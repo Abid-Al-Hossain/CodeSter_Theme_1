@@ -179,31 +179,6 @@ function buildDerivedColorTokens(colors) {
   }
 }
 
-function getComputedTokens() {
-  const style = getComputedStyle(document.documentElement)
-  const vars = [
-    'color-bg', 'color-bg-2', 'color-bg-3',
-    'color-surface',
-    'color-primary', 'color-primary-2', 'color-secondary', 'color-accent',
-    'color-text', 'color-text-2', 'color-text-3', 'color-border', 'color-border-2',
-    'font-heading', 'font-body', 'font-mono', 'font-accent',
-    'radius-sm', 'radius-md', 'radius-lg', 'radius-xl',
-    'border-w', 'blur-glass', 'dur',
-  ]
-  const result = {}
-
-  vars.forEach((token) => {
-    result[token] = style.getPropertyValue(`--${token}`).trim()
-  })
-
-  return result
-}
-
-function generateExportCSS(era, tokens) {
-  const lines = Object.entries(tokens).map(([key, value]) => `  --${key}: ${value};`)
-  return `:root { /* era: ${era} */\n${lines.join('\n')}\n}`
-}
-
 function savePrefs(prefs) {
   try {
     localStorage.setItem('chronos-prefs', JSON.stringify(prefs))
@@ -255,8 +230,6 @@ Alpine.store('chr', {
   hasCustomFonts: false,
   hasCustomColors: false,
   activePalette: '',
-  exportCSS: '',
-  exportCopied: false,
   paletteOptions: PALETTE_OPTIONS,
 
   async init() {
@@ -292,7 +265,6 @@ Alpine.store('chr', {
 
   setActiveTab(tab) {
     this.activeTab = tab
-    if (tab === 'export') this.generateExport()
   },
 
   async setEra(era) {
@@ -378,32 +350,6 @@ Alpine.store('chr', {
     syncCustomizerToggle(this.open)
   },
 
-  generateExport() {
-    this.exportCSS = generateExportCSS(this.era, getComputedTokens())
-  },
-
-  async copyExport() {
-    this.generateExport()
-    try {
-      await navigator.clipboard.writeText(this.exportCSS)
-      this.exportCopied = true
-      window.setTimeout(() => {
-        this.exportCopied = false
-      }, 2500)
-    } catch {
-      const textarea = document.createElement('textarea')
-      textarea.value = this.exportCSS
-      document.body.appendChild(textarea)
-      textarea.select()
-      document.execCommand('copy')
-      document.body.removeChild(textarea)
-      this.exportCopied = true
-      window.setTimeout(() => {
-        this.exportCopied = false
-      }, 2500)
-    }
-  },
-
   save() {
     savePrefs({
       era: this.era,
@@ -429,7 +375,6 @@ Alpine.store('chr', {
     await applyEra('modern')
     this.syncColorInputsFromComputed()
     localStorage.removeItem('chronos-prefs')
-    this.generateExport()
   },
 })
 

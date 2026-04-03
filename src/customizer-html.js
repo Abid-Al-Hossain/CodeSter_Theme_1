@@ -18,7 +18,7 @@ export const CUSTOMIZER_HTML = /* html */ `
   <div class="cust-header">
     <div>
       <div style="font-family:var(--font-accent);font-weight:800;font-size:1.1rem;color:var(--color-primary)">CHRONOS</div>
-      <div class="cust-subtitle">Style Customizer</div>
+      <div class="cust-subtitle">Preview styles before editing the source project.</div>
     </div>
     <button
       @click="$store.chr.close()"
@@ -31,7 +31,6 @@ export const CUSTOMIZER_HTML = /* html */ `
     <button class="cust-tab" :class="$store.chr.activeTab==='era'?'active':''" @click="$store.chr.setActiveTab('era')" role="tab" id="chr-tab-era" :aria-selected="$store.chr.activeTab==='era' ? 'true' : 'false'" aria-controls="chr-panel-era">Eras</button>
     <button class="cust-tab" :class="$store.chr.activeTab==='colors'?'active':''" @click="$store.chr.setActiveTab('colors')" role="tab" id="chr-tab-colors" :aria-selected="$store.chr.activeTab==='colors' ? 'true' : 'false'" aria-controls="chr-panel-colors">Colors</button>
     <button class="cust-tab" :class="$store.chr.activeTab==='fonts'?'active':''" @click="$store.chr.setActiveTab('fonts')" role="tab" id="chr-tab-fonts" :aria-selected="$store.chr.activeTab==='fonts' ? 'true' : 'false'" aria-controls="chr-panel-fonts">Fonts</button>
-    <button class="cust-tab" :class="$store.chr.activeTab==='export'?'active':''" @click="$store.chr.setActiveTab('export')" role="tab" id="chr-tab-export" :aria-selected="$store.chr.activeTab==='export' ? 'true' : 'false'" aria-controls="chr-panel-export">Export</button>
     <button class="cust-tab" :class="$store.chr.activeTab==='layouts'?'active':''" @click="$store.chr.setActiveTab('layouts')" role="tab" id="chr-tab-layouts" :aria-selected="$store.chr.activeTab==='layouts' ? 'true' : 'false'" aria-controls="chr-panel-layouts">Layouts</button>
   </div>
 
@@ -150,7 +149,7 @@ export const CUSTOMIZER_HTML = /* html */ `
       </div>
       <div style="margin-top:20px;padding:12px;background:var(--color-bg-2);border-radius:var(--radius-md);border:1px solid var(--color-border)">
         <p style="font-size:0.75rem;color:var(--color-text-2);margin:0;line-height:1.5">
-          <strong>Tip:</strong> Era, font, and palette choices stay with you while moving between layouts.
+          <strong>Tip:</strong> Use this panel to preview combinations, then apply lasting changes in the downloaded source files.
         </p>
       </div>
     </div>
@@ -271,21 +270,6 @@ export const CUSTOMIZER_HTML = /* html */ `
 
       <div class="font-picker-note" style="margin-top:16px;font-size:0.75rem">
         65+ fonts available. Loaded on demand to keep performance fast.
-      </div>
-    </div>
-
-    <div x-show="$store.chr.activeTab==='export'" x-cloak role="tabpanel" id="chr-panel-export" aria-labelledby="chr-tab-export">
-      <span class="cust-label">Your Theme CSS</span>
-      <p style="font-size:0.78rem;color:var(--color-text-2);margin-bottom:12px">
-        Copy these CSS variables into your own <code style="font-family:var(--font-mono)">:root</code> block to reuse the current setup.
-      </p>
-      <pre class="export-code" x-text="$store.chr.exportCSS || 'Select Refresh to generate CSS.'"></pre>
-
-      <div style="display:flex;gap:8px;margin-top:12px">
-        <button class="chr-btn-primary" style="flex:1;justify-content:center;font-size:0.82rem;padding:10px" @click="$store.chr.copyExport()">
-          <span x-text="$store.chr.exportCopied ? 'Copied' : 'Copy CSS'"></span>
-        </button>
-        <button class="chr-btn-ghost" style="font-size:0.82rem;padding:10px 16px" @click="$store.chr.generateExport()">Refresh</button>
       </div>
     </div>
   </div>

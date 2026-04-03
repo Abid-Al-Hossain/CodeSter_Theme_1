@@ -1117,22 +1117,6 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
   color: var(--color-text-2);
 }
 
-/* Export area */
-.export-code {
-  background: var(--color-bg-3);
-  border: var(--border-w) solid var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: 12px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  line-height: 1.5;
-  color: var(--color-text-2);
-  white-space: pre;
-  overflow-x: auto;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
 .chr-demo-toast {
   position: fixed;
   left: 50%;
