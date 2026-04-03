@@ -71,7 +71,7 @@
   --color-accent:    #c0392b;
   --color-text:      #f5f0e8;
   --color-text-2:    #c9b99a;
-  --color-text-3:    #7a6a55;
+  --color-text-3:    #9b896f;
   --color-border:    #2a2010;
   --color-border-2:  #3d3018;
   --font-heading:    'Cinzel', serif;
@@ -98,7 +98,7 @@
   --color-accent:    #10b981;
   --color-text:      #e2e8f0;
   --color-text-2:    #94a3b8;
-  --color-text-3:    #475569;
+  --color-text-3:    #6f8296;
   --color-border:    rgba(6,182,212,0.2);
   --color-border-2:  rgba(6,182,212,0.4);
   --font-heading:    'Space Grotesk', sans-serif;
@@ -152,7 +152,7 @@
   --color-accent:    #ffff00;
   --color-text:      #00ffff;
   --color-text-2:    #ff0080;
-  --color-text-3:    #444444;
+  --color-text-3:    #8b96a3;
   --color-border:    #ff0080;
   --color-border-2:  #00ffff;
   --font-heading:    'Orbitron', sans-serif;
@@ -290,7 +290,7 @@
   --color-accent:    #00e5ff;
   --color-text:      #ffffff;
   --color-text-2:    #aaaaaa;
-  --color-text-3:    #555555;
+  --color-text-3:    #8f8f8f;
   --color-border:    rgba(245,230,66,0.2);
   --color-border-2:  rgba(245,230,66,0.4);
   --font-heading:    'Unbounded', sans-serif;
@@ -634,6 +634,11 @@ img { max-width: 100%; height: auto; display: block; }
   transition: all 0.2s ease;
 }
 
+.cust-tab:hover {
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+
 .cust-tab.active {
   color: var(--color-primary);
   border-bottom-color: var(--color-primary);
@@ -651,13 +656,35 @@ img { max-width: 100%; height: auto; display: block; }
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-text-3);
+  color: var(--color-text-2);
   display: block;
   margin-bottom: 8px;
   margin-top: 16px;
 }
 
 .cust-label:first-child { margin-top: 0; }
+
+.cust-subtitle {
+  font-size: 0.7rem;
+  color: var(--color-text-2);
+  margin-top: 2px;
+}
+
+.cust-close {
+  color: var(--color-text-2);
+  font-size: 1rem;
+  line-height: 1;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: transparent;
+}
+
+.cust-close:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+}
 
 /* Era grid */
 .era-grid {
@@ -772,9 +799,77 @@ img { max-width: 100%; height: auto; display: block; }
 
 .palette-sub {
   font-size: 0.68rem;
-  color: var(--color-text-3);
+  color: var(--color-text-2);
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+.palette-card.active .palette-sub {
+  color: var(--color-text);
+}
+
+.layout-list-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.layout-list-link:hover {
+  border-color: var(--color-primary);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-sm);
+}
+
+.layout-link-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.layout-link-meta {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-2);
+}
+
+.layout-list-link:hover .layout-link-title {
+  color: var(--color-primary);
+}
+
+.layout-list-link:hover .layout-link-meta {
+  color: var(--color-text);
+}
+
+.layout-thumb-frame {
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-border) 90%, #000 10%);
+  background: #ffffff;
+  flex-shrink: 0;
+}
+
+.layout-mini-thumb {
+  width: 68px;
+  height: 54px;
+  border-radius: calc(var(--radius-sm) + 2px);
+}
+
+.layout-card-thumb {
+  height: 180px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.layout-thumb-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* Color picker row*/
@@ -812,6 +907,11 @@ img { max-width: 100%; height: auto; display: block; }
   font-size: 0.85rem;
   margin-bottom: 10px;
   cursor: pointer;
+}
+
+.font-empty-state,
+.font-picker-note {
+  color: var(--color-text-2);
 }
 
 /* Export area */

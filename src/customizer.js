@@ -158,6 +158,8 @@ function buildDerivedColorTokens(colors) {
   const text = normalizeHex(colors.text, DEFAULT_COLORS.text)
   const darkTheme = isDarkColor(bg)
   const shadeTarget = darkTheme ? '#ffffff' : '#000000'
+  const secondaryTextMix = darkTheme ? 0.16 : 0.22
+  const tertiaryTextMix = darkTheme ? 0.32 : 0.42
 
   return {
     'color-bg': bg,
@@ -169,8 +171,8 @@ function buildDerivedColorTokens(colors) {
     'color-secondary': secondary,
     'color-accent': accent,
     'color-text': text,
-    'color-text-2': mixHex(text, bg, 0.28),
-    'color-text-3': mixHex(text, bg, 0.5),
+    'color-text-2': mixHex(text, bg, secondaryTextMix),
+    'color-text-3': mixHex(text, bg, tertiaryTextMix),
     'color-border': mixHex(bg2, text, darkTheme ? 0.22 : 0.14),
     'color-border-2': mixHex(bg2, primary, 0.28),
   }
