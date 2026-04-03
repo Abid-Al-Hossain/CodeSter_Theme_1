@@ -3,127 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos layout directory with 10 layouts, 12 eras, 16 preset palettes, and a shared live customizer.">
   <title>Chronos | Layout Directory</title>
   <script>(function(){try{var p=JSON.parse(localStorage.getItem('chronos-prefs'));if(p&&p.era)document.documentElement.setAttribute('data-era',p.era)}catch(e){}})()</script>
   <script type="module" src="/src/main.js"></script>
 </head>
-<body style="background:var(--color-bg); color:var(--color-text); min-height:100vh; overflow-x:hidden">
+<body style="background:var(--color-bg);color:var(--color-text);min-height:100vh;overflow-x:hidden">
+  <a href="#layout-grid" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to layouts</a>
 
-  <div style="padding: 100px 20px;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-      
-      <div style="text-align: center; margin-bottom: 80px;" data-reveal>
-        <div style="font-family:var(--font-accent); font-weight:800; color:var(--color-primary); font-size:1.2rem; letter-spacing:0.1em; margin-bottom:16px;">✦ CHRONOS</div>
-        <h1 style="font-family: var(--font-heading); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; margin-bottom: 24px; letter-spacing: -0.02em;">Select a Layout</h1>
-        <p style="font-family: var(--font-body); font-size: 1.1rem; color: var(--color-text-2); max-width: 640px; margin: 0 auto; line-height: 1.7;">
-          Use the <strong>CUSTOMIZE</strong> panel to instantly apply 10 different eras to any of these layouts. Every layout completely transforms. 
+  <div style="padding:96px 20px 80px">
+    <div style="max-width:1200px;margin:0 auto">
+      <header style="text-align:center;margin-bottom:56px" data-reveal>
+        <div style="font-family:var(--font-accent);font-weight:800;color:var(--color-primary);font-size:1.1rem;letter-spacing:.12em;margin-bottom:16px">CHRONOS</div>
+        <h1 style="font-family:var(--font-heading);font-size:clamp(2.6rem,5vw,4.2rem);font-weight:800;margin-bottom:20px;letter-spacing:-.03em">Choose a layout, then reshape the era live</h1>
+        <p style="font-family:var(--font-body);font-size:1.05rem;color:var(--color-text-2);max-width:720px;margin:0 auto;line-height:1.8">
+          Chronos currently contains 10 source layouts, 12 design eras, 16 preset palettes, and 65+ font options. Use the shared CUSTOMIZE panel on any page to test the product in its finalization phase before the later shipping pass.
         </p>
-      </div>
+      </header>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;" data-reveal-group>
-        
-        <!-- 01 -->
-        <a href="layout-01.html" style="text-decoration:none; display:flex; flex-direction:column; border-radius:var(--radius-md); border:var(--border-w) solid var(--color-border); background:var(--color-bg-2); overflow:hidden; transition:transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease)" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.borderColor='';this.style.transform='';this.style.boxShadow=''">
-          <div style="height:200px; background:linear-gradient(135deg, var(--color-primary), var(--color-secondary)); display:flex; align-items:center; justify-content:center; font-size:3.5rem; opacity:0.9">🏢</div>
-          <div style="padding:24px; flex:1; display:flex; flex-direction:column">
-            <div style="font-size:0.75rem; font-weight:700; color:var(--color-text-3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px">Layout 01</div>
-            <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:700; color:var(--color-text); margin-bottom:12px">SaaS Landing Page</h2>
-            <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--color-text-2); line-height:1.6; flex:1">A comprehensive software marketing page with features, process, and pricing.</p>
-          </div>
+      <section style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:48px" data-reveal-group aria-label="Product summary">
+        <div style="padding:22px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2);text-align:center"><div style="font-size:2rem;font-family:var(--font-heading);font-weight:800;color:var(--color-primary)">10</div><div style="font-size:.82rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em">Layouts</div></div>
+        <div style="padding:22px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2);text-align:center"><div style="font-size:2rem;font-family:var(--font-heading);font-weight:800;color:var(--color-primary)">12</div><div style="font-size:.82rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em">Eras</div></div>
+        <div style="padding:22px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2);text-align:center"><div style="font-size:2rem;font-family:var(--font-heading);font-weight:800;color:var(--color-primary)">16</div><div style="font-size:.82rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em">Palettes</div></div>
+        <div style="padding:22px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2);text-align:center"><div style="font-size:2rem;font-family:var(--font-heading);font-weight:800;color:var(--color-primary)">65+</div><div style="font-size:.82rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em">Fonts</div></div>
+      </section>
+
+      <section id="layout-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px" data-reveal-group aria-label="Available layouts">
+        <a href="layout-01.html" style="text-decoration:none;display:flex;flex-direction:column;border-radius:var(--radius-md);border:var(--border-w) solid var(--color-border);background:var(--color-bg-2);overflow:hidden">
+          <div style="height:180px;background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-family:var(--font-heading);font-weight:800;color:#fff">01</div>
+          <div style="padding:22px;flex:1;display:flex;flex-direction:column"><div style="font-size:.75rem;font-weight:700;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Layout 01</div><h2 style="font-family:var(--font-heading);font-size:1.2rem;font-weight:700;color:var(--color-text);margin-bottom:12px">Modern SaaS Landing</h2><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7;flex:1">Primary product landing page with sections for features, process, layouts, and FAQ.</p></div>
         </a>
-
-        <!-- 02 -->
-        <a href="layout-02.html" style="text-decoration:none; display:flex; flex-direction:column; border-radius:var(--radius-md); border:var(--border-w) solid var(--color-border); background:var(--color-bg-2); overflow:hidden; transition:transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease)" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.borderColor='';this.style.transform='';this.style.boxShadow=''">
-          <div style="height:200px; background:linear-gradient(135deg, #3b82f6, #10b981); display:flex; align-items:center; justify-content:center; font-size:3.5rem; opacity:0.9">🎨</div>
-          <div style="padding:24px; flex:1; display:flex; flex-direction:column">
-            <div style="font-size:0.75rem; font-weight:700; color:var(--color-text-3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px">Layout 02</div>
-            <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:700; color:var(--color-text); margin-bottom:12px">Creative Portfolio</h2>
-            <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--color-text-2); line-height:1.6; flex:1">A dramatic split-screen portfolio designed for freelancers and digital studios.</p>
-          </div>
+        <a href="layout-02.html" style="text-decoration:none;display:flex;flex-direction:column;border-radius:var(--radius-md);border:var(--border-w) solid var(--color-border);background:var(--color-bg-2);overflow:hidden">
+          <div style="height:180px;background:linear-gradient(135deg,#3b82f6,#10b981);display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-family:var(--font-heading);font-weight:800;color:#fff">02</div>
+          <div style="padding:22px;flex:1;display:flex;flex-direction:column"><div style="font-size:.75rem;font-weight:700;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Layout 02</div><h2 style="font-family:var(--font-heading);font-size:1.2rem;font-weight:700;color:var(--color-text);margin-bottom:12px">Creative Portfolio</h2><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7;flex:1">Split-screen showcase for freelancers, agencies, and visual studios.</p></div>
         </a>
-
-        <!-- 03 -->
-        <a href="layout-03.html" style="text-decoration:none; display:flex; flex-direction:column; border-radius:var(--radius-md); border:var(--border-w) solid var(--color-border); background:var(--color-bg-2); overflow:hidden; transition:transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease)" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.borderColor='';this.style.transform='';this.style.boxShadow=''">
-          <div style="height:200px; background:linear-gradient(135deg, #ef4444, #f59e0b); display:flex; align-items:center; justify-content:center; font-size:3.5rem; opacity:0.9">🧱</div>
-          <div style="padding:24px; flex:1; display:flex; flex-direction:column">
-            <div style="font-size:0.75rem; font-weight:700; color:var(--color-text-3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px">Layout 03</div>
-            <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:700; color:var(--color-text); margin-bottom:12px">Editorial Feed</h2>
-            <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--color-text-2); line-height:1.6; flex:1">A bold, loud continuous scrolling feed perfect for magazines or unfiltered blogs.</p>
-          </div>
+        <a href="layout-03.html" style="text-decoration:none;display:flex;flex-direction:column;border-radius:var(--radius-md);border:var(--border-w) solid var(--color-border);background:var(--color-bg-2);overflow:hidden">
+          <div style="height:180px;background:linear-gradient(135deg,#ef4444,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-family:var(--font-heading);font-weight:800;color:#fff">03</div>
+          <div style="padding:22px;flex:1;display:flex;flex-direction:column"><div style="font-size:.75rem;font-weight:700;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Layout 03</div><h2 style="font-family:var(--font-heading);font-size:1.2rem;font-weight:700;color:var(--color-text);margin-bottom:12px">Editorial Feed</h2><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7;flex:1">Scrolling editorial composition for magazines, journals, and opinion-led sites.</p></div>
         </a>
-
-        <!-- 04 -->
-        <a href="layout-04.html" style="text-decoration:none; display:flex; flex-direction:column; border-radius:var(--radius-md); border:var(--border-w) solid var(--color-border); background:var(--color-bg-2); overflow:hidden; transition:transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease)" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.borderColor='';this.style.transform='';this.style.boxShadow=''">
-          <div style="height:200px; background:linear-gradient(135deg, #8b5cf6, #ec4899); display:flex; align-items:center; justify-content:center; font-size:3.5rem; opacity:0.9">📜</div>
-          <div style="padding:24px; flex:1; display:flex; flex-direction:column">
-            <div style="font-size:0.75rem; font-weight:700; color:var(--color-text-3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px">Layout 04</div>
-            <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:700; color:var(--color-text); margin-bottom:12px">Text Manuscript</h2>
-            <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--color-text-2); line-height:1.6; flex:1">A highly legible, typography-focused layout designed for long-form reading.</p>
-          </div>
+        <a href="layout-04.html" style="text-decoration:none;display:flex;flex-direction:column;border-radius:var(--radius-md);border:var(--border-w) solid var(--color-border);background:var(--color-bg-2);overflow:hidden">
+          <div style="height:180px;background:linear-gradient(135deg,#8b5cf6,#ec4899);display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-family:var(--font-heading);font-weight:800;color:#fff">04</div>
+          <div style="padding:22px;flex:1;display:flex;flex-direction:column"><div style="font-size:.75rem;font-weight:700;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Layout 04</div><h2 style="font-family:var(--font-heading);font-size:1.2rem;font-weight:700;color:var(--color-text);margin-bottom:12px">Text Manuscript</h2><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7;flex:1">Reading-first presentation for essays, editorial systems, and documentation.</p></div>
         </a>
-
-        <!-- 05 -->
-        <a href="layout-05.html" style="text-decoration:none; display:flex; flex-direction:column; border-radius:var(--radius-md); border:var(--border-w) solid var(--color-border); background:var(--color-bg-2); overflow:hidden; transition:transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease)" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.borderColor='';this.style.transform='';this.style.boxShadow=''">
-          <div style="height:200px; background:linear-gradient(135deg, #14b8a6, #06b6d4); display:flex; align-items:center; justify-content:center; font-size:3.5rem; opacity:0.9">💻</div>
-          <div style="padding:24px; flex:1; display:flex; flex-direction:column">
-            <div style="font-size:0.75rem; font-weight:700; color:var(--color-text-3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px">Layout 05</div>
-            <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:700; color:var(--color-text); margin-bottom:12px">Web App Dashboard</h2>
-            <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--color-text-2); line-height:1.6; flex:1">A complete application sidebar layout with data cards and complex nested UI.</p>
-          </div>
+        <a href="layout-05.html" style="text-decoration:none;display:flex;flex-direction:column;border-radius:var(--radius-md);border:var(--border-w) solid var(--color-border);background:var(--color-bg-2);overflow:hidden">
+          <div style="height:180px;background:linear-gradient(135deg,#14b8a6,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-family:var(--font-heading);font-weight:800;color:#fff">05</div>
+          <div style="padding:22px;flex:1;display:flex;flex-direction:column"><div style="font-size:.75rem;font-weight:700;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Layout 05</div><h2 style="font-family:var(--font-heading);font-size:1.2rem;font-weight:700;color:var(--color-text);margin-bottom:12px">Web App Dashboard</h2><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7;flex:1">Sidebar dashboard demo with updated runtime date handling and safer KPI treatment.</p></div>
         </a>
-
-        <!-- 06 -->
-        <a href="layout-06.html" style="text-decoration:none; display:flex; flex-direction:column; border-radius:var(--radius-md); border:var(--border-w) solid var(--color-border); background:var(--color-bg-2); overflow:hidden; transition:transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease)" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.borderColor='';this.style.transform='';this.style.boxShadow=''">
-          <div style="height:200px; background:linear-gradient(135deg, #f43f5e, #8b5cf6); display:flex; align-items:center; justify-content:center; font-size:3.5rem; opacity:0.9">✨</div>
-          <div style="padding:24px; flex:1; display:flex; flex-direction:column">
-            <div style="font-size:0.75rem; font-weight:700; color:var(--color-text-3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px">Layout 06</div>
-            <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:700; color:var(--color-text); margin-bottom:12px">Artistic Showcase</h2>
-            <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--color-text-2); line-height:1.6; flex:1">An expressive, free-flowing layout with oversized typography and floating elements.</p>
-          </div>
+        <a href="layout-06.html" style="text-decoration:none;display:flex;flex-direction:column;border-radius:var(--radius-md);border:var(--border-w) solid var(--color-border);background:var(--color-bg-2);overflow:hidden">
+          <div style="height:180px;background:linear-gradient(135deg,#f43f5e,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-family:var(--font-heading);font-weight:800;color:#fff">06</div>
+          <div style="padding:22px;flex:1;display:flex;flex-direction:column"><div style="font-size:.75rem;font-weight:700;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Layout 06</div><h2 style="font-family:var(--font-heading);font-size:1.2rem;font-weight:700;color:var(--color-text);margin-bottom:12px">Artistic Showcase</h2><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7;flex:1">Expressive display layout with oversized type and gallery-led composition.</p></div>
         </a>
-
-        <!-- 07 -->
-        <a href="layout-07.html" style="text-decoration:none; display:flex; flex-direction:column; border-radius:var(--radius-md); border:var(--border-w) solid var(--color-border); background:var(--color-bg-2); overflow:hidden; transition:transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease)" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.borderColor='';this.style.transform='';this.style.boxShadow=''">
-          <div style="height:200px; background:linear-gradient(135deg, #0ea5e9, #38bdf8); display:flex; align-items:center; justify-content:center; font-size:3.5rem; opacity:0.9">🚀</div>
-          <div style="padding:24px; flex:1; display:flex; flex-direction:column">
-            <div style="font-size:0.75rem; font-weight:700; color:var(--color-text-3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px">Layout 07</div>
-            <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:700; color:var(--color-text); margin-bottom:12px">Launch Page</h2>
-            <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--color-text-2); line-height:1.6; flex:1">A high-conversion splash page for product drops, featuring a countdown timer.</p>
-          </div>
+        <a href="layout-07.html" style="text-decoration:none;display:flex;flex-direction:column;border-radius:var(--radius-md);border:var(--border-w) solid var(--color-border);background:var(--color-bg-2);overflow:hidden">
+          <div style="height:180px;background:linear-gradient(135deg,#0ea5e9,#38bdf8);display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-family:var(--font-heading);font-weight:800;color:#fff">07</div>
+          <div style="padding:22px;flex:1;display:flex;flex-direction:column"><div style="font-size:.75rem;font-weight:700;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Layout 07</div><h2 style="font-family:var(--font-heading);font-size:1.2rem;font-weight:700;color:var(--color-text);margin-bottom:12px">Futuristic Launch</h2><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7;flex:1">Launch-page treatment with a relative countdown and corrected technical claims.</p></div>
         </a>
-
-        <!-- 08 -->
-        <a href="layout-08.html" style="text-decoration:none; display:flex; flex-direction:column; border-radius:var(--radius-md); border:var(--border-w) solid var(--color-border); background:var(--color-bg-2); overflow:hidden; transition:transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease)" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.borderColor='';this.style.transform='';this.style.boxShadow=''">
-          <div style="height:200px; background:linear-gradient(135deg, #64748b, #94a3b8); display:flex; align-items:center; justify-content:center; font-size:3.5rem; opacity:0.9">📓</div>
-          <div style="padding:24px; flex:1; display:flex; flex-direction:column">
-            <div style="font-size:0.75rem; font-weight:700; color:var(--color-text-3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px">Layout 08</div>
-            <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:700; color:var(--color-text); margin-bottom:12px">Minimal Journal</h2>
-            <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--color-text-2); line-height:1.6; flex:1">A hyper-clean, spacious layout designed for photographers and writers.</p>
-          </div>
+        <a href="layout-08.html" style="text-decoration:none;display:flex;flex-direction:column;border-radius:var(--radius-md);border:var(--border-w) solid var(--color-border);background:var(--color-bg-2);overflow:hidden">
+          <div style="height:180px;background:linear-gradient(135deg,#64748b,#94a3b8);display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-family:var(--font-heading);font-weight:800;color:#fff">08</div>
+          <div style="padding:22px;flex:1;display:flex;flex-direction:column"><div style="font-size:.75rem;font-weight:700;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Layout 08</div><h2 style="font-family:var(--font-heading);font-size:1.2rem;font-weight:700;color:var(--color-text);margin-bottom:12px">Minimal Journal</h2><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7;flex:1">Spacious editorial layout tuned for photography, notes, and essays.</p></div>
         </a>
-
-        <!-- 09 -->
-        <a href="layout-09.html" style="text-decoration:none; display:flex; flex-direction:column; border-radius:var(--radius-md); border:var(--border-w) solid var(--color-border); background:var(--color-bg-2); overflow:hidden; transition:transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease)" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.borderColor='';this.style.transform='';this.style.boxShadow=''">
-          <div style="height:200px; background:linear-gradient(135deg, #10b981, #3b82f6); display:flex; align-items:center; justify-content:center; font-size:3.5rem; opacity:0.9">⚡</div>
-          <div style="padding:24px; flex:1; display:flex; flex-direction:column">
-            <div style="font-size:0.75rem; font-weight:700; color:var(--color-text-3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px">Layout 09</div>
-            <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:700; color:var(--color-text); margin-bottom:12px">Digital Agency</h2>
-            <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--color-text-2); line-height:1.6; flex:1">A dynamic, motion-heavy layout designed for high-end digital agencies.</p>
-          </div>
+        <a href="layout-09.html" style="text-decoration:none;display:flex;flex-direction:column;border-radius:var(--radius-md);border:var(--border-w) solid var(--color-border);background:var(--color-bg-2);overflow:hidden">
+          <div style="height:180px;background:linear-gradient(135deg,#10b981,#3b82f6);display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-family:var(--font-heading);font-weight:800;color:#fff">09</div>
+          <div style="padding:22px;flex:1;display:flex;flex-direction:column"><div style="font-size:.75rem;font-weight:700;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Layout 09</div><h2 style="font-family:var(--font-heading);font-size:1.2rem;font-weight:700;color:var(--color-text);margin-bottom:12px">Cyberpunk Agency</h2><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7;flex:1">Glitch-heavy agency demo with repaired mobile grids and neutral contact messaging.</p></div>
         </a>
-
-        <!-- 10 -->
-        <a href="layout-10.html" style="text-decoration:none; display:flex; flex-direction:column; border-radius:var(--radius-md); border:var(--border-w) solid var(--color-border); background:var(--color-bg-2); overflow:hidden; transition:transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease)" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.borderColor='';this.style.transform='';this.style.boxShadow=''">
-          <div style="height:200px; background:linear-gradient(135deg, #b91c1c, #dc2626); display:flex; align-items:center; justify-content:center; font-size:3.5rem; opacity:0.9">🏰</div>
-          <div style="padding:24px; flex:1; display:flex; flex-direction:column">
-            <div style="font-size:0.75rem; font-weight:700; color:var(--color-text-3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px">Layout 10</div>
-            <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:700; color:var(--color-text); margin-bottom:12px">Institutional Archive</h2>
-            <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--color-text-2); line-height:1.6; flex:1">A structured, formal layout perfect for museums, galleries, or historical archives.</p>
-          </div>
+        <a href="layout-10.html" style="text-decoration:none;display:flex;flex-direction:column;border-radius:var(--radius-md);border:var(--border-w) solid var(--color-border);background:var(--color-bg-2);overflow:hidden">
+          <div style="height:180px;background:linear-gradient(135deg,#b91c1c,#dc2626);display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-family:var(--font-heading);font-weight:800;color:#fff">10</div>
+          <div style="padding:22px;flex:1;display:flex;flex-direction:column"><div style="font-size:.75rem;font-weight:700;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Layout 10</div><h2 style="font-family:var(--font-heading);font-size:1.2rem;font-weight:700;color:var(--color-text);margin-bottom:12px">Gothic Archive</h2><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7;flex:1">Institutional archive presentation updated to the full 12-era catalog and responsive navigation.</p></div>
         </a>
-
-      </div>
-
+      </section>
     </div>
   </div>
 

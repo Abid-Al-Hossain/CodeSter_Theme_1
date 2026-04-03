@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" data-era="cyberpunk">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Chronos Layout 09 — Cyberpunk Agency. Neon glitch effects, terminal aesthetic, dynamic hover interactions.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 09 - Cyberpunk agency demo with glitch typography, responsive grids, and stable placeholder behavior.">
   <title>Chronos | Cyberpunk Agency</title>
   <script>(function(){try{var p=JSON.parse(localStorage.getItem('chronos-prefs'));if(p&&p.era)document.documentElement.setAttribute('data-era',p.era)}catch(e){}})()</script>
   <script type="module" src="/src/main.js"></script>
@@ -10,137 +11,164 @@
     [x-cloak]{display:none!important}
     body{background:var(--color-bg);color:var(--color-text);overflow-x:hidden}
     .neon-box{border:1px solid var(--color-primary);box-shadow:0 0 0 1px var(--color-primary),inset 0 0 20px color-mix(in srgb,var(--color-primary) 5%,transparent)}
-    .neon-box-2{border:1px solid var(--color-secondary);box-shadow:0 0 0 1px var(--color-secondary),inset 0 0 20px color-mix(in srgb,var(--color-secondary) 5%,transparent)}
     .glitch-wrap{position:relative;display:inline-block}
     .glitch-clone{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
-    .glitch-wrap:hover .glitch-clone:first-child{color:var(--color-primary);animation:glitch-a 0.3s steps(3) infinite;clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%);transform:translateX(-3px)}
-    .glitch-wrap:hover .glitch-clone:last-child{color:var(--color-secondary);animation:glitch-b 0.4s steps(3) infinite;clip-path:polygon(0 65%,100% 65%,100% 85%,0 85%);transform:translateX(3px)}
+    .glitch-wrap:hover .glitch-clone:first-child{color:var(--color-primary);animation:glitch-a .3s steps(3) infinite;clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%);transform:translateX(-3px)}
+    .glitch-wrap:hover .glitch-clone:last-child{color:var(--color-secondary);animation:glitch-b .4s steps(3) infinite;clip-path:polygon(0 65%,100% 65%,100% 85%,0 85%);transform:translateX(3px)}
     @keyframes glitch-a{0%,100%{transform:translateX(-3px)}50%{transform:translateX(3px)}}
     @keyframes glitch-b{0%,100%{transform:translateX(3px)}50%{transform:translateX(-3px)}}
-    .service-block{border:1px solid var(--color-border);padding:32px;position:relative;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s}
-    .service-block::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,color-mix(in srgb,var(--color-primary) 5%,transparent),transparent);opacity:0;transition:opacity 0.3s}
-    .service-block:hover{border-color:var(--color-primary);box-shadow:0 0 20px color-mix(in srgb,var(--color-primary) 15%,transparent)}
+    .service-block{border:1px solid var(--color-border);padding:32px;position:relative;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+    .service-block::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,color-mix(in srgb,var(--color-primary) 6%,transparent),transparent);opacity:0;transition:opacity .3s}
+    .service-block:hover{border-color:var(--color-primary);box-shadow:0 0 20px color-mix(in srgb,var(--color-primary) 16%,transparent)}
     .service-block:hover::before{opacity:1}
-    .work-item{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;padding:24px;border-bottom:1px solid var(--color-border);transition:background 0.2s,padding 0.3s var(--ease);cursor:pointer}
+    .work-item{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;padding:24px;border-bottom:1px solid var(--color-border);transition:background .2s,padding .3s var(--ease);cursor:pointer}
     .work-item:hover{background:color-mix(in srgb,var(--color-primary) 3%,transparent);padding-left:40px}
-    .work-num{font-family:var(--font-mono);font-size:0.75rem;color:var(--color-text-3);min-width:32px}
-    .work-arrow{color:var(--color-primary);opacity:0;transform:translateX(-10px);transition:all 0.2s}
+    .work-num{font-family:var(--font-mono);font-size:.75rem;color:var(--color-text-3);min-width:32px}
+    .work-arrow{color:var(--color-primary);opacity:0;transform:translateX(-10px);transition:all .2s}
     .work-item:hover .work-arrow{opacity:1;transform:translateX(0)}
     .ticker{overflow:hidden;border-top:1px solid var(--color-primary);border-bottom:1px solid var(--color-primary);background:color-mix(in srgb,var(--color-primary) 5%,transparent);padding:10px 0}
-    @media(max-width:768px){.work-item{grid-template-columns:auto 1fr}}
+    .hero-grid,.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+    .services-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--color-border)}
+    .clients-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;text-align:center}
+    @media(max-width:980px){.hero-grid,.contact-grid{grid-template-columns:1fr}.clients-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(max-width:768px){.work-item{grid-template-columns:auto 1fr}.services-grid{grid-template-columns:1fr}}
+    @media(max-width:620px){.clients-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:520px){.clients-grid{grid-template-columns:1fr}.work-item{gap:14px;padding:18px}.work-item:hover{padding-left:24px}}
   </style>
 </head>
 <body>
-<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-bg);border-radius:var(--radius-sm);font-weight:700;font-family:var(--font-mono)" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">SKIP_TO_CONTENT()</a>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-bg);border-radius:var(--radius-sm);font-weight:700;font-family:var(--font-mono)" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+
 <header class="chr-nav" role="banner">
   <div class="chr-container chr-nav-inner">
-    <a href="index.html" class="chr-logo">✦ CHRONOS[SYS]</a>
-    <nav><ul class="chr-nav-links"><li><a href="#work">Work</a></li><li><a href="#services">Services</a></li><li><a href="#clients">Clients</a></li><li><a href="#contact">Contact</a></li></ul></nav>
-    <div style="display:flex;gap:12px;align-items:center"><a href="#contact" class="chr-btn-primary neon-box" style="padding:10px 22px;font-size:0.85rem;font-family:var(--font-mono)">[CONNECT]</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+    <a href="index.html" class="chr-logo">CHRONOS[SYS]</a>
+    <nav aria-label="Agency navigation">
+      <ul class="chr-nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#clients">Clients</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex;gap:12px;align-items:center">
+      <a href="#contact" class="chr-btn-primary neon-box" style="padding:10px 22px;font-size:.85rem;font-family:var(--font-mono)">[CONNECT]</a>
+      <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </header>
+
 <main id="main-content">
-<!-- § 1. HERO GLITCH -->
-<section id="hero" style="min-height:90vh;display:flex;align-items:center;padding:100px 0;position:relative;overflow:hidden" aria-labelledby="cyber-heading">
-  <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,color-mix(in srgb,var(--color-primary) 3%,transparent) 2px,color-mix(in srgb,var(--color-primary) 3%,transparent) 4px);pointer-events:none" aria-hidden="true"></div>
-  <div class="chr-container" style="position:relative;z-index:2">
-    <div data-reveal>
-      <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--color-primary);margin-bottom:24px;letter-spacing:0.1em">&gt; INITIALIZING CHRONOS AGENCY SYSTEM v9.06...</div>
-      <h1 id="cyber-heading" style="font-size:clamp(3.5rem,12vw,9rem);font-weight:900;text-transform:uppercase;line-height:0.85;margin-bottom:32px">
-        <div class="glitch-wrap" data-text="NEURAL">NEURAL<span class="glitch-clone" aria-hidden="true">NEURAL</span><span class="glitch-clone" aria-hidden="true">NEURAL</span></div>
-        <br>
-        <div class="glitch-wrap" style="color:var(--color-primary)" data-text=".FLUX">.<span style="color:var(--color-secondary)">FLUX</span><span class="glitch-clone" aria-hidden="true">.FLUX</span><span class="glitch-clone" aria-hidden="true">.FLUX</span></div>
-      </h1>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:700px">
-        <p style="color:var(--color-text-2);line-height:1.7;font-size:0.95rem">A design collective operating at the frontier of digital aesthetic. We build interfaces for the age of neon and code.</p>
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <a href="#work" class="chr-btn-primary" style="font-family:var(--font-mono);font-size:0.85rem;justify-content:center">&gt; VIEW_WORK()</a>
-          <a href="#contact" class="chr-btn-ghost" style="font-family:var(--font-mono);font-size:0.85rem;justify-content:center">&gt; INIT_PROJECT()</a>
+  <section id="hero" style="min-height:90vh;display:flex;align-items:center;padding:100px 0;position:relative;overflow:hidden" aria-labelledby="cyber-heading">
+    <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,color-mix(in srgb,var(--color-primary) 3%,transparent) 2px,color-mix(in srgb,var(--color-primary) 3%,transparent) 4px);pointer-events:none" aria-hidden="true"></div>
+    <div class="chr-container" style="position:relative;z-index:2">
+      <div data-reveal>
+        <div style="font-family:var(--font-mono);font-size:.75rem;color:var(--color-primary);margin-bottom:24px;letter-spacing:.1em">&gt; CHRONOS agency mode online...</div>
+        <h1 id="cyber-heading" style="font-size:clamp(3.2rem,12vw,8.5rem);font-weight:900;text-transform:uppercase;line-height:.85;margin-bottom:32px">
+          <span class="glitch-wrap">NEURAL<span class="glitch-clone" aria-hidden="true">NEURAL</span><span class="glitch-clone" aria-hidden="true">NEURAL</span></span>
+          <br>
+          <span class="glitch-wrap" style="color:var(--color-primary)">.FLUX<span class="glitch-clone" aria-hidden="true">.FLUX</span><span class="glitch-clone" aria-hidden="true">.FLUX</span></span>
+        </h1>
+        <div class="hero-grid" style="max-width:760px">
+          <p style="color:var(--color-text-2);line-height:1.8;font-size:.96rem">
+            This agency-style layout shows how Chronos can shift into a high-contrast cyberpunk voice without changing the shared source architecture. The content now reflects the real product scope: 10 layouts, 12 eras, 16 palettes, and 65+ fonts.
+          </p>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <a href="#work" class="chr-btn-primary" style="font-family:var(--font-mono);font-size:.85rem;justify-content:center">&gt; VIEW_WORK()</a>
+            <a href="#contact" class="chr-btn-ghost" style="font-family:var(--font-mono);font-size:.85rem;justify-content:center">&gt; START_PROJECT()</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<!-- § 2. TICKER -->
-<div class="ticker" aria-hidden="true">
-  <div class="chr-marquee-track" style="font-family:var(--font-mono);font-size:0.78rem;color:var(--color-primary);font-weight:700;letter-spacing:0.1em">
-    <span style="padding:0 40px">◈ DESIGN.EXE RUNNING</span><span style="padding:0 40px">◈ ERA_COUNT: 10</span><span style="padding:0 40px">◈ FONTS_LOADED: 65</span><span style="padding:0 40px">◈ CUSTOMIZER: ONLINE</span><span style="padding:0 40px">◈ TRANSITIONS: ARMED</span><span style="padding:0 40px">◈ CHRONOS_V2: DEPLOYED</span><span style="padding:0 40px">◈ DESIGN.EXE RUNNING</span><span style="padding:0 40px">◈ ERA_COUNT: 10</span><span style="padding:0 40px">◈ FONTS_LOADED: 65</span><span style="padding:0 40px">◈ CUSTOMIZER: ONLINE</span><span style="padding:0 40px">◈ TRANSITIONS: ARMED</span><span style="padding:0 40px">◈ CHRONOS_V2: DEPLOYED</span>
-  </div>
-</div>
-<!-- § 3. SELECTED WORK -->
-<section id="work" class="chr-section-sm" aria-labelledby="work-heading">
-  <div class="chr-container">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--color-border)" data-reveal>
-      <h2 id="work-heading" style="font-family:var(--font-accent);font-size:1.4rem;font-weight:900;text-transform:uppercase">Selected_Work</h2>
-      <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--color-text-3)">12 projects / 3 shown</span>
-    </div>
-    <div data-reveal-group>
-      <div class="work-item"><div class="work-num">01</div><div><div style="font-size:0.7rem;color:var(--color-text-3);font-family:var(--font-mono);margin-bottom:4px">BRANDING · 2026</div><div style="font-size:1.5rem;font-weight:900;text-transform:uppercase">FLUX_MUSIC</div><div style="font-size:0.85rem;color:var(--color-text-2)">Identity system for a music streaming platform</div></div><div class="work-arrow" aria-hidden="true">→</div></div>
-      <div class="work-item"><div class="work-num">02</div><div><div style="font-size:0.7rem;color:var(--color-text-3);font-family:var(--font-mono);margin-bottom:4px">WEB · 2026</div><div style="font-size:1.5rem;font-weight:900;text-transform:uppercase">NEON.DAO</div><div style="font-size:0.85rem;color:var(--color-text-2)">Decentralized governance platform with dark UI</div></div><div class="work-arrow" aria-hidden="true">→</div></div>
-      <div class="work-item"><div class="work-num">03</div><div><div style="font-size:0.7rem;color:var(--color-text-3);font-family:var(--font-mono);margin-bottom:4px">SPATIAL · 2025</div><div style="font-size:1.5rem;font-weight:900;text-transform:uppercase">VOID_LAB</div><div style="font-size:0.85rem;color:var(--color-text-2)">Mixed-reality gallery for digital artists</div></div><div class="work-arrow" aria-hidden="true">→</div></div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="chr-marquee-track" style="font-family:var(--font-mono);font-size:.78rem;color:var(--color-primary);font-weight:700;letter-spacing:.1em">
+      <span style="padding:0 40px">SYSTEM READY</span><span style="padding:0 40px">LAYOUT_COUNT: 10</span><span style="padding:0 40px">ERA_COUNT: 12</span><span style="padding:0 40px">PALETTES: 16</span><span style="padding:0 40px">FONTS: 65_PLUS</span><span style="padding:0 40px">CUSTOMIZER: ONLINE</span><span style="padding:0 40px">SYSTEM READY</span><span style="padding:0 40px">LAYOUT_COUNT: 10</span><span style="padding:0 40px">ERA_COUNT: 12</span><span style="padding:0 40px">PALETTES: 16</span><span style="padding:0 40px">FONTS: 65_PLUS</span><span style="padding:0 40px">CUSTOMIZER: ONLINE</span>
     </div>
   </div>
-</section>
-<!-- § 4. SERVICES -->
-<section id="services" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="services-heading">
-  <div class="chr-container">
-    <h2 id="services-heading" style="font-family:var(--font-accent);font-size:1.4rem;font-weight:900;text-transform:uppercase;margin-bottom:32px" data-reveal>Services.Array()</h2>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--color-border)" data-reveal-group>
-      <div class="service-block"><div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--color-primary);margin-bottom:16px">// 01</div><h3 style="font-size:1.1rem;font-weight:900;text-transform:uppercase;margin-bottom:8px">Neural_UI</h3><p style="font-size:0.85rem;color:var(--color-text-2);line-height:1.6">Interface design for blockchain, AI, and data-heavy platforms.</p></div>
-      <div class="service-block"><div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--color-secondary);margin-bottom:16px">// 02</div><h3 style="font-size:1.1rem;font-weight:900;text-transform:uppercase;margin-bottom:8px">Glitch_Brand</h3><p style="font-size:0.85rem;color:var(--color-text-2);line-height:1.6">Brand identities that push aesthetic boundaries across all eras.</p></div>
-      <div class="service-block"><div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--color-accent);margin-bottom:16px">// 03</div><h3 style="font-size:1.1rem;font-weight:900;text-transform:uppercase;margin-bottom:8px">System_Dev</h3><p style="font-size:0.85rem;color:var(--color-text-2);line-height:1.6">Component systems and design tokens built for the long term.</p></div>
+
+  <section id="work" class="chr-section-sm" aria-labelledby="work-heading">
+    <div class="chr-container">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--color-border);gap:16px;flex-wrap:wrap" data-reveal>
+        <h2 id="work-heading" style="font-family:var(--font-accent);font-size:1.4rem;font-weight:900;text-transform:uppercase">Selected_Work</h2>
+        <span style="font-family:var(--font-mono);font-size:.8rem;color:var(--color-text-3)">12 reference projects / 3 shown</span>
+      </div>
+      <div data-reveal-group>
+        <div class="work-item"><div class="work-num">01</div><div><div style="font-size:.72rem;color:var(--color-text-3);font-family:var(--font-mono);margin-bottom:4px">BRANDING · 2026</div><div style="font-size:1.45rem;font-weight:900;text-transform:uppercase">FLUX_MUSIC</div><div style="font-size:.85rem;color:var(--color-text-2)">Identity system for a streaming platform prototype</div></div><div class="work-arrow" aria-hidden="true">-&gt;</div></div>
+        <div class="work-item"><div class="work-num">02</div><div><div style="font-size:.72rem;color:var(--color-text-3);font-family:var(--font-mono);margin-bottom:4px">WEB · 2026</div><div style="font-size:1.45rem;font-weight:900;text-transform:uppercase">NEON.DAO</div><div style="font-size:.85rem;color:var(--color-text-2)">Data-heavy governance interface with stark terminal styling</div></div><div class="work-arrow" aria-hidden="true">-&gt;</div></div>
+        <div class="work-item"><div class="work-num">03</div><div><div style="font-size:.72rem;color:var(--color-text-3);font-family:var(--font-mono);margin-bottom:4px">SPATIAL · 2025</div><div style="font-size:1.45rem;font-weight:900;text-transform:uppercase">VOID_LAB</div><div style="font-size:.85rem;color:var(--color-text-2)">Mixed-reality gallery concept for digital art launches</div></div><div class="work-arrow" aria-hidden="true">-&gt;</div></div>
+      </div>
     </div>
-  </div>
-</section>
-<!-- § 5. CLIENTS -->
-<section id="clients" class="chr-section-sm" aria-labelledby="clients-heading">
-  <div class="chr-container">
-    <h2 id="clients-heading" style="font-family:var(--font-accent);font-size:1rem;font-weight:900;text-transform:uppercase;color:var(--color-text-3);margin-bottom:40px;text-align:center" data-reveal>Clients.Map(name => trust)</h2>
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;text-align:center" data-reveal-group>
-      <div style="padding:24px;border:1px solid var(--color-border);font-family:var(--font-mono);font-size:0.85rem;font-weight:700;color:var(--color-text-2)">FLUX.IO</div>
-      <div style="padding:24px;border:1px solid var(--color-border);font-family:var(--font-mono);font-size:0.85rem;font-weight:700;color:var(--color-text-2)">NEON DAO</div>
-      <div style="padding:24px;border:1px solid var(--color-border);font-family:var(--font-mono);font-size:0.85rem;font-weight:700;color:var(--color-text-2)">VOID LAB</div>
-      <div style="padding:24px;border:1px solid var(--color-border);font-family:var(--font-mono);font-size:0.85rem;font-weight:700;color:var(--color-text-2)">NEXUS X</div>
-      <div style="padding:24px;border:1px solid var(--color-border);font-family:var(--font-mono);font-size:0.85rem;font-weight:700;color:var(--color-text-2)">AETHER_CO</div>
+  </section>
+
+  <section id="services" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="services-heading">
+    <div class="chr-container">
+      <h2 id="services-heading" style="font-family:var(--font-accent);font-size:1.4rem;font-weight:900;text-transform:uppercase;margin-bottom:32px" data-reveal>Services.Array()</h2>
+      <div class="services-grid" data-reveal-group>
+        <div class="service-block"><div style="font-family:var(--font-mono);font-size:.7rem;color:var(--color-primary);margin-bottom:16px">// 01</div><h3 style="font-size:1.1rem;font-weight:900;text-transform:uppercase;margin-bottom:8px">Neural_UI</h3><p style="font-size:.86rem;color:var(--color-text-2);line-height:1.7">Interface direction for AI, data, and launch-driven products.</p></div>
+        <div class="service-block"><div style="font-family:var(--font-mono);font-size:.7rem;color:var(--color-secondary);margin-bottom:16px">// 02</div><h3 style="font-size:1.1rem;font-weight:900;text-transform:uppercase;margin-bottom:8px">Glitch_Brand</h3><p style="font-size:.86rem;color:var(--color-text-2);line-height:1.7">Brand systems that can shift across Chronos eras without rewriting structure.</p></div>
+        <div class="service-block"><div style="font-family:var(--font-mono);font-size:.7rem;color:var(--color-accent);margin-bottom:16px">// 03</div><h3 style="font-size:1.1rem;font-weight:900;text-transform:uppercase;margin-bottom:8px">System_Dev</h3><p style="font-size:.86rem;color:var(--color-text-2);line-height:1.7">Reusable sections, tokens, and layout logic built for source-level refinement.</p></div>
+      </div>
     </div>
-  </div>
-</section>
-<!-- § 6. CONTACT -->
-<section id="contact" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="contact-heading">
-  <div class="chr-container" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
-    <div data-reveal>
-      <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--color-primary);margin-bottom:16px">&gt; INIT_PROJECT()</div>
-      <h2 id="contact-heading" style="font-size:clamp(2rem,5vw,3.5rem);font-weight:900;text-transform:uppercase;margin-bottom:1.5rem;line-height:1">START A PROJECT</h2>
-      <p style="color:var(--color-text-2);line-height:1.7;margin-bottom:2rem">We take on 4 projects per cycle. Current queue: 2 open slots. Move fast or wait for the next cycle.</p>
-      <div style="font-family:var(--font-mono);font-size:0.9rem;color:var(--color-primary)">hello@neural.flux<br><span style="color:var(--color-text-3)">@chronos_agency</span></div>
+  </section>
+
+  <section id="clients" class="chr-section-sm" aria-labelledby="clients-heading">
+    <div class="chr-container">
+      <h2 id="clients-heading" style="font-family:var(--font-accent);font-size:1rem;font-weight:900;text-transform:uppercase;color:var(--color-text-3);margin-bottom:40px;text-align:center" data-reveal>Clients.Map(name =&gt; trust)</h2>
+      <div class="clients-grid" data-reveal-group>
+        <div style="padding:24px;border:1px solid var(--color-border);font-family:var(--font-mono);font-size:.85rem;font-weight:700;color:var(--color-text-2)">FLUX.IO</div>
+        <div style="padding:24px;border:1px solid var(--color-border);font-family:var(--font-mono);font-size:.85rem;font-weight:700;color:var(--color-text-2)">NEON DAO</div>
+        <div style="padding:24px;border:1px solid var(--color-border);font-family:var(--font-mono);font-size:.85rem;font-weight:700;color:var(--color-text-2)">VOID LAB</div>
+        <div style="padding:24px;border:1px solid var(--color-border);font-family:var(--font-mono);font-size:.85rem;font-weight:700;color:var(--color-text-2)">NEXUS X</div>
+        <div style="padding:24px;border:1px solid var(--color-border);font-family:var(--font-mono);font-size:.85rem;font-weight:700;color:var(--color-text-2)">AETHER.CO</div>
+      </div>
     </div>
-    <div data-reveal>
-      <form style="display:flex;flex-direction:column;gap:16px" aria-label="Contact form">
-        <div>
-          <label for="cy-name" style="display:block;font-family:var(--font-mono);font-size:0.72rem;color:var(--color-text-3);margin-bottom:6px">NAME.STRING:</label>
-          <input type="text" id="cy-name" placeholder="your_name" style="width:100%;padding:12px 16px;background:var(--color-bg);border:1px solid var(--color-border);color:var(--color-text);font-family:var(--font-mono);font-size:0.88rem;outline:none;border-radius:var(--radius-sm)" autocomplete="name">
-        </div>
-        <div>
-          <label for="cy-email" style="display:block;font-family:var(--font-mono);font-size:0.72rem;color:var(--color-text-3);margin-bottom:6px">EMAIL.STRING:</label>
-          <input type="email" id="cy-email" placeholder="you@xnode.net" style="width:100%;padding:12px 16px;background:var(--color-bg);border:1px solid var(--color-border);color:var(--color-text);font-family:var(--font-mono);font-size:0.88rem;outline:none;border-radius:var(--radius-sm)" autocomplete="email">
-        </div>
-        <div>
-          <label for="cy-msg" style="display:block;font-family:var(--font-mono);font-size:0.72rem;color:var(--color-text-3);margin-bottom:6px">MESSAGE.STRING:</label>
-          <textarea id="cy-msg" rows="4" placeholder="describe_your_project()" style="width:100%;padding:12px 16px;background:var(--color-bg);border:1px solid var(--color-border);color:var(--color-text);font-family:var(--font-mono);font-size:0.88rem;outline:none;border-radius:var(--radius-sm);resize:vertical"></textarea>
-        </div>
-        <button type="submit" class="chr-btn-primary" style="font-family:var(--font-mono);justify-content:center">&gt; SUBMIT_REQUEST()</button>
-      </form>
+  </section>
+
+  <section id="contact" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="contact-heading">
+    <div class="chr-container contact-grid" style="align-items:start">
+      <div data-reveal>
+        <div style="font-family:var(--font-mono);font-size:.75rem;color:var(--color-primary);margin-bottom:16px">&gt; START_PROJECT()</div>
+        <h2 id="contact-heading" style="font-size:clamp(2rem,5vw,3.5rem);font-weight:900;text-transform:uppercase;margin-bottom:1.5rem;line-height:1">Start a project</h2>
+        <p style="color:var(--color-text-2);line-height:1.8;margin-bottom:2rem">
+          This section is intentionally neutral demo copy. Use it as a high-energy contact block for agencies, creative studios, or internal showcases while you refine the final production messaging.
+        </p>
+        <div style="font-family:var(--font-mono);font-size:.9rem;color:var(--color-primary)">hello@chronos.demo<br><span style="color:var(--color-text-3)">@chronos_agency</span></div>
+      </div>
+      <div data-reveal>
+        <form style="display:flex;flex-direction:column;gap:16px" aria-label="Contact form" data-demo-message="Demo contact form submitted. Connect this form to your own endpoint.">
+          <div>
+            <label for="cy-name" style="display:block;font-family:var(--font-mono);font-size:.72rem;color:var(--color-text-3);margin-bottom:6px">NAME.STRING:</label>
+            <input type="text" id="cy-name" placeholder="your_name" style="width:100%;padding:12px 16px;background:var(--color-bg);border:1px solid var(--color-border);color:var(--color-text);font-family:var(--font-mono);font-size:.88rem;outline:none;border-radius:var(--radius-sm)" autocomplete="name">
+          </div>
+          <div>
+            <label for="cy-email" style="display:block;font-family:var(--font-mono);font-size:.72rem;color:var(--color-text-3);margin-bottom:6px">EMAIL.STRING:</label>
+            <input type="email" id="cy-email" placeholder="you@xnode.net" style="width:100%;padding:12px 16px;background:var(--color-bg);border:1px solid var(--color-border);color:var(--color-text);font-family:var(--font-mono);font-size:.88rem;outline:none;border-radius:var(--radius-sm)" autocomplete="email">
+          </div>
+          <div>
+            <label for="cy-msg" style="display:block;font-family:var(--font-mono);font-size:.72rem;color:var(--color-text-3);margin-bottom:6px">MESSAGE.STRING:</label>
+            <textarea id="cy-msg" rows="4" placeholder="describe_your_project()" style="width:100%;padding:12px 16px;background:var(--color-bg);border:1px solid var(--color-border);color:var(--color-text);font-family:var(--font-mono);font-size:.88rem;outline:none;border-radius:var(--radius-sm);resize:vertical"></textarea>
+          </div>
+          <button type="submit" class="chr-btn-primary" style="font-family:var(--font-mono);justify-content:center">&gt; SUBMIT_REQUEST()</button>
+        </form>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 </main>
+
 <footer style="background:var(--color-bg);border-top:1px solid var(--color-primary);box-shadow:0 -4px 40px color-mix(in srgb,var(--color-primary) 10%,transparent);padding:40px 0" role="contentinfo">
   <div class="chr-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
-    <a href="index.html" class="chr-logo" style="font-family:var(--font-mono)">✦ CHRONOS[SYS]</a>
-    <p style="font-size:0.78rem;color:var(--color-text-3);font-family:var(--font-mono)">© 2026 Chronos · Layout 09 — Cyberpunk Agency</p>
-    <nav><ul style="list-style:none;display:flex;gap:20px"><li><a href="layout-08.html" style="font-size:0.82rem;color:var(--color-text-2);font-family:var(--font-mono)">Minimal ←</a></li><li><a href="layout-10.html" style="font-size:0.82rem;color:var(--color-text-2);font-family:var(--font-mono)">Gothic →</a></li></ul></nav>
+    <a href="index.html" class="chr-logo" style="font-family:var(--font-mono)">CHRONOS[SYS]</a>
+    <p style="font-size:.78rem;color:var(--color-text-3);font-family:var(--font-mono)">2026 Chronos - Layout 09 Cyberpunk Agency</p>
+    <nav aria-label="Related layouts">
+      <ul style="list-style:none;display:flex;gap:20px">
+        <li><a href="layout-08.html" style="font-size:.82rem;color:var(--color-text-2);font-family:var(--font-mono)">Minimal</a></li>
+        <li><a href="layout-10.html" style="font-size:.82rem;color:var(--color-text-2);font-family:var(--font-mono)">Gothic</a></li>
+      </ul>
+    </nav>
   </div>
 </footer>
+
 <div id="chr-customizer-mount"></div>
 </body>
 </html>

@@ -8,6 +8,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
+        layout01: 'layout-01.html',
         layout02: 'layout-02.html',
         layout03: 'layout-03.html',
         layout04: 'layout-04.html',
