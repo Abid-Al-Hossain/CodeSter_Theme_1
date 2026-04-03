@@ -5,6 +5,7 @@ import {
   revealAboveFold,
   initCounters,
   initNavHighlight,
+  initSectionJumpTransitions,
   initFAQ,
   initMobileNav,
 } from './transitions.js'
@@ -474,6 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
   revealAboveFold()
   initCounters()
   initNavHighlight()
+  initSectionJumpTransitions()
   initFAQ()
   initMobileNav()
 })

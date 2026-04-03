@@ -161,6 +161,126 @@ export function initNavHighlight() {
   setActive(pickFallbackSection())
 }
 
+function getCurrentSectionIndex(sectionList) {
+  const activationLine = window.innerHeight * 0.35
+  let index = 0
+
+  sectionList.forEach((section, sectionIndex) => {
+    if (section.getBoundingClientRect().top <= activationLine) {
+      index = sectionIndex
+    }
+  })
+
+  return index
+}
+
+function getSectionMotionProfile() {
+  const path = window.location.pathname.toLowerCase()
+
+  if (path.includes('layout-04') || path.includes('layout-08') || path.includes('layout-12')) return 'soft'
+  if (path.includes('layout-05') || path.includes('layout-15')) return 'lateral'
+  if (path.includes('layout-09')) return 'cyber'
+  if (path.includes('layout-14')) return 'travel'
+  if (path.includes('layout-02') || path.includes('layout-06')) return 'creative'
+  if (path.includes('layout-03') || path.includes('layout-10')) return 'editorial'
+  if (path.includes('layout-07')) return 'launch'
+  return 'default'
+}
+
+export function initSectionJumpTransitions() {
+  const sectionList = Array.from(document.querySelectorAll('section[id]'))
+  const links = Array.from(document.querySelectorAll('a[href^="#"]')).filter((link) => {
+    const href = link.getAttribute('href') || ''
+    return href.startsWith('#') && href !== '#' && href !== '#main-content' && document.querySelector(href)
+  })
+  if (!sectionList.length || !links.length) return
+
+  document.body.dataset.sectionMotion = getSectionMotionProfile()
+
+  let activeCleanup = null
+
+  function triggerSectionJump(target, direction) {
+    if (activeCleanup) activeCleanup()
+
+    const classNames = ['chr-section-jump-target', `chr-section-jump-${direction}`]
+    let observer = null
+
+    const cleanup = () => {
+      classNames.forEach((className) => target.classList.remove(className))
+      observer?.disconnect()
+      observer = null
+      if (activeCleanup === cleanup) activeCleanup = null
+    }
+
+    const run = () => {
+      cleanup()
+      // Force a reflow so repeated jumps retrigger the animation.
+      void target.offsetWidth
+      classNames.forEach((className) => target.classList.add(className))
+      window.setTimeout(cleanup, 720)
+    }
+
+    const rect = target.getBoundingClientRect()
+    const alreadyVisible = rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.15
+
+    if (alreadyVisible) {
+      run()
+    } else {
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            run()
+            observer?.disconnect()
+            observer = null
+          }
+        })
+      }, {
+        threshold: 0.2,
+        rootMargin: '0px 0px -18% 0px',
+      })
+
+      observer.observe(target)
+    }
+
+    activeCleanup = cleanup
+  }
+
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return
+      }
+
+      const href = link.getAttribute('href')
+      if (!href || !href.startsWith('#')) return
+
+      const target = document.querySelector(href)
+      if (!(target instanceof HTMLElement)) return
+
+      event.preventDefault()
+
+      const currentIndex = getCurrentSectionIndex(sectionList)
+      const targetIndex = sectionList.findIndex((section) => section.id === target.id)
+      const direction = targetIndex >= currentIndex ? 'forward' : 'backward'
+
+      triggerSectionJump(target, direction)
+
+      if (window.location.hash !== href) {
+        history.pushState(null, '', href)
+      }
+
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+  })
+}
+
 /**
  * FAQ accordion with keyboard support.
  */
