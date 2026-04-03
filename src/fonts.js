@@ -56,16 +56,16 @@ export function loadGoogleFont(name) {
  * Preload fonts for the active era
  */
 export const ERA_DEFAULT_FONTS = {
-  modern:     { heading: 'Outfit', body: 'Inter', mono: 'JetBrains Mono', accent: 'Syne' },
+  modern:     { heading: 'Plus Jakarta Sans', body: 'Inter', mono: 'JetBrains Mono', accent: 'Space Grotesk' },
   gothic:     { heading: 'Cinzel', body: 'Crimson Pro', mono: 'UnifrakturMaguntia', accent: 'UnifrakturMaguntia' },
   futuristic: { heading: 'Space Grotesk', body: 'Plus Jakarta Sans', mono: 'Space Mono', accent: 'Orbitron' },
   retro:      { heading: 'Playfair Display', body: 'Crimson Pro', mono: 'Inconsolata', accent: 'EB Garamond' },
   cyberpunk:  { heading: 'Orbitron', body: 'Tektur', mono: 'Space Mono', accent: 'Audiowide' },
   brutalist:  { heading: 'Archivo Black', body: 'Barlow Condensed', mono: 'Fira Code', accent: 'Oswald' },
-  minimalist: { heading: 'Outfit', body: 'Inter', mono: 'DM Mono', accent: 'Syne' },
+  minimalist: { heading: 'Work Sans', body: 'Inter', mono: 'DM Mono', accent: 'Work Sans' },
   eco:        { heading: 'Sora', body: 'DM Sans', mono: 'Source Code Pro', accent: 'Nunito' },
   corporate:  { heading: 'Manrope', body: 'Inter', mono: 'IBM Plex Mono', accent: 'Work Sans' },
   artistic:   { heading: 'Unbounded', body: 'Syne', mono: 'Fira Code', accent: 'Anton' },
   apocalyptic:{ heading: 'UnifrakturMaguntia', body: 'Fira Code', mono: 'Space Mono', accent: 'Almendra' },
-  liquid:     { heading: 'Outfit', body: 'Inter', mono: 'DM Mono', accent: 'Syne' }
+  liquid:     { heading: 'Lexend', body: 'DM Sans', mono: 'DM Mono', accent: 'Readex Pro' }
 }

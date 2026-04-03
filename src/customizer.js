@@ -31,11 +31,11 @@ const PALETTES = {
 
 const DEFAULT_COLORS = {
   primary: '#2563eb',
-  secondary: '#6366f1',
-  accent: '#38bdf8',
-  bg: '#ffffff',
-  bg2: '#f8fafc',
-  surface: '#f8fafc',
+  secondary: '#14b8a6',
+  accent: '#60a5fa',
+  bg: '#fbfdff',
+  bg2: '#f3f7fb',
+  surface: '#f3f7fb',
   text: '#0f172a',
 }
 
@@ -247,7 +247,7 @@ Alpine.store('chr', {
   open: false,
   activeTab: 'era',
   era: 'modern',
-  fonts: { heading: 'Outfit', body: 'Inter', mono: 'JetBrains Mono', accent: 'Syne' },
+  fonts: { heading: 'Plus Jakarta Sans', body: 'Inter', mono: 'JetBrains Mono', accent: 'Space Grotesk' },
   colors: { ...DEFAULT_COLORS },
   hasCustomFonts: false,
   hasCustomColors: false,
@@ -419,7 +419,7 @@ Alpine.store('chr', {
     this.hasCustomColors = false
     this.activePalette = ''
     this.colors = { ...DEFAULT_COLORS }
-    this.fonts = { heading: 'Outfit', body: 'Inter', mono: 'JetBrains Mono', accent: 'Syne' }
+    this.fonts = { heading: 'Plus Jakarta Sans', body: 'Inter', mono: 'JetBrains Mono', accent: 'Space Grotesk' }
 
     document.documentElement.removeAttribute('style')
     document.documentElement.setAttribute('data-era', 'modern')
