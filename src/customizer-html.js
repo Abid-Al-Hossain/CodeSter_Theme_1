@@ -111,19 +111,36 @@ export const CUSTOMIZER_HTML = /* html */`
 
     <!-- ── FONTS TAB ───────────────────────────────── -->
     <div x-show="$store.chr.activeTab==='fonts'" x-cloak>
-      <datalist id="chr-all-fonts"></datalist>
+      <template x-for="f in [{id:'heading', label:'Heading'}, {id:'body', label:'Body'}, {id:'accent', label:'Accent / Display'}, {id:'mono', label:'Monospace'}]" :key="f.id">
+        <div style="margin-bottom:16px;">
+          <span class="cust-label" x-text="f.label + ' Font'"></span>
+          
+          <div x-data="chrFontDropdown(f.id)" @click.outside="open = false" style="position:relative">
+             <button @click="toggle()" style="width:100%; display:flex; justify-content:space-between; align-items:center; background:var(--color-bg); border:1px solid var(--color-border); padding:10px 14px; border-radius:var(--radius-sm); color:var(--color-text); font-size:0.85rem; cursor:pointer;" aria-label="Select Font">
+                <span x-text="$store.chr.fonts[f.id]" :style="'font-family:' + $store.chr.fonts[f.id]"></span>
+                <span style="font-size:0.6rem; opacity:0.5">▼</span>
+             </button>
+             
+             <div x-show="open" style="position:absolute; top:calc(100% + 4px); left:0; width:100%; background:var(--color-bg); border:1px solid var(--color-border); border-radius:var(--radius-sm); z-index:100; box-shadow:0 10px 25px rgba(0,0,0,0.2)" x-transition x-cloak>
+                <div style="padding:8px">
+                   <input type="text" x-model="search" x-ref="search" placeholder="Search fonts..." style="width:100%; padding:8px 12px; background:var(--color-bg-2); border:1px solid var(--color-border); border-radius:4px; color:var(--color-text); font-size:0.8rem; outline:none">
+                </div>
+                <div style="max-height:220px; overflow-y:auto; padding-bottom:8px">
+                   <template x-for="font in filtered" :key="font">
+                      <div @click="selectFont(font)" style="padding:8px 16px; font-size:0.9rem; cursor:pointer" 
+                           :style="\`font-family:\${font};\` + ($store.chr.fonts[f.id] === font ? 'background:var(--color-primary);color:#fff' : 'color:var(--color-text)')"
+                           x-text="font"
+                           onmouseover="if(this.style.background==='')this.style.background='var(--color-bg-2)'"
+                           onmouseout="if(this.style.color==='var(--color-text)')this.style.background=''">
+                      </div>
+                   </template>
+                   <div x-show="filtered.length===0" style="padding:16px; text-align:center; color:var(--color-text-3); font-size:0.8rem">No fonts found</div>
+                </div>
+             </div>
+          </div>
 
-      <span class="cust-label">Heading Font</span>
-      <input type="text" class="font-select chr-font-select" data-role="heading" style="font-family:var(--font-heading)" list="chr-all-fonts" autocomplete="off">
-
-      <span class="cust-label">Body Font</span>
-      <input type="text" class="font-select chr-font-select" data-role="body" style="font-family:var(--font-body)" list="chr-all-fonts" autocomplete="off">
-
-      <span class="cust-label">Accent / Display Font</span>
-      <input type="text" class="font-select chr-font-select" data-role="accent" style="font-family:var(--font-accent)" list="chr-all-fonts" autocomplete="off">
-
-      <span class="cust-label">Monospace Font</span>
-      <input type="text" class="font-select chr-font-select" data-role="mono" style="font-family:var(--font-mono)" list="chr-all-fonts" autocomplete="off">
+        </div>
+      </template>
 
       <div style="margin-top:16px;font-size:0.75rem;color:var(--color-text-3)">
         65+ fonts available. Loaded on-demand to keep performance optimal.

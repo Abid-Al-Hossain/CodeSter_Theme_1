@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en" data-era="modern">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos — The premium multi-era HTML theme bundle with 10 layouts, 10 eras, and a real-time style customizer. Build any website, any aesthetic.">
+  <title>Chronos | Modern SaaS Landing Page</title>
+
+  <!-- FOUC Prevention: restore era before paint -->
+  <script>
+    (function(){
+      try {
+        var p = JSON.parse(localStorage.getItem('chronos-prefs'))
+        if (p && p.era) document.documentElement.setAttribute('data-era', p.era)
+      } catch(e) {}
+    })()
+  </script>
+
+  <!-- Vite entry -->
+  <script type="module" src="/src/main.js"></script>
+
+  <style>
+    [x-cloak] { display: none !important; }
+
+    /* Hero blob background */
+    .hero-wrapper {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--color-bg);
+    }
+
+    .hero-blob-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--color-primary), transparent 70%);
+      opacity: 0.12;
+      top: -100px; right: -100px;
+    }
+
+    .hero-blob-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, var(--color-secondary), transparent 70%);
+      opacity: 0.1;
+      bottom: -50px; left: 10%;
+      animation-delay: 3s;
+    }
+
+    /* Gradient orb ring */
+    .hero-orb {
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--color-primary), var(--color-secondary), var(--color-accent), var(--color-primary));
+      opacity: 0.06;
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      filter: blur(1px);
+      animation: orb-spin 20s linear infinite;
+    }
+
+    @keyframes orb-spin {
+      from { transform: translateY(-50%) rotate(0deg); }
+      to { transform: translateY(-50%) rotate(360deg); }
+    }
+
+    /* Marquee section */
+    .marquee-section {
+      background: var(--color-bg-2);
+      border-top: var(--border-w) solid var(--color-border);
+      border-bottom: var(--border-w) solid var(--color-border);
+      padding: 20px 0;
+      overflow: hidden;
+    }
+
+    /* Screenshot mockup */
+    .mockup-screen {
+      background: var(--color-bg-2);
+      border: var(--border-w) solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    .mockup-bar {
+      background: var(--color-bg-3);
+      padding: 12px 20px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      border-bottom: var(--border-w) solid var(--color-border);
+    }
+
+    .mockup-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+
+    /* Process connector */
+    .process-connector {
+      position: absolute;
+      top: 24px;
+      left: calc(100% - 8px);
+      width: calc(100% - 16px);
+      height: 2px;
+      background: linear-gradient(to right, var(--color-primary), transparent);
+      z-index: 0;
+    }
+
+    /* Pricing toggle */
+    .pricing-toggle {
+      display: inline-flex;
+      background: var(--color-bg-2);
+      border: var(--border-w) solid var(--color-border);
+      border-radius: var(--radius-full);
+      padding: 4px;
+    }
+
+    .pricing-toggle button {
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .pricing-toggle button.active {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    /* Star rating */
+    .stars { color: #f59e0b; letter-spacing: -2px; font-size: 1rem; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- § NAVIGATION                                           -->
+<!-- ══════════════════════════════════════════════════════ -->
+<header class="chr-nav" role="banner">
+  <div class="chr-container chr-nav-inner">
+    <a href="/" class="chr-logo" aria-label="Chronos Home">✦ CHRONOS</a>
+
+    <nav role="navigation" aria-label="Main navigation">
+      <ul class="chr-nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#showcase">Showcase</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="#pricing" class="chr-btn-ghost" style="padding:10px 20px;font-size:0.85rem">Log in</a>
+      <a href="#pricing" class="chr-btn-primary" style="padding:10px 22px;font-size:0.85rem">Start Free →</a>
+      <button class="chr-nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- § 1. HERO                                              -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section id="hero" class="hero-wrapper" aria-labelledby="hero-heading">
+  <!-- Animated blobs -->
+  <div class="chr-blob hero-blob-1"></div>
+  <div class="chr-blob hero-blob-2"></div>
+  <div class="hero-orb"></div>
+
+  <div class="chr-container" style="position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+    <!-- Left: copy -->
+    <div>
+      <div class="chr-badge" data-reveal style="margin-bottom:1.5rem;display:inline-flex">
+        <span>✦</span> Multi-Era Design System · 10 Layouts
+      </div>
+
+      <h1 id="hero-heading" data-reveal class="chr-heading-xl" style="margin-bottom:1.5rem">
+        One Theme.<br>
+        <span class="chr-gradient-text">Every Era.</span><br>
+        Infinite Style.
+      </h1>
+
+      <p data-reveal style="font-size:1.15rem;color:var(--color-text-2);max-width:480px;margin-bottom:2.5rem;line-height:1.7">
+        Chronos is the only theme bundle that lets you switch between Gothic, Cyberpunk, Futuristic, Retro, and 6 more eras — with live real-time customization and 65+ font options.
+      </p>
+
+      <div data-reveal style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+        <a href="#pricing" class="chr-btn-primary" style="font-size:1rem;padding:16px 36px">
+          Get Chronos Bundle →
+        </a>
+        <a href="#showcase" class="chr-btn-ghost" style="font-size:1rem;padding:16px 28px">
+          View Layouts ↓
+        </a>
+      </div>
+
+      <div data-reveal style="margin-top:2.5rem;display:flex;gap:32px;flex-wrap:wrap">
+        <div>
+          <div class="chr-stat-number" style="font-size:2rem" data-count="10" data-suffix="+">0+</div>
+          <div style="font-size:0.8rem;color:var(--color-text-3)">Layouts</div>
+        </div>
+        <div>
+          <div class="chr-stat-number" style="font-size:2rem" data-count="10">0</div>
+          <div style="font-size:0.8rem;color:var(--color-text-3)">Design Eras</div>
+        </div>
+        <div>
+          <div class="chr-stat-number" style="font-size:2rem" data-count="65" data-suffix="+">0+</div>
+          <div style="font-size:0.8rem;color:var(--color-text-3)">Google Fonts</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: mockup -->
+    <div data-reveal="right" style="display:flex;justify-content:center">
+      <div class="mockup-screen" style="width:100%;max-width:520px">
+        <div class="mockup-bar">
+          <div class="mockup-dot" style="background:#ff5f57"></div>
+          <div class="mockup-dot" style="background:#febc2e"></div>
+          <div class="mockup-dot" style="background:#28c840"></div>
+          <div style="flex:1;height:8px;background:var(--color-bg);border-radius:4px;margin-left:8px"></div>
+        </div>
+        <div style="padding:24px;display:grid;grid-template-columns:1fr 2fr;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="height:8px;background:var(--color-primary);border-radius:4px;opacity:0.7;width:60%"></div>
+            <div style="height:6px;background:var(--color-border);border-radius:4px"></div>
+            <div style="height:6px;background:var(--color-border);border-radius:4px;width:80%"></div>
+            <div style="height:6px;background:var(--color-border);border-radius:4px;width:70%"></div>
+            <div style="height:6px;background:var(--color-border);border-radius:4px;width:90%"></div>
+            <div style="height:6px;background:var(--color-border);border-radius:4px;width:65%"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="height:100px;background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));border-radius:var(--radius-md);opacity:0.2"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <div style="height:48px;background:var(--color-bg-3);border-radius:var(--radius-sm);border:1px solid var(--color-border)"></div>
+              <div style="height:48px;background:var(--color-primary);border-radius:var(--radius-sm);opacity:0.15"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- § 2. SOCIAL PROOF MARQUEE                             -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="marquee-section" aria-label="Trusted by">
+  <div style="overflow:hidden">
+    <div class="chr-marquee-track">
+      <!-- Repeat twice for seamless loop -->
+      <template id="marquee-items">
+        <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px;font-size:0.85rem;color:var(--color-text-3);font-weight:500">
+          ✦ 10 Layouts
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px;font-size:0.85rem;color:var(--color-text-3);font-weight:500">
+          ✦ 10 Design Eras
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px;font-size:0.85rem;color:var(--color-text-3);font-weight:500">
+          ✦ 65+ Google Fonts
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px;font-size:0.85rem;color:var(--color-text-3);font-weight:500">
+          ✦ Live Color Picker
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px;font-size:0.85rem;color:var(--color-text-3);font-weight:500">
+          ✦ Live Font Picker
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px;font-size:0.85rem;color:var(--color-text-3);font-weight:500">
+          ✦ CSS Export
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px;font-size:0.85rem;color:var(--color-text-3);font-weight:500">
+          ✦ Instant Era Switch
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px;font-size:0.85rem;color:var(--color-text-3);font-weight:500">
+          ✦ Fully Responsive
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px;font-size:0.85rem;color:var(--color-text-3);font-weight:500">
+          ✦ SEO Optimized
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px;font-size:0.85rem;color:var(--color-text-3);font-weight:500">
+          ✦ WCAG Accessible
+        </span>
+      </template>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- § 3. FEATURES                                          -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section id="features" class="chr-section" aria-labelledby="features-heading">
+  <div class="chr-container">
+    <div style="text-align:center;max-width:640px;margin:0 auto 64px" data-reveal>
+      <div class="chr-heading-sm">Core Features</div>
+      <h2 id="features-heading" class="chr-heading-xl">Everything you need.<br>Nothing you don't.</h2>
+      <p style="color:var(--color-text-2);margin-top:1rem;font-size:1.05rem">Chronos ships with a production-ready customization engine, multiple structural layouts, and deep design token control out of the box.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px" data-reveal-group>
+      <div class="chr-feature-card">
+        <div class="chr-feature-icon" aria-hidden="true">⚡</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.75rem">10 Design Eras</h3>
+        <p style="color:var(--color-text-2);font-size:0.92rem;line-height:1.6">Switch between Gothic, Futuristic, Retro, Cyberpunk, Brutalist, Minimalist, Eco, Corporate, Artistic, and Modern with a single click.</p>
+      </div>
+      <div class="chr-feature-card">
+        <div class="chr-feature-icon" aria-hidden="true">🎨</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.75rem">Live Color Engine</h3>
+        <p style="color:var(--color-text-2);font-size:0.92rem;line-height:1.6">6 live color pickers update every element simultaneously. 8 preset curated palettes. Changes are saved automatically between sessions.</p>
+      </div>
+      <div class="chr-feature-card">
+        <div class="chr-feature-icon" aria-hidden="true">🔤</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.75rem">65+ Google Fonts</h3>
+        <p style="color:var(--color-text-2);font-size:0.92rem;line-height:1.6">Separate pickers for Heading, Body, Accent, and Monospace fonts. Fonts load on-demand. Changes persist across page reloads.</p>
+      </div>
+      <div class="chr-feature-card">
+        <div class="chr-feature-icon" aria-hidden="true">💾</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.75rem">CSS Export & Save</h3>
+        <p style="color:var(--color-text-2);font-size:0.92rem;line-height:1.6">Generate a clean <code style="font-family:var(--font-mono);font-size:0.85em">:root {}</code> CSS block from your customizations. Copy to clipboard and apply it to any project.</p>
+      </div>
+      <div class="chr-feature-card">
+        <div class="chr-feature-icon" aria-hidden="true">📱</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.75rem">Fully Responsive</h3>
+        <p style="color:var(--color-text-2);font-size:0.92rem;line-height:1.6">Every layout is crafted mobile-first. Tested at 320px, 768px, 1024px, and 1920px. Navigation collapses cleanly on mobile.</p>
+      </div>
+      <div class="chr-feature-card">
+        <div class="chr-feature-icon" aria-hidden="true">♿</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.75rem">WCAG Accessible</h3>
+        <p style="color:var(--color-text-2);font-size:0.92rem;line-height:1.6">Semantic HTML5, proper ARIA labels, keyboard navigable accordion FAQ, skip-to-content link. Built for everyone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- § 4. HOW IT WORKS (Process)                           -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section id="how-it-works" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="process-heading">
+  <div class="chr-container">
+    <div style="text-align:center;max-width:560px;margin:0 auto 64px" data-reveal>
+      <div class="chr-heading-sm">How It Works</div>
+      <h2 id="process-heading" class="chr-heading-xl">From purchase to live in minutes</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:32px;position:relative" data-reveal-group>
+      <div style="text-align:center;position:relative">
+        <div class="chr-step-number">01</div>
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--color-primary);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-weight:800;font-size:1.2rem;position:relative;z-index:2">✓</div>
+        <h3 style="font-size:1rem;margin-bottom:8px">Download</h3>
+        <p style="font-size:0.85rem;color:var(--color-text-2)">Get the package. Extract the ZIP and open any layout in your browser. No build step needed.</p>
+        <div class="process-connector" aria-hidden="true"></div>
+      </div>
+      <div style="text-align:center;position:relative">
+        <div class="chr-step-number">02</div>
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--color-primary);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-weight:800;font-size:1.2rem;position:relative;z-index:2">✦</div>
+        <h3 style="font-size:1rem;margin-bottom:8px">Select an Era</h3>
+        <p style="font-size:0.85rem;color:var(--color-text-2)">Click the CUSTOMIZE button, choose an era and watch the entire site transform instantly.</p>
+        <div class="process-connector" aria-hidden="true" style="background:linear-gradient(to right,var(--color-secondary),transparent)"></div>
+      </div>
+      <div style="text-align:center;position:relative">
+        <div class="chr-step-number">03</div>
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--color-primary);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-weight:800;font-size:1.2rem;position:relative;z-index:2">🎨</div>
+        <h3 style="font-size:1rem;margin-bottom:8px">Customize</h3>
+        <p style="font-size:0.85rem;color:var(--color-text-2)">Pick your colors, fonts, and accents. Live preview updates as you drag. Nothing to save, it persists automatically.</p>
+        <div class="process-connector" aria-hidden="true" style="background:linear-gradient(to right,var(--color-accent),transparent)"></div>
+      </div>
+      <div style="text-align:center">
+        <div class="chr-step-number">04</div>
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--color-primary);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-weight:800;font-size:1.2rem">🚀</div>
+        <h3 style="font-size:1rem;margin-bottom:8px">Export & Ship</h3>
+        <p style="font-size:0.85rem;color:var(--color-text-2)">Hit Export, copy your CSS variables, drop them into your project, and go live.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- § 6. STATS                                            -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="chr-section-sm" style="background:var(--color-primary)" aria-label="Statistics">
+  <div class="chr-container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center" data-reveal-group>
+      <div>
+        <div style="font-family:var(--font-heading);font-size:3rem;font-weight:800;color:#fff" data-count="10" data-suffix="+">0+</div>
+        <div style="font-size:0.85rem;color:rgba(255,255,255,0.7);margin-top:4px">Premium Layouts</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-heading);font-size:3rem;font-weight:800;color:#fff" data-count="65" data-suffix="+">0+</div>
+        <div style="font-size:0.85rem;color:rgba(255,255,255,0.7);margin-top:4px">Google Fonts</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-heading);font-size:3rem;font-weight:800;color:#fff" data-count="8">0</div>
+        <div style="font-size:0.85rem;color:rgba(255,255,255,0.7);margin-top:4px">Preset Palettes</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-heading);font-size:3rem;font-weight:800;color:#fff" data-count="100" data-suffix="%">0%</div>
+        <div style="font-size:0.85rem;color:rgba(255,255,255,0.7);margin-top:4px">Vanilla — No Framework Dep.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- § 7. TESTIMONIALS                                      -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section id="testimonials" class="chr-section" aria-labelledby="testimonials-heading">
+  <div class="chr-container">
+    <div style="text-align:center;max-width:560px;margin:0 auto 64px" data-reveal>
+      <div class="chr-heading-sm">Reviews</div>
+      <h2 id="testimonials-heading" class="chr-heading-xl">What creators are saying</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px" data-reveal-group>
+      <blockquote class="chr-testimonial">
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <p style="margin:12px 0 20px;color:var(--color-text-2);font-size:0.95rem;line-height:1.7">"The era switching is genuinely mindblowing. I switched the entire look of my portfolio from Minimalist to Gothic in one click. Fonts, colors, spacing — everything changed at once."</p>
+        <footer style="display:flex;align-items:center;gap:12px">
+          <div style="width:40px;height:40px;background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));border-radius:50%"></div>
+          <div>
+            <div style="font-weight:700;font-size:0.9rem">Alex Rivera</div>
+            <div style="font-size:0.78rem;color:var(--color-text-3)">UI Designer, Freelance</div>
+          </div>
+        </footer>
+      </blockquote>
+
+      <blockquote class="chr-testimonial">
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <p style="margin:12px 0 20px;color:var(--color-text-2);font-size:0.95rem;line-height:1.7">"Used the Corporate era and Dashboard layout for a client project. Saved me 3 days of design time. The code is clean, semantic, and the customizer panel is a killer selling point."</p>
+        <footer style="display:flex;align-items:center;gap:12px">
+          <div style="width:40px;height:40px;background:linear-gradient(135deg,var(--color-secondary),var(--color-accent));border-radius:50%"></div>
+          <div>
+            <div style="font-weight:700;font-size:0.9rem">Sarah Chen</div>
+            <div style="font-size:0.78rem;color:var(--color-text-3)">Frontend Dev, Agency</div>
+          </div>
+        </footer>
+      </blockquote>
+
+      <blockquote class="chr-testimonial">
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <p style="margin:12px 0 20px;color:var(--color-text-2);font-size:0.95rem;line-height:1.7">"The Futuristic Layout 07 with the countdown timer was exactly what I needed for a product launch. The scanning beam animation had my client screaming. 10/10."</p>
+        <footer style="display:flex;align-items:center;gap:12px">
+          <div style="width:40px;height:40px;background:linear-gradient(135deg,var(--color-accent),var(--color-primary));border-radius:50%"></div>
+          <div>
+            <div style="font-weight:700;font-size:0.9rem">Marcus Venn</div>
+            <div style="font-size:0.78rem;color:var(--color-text-3)">Product Designer</div>
+          </div>
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- § 8. PRICING                                          -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section id="pricing" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="pricing-heading">
+  <div class="chr-container">
+    <div style="text-align:center;max-width:560px;margin:0 auto 64px" data-reveal>
+      <div class="chr-heading-sm">Pricing</div>
+      <h2 id="pricing-heading" class="chr-heading-xl">One payment. Lifetime access.</h2>
+      <p style="color:var(--color-text-2);margin-top:1rem">No subscriptions. No renewals. Get everything forever.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:center;max-width:1000px;margin:0 auto" data-reveal-group>
+      <div class="chr-pricing-card">
+        <div class="chr-heading-sm">Starter</div>
+        <div style="font-size:3rem;font-weight:800;margin:16px 0 4px;font-family:var(--font-heading)">$19</div>
+        <div style="font-size:0.85rem;color:var(--color-text-2);margin-bottom:24px">one-time</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;font-size:0.9rem">
+          <li style="display:flex;gap:10px;align-items:center"><span style="color:var(--color-primary)">✓</span> 3 Layouts</li>
+          <li style="display:flex;gap:10px;align-items:center"><span style="color:var(--color-primary)">✓</span> All 10 Eras</li>
+          <li style="display:flex;gap:10px;align-items:center"><span style="color:var(--color-primary)">✓</span> Live Customizer</li>
+          <li style="display:flex;gap:10px;align-items:center"><span style="color:var(--color-text-3)">—</span> <span style="color:var(--color-text-3)">Documentation</span></li>
+          <li style="display:flex;gap:10px;align-items:center"><span style="color:var(--color-text-3)">—</span> <span style="color:var(--color-text-3)">Priority Support</span></li>
+        </ul>
+        <a href="#" class="chr-btn-ghost" style="width:100%;justify-content:center">Get Starter</a>
+      </div>
+
+      <div class="chr-pricing-card featured">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;opacity:0.8;margin-bottom:12px">✦ Most Popular</div>
+        <div class="chr-heading-sm" style="color:rgba(255,255,255,0.7)">Full Bundle</div>
+        <div style="font-size:3rem;font-weight:800;margin:16px 0 4px;font-family:var(--font-heading)">$39</div>
+        <div style="font-size:0.85rem;opacity:0.7;margin-bottom:24px">one-time · all 10 layouts</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;font-size:0.9rem">
+          <li style="display:flex;gap:10px;align-items:center"><span>✓</span> All 10 Layouts</li>
+          <li style="display:flex;gap:10px;align-items:center"><span>✓</span> All 10 Eras</li>
+          <li style="display:flex;gap:10px;align-items:center"><span>✓</span> Live Customizer + Export</li>
+          <li style="display:flex;gap:10px;align-items:center"><span>✓</span> HTML Documentation</li>
+          <li style="display:flex;gap:10px;align-items:center"><span>✓</span> Priority Support</li>
+        </ul>
+        <a href="#" style="display:flex;justify-content:center;background:#fff;color:var(--color-primary);padding:14px 32px;border-radius:var(--radius-md);font-weight:700;font-size:0.95rem">Get Full Bundle →</a>
+      </div>
+
+      <div class="chr-pricing-card">
+        <div class="chr-heading-sm">Extended</div>
+        <div style="font-size:3rem;font-weight:800;margin:16px 0 4px;font-family:var(--font-heading)">$79</div>
+        <div style="font-size:0.85rem;color:var(--color-text-2);margin-bottom:24px">one-time · commercial license</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;font-size:0.9rem">
+          <li style="display:flex;gap:10px;align-items:center"><span style="color:var(--color-primary)">✓</span> Everything in Full</li>
+          <li style="display:flex;gap:10px;align-items:center"><span style="color:var(--color-primary)">✓</span> Commercial License</li>
+          <li style="display:flex;gap:10px;align-items:center"><span style="color:var(--color-primary)">✓</span> Resale Rights Included</li>
+          <li style="display:flex;gap:10px;align-items:center"><span style="color:var(--color-primary)">✓</span> Future Updates Free</li>
+          <li style="display:flex;gap:10px;align-items:center"><span style="color:var(--color-primary)">✓</span> 1-on-1 Setup Call</li>
+        </ul>
+        <a href="#" class="chr-btn-ghost" style="width:100%;justify-content:center">Get Extended</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- § 9. FAQ                                              -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section id="faq" class="chr-section" aria-labelledby="faq-heading">
+  <div class="chr-container" style="max-width:760px">
+    <div style="text-align:center;margin-bottom:56px" data-reveal>
+      <div class="chr-heading-sm">FAQ</div>
+      <h2 id="faq-heading" class="chr-heading-xl">Common Questions</h2>
+    </div>
+
+    <div data-reveal>
+      <div class="chr-faq-item">
+        <button class="chr-faq-trigger" aria-expanded="false" id="faq-1">
+          Do I need a framework or build step to use Chronos?
+          <span class="chr-faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="chr-faq-body" role="region" aria-labelledby="faq-1">
+          <p>No. The buyer deliverable is pure HTML + CSS + vanilla JS. Open any layout file in a browser and it works. The customizer uses Alpine.js which is loaded from CDN — no npm or build tools needed.</p>
+        </div>
+      </div>
+
+      <div class="chr-faq-item">
+        <button class="chr-faq-trigger" aria-expanded="false" id="faq-2">
+          Do all 10 layouts share the same customizer?
+          <span class="chr-faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="chr-faq-body" role="region" aria-labelledby="faq-2">
+          <p>Yes. The Chronos customizer engine is embedded in every layout. Your color and font preferences are saved to localStorage, so switching between layouts preserves your customization automatically.</p>
+        </div>
+      </div>
+
+      <div class="chr-faq-item">
+        <button class="chr-faq-trigger" aria-expanded="false" id="faq-3">
+          How does the era switching work technically?
+          <span class="chr-faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="chr-faq-body" role="region" aria-labelledby="faq-3">
+          <p>Each era is a set of CSS custom properties scoped to a <code>[data-era="..."]</code> attribute on the &lt;html&gt; element. A global transition rule animates every property simultaneously. No JavaScript style rewriting — just declarative CSS.</p>
+        </div>
+      </div>
+
+      <div class="chr-faq-item">
+        <button class="chr-faq-trigger" aria-expanded="false" id="faq-4">
+          Can I use this for client projects?
+          <span class="chr-faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="chr-faq-body" role="region" aria-labelledby="faq-4">
+          <p>The Full Bundle includes a single-site license. For unlimited client projects and resale rights, choose the Extended License.</p>
+        </div>
+      </div>
+
+      <div class="chr-faq-item">
+        <button class="chr-faq-trigger" aria-expanded="false" id="faq-5">
+          Are the layouts responsive on mobile?
+          <span class="chr-faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="chr-faq-body" role="region" aria-labelledby="faq-5">
+          <p>Absolutely. All 10 layouts are mobile-first and tested at 320px, 768px, 1024px, and 1920px. The navigation collapses into a hamburger menu with smooth animation on screens smaller than 768px.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- § 10. FOOTER                                          -->
+<!-- ══════════════════════════════════════════════════════ -->
+<footer style="background:var(--color-bg-2);border-top:var(--border-w) solid var(--color-border);padding:80px 0 40px" role="contentinfo">
+  <div class="chr-container">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px" data-reveal-group>
+      <div>
+        <div class="chr-logo" style="margin-bottom:16px;font-size:1.6rem">✦ CHRONOS</div>
+        <p style="font-size:0.9rem;color:var(--color-text-2);max-width:300px;line-height:1.7;margin-bottom:24px">
+          The multi-era HTML theme bundle. One purchase, infinite styles. Built for creators who refuse to compromise.
+        </p>
+        <form class="chr-newsletter-form" aria-label="Newsletter signup">
+          <label for="footer-email" style="display:none">Email address</label>
+          <input type="email" id="footer-email" placeholder="your@email.com" autocomplete="email">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+
+      <div>
+        <h3 style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-3);margin-bottom:16px">Layouts</h3>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+          <li><a href="index.html" style="font-size:0.9rem;color:var(--color-text-2)">01 · Modern SaaS</a></li>
+          <li><a href="layout-02.html" style="font-size:0.9rem;color:var(--color-text-2)">02 · Portfolio</a></li>
+          <li><a href="layout-03.html" style="font-size:0.9rem;color:var(--color-text-2)">03 · Brutalist Feed</a></li>
+          <li><a href="layout-04.html" style="font-size:0.9rem;color:var(--color-text-2)">04 · Manuscript</a></li>
+          <li><a href="layout-05.html" style="font-size:0.9rem;color:var(--color-text-2)">05 · Dashboard</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-3);margin-bottom:16px">More Layouts</h3>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+          <li><a href="layout-06.html" style="font-size:0.9rem;color:var(--color-text-2)">06 · Artistic Studio</a></li>
+          <li><a href="layout-07.html" style="font-size:0.9rem;color:var(--color-text-2)">07 · Futuristic Launch</a></li>
+          <li><a href="layout-08.html" style="font-size:0.9rem;color:var(--color-text-2)">08 · Minimal Journal</a></li>
+          <li><a href="layout-09.html" style="font-size:0.9rem;color:var(--color-text-2)">09 · Cyberpunk Agency</a></li>
+          <li><a href="layout-10.html" style="font-size:0.9rem;color:var(--color-text-2)">10 · Gothic Archive</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-3);margin-bottom:16px">Info</h3>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+          <li><a href="#" style="font-size:0.9rem;color:var(--color-text-2)">Documentation</a></li>
+          <li><a href="#pricing" style="font-size:0.9rem;color:var(--color-text-2)">Pricing</a></li>
+          <li><a href="#faq" style="font-size:0.9rem;color:var(--color-text-2)">FAQ</a></li>
+          <li><a href="#" style="font-size:0.9rem;color:var(--color-text-2)">License</a></li>
+          <li><a href="#" style="font-size:0.9rem;color:var(--color-text-2)">Support</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:var(--border-w) solid var(--color-border);padding-top:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+      <p style="font-size:0.82rem;color:var(--color-text-3)">© 2026 Chronos Theme Bundle. All rights reserved.</p>
+      <div style="display:flex;gap:20px">
+        <a href="#" style="font-size:0.82rem;color:var(--color-text-3)">Privacy</a>
+        <a href="#" style="font-size:0.82rem;color:var(--color-text-3)">Terms</a>
+        <a href="#" style="font-size:0.82rem;color:var(--color-text-3)">License</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ CHRONOS CUSTOMIZER (injected) ══════════════════ -->
+<div id="chr-customizer-mount"></div>
+<script>
+  // Inline marquee duplication for seamless loop
+  const track = document.querySelector('.chr-marquee-track')
+  if (track) {
+    const items = document.getElementById('marquee-items')
+    if (items) {
+      const html = items.innerHTML
+      track.innerHTML = html + html // Double for seamless loop
+    }
+  }
+</script>
+
+</body>
+</html>

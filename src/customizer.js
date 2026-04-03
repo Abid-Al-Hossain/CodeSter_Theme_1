@@ -267,28 +267,29 @@ Alpine.store('chr', {
   }
 })
 
-// ── Make font options builder available to templates ───────
-window.chrFontOptions = buildFontOptions
+// ── Font Dropdown Alpine Component ──────────────────────────
+const ALL_FONTS_FLAT = Object.values(FONTS).flat().sort()
 
-// ── Initialize sidebar font picker after Alpine mounts ────
-document.addEventListener('alpine:initialized', () => {
-  // Populate the datalist dynamically
-  const datalist = document.getElementById('chr-all-fonts')
-  if (datalist) {
-    datalist.innerHTML = buildFontOptions('') // Build list of <option>
+Alpine.data('chrFontDropdown', (role) => ({
+  open: false,
+  search: '',
+  get filtered() {
+    if (!this.search) return ALL_FONTS_FLAT
+    const s = this.search.toLowerCase()
+    return ALL_FONTS_FLAT.filter(f => f.toLowerCase().includes(s))
+  },
+  selectFont(font) {
+    this.$store.chr.setFont(role, font)
+    this.open = false
+    this.search = ''
+  },
+  toggle() {
+    this.open = !this.open
+    if (this.open) {
+      setTimeout(() => this.$refs.search.focus(), 50)
+    }
   }
-
-  // Bind the searchable inputs
-  document.querySelectorAll('.chr-font-select').forEach(input => {
-    const role = input.dataset.role
-    input.value = Alpine.store('chr').fonts[role] || 'Inter'
-    
-    // Listen to change (when user selects from datalist or presses enter)
-    input.addEventListener('change', (e) => {
-      Alpine.store('chr').setFont(role, e.target.value)
-    })
-  })
-})
+}))
 
 // ── Main init ─────────────────────────────────────────────
 window.Alpine = Alpine
