@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-era="futuristic">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 07 — Futuristic Launch. Live countdown, scanning beam, glassmorphism panels.">
+  <title>Chronos | Futuristic Launch</title>
+  <script>(function(){try{var p=JSON.parse(localStorage.getItem('chronos-prefs'));if(p&&p.era)document.documentElement.setAttribute('data-era',p.era)}catch(e){}})()</script>
+  <script type="module" src="/src/main.js"></script>
+  <style>
+    [x-cloak]{display:none!important}
+    body{background:var(--color-bg);color:var(--color-text);overflow-x:hidden}
+    .grid-bg{position:fixed;inset:0;background-image:linear-gradient(var(--color-border) 1px,transparent 1px),linear-gradient(90deg,var(--color-border) 1px,transparent 1px);background-size:60px 60px;opacity:0.3;pointer-events:none;z-index:0}
+    .scan-line{position:fixed;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--color-primary),transparent);opacity:0.5;animation:scan 5s linear infinite;z-index:1;pointer-events:none}
+    @keyframes scan{0%{top:0;opacity:0}5%{opacity:0.5}95%{opacity:0.5}100%{top:100vh;opacity:0}}
+    .launch-section{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;z-index:2}
+    .glow-text{text-shadow:0 0 30px color-mix(in srgb,var(--color-primary) 60%,transparent)}
+    .countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:640px;margin:40px auto}
+    .count-item{text-align:center;padding:24px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface);backdrop-filter:blur(var(--blur-glass));-webkit-backdrop-filter:blur(var(--blur-glass))}
+    .count-val{font-family:var(--font-accent);font-size:3rem;font-weight:700;color:var(--color-primary);display:block;text-shadow:0 0 20px color-mix(in srgb,var(--color-primary) 40%,transparent);line-height:1}
+    .count-label{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--color-text-3);margin-top:4px}
+    .glass-card{background:var(--color-surface);backdrop-filter:blur(var(--blur-glass));-webkit-backdrop-filter:blur(var(--blur-glass));border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px}
+    .feature-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border:1px solid var(--color-border);border-radius:var(--radius-full);font-size:0.8rem;font-weight:600;background:var(--color-surface);backdrop-filter:blur(8px)}
+    .terminal{background:#000;border:1px solid var(--color-primary);border-radius:var(--radius-sm);padding:20px;font-family:var(--font-mono);font-size:0.78rem;line-height:1.8}
+    .terminal .prompt{color:var(--color-primary)}
+    .terminal .output{color:var(--color-text-2)}
+    .neon-border{box-shadow:0 0 0 1px var(--color-primary),0 0 20px color-mix(in srgb,var(--color-primary) 20%,transparent)}
+    @media(max-width:640px){.countdown-grid{grid-template-columns:repeat(2,1fr)}.count-val{font-size:2rem}}
+  </style>
+</head>
+<body>
+<div class="grid-bg" aria-hidden="true"></div>
+<div class="scan-line" aria-hidden="true"></div>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-bg);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<header class="chr-nav" role="banner">
+  <div class="chr-container chr-nav-inner">
+    <a href="index.html" class="chr-logo glow-text">✦ CHRONOS</a>
+    <nav><ul class="chr-nav-links"><li><a href="#launch">Launch</a></li><li><a href="#systems">Systems</a></li><li><a href="#specs">Specs</a></li><li><a href="#access">Access</a></li></ul></nav>
+    <div style="display:flex;gap:12px;align-items:center"><a href="#access" class="chr-btn-primary neon-border" style="padding:10px 22px;font-size:0.85rem">Request Access →</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+  </div>
+</header>
+<main id="main-content">
+<!-- § 1. LAUNCH HERO (Countdown) -->
+<section id="launch" class="launch-section" aria-labelledby="launch-heading">
+  <div style="text-align:center;width:100%;max-width:800px;padding:0 1.5rem;position:relative;z-index:3">
+    <div class="chr-badge" style="margin-bottom:24px" data-reveal>SYSTEM DEPLOYMENT INITIATED — PHASE III</div>
+    <h1 id="launch-heading" class="glow-text" style="font-family:var(--font-accent);font-size:clamp(2.5rem,8vw,6rem);font-weight:900;text-transform:uppercase;letter-spacing:-0.02em;line-height:0.9;margin-bottom:16px" data-reveal>
+      CHRONOS<br><span style="color:var(--color-primary)">PRIME</span><br>ONLINE
+    </h1>
+    <p data-reveal style="color:var(--color-text-2);margin-bottom:0;max-width:480px;margin-left:auto;margin-right:auto">Multi-era design engine deploying to all nodes. Gain early access before public launch.</p>
+    <div class="countdown-grid" id="countdown" aria-label="Launch countdown" data-reveal-group>
+      <div class="count-item"><span class="count-val" id="cd-days">--</span><div class="count-label">Days</div></div>
+      <div class="count-item"><span class="count-val" id="cd-hours">--</span><div class="count-label">Hours</div></div>
+      <div class="count-item"><span class="count-val" id="cd-mins">--</span><div class="count-label">Min</div></div>
+      <div class="count-item"><span class="count-val" id="cd-secs">--</span><div class="count-label">Sec</div></div>
+    </div>
+    <form data-reveal style="display:flex;gap:0;max-width:480px;margin:0 auto;border-radius:var(--radius-full);overflow:hidden;border:1px solid var(--color-border);background:var(--color-surface);backdrop-filter:blur(var(--blur-glass))" aria-label="Early access signup">
+      <label for="launch-email" style="display:none">Email</label>
+      <input type="email" id="launch-email" placeholder="neural-id@xnode.net" style="flex:1;padding:16px 24px;background:transparent;color:var(--color-text);font-family:var(--font-mono);font-size:0.85rem;border:none;outline:none">
+      <button type="submit" class="chr-btn-primary" style="border-radius:0;padding:16px 28px;font-family:var(--font-accent)">QUEUE →</button>
+    </form>
+  </div>
+</section>
+<!-- § 2. SYSTEMS / FEATURES -->
+<section id="systems" class="chr-section" aria-labelledby="systems-heading">
+  <div class="chr-container">
+    <div style="text-align:center;max-width:560px;margin:0 auto 64px" data-reveal>
+      <div class="chr-heading-sm" style="color:var(--color-primary)">Deployed Systems</div>
+      <h2 id="systems-heading" class="chr-heading-xl glow-text">Multi-Era Architecture</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px" data-reveal-group>
+      <div class="glass-card">
+        <div style="width:48px;height:48px;border-radius:var(--radius-sm);background:color-mix(in srgb,var(--color-primary) 15%,transparent);border:1px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:20px">🌌</div>
+        <h3 style="font-family:var(--font-accent);font-size:1rem;margin-bottom:8px;text-transform:uppercase">CSS Variable Grid</h3>
+        <p style="color:var(--color-text-2);font-size:0.85rem;line-height:1.6">10 era token sets loaded into :root. Instant switching via data-era attribute. Zero flash of unstyled content.</p>
+      </div>
+      <div class="glass-card">
+        <div style="width:48px;height:48px;border-radius:var(--radius-sm);background:color-mix(in srgb,var(--color-secondary) 15%,transparent);border:1px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:20px">🔄</div>
+        <h3 style="font-family:var(--font-accent);font-size:1rem;margin-bottom:8px;text-transform:uppercase">Transition Matrix</h3>
+        <p style="color:var(--color-text-2);font-size:0.85rem;line-height:1.6">All property transitions fire simultaneously across every element. 400ms cubic-bezier easing. Buttery smooth.</p>
+      </div>
+      <div class="glass-card">
+        <div style="width:48px;height:48px;border-radius:var(--radius-sm);background:color-mix(in srgb,var(--color-accent) 15%,transparent);border:1px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:20px">🔤</div>
+        <h3 style="font-family:var(--font-accent);font-size:1rem;margin-bottom:8px;text-transform:uppercase">Font Subsystem</h3>
+        <p style="color:var(--color-text-2);font-size:0.85rem;line-height:1.6">65+ fonts. Heading, body, accent, mono — all separately controllable. Lazy-loaded. localStorage persistent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- § 3. TERMINAL / SPECS -->
+<section id="specs" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="specs-heading">
+  <div class="chr-container" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+    <div data-reveal="left">
+      <div class="chr-heading-sm">System Specs</div>
+      <h2 id="specs-heading" class="chr-heading-xl glow-text" style="margin-bottom:2rem">Technical<br>Readout</h2>
+      <div style="display:grid;gap:16px">
+        <div class="feature-pill">✦ Alpine.js v3 — 15KB reactive layer</div>
+        <div class="feature-pill">✦ Tailwind CSS v4 — CSS-first tokens</div>
+        <div class="feature-pill">✦ Vite 6 — compiled, no runtime dep</div>
+        <div class="feature-pill">✦ 65+ Google Fonts — lazy-loaded</div>
+        <div class="feature-pill">✦ WCAG AA compliant</div>
+        <div class="feature-pill">✦ Core Web Vitals optimized</div>
+      </div>
+    </div>
+    <div class="terminal neon-border" data-reveal="right">
+      <div class="prompt">$ chronos --status</div>
+      <div class="output">Scanning layout matrix...</div>
+      <div class="output" style="color:var(--color-accent)">[ OK ] 10 layouts loaded</div>
+      <div class="output" style="color:var(--color-accent)">[ OK ] 10 eras initialized</div>
+      <div class="output" style="color:var(--color-accent)">[ OK ] 65 fonts indexed</div>
+      <div class="output" style="color:var(--color-accent)">[ OK ] Customizer online</div>
+      <div class="output" style="color:var(--color-accent)">[ OK ] Transitions armed</div>
+      <div class="prompt" style="margin-top:8px">$ chronos --launch<span style="animation:blink 1s step-end infinite">▋</span></div>
+    </div>
+  </div>
+</section>
+<!-- § 4. FEATURE GRID -->
+<section class="chr-section" aria-label="Features">
+  <div class="chr-container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px" data-reveal-group>
+      <div class="glass-card" style="text-align:center"><div style="font-size:2rem;margin-bottom:12px">🚀</div><div style="font-family:var(--font-accent);font-weight:700;font-size:0.9rem;text-transform:uppercase">Instant Launch</div></div>
+      <div class="glass-card" style="text-align:center"><div style="font-size:2rem;margin-bottom:12px">🌌</div><div style="font-family:var(--font-accent);font-weight:700;font-size:0.9rem;text-transform:uppercase">10 Worlds</div></div>
+      <div class="glass-card" style="text-align:center"><div style="font-size:2rem;margin-bottom:12px">⚡</div><div style="font-family:var(--font-accent);font-weight:700;font-size:0.9rem;text-transform:uppercase">Zero Latency</div></div>
+      <div class="glass-card" style="text-align:center"><div style="font-size:2rem;margin-bottom:12px">🔐</div><div style="font-family:var(--font-accent);font-weight:700;font-size:0.9rem;text-transform:uppercase">One License</div></div>
+    </div>
+  </div>
+</section>
+<!-- § 5. ACCESS CTA -->
+<section id="access" class="launch-section" style="min-height:60vh" aria-labelledby="access-heading">
+  <div style="text-align:center;padding:0 1.5rem;z-index:3" data-reveal>
+    <h2 id="access-heading" class="glow-text" style="font-family:var(--font-accent);font-size:clamp(2rem,6vw,4rem);font-weight:900;text-transform:uppercase;margin-bottom:1.5rem">REQUEST<br>EARLY ACCESS</h2>
+    <p style="color:var(--color-text-2);margin-bottom:2rem;max-width:440px;margin-left:auto;margin-right:auto">Join the waitlist. First 100 nodes receive the Extended Bundle at Starter price.</p>
+    <a href="index.html#pricing" class="chr-btn-primary neon-border" style="font-size:1rem;padding:16px 48px;font-family:var(--font-accent)">ACCESS NOW →</a>
+  </div>
+</section>
+</main>
+<footer style="background:var(--color-bg-2);border-top:var(--border-w) solid var(--color-border);padding:40px 0;position:relative;z-index:2" role="contentinfo">
+  <div class="chr-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <a href="index.html" class="chr-logo glow-text">✦ CHRONOS</a>
+    <p style="font-size:0.82rem;color:var(--color-text-3);font-family:var(--font-mono)">© 2026 Chronos · Layout 07 — Futuristic Launch</p>
+    <nav><ul style="list-style:none;display:flex;gap:20px"><li><a href="layout-05.html" style="font-size:0.85rem;color:var(--color-text-2)">Dashboard</a></li><li><a href="layout-08.html" style="font-size:0.85rem;color:var(--color-text-2)">Journal →</a></li></ul></nav>
+  </div>
+</footer>
+<script>
+  // Live countdown to a future date
+  const launch = new Date('2026-12-31T00:00:00Z').getTime()
+  function tick(){
+    const now = Date.now(), diff = launch - now
+    if(diff < 0){document.getElementById('countdown').innerHTML='<div style="grid-column:span 4;text-align:center;font-size:2rem;color:var(--color-primary);font-weight:900">LAUNCHED</div>';return}
+    const d=Math.floor(diff/864e5),h=Math.floor((diff%864e5)/36e5),m=Math.floor((diff%36e5)/6e4),s=Math.floor((diff%6e4)/1e3)
+    document.getElementById('cd-days').textContent=String(d).padStart(2,'0')
+    document.getElementById('cd-hours').textContent=String(h).padStart(2,'0')
+    document.getElementById('cd-mins').textContent=String(m).padStart(2,'0')
+    document.getElementById('cd-secs').textContent=String(s).padStart(2,'0')
+  }
+  tick(); setInterval(tick,1000)
+</script>
+<style>@keyframes blink{50%{opacity:0}}</style>
+<div id="chr-customizer-mount"></div>
+</body>
+</html>

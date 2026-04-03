@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" data-era="minimalist">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 08 — Minimal Journal. Pure whitespace, optimal typography, distraction-free reading.">
+  <title>Chronos | Minimal Journal</title>
+  <script>(function(){try{var p=JSON.parse(localStorage.getItem('chronos-prefs'));if(p&&p.era)document.documentElement.setAttribute('data-era',p.era)}catch(e){}})()</script>
+  <script type="module" src="/src/main.js"></script>
+  <style>
+    [x-cloak]{display:none!important}
+    body{background:var(--color-bg);color:var(--color-text)}
+    .j-container{max-width:640px;margin:0 auto;padding:0 1.5rem}
+    .j-header{border-bottom:1px solid var(--color-border);padding:20px 0;display:flex;justify-content:space-between;align-items:baseline;margin-bottom:80px}
+    .j-issue{font-size:0.7rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:0.2em}
+    .j-body p{font-size:1.1rem;line-height:1.9;margin-bottom:1.8rem;color:var(--color-text)}
+    .j-body h2{font-size:1.6rem;font-weight:700;margin:3rem 0 1.2rem;letter-spacing:-0.02em}
+    .j-body h3{font-size:1.2rem;font-weight:700;margin:2rem 0 0.8rem}
+    .j-pull-quote{margin:3rem 0;padding-left:28px;border-left:3px solid var(--color-text);font-size:1.3rem;line-height:1.5;font-style:italic;color:var(--color-text-2)}
+    .j-rule{border:none;border-top:1px solid var(--color-border);margin:3rem 0}
+    .j-caption{font-size:0.78rem;color:var(--color-text-3);text-align:center;margin-top:-16px;margin-bottom:2rem}
+    .j-tags{display:flex;gap:8px;flex-wrap:wrap;margin:1.5rem 0}
+    .j-tag{padding:4px 12px;border:1px solid var(--color-border);border-radius:var(--radius-full);font-size:0.75rem;color:var(--color-text-2)}
+    .j-post-card{border-bottom:1px solid var(--color-border);padding:32px 0;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
+    .j-reading-time{font-size:0.72rem;color:var(--color-text-3);white-space:nowrap;margin-top:4px}
+    .j-post-image{width:100px;height:80px;background:var(--color-bg-3);border-radius:var(--radius-sm);flex-shrink:0;border:1px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+    .progress{position:fixed;top:0;left:0;height:2px;background:var(--color-text);z-index:9999;width:0;transition:width 0.1s linear}
+  </style>
+</head>
+<body>
+<div class="progress" id="reading-progress" aria-hidden="true"></div>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<header class="chr-nav" role="banner">
+  <div class="chr-container chr-nav-inner">
+    <a href="index.html" class="chr-logo">✦ CHRONOS</a>
+    <nav><ul class="chr-nav-links"><li><a href="#essays">Essays</a></li><li><a href="#notes">Notes</a></li><li><a href="#reading">Reading</a></li><li><a href="#archive">Archive</a></li></ul></nav>
+    <div style="display:flex;gap:12px;align-items:center"><a href="#subscribe" class="chr-btn-primary" style="padding:10px 22px;font-size:0.85rem">Subscribe</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+  </div>
+</header>
+<main id="main-content">
+<!-- § 1. ISSUE HEADER -->
+<div style="background:var(--color-bg);padding:80px 0 0">
+  <div class="j-container">
+    <div class="j-header">
+      <span class="j-issue">Chronos Journal · Volume I · Issue 04</span>
+      <span class="j-issue">October 2026</span>
+    </div>
+    <div data-reveal>
+      <div class="j-tags"><span class="j-tag">Design</span><span class="j-tag">Philosophy</span><span class="j-tag">Craft</span></div>
+      <h1 style="font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;letter-spacing:-0.03em;line-height:1.1;margin-bottom:24px">The Case for Designing Across All Eras Simultaneously</h1>
+      <p style="font-size:1.1rem;color:var(--color-text-2);line-height:1.6;margin-bottom:32px">On minimalism, historicism, and why the best design systems don't choose an era — they contain all of them.</p>
+      <div style="display:flex;gap:16px;align-items:center;margin-bottom:56px">
+        <div style="width:36px;height:36px;background:var(--color-text);border-radius:50%"></div>
+        <div><div style="font-size:0.9rem;font-weight:600">Chronos Editorial</div><div style="font-size:0.78rem;color:var(--color-text-3)">12 min read · October 3, 2026</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- § 2. MAIN ARTICLE -->
+<section id="essays" style="padding-bottom:80px">
+  <div class="j-container j-body">
+    <div data-reveal>
+      <p>The history of design is not a straight line toward perfection. It is a series of arguments — each era making a case against the excesses of the last, while carrying forward what could not be abandoned.</p>
+      <p>Minimalism, in particular, has always defined itself in opposition. In the 1960s, it reacted against the ornamentation of postmodernism. In the 2010s, flat design reacted against the skeuomorphism of early iOS. In 2026, we're watching a new minimalism emerge in reaction to the hyper-stimulation of algorithms and scroll.</p>
+      <div class="j-pull-quote">"Good design is as little design as possible — but it must still contain the memory of everything it chose to exclude."</div>
+      <p>This is where Chronos becomes interesting as a philosophical object. The Minimalist era in Chronos is not an absence of opinion. It is the result of having studied every other era — Gothic, Brutalist, Cyberpunk, Eco — and distilling them down to the essential.</p>
+      <hr class="j-rule">
+      <h2>The System, Not the Moment</h2>
+      <p>Most themes build for a single aesthetic moment. They solve the problem of "what does a website look like in 2026?" But this question has a short shelf life. The design that feels cutting-edge today will feel dated in two years.</p>
+      <p>Chronos asks a different question: what is the underlying system that produces any aesthetic? If we can identify the tokens — the color, the type, the space, the radius — we can regenerate any era on demand. The system outlives the moment.</p>
+      <h3>What This Means for the Buyer</h3>
+      <p>For the buyer of Chronos, this means they are not purchasing a style. They are purchasing a capacity. The ability to produce Gothic heaviness, Brutalist rawness, or Futuristic luminosity from the same structural foundation.</p>
+      <p>The reading layout you're experiencing right now — the Minimalist Journal — is the same HTML as the Cyberpunk Agency or the Gothic Archive. Only the tokens differ. And the tokens are fully yours to control.</p>
+    </div>
+  </div>
+</section>
+<!-- § 3. RELATED READING -->
+<section id="reading" style="background:var(--color-bg-2);padding:80px 0;border-top:1px solid var(--color-border)" aria-labelledby="related-heading">
+  <div class="j-container">
+    <h2 id="related-heading" style="font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:32px" data-reveal>Related Essays</h2>
+    <div data-reveal-group>
+      <div class="j-post-card">
+        <div>
+          <div class="j-tags"><span class="j-tag">Gothic</span><span class="j-tag">History</span></div>
+          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:4px;line-height:1.3"><a href="#" style="color:inherit">On the Gothic Era: Why Darkness Has Always Been Honest</a></h3>
+          <div class="j-reading-time">8 min read · September 2026</div>
+        </div>
+        <div class="j-post-image">⚔️</div>
+      </div>
+      <div class="j-post-card">
+        <div>
+          <div class="j-tags"><span class="j-tag">Brutalism</span><span class="j-tag">Politics</span></div>
+          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:4px;line-height:1.3"><a href="#" style="color:inherit">Brutalism as Protest: Thick Borders and Radical Honesty</a></h3>
+          <div class="j-reading-time">6 min read · August 2026</div>
+        </div>
+        <div class="j-post-image">🧱</div>
+      </div>
+      <div class="j-post-card">
+        <div>
+          <div class="j-tags"><span class="j-tag">Futuristic</span><span class="j-tag">AI</span></div>
+          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:4px;line-height:1.3"><a href="#" style="color:inherit">Glass and Light: The Aesthetic Grammar of Futurism</a></h3>
+          <div class="j-reading-time">10 min read · July 2026</div>
+        </div>
+        <div class="j-post-image">🚀</div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- § 4. SUBSCRIBE -->
+<section id="subscribe" style="padding:80px 0" aria-labelledby="sub-heading">
+  <div class="j-container" data-reveal>
+    <h2 id="sub-heading" style="font-size:1.6rem;font-weight:700;margin-bottom:8px">Subscribe to the Journal</h2>
+    <p style="color:var(--color-text-2);margin-bottom:24px;font-size:0.9rem">Long-form design thinking, monthly. No optimization, no growth hacking — just craft.</p>
+    <form class="chr-newsletter-form" aria-label="Subscribe">
+      <label for="j-email" style="display:none">Email</label>
+      <input type="email" id="j-email" placeholder="your@email.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</section>
+<!-- § 5. ARCHIVE -->
+<section id="archive" style="background:var(--color-bg-3);border-top:1px solid var(--color-border);padding:64px 0" aria-labelledby="archive-heading">
+  <div class="j-container" data-reveal>
+    <h2 id="archive-heading" style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--color-text-3);margin-bottom:24px">Other Layouts in the Bundle</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+      <a href="index.html" style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--color-border);color:inherit;font-size:0.88rem"><span>01 · Modern SaaS</span><span style="color:var(--color-text-3)">→</span></a>
+      <a href="layout-06.html" style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--color-border);color:inherit;font-size:0.88rem"><span>06 · Artistic Studio</span><span style="color:var(--color-text-3)">→</span></a>
+      <a href="layout-02.html" style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--color-border);color:inherit;font-size:0.88rem"><span>02 · Portfolio</span><span style="color:var(--color-text-3)">→</span></a>
+      <a href="layout-07.html" style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--color-border);color:inherit;font-size:0.88rem"><span>07 · Futuristic</span><span style="color:var(--color-text-3)">→</span></a>
+      <a href="layout-09.html" style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--color-border);color:inherit;font-size:0.88rem"><span>09 · Cyberpunk</span><span style="color:var(--color-text-3)">→</span></a>
+      <a href="layout-10.html" style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--color-border);color:inherit;font-size:0.88rem"><span>10 · Gothic Archive</span><span style="color:var(--color-text-3)">→</span></a>
+    </div>
+  </div>
+</section>
+</main>
+<footer style="padding:40px 0;border-top:1px solid var(--color-border)" role="contentinfo">
+  <div class="j-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <a href="index.html" class="chr-logo" style="font-size:1rem">✦ CHRONOS</a>
+    <p style="font-size:0.78rem;color:var(--color-text-3)">© 2026 Chronos · Layout 08 — Minimal Journal</p>
+  </div>
+</footer>
+<script>
+  // Reading progress bar
+  window.addEventListener('scroll', () => {
+    const prog = document.getElementById('reading-progress')
+    if (!prog) return
+    const scrollTop = window.scrollY
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight
+    prog.style.width = (scrollTop / docHeight * 100) + '%'
+  }, { passive: true })
+</script>
+<div id="chr-customizer-mount"></div>
+</body>
+</html>

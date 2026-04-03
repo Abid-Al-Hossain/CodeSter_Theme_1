@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" data-era="artistic">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 06 — Artistic Studio. Immersive scroll, parallax shapes, oversized typography.">
+  <title>Chronos | Artistic Studio</title>
+  <script>(function(){try{var p=JSON.parse(localStorage.getItem('chronos-prefs'));if(p&&p.era)document.documentElement.setAttribute('data-era',p.era)}catch(e){}})()</script>
+  <script type="module" src="/src/main.js"></script>
+  <style>
+    [x-cloak]{display:none!important}
+    .art-fullscreen{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .art-title{font-size:clamp(4rem,15vw,12rem);font-weight:900;text-transform:uppercase;line-height:0.85;text-align:center;position:relative;z-index:10;mix-blend-mode:normal}
+    .art-shape{position:absolute;border-radius:50%;filter:blur(60px);animation:art-float 12s ease-in-out infinite alternate;pointer-events:none}
+    @keyframes art-float{0%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-25px) scale(1.05)}100%{transform:translate(-20px,15px) scale(0.97)}}
+    .project-row{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:var(--border-w) solid var(--color-border)}
+    .project-row:last-child{border-bottom:var(--border-w) solid var(--color-border)}
+    .project-num{padding:40px 32px;border-right:var(--border-w) solid var(--color-border);font-family:var(--font-accent);font-size:4rem;font-weight:900;color:var(--color-primary);line-height:1;display:flex;align-items:center}
+    .project-info{padding:40px 32px;display:flex;flex-direction:column;justify-content:center}
+    .project-title{font-size:2.5rem;font-weight:900;text-transform:uppercase;margin-bottom:8px;transition:color 0.2s}
+    .project-row:hover .project-title{color:var(--color-primary)}
+    .project-row:hover{background:var(--color-bg-2)}
+    .art-cursor-text{position:fixed;pointer-events:none;z-index:99998;font-size:0.7rem;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;color:var(--color-primary);background:var(--color-bg);padding:8px 14px;border-radius:var(--radius-full);display:none;border:1px solid var(--color-border)}
+    @media(max-width:768px){.art-title{font-size:clamp(3rem,12vw,6rem)}.project-row{grid-template-columns:1fr}.project-num{padding:24px;font-size:3rem}.project-info{padding:24px}}
+  </style>
+</head>
+<body>
+<div class="art-cursor-text" id="art-cursor">VIEW →</div>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-bg);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<header class="chr-nav" role="banner">
+  <div class="chr-container chr-nav-inner">
+    <a href="index.html" class="chr-logo">✦ CHRONOS</a>
+    <nav><ul class="chr-nav-links"><li><a href="#about">Studio</a></li><li><a href="#work">Work</a></li><li><a href="#manifesto">Manifesto</a></li><li><a href="#contact">Contact</a></li></ul></nav>
+    <div style="display:flex;gap:12px;align-items:center"><a href="#contact" class="chr-btn-primary" style="padding:10px 22px;font-size:0.85rem">Collaborate →</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+  </div>
+</header>
+<main id="main-content">
+<!-- § 1. HERO -->
+<section id="hero" class="art-fullscreen" aria-labelledby="art-heading">
+  <div class="art-shape" style="width:500px;height:500px;background:var(--color-primary);opacity:0.15;top:-100px;right:-50px;animation-delay:0s"></div>
+  <div class="art-shape" style="width:350px;height:350px;background:var(--color-secondary);opacity:0.12;bottom:-50px;left:5%;animation-delay:4s"></div>
+  <div class="art-shape" style="width:200px;height:200px;background:var(--color-accent);opacity:0.1;top:40%;left:30%;animation-delay:2s"></div>
+  <div style="text-align:center;z-index:10;padding:40px">
+    <h1 id="art-heading" class="art-title" data-reveal>
+      ART<span style="color:var(--color-primary)">⁕</span><br>IS THE<br>CORE.
+    </h1>
+    <p data-reveal style="font-size:1.1rem;color:var(--color-text-2);max-width:500px;margin:32px auto;line-height:1.7">A creative studio that designs at the intersection of technology and artistic experience. Every era is a canvas.</p>
+    <a href="#work" data-reveal class="chr-btn-primary" style="font-size:1rem;padding:16px 40px">View Our Work ↓</a>
+  </div>
+</section>
+<!-- § 2. MARQUEE -->
+<div style="background:var(--color-primary);padding:14px 0;overflow:hidden">
+  <div class="chr-marquee-track" style="color:var(--color-bg);font-weight:900;text-transform:uppercase;font-size:0.9rem;letter-spacing:0.05em">
+    <span style="padding:0 40px">Design Across Eras</span><span style="padding:0 40px">⁕</span><span style="padding:0 40px">Artistic Technology</span><span style="padding:0 40px">⁕</span><span style="padding:0 40px">Multi-Era Vision</span><span style="padding:0 40px">⁕</span><span style="padding:0 40px">Chronos Studio</span><span style="padding:0 40px">⁕</span><span style="padding:0 40px">Design Across Eras</span><span style="padding:0 40px">⁕</span><span style="padding:0 40px">Artistic Technology</span><span style="padding:0 40px">⁕</span><span style="padding:0 40px">Multi-Era Vision</span><span style="padding:0 40px">⁕</span><span style="padding:0 40px">Chronos Studio</span><span style="padding:0 40px">⁕</span>
+  </div>
+</div>
+<!-- § 3. WORK -->
+<section id="work" class="chr-section-sm" aria-labelledby="work-heading">
+  <div class="chr-container"><h2 id="work-heading" style="font-size:clamp(1.5rem,4vw,2.5rem);font-weight:900;text-transform:uppercase;margin-bottom:0;padding-bottom:20px;border-bottom:var(--border-w) solid var(--color-border)" data-reveal>Selected Work</h2></div>
+  <div id="project-list">
+    <a href="#" class="project-row" style="display:grid;text-decoration:none;color:inherit;transition:background 0.2s">
+      <div class="project-num">01</div>
+      <div class="project-info"><div class="chr-heading-sm">Branding · 2026</div><div class="project-title">NEON FLUX</div><div style="font-size:0.88rem;color:var(--color-text-2)">Identity system for a music streaming platform. Cyberpunk era.</div></div>
+    </a>
+    <a href="#" class="project-row" style="display:grid;text-decoration:none;color:inherit;transition:background 0.2s">
+      <div class="project-num">02</div>
+      <div class="project-info"><div class="chr-heading-sm">Web · 2025</div><div class="project-title">GOTHIC REV</div><div style="font-size:0.88rem;color:var(--color-text-2)">Heritage brand revival using the Gothic era design system.</div></div>
+    </a>
+    <a href="#" class="project-row" style="display:grid;text-decoration:none;color:inherit;transition:background 0.2s">
+      <div class="project-num">03</div>
+      <div class="project-info"><div class="chr-heading-sm">Spatial · 2025</div><div class="project-title">AURA LAB</div><div style="font-size:0.88rem;color:var(--color-text-2)">Immersive science experience. Futuristic era, glassmorphism panels.</div></div>
+    </a>
+    <a href="#" class="project-row" style="display:grid;text-decoration:none;color:inherit;transition:background 0.2s">
+      <div class="project-num">04</div>
+      <div class="project-info"><div class="chr-heading-sm">Editorial · 2024</div><div class="project-title">BRUTALPRESS</div><div style="font-size:0.88rem;color:var(--color-text-2)">Digital magazine built on the Brutalist era layout system.</div></div>
+    </a>
+  </div>
+</section>
+<!-- § 4. ABOUT -->
+<section id="about" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="studio-heading">
+  <div class="chr-container" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
+    <div data-reveal="left"><h2 id="studio-heading" style="font-size:clamp(2rem,5vw,3.5rem);font-weight:900;text-transform:uppercase;margin-bottom:1.5rem">The Studio Across Eras</h2><p style="color:var(--color-text-2);line-height:1.8;margin-bottom:1rem">We are not bound by one aesthetic. Our work exists at the intersection of Gothic heritage and Futuristic ambition, Brutalist honesty and Eco sensitivity.</p><p style="color:var(--color-text-2);line-height:1.8">Chronos is our design operating system. Every project begins with era selection, then evolves through the customizer into something uniquely yours.</p></div>
+    <div data-reveal="right" style="display:grid;gap:16px">
+      <div style="padding:28px;border:var(--border-w) solid var(--color-border);border-radius:var(--radius-md)"><div style="font-size:3rem;font-weight:900;font-family:var(--font-accent);color:var(--color-primary)" data-count="10">0</div><div style="font-size:0.85rem;color:var(--color-text-2)">Design Eras Available</div></div>
+      <div style="padding:28px;border:var(--border-w) solid var(--color-border);border-radius:var(--radius-md)"><div style="font-size:3rem;font-weight:900;font-family:var(--font-accent);color:var(--color-primary)" data-count="65" data-suffix="+">0+</div><div style="font-size:0.85rem;color:var(--color-text-2)">Google Fonts in Palette</div></div>
+    </div>
+  </div>
+</section>
+<!-- § 5. MANIFESTO -->
+<section id="manifesto" class="art-fullscreen" style="background:var(--color-bg)" aria-labelledby="manifesto-heading">
+  <div style="max-width:900px;text-align:center;padding:60px 40px;z-index:2" data-reveal>
+    <h2 id="manifesto-heading" style="font-size:clamp(2rem,6vw,5rem);font-weight:900;text-transform:uppercase;line-height:0.9;margin-bottom:2rem">ART MUST NEVER APOLOGIZE FOR ITS ERA.</h2>
+    <p style="font-size:1.2rem;color:var(--color-text-2);max-width:600px;margin:0 auto;line-height:1.7">Gothic is not dead. Brutalism is not over. The Futuristic has already arrived. Every era speaks to a different truth — and Chronos lets you speak all of them.</p>
+  </div>
+</section>
+<!-- § 6. CONTACT -->
+<section id="contact" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="contact-heading">
+  <div class="chr-container" style="max-width:680px">
+    <div data-reveal>
+      <div class="chr-heading-sm">Collaborate</div>
+      <h2 id="contact-heading" class="chr-heading-xl" style="margin-bottom:2rem">Let's make something extraordinary.</h2>
+      <a href="mailto:hello@chronos.studio" class="chr-btn-primary" style="font-size:1.1rem;padding:18px 48px">hello@chronos.studio →</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer style="background:var(--color-bg);border-top:var(--border-w) solid var(--color-border);padding:40px 0" role="contentinfo">
+  <div class="chr-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <a href="index.html" class="chr-logo">✦ CHRONOS</a>
+    <p style="font-size:0.82rem;color:var(--color-text-3)">© 2026 Chronos · Layout 06 — Artistic Studio</p>
+    <nav><ul style="list-style:none;display:flex;gap:20px"><li><a href="layout-07.html" style="font-size:0.85rem;color:var(--color-text-2)">Futuristic →</a></li><li><a href="layout-09.html" style="font-size:0.85rem;color:var(--color-text-2)">Cyberpunk →</a></li></ul></nav>
+  </div>
+</footer>
+<script>
+  const cursor = document.getElementById('art-cursor')
+  const projectList = document.getElementById('project-list')
+  if (projectList && cursor) {
+    projectList.addEventListener('mousemove', e => {
+      cursor.style.display = 'block'
+      cursor.style.left = (e.clientX + 16) + 'px'
+      cursor.style.top = (e.clientY - 16) + 'px'
+    })
+    projectList.addEventListener('mouseleave', () => { cursor.style.display = 'none' })
+  }
+</script>
+<div id="chr-customizer-mount"></div>
+</body>
+</html>

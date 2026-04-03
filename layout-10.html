@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" data-era="gothic">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 10 — Gothic Archive. Ornate double-borders, gold foil accents, vertical navigation, historical atmosphere.">
+  <title>Chronos | The Gothic Archive</title>
+  <script>(function(){try{var p=JSON.parse(localStorage.getItem('chronos-prefs'));if(p&&p.era)document.documentElement.setAttribute('data-era',p.era)}catch(e){}})()</script>
+  <script type="module" src="/src/main.js"></script>
+  <style>
+    [x-cloak]{display:none!important}
+    body{display:flex;min-height:100vh;flex-direction:row}
+    .gothic-sidebar{width:320px;flex-shrink:0;background:var(--color-bg-2);border-right:double 4px var(--color-primary);display:flex;flex-direction:column;padding:40px 32px;position:sticky;top:0;height:100vh;overflow-y:auto}
+    .gothic-title{font-family:var(--font-heading);font-size:2rem;color:var(--color-primary);text-align:center;margin-bottom:8px;line-height:1.1}
+    .gothic-subtitle{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.3em;color:var(--color-text-3);text-align:center;margin-bottom:32px}
+    .gothic-divider{text-align:center;color:var(--color-primary);font-size:1.2rem;margin:16px 0;letter-spacing:0.3em}
+    .gothic-nav-item{display:block;padding:12px 0;font-family:var(--font-body);font-size:0.9rem;color:var(--color-text-2);text-align:center;border-bottom:1px solid var(--color-border);letter-spacing:0.05em;transition:color 0.2s}
+    .gothic-nav-item:hover{color:var(--color-primary)}
+    .gothic-main{flex:1;overflow:hidden}
+    .ornate-box{position:relative;border:double 3px var(--color-primary);padding:60px;background:var(--color-bg);margin:0}
+    .ornate-box::before{content:'';position:absolute;inset:12px;border:1px solid color-mix(in srgb,var(--color-primary) 30%,transparent);pointer-events:none}
+    .ornate-corner{position:absolute;width:20px;height:20px;border-color:var(--color-primary);border-style:solid}
+    .oc-tl{top:4px;left:4px;border-width:2px 0 0 2px}
+    .oc-tr{top:4px;right:4px;border-width:2px 2px 0 0}
+    .oc-bl{bottom:4px;left:4px;border-width:0 0 2px 2px}
+    .oc-br{bottom:4px;right:4px;border-width:0 2px 2px 0}
+    .gothic-section{padding:80px}
+    .entry-row{display:grid;grid-template-columns:80px 1px 1fr;gap:32px;margin-bottom:48px}
+    .entry-year{font-family:var(--font-heading);font-size:1.5rem;color:var(--color-primary);text-align:right;padding-top:4px}
+    .entry-line{background:linear-gradient(to bottom,var(--color-primary),transparent);width:1px}
+    .entry-text h3{font-family:var(--font-heading);font-size:1.2rem;margin-bottom:8px;color:var(--color-primary)}
+    .entry-text p{color:var(--color-text-2);font-size:0.9rem;line-height:1.7}
+    @media(max-width:1024px){body{flex-direction:column}.gothic-sidebar{width:100%;height:auto;position:relative;padding:32px}.gothic-section{padding:40px 20px}.ornate-box{padding:32px}}
+  </style>
+</head>
+<body>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-bg);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+
+<!-- GOTHIC SIDEBAR -->
+<nav class="gothic-sidebar" role="navigation" aria-label="Archive navigation">
+  <div class="gothic-title">CHRONOS<br>ARCHIVE</div>
+  <div class="gothic-subtitle">Established MMXXVI</div>
+  <div class="gothic-divider">✦ ✦ ✦</div>
+
+  <div style="margin-bottom:24px">
+    <a href="#collection" class="gothic-nav-item">The Collection</a>
+    <a href="#chronicle" class="gothic-nav-item">Chronicle</a>
+    <a href="#eras" class="gothic-nav-item">Hall of Eras</a>
+    <a href="#scriptorium" class="gothic-nav-item">Scriptorium</a>
+    <a href="#relics" class="gothic-nav-item">Sacred Relics</a>
+    <a href="#correspondence" class="gothic-nav-item">Correspondence</a>
+  </div>
+
+  <div class="gothic-divider">⸻</div>
+
+  <div style="margin-bottom:24px">
+    <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-text-3);text-align:center;margin-bottom:12px">Other Chambers</div>
+    <a href="index.html" class="gothic-nav-item" style="font-size:0.82rem">Modern SaaS</a>
+    <a href="layout-02.html" class="gothic-nav-item" style="font-size:0.82rem">Portfolio</a>
+    <a href="layout-07.html" class="gothic-nav-item" style="font-size:0.82rem">Futuristic</a>
+    <a href="layout-09.html" class="gothic-nav-item" style="font-size:0.82rem">Cyberpunk</a>
+  </div>
+
+  <div style="margin-top:auto;text-align:center">
+    <div class="gothic-divider">† † †</div>
+    <div style="font-size:0.68rem;color:var(--color-text-3);letter-spacing:0.15em">ANNO DOMINI MMXXVI</div>
+  </div>
+</nav>
+
+<!-- MAIN ARCHIVE CONTENT -->
+<main class="gothic-main" id="main-content">
+
+  <!-- § 1. TITLE ORNAMENT -->
+  <div style="background:var(--color-bg-2);border-bottom:double 4px var(--color-primary);position:sticky;top:0;z-index:50">
+    <div style="padding:16px 80px;display:flex;justify-content:space-between;align-items:center">
+      <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.3em;color:var(--color-text-3)">The Chronos Archive</div>
+      <a href="index.html#pricing" class="chr-btn-primary" style="font-family:var(--font-heading);font-size:0.82rem;padding:8px 20px">Acquire Collection →</a>
+    </div>
+  </div>
+
+  <!-- § 2. HERO COMPARTMENT -->
+  <section id="collection" style="padding:80px;background:var(--color-bg);border-bottom:double 3px var(--color-primary);position:relative" aria-labelledby="archive-heading">
+    <div class="ornate-box" data-reveal>
+      <div class="ornate-corner oc-tl" aria-hidden="true"></div>
+      <div class="ornate-corner oc-tr" aria-hidden="true"></div>
+      <div class="ornate-corner oc-bl" aria-hidden="true"></div>
+      <div class="ornate-corner oc-br" aria-hidden="true"></div>
+      <div style="text-align:center">
+        <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.4em;color:var(--color-text-3);margin-bottom:24px">Volume I · The Complete Collection</div>
+        <h1 id="archive-heading" style="font-size:clamp(2.5rem,5vw,5rem);font-weight:700;margin-bottom:16px;color:var(--color-primary);line-height:1">Chronos: A Multi-Era Archive</h1>
+        <div style="color:var(--color-primary);font-size:1.4rem;letter-spacing:0.4em;margin-bottom:24px">⸻ ✦ ⸻</div>
+        <p style="max-width:600px;margin:0 auto;font-size:1rem;line-height:1.8;color:var(--color-text-2)">A complete compendium of ten layout structures and ten design eras. Built for those who understand that aesthetic is not a choice made once, but a living conversation across centuries.</p>
+        <div style="margin-top:40px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap">
+          <a href="index.html#pricing" class="chr-btn-primary" style="font-family:var(--font-heading)">Acquire the Bundle →</a>
+          <a href="#chronicle" class="chr-btn-ghost" style="font-family:var(--font-heading)">Browse the Archive</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- § 3. CHRONICLE (Timeline) -->
+  <section id="chronicle" class="gothic-section" style="background:var(--color-bg-2);border-bottom:double 3px var(--color-primary)" aria-labelledby="chronicle-heading">
+    <h2 id="chronicle-heading" style="font-family:var(--font-heading);font-size:2rem;color:var(--color-primary);margin-bottom:40px;text-align:center" data-reveal>Chronicle of Eras</h2>
+    <div data-reveal>
+      <div class="entry-row">
+        <div class="entry-year">VII<br>C.</div>
+        <div class="entry-line"></div>
+        <div class="entry-text"><h3>The Gothic Era</h3><p>Born from the great cathedrals and illuminated manuscripts of medieval Europe. Defined by pointed arches, rich ornament, and the profound weight of divine intention. In Chronos, these principles manifest as Cinzel typography, gold variable tokens, and double-border structures.</p></div>
+      </div>
+      <div class="entry-row">
+        <div class="entry-year">XIX<br>C.</div>
+        <div class="entry-line"></div>
+        <div class="entry-text"><h3>The Retro Era</h3><p>From the Victorian print era through the art deco movement and mid-century modernism. Serifed wisdom, parchment warmth, and the dignity of the printed page brought into digital form.</p></div>
+      </div>
+      <div class="entry-row">
+        <div class="entry-year">XX<br>C.</div>
+        <div class="entry-line"></div>
+        <div class="entry-text"><h3>The Brutalist Era</h3><p>A reaction against decoration. The Brutalist era strips design to its structural bones: raw grids, black borders, and the confidence of honesty without ornament.</p></div>
+      </div>
+      <div class="entry-row">
+        <div class="entry-year">XXI<br>C.</div>
+        <div class="entry-line"></div>
+        <div class="entry-text"><h3>The Futuristic & Cyberpunk Eras</h3><p>The current epoch. Glass surfaces, neon light, and the aesthetics of infinite connectivity. Cyberpunk adds the tension of a world where technology and humanity struggle for dominance.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- § 4. HALL OF ERAS -->
+  <section id="eras" class="gothic-section" style="border-bottom:double 3px var(--color-primary)" aria-labelledby="eras-heading">
+    <h2 id="eras-heading" style="font-family:var(--font-heading);font-size:2rem;color:var(--color-primary);margin-bottom:40px;text-align:center" data-reveal>Hall of Eras · The Ten</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--color-border)" data-reveal-group>
+      <div style="background:var(--color-bg);padding:28px;border-left:4px solid var(--color-primary)"><div style="font-family:var(--font-heading);color:var(--color-primary);font-size:1rem;margin-bottom:4px">I. Gothic</div><div style="font-size:0.82rem;color:var(--color-text-2)">Medieval manuscript aesthetics. Double borders, Cinzel, gold.</div></div>
+      <div style="background:var(--color-bg);padding:28px;border-left:4px solid var(--color-primary)"><div style="font-family:var(--font-heading);color:var(--color-primary);font-size:1rem;margin-bottom:4px">II. Modern</div><div style="font-size:0.82rem;color:var(--color-text-2)">Clean, whitespace-driven, Inter. Software-era SaaS aesthetic.</div></div>
+      <div style="background:var(--color-bg);padding:28px;border-left:4px solid var(--color-primary)"><div style="font-family:var(--font-heading);color:var(--color-primary);font-size:1rem;margin-bottom:4px">III. Futuristic</div><div style="font-size:0.82rem;color:var(--color-text-2)">Glassmorphism, neon cyan, spatial depth. Orbitron accents.</div></div>
+      <div style="background:var(--color-bg);padding:28px;border-left:4px solid var(--color-primary)"><div style="font-family:var(--font-heading);color:var(--color-primary);font-size:1rem;margin-bottom:4px">IV. Retro</div><div style="font-size:0.82rem;color:var(--color-text-2)">Parchment warmth, serif typography, manuscript reverence.</div></div>
+      <div style="background:var(--color-bg);padding:28px;border-left:4px solid var(--color-primary)"><div style="font-family:var(--font-heading);color:var(--color-primary);font-size:1rem;margin-bottom:4px">V. Cyberpunk</div><div style="font-size:0.82rem;color:var(--color-text-2)">Magenta-cyan tension, glitch effects, terminal UI.</div></div>
+      <div style="background:var(--color-bg);padding:28px;border-left:4px solid var(--color-primary)"><div style="font-family:var(--font-heading);color:var(--color-primary);font-size:1rem;margin-bottom:4px">VI. Brutalist</div><div style="font-size:0.82rem;color:var(--color-text-2)">Raw grids, thick black borders, Archivo Black, honesty.</div></div>
+      <div style="background:var(--color-bg);padding:28px;border-left:4px solid var(--color-primary)"><div style="font-family:var(--font-heading);color:var(--color-primary);font-size:1rem;margin-bottom:4px">VII. Minimalist</div><div style="font-size:0.82rem;color:var(--color-text-2)">Pure whitespace, zero decoration, maximum type rhythm.</div></div>
+      <div style="background:var(--color-bg);padding:28px;border-left:4px solid var(--color-primary)"><div style="font-family:var(--font-heading);color:var(--color-primary);font-size:1rem;margin-bottom:4px">VIII. Eco</div><div style="font-size:0.82rem;color:var(--color-text-2)">Organic rounds, earthy greens, warmth. Nature in pixels.</div></div>
+      <div style="background:var(--color-bg);padding:28px;border-left:4px solid var(--color-primary)"><div style="font-family:var(--font-heading);color:var(--color-primary);font-size:1rem;margin-bottom:4px">IX. Corporate</div><div style="font-size:0.82rem;color:var(--color-text-2)">Trust, navy blues, clarity. Enterprise-grade professionalism.</div></div>
+      <div style="background:var(--color-bg);padding:28px;border-left:4px solid var(--color-primary)"><div style="font-family:var(--font-heading);color:var(--color-primary);font-size:1rem;margin-bottom:4px">X. Artistic</div><div style="font-size:0.82rem;color:var(--color-text-2)">Yellow-magenta tension, oversized type, zero borders.</div></div>
+    </div>
+  </section>
+
+  <!-- § 5. SCRIPTORIUM (Features) -->
+  <section id="scriptorium" class="gothic-section" style="background:var(--color-bg-2);border-bottom:double 3px var(--color-primary)" aria-labelledby="scriptorium-heading">
+    <h2 id="scriptorium-heading" style="font-family:var(--font-heading);font-size:2rem;color:var(--color-primary);text-align:center;margin-bottom:40px" data-reveal>The Scriptorium</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px" data-reveal-group>
+      <div style="text-align:center;padding:32px;border:1px solid var(--color-primary)">
+        <div style="font-size:2.5rem;margin-bottom:16px">⚙️</div>
+        <h3 style="font-family:var(--font-heading);margin-bottom:8px;color:var(--color-primary)">The Engine</h3>
+        <p style="font-size:0.85rem;color:var(--color-text-2);line-height:1.6">CSS variable tokens. Alpine.js store. Era switching via data-attr. All transitions simultaneous.</p>
+      </div>
+      <div style="text-align:center;padding:32px;border:1px solid var(--color-primary)">
+        <div style="font-size:2.5rem;margin-bottom:16px">📜</div>
+        <h3 style="font-family:var(--font-heading);margin-bottom:8px;color:var(--color-primary)">The Codex</h3>
+        <p style="font-size:0.85rem;color:var(--color-text-2);line-height:1.6">65+ curated Google Fonts. Separate heading, body, accent, and mono controls.</p>
+      </div>
+      <div style="text-align:center;padding:32px;border:1px solid var(--color-primary)">
+        <div style="font-size:2.5rem;margin-bottom:16px">🏺</div>
+        <h3 style="font-family:var(--font-heading);margin-bottom:8px;color:var(--color-primary)">The Relics</h3>
+        <p style="font-size:0.85rem;color:var(--color-text-2);line-height:1.6">8 preset palettes. CSS Export feature. localStorage persistence across sessions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- § 6. CORRESPONDENCE (Contact + Footer) -->
+  <section id="correspondence" class="gothic-section" style="text-align:center" aria-labelledby="corr-heading">
+    <div data-reveal>
+      <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.4em;color:var(--color-text-3);margin-bottom:24px">Correspondence</div>
+      <h2 id="corr-heading" style="font-family:var(--font-heading);font-size:2.5rem;color:var(--color-primary);margin-bottom:8px">Seek an Audience</h2>
+      <div style="color:var(--color-primary);font-size:1.2rem;letter-spacing:0.4em;margin-bottom:24px">⸻ ✦ ⸻</div>
+      <p style="color:var(--color-text-2);max-width:480px;margin:0 auto 40px;line-height:1.7;font-size:0.95rem">The Chronos Archive is open to all who seek design transcendent of its moment. Acquire the full collection, or correspond regarding bespoke arrangements.</p>
+      <a href="index.html#pricing" class="chr-btn-primary" style="font-family:var(--font-heading);font-size:1rem;padding:16px 48px">Acquire the Full Bundle →</a>
+    </div>
+    <div style="margin-top:80px;border-top:double 4px var(--color-primary);padding-top:40px">
+      <div style="font-size:0.68rem;color:var(--color-text-3);letter-spacing:0.2em">© ANNO DOMINI MMXXVI · CHRONOS PRESS · ALL RIGHTS PRESERVED IN PERPETUITY</div>
+      <div style="font-size:1.2rem;color:var(--color-primary);margin-top:12px;letter-spacing:0.3em">† † †</div>
+    </div>
+  </section>
+
+</main>
+
+<div id="chr-customizer-mount"></div>
+</body>
+</html>

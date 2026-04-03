@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-era="brutalist">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 03 — Brutalist Feed. Raw grid, thick borders, high-contrast content.">
+  <title>Chronos | Brutalist Feed</title>
+  <script>(function(){try{var p=JSON.parse(localStorage.getItem('chronos-prefs'));if(p&&p.era)document.documentElement.setAttribute('data-era',p.era)}catch(e){}})()</script>
+  <script type="module" src="/src/main.js"></script>
+  <style>
+    [x-cloak]{display:none!important}
+    .feed-grid{display:grid;grid-template-columns:repeat(12,1fr);border-left:var(--border-w) solid var(--color-border);border-top:var(--border-w) solid var(--color-border)}
+    .fi{border-right:var(--border-w) solid var(--color-border);border-bottom:var(--border-w) solid var(--color-border);padding:40px;grid-column:span 4;transition:background 0.2s}
+    .fi:hover{background:var(--color-bg-2)}
+    .fi.wide{grid-column:span 8}
+    .fi.full{grid-column:span 12}
+    .fi-cat{display:inline-block;padding:4px 12px;background:var(--color-primary);color:#fff;font-weight:900;text-transform:uppercase;font-size:0.78rem;letter-spacing:0.05em;margin-bottom:16px}
+    @media(max-width:768px){.fi,.fi.wide,.fi.full{grid-column:span 12}}
+  </style>
+</head>
+<body>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<header class="chr-nav" role="banner">
+  <div class="chr-container chr-nav-inner">
+    <a href="index.html" class="chr-logo">✦ CHRONOS</a>
+    <nav><ul class="chr-nav-links"><li><a href="#latest">Latest</a></li><li><a href="#features">Features</a></li><li><a href="#archive">Archive</a></li><li><a href="#subscribe">Subscribe</a></li></ul></nav>
+    <div style="display:flex;gap:12px;align-items:center"><a href="#subscribe" class="chr-btn-primary" style="padding:10px 22px;font-size:0.85rem">Subscribe</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+  </div>
+</header>
+<main id="main-content">
+<!-- § 1. HERO HEADER -->
+<section id="hero" style="background:var(--color-accent);border-bottom:var(--border-w) solid var(--color-border);padding:80px 0">
+  <div class="chr-container">
+    <div data-reveal>
+      <div class="chr-heading-sm">THE CHRONOS FEED</div>
+      <h1 class="chr-heading-xl" style="font-size:clamp(3rem,10vw,7rem);text-transform:uppercase;letter-spacing:-0.02em;line-height:0.9;margin:16px 0">RAW.<br>REAL.<br>RADICAL.</h1>
+      <p style="font-size:1.2rem;max-width:600px;margin-top:24px;color:var(--color-text-2)">Design commentary without filters. Every era. Every opinion. No corporate polish.</p>
+    </div>
+  </div>
+</section>
+<!-- § 2. MARQUEE -->
+<div style="background:var(--color-primary);padding:12px 0;overflow:hidden;border-bottom:var(--border-w) solid var(--color-border)">
+  <div class="chr-marquee-track" style="color:#fff;font-weight:900;text-transform:uppercase;font-size:0.85rem">
+    <span style="padding:0 32px">BRUTALISM IS NOT DEAD</span><span style="padding:0 32px">✦</span>
+    <span style="padding:0 32px">DESIGN FOR EVERYONE</span><span style="padding:0 32px">✦</span>
+    <span style="padding:0 32px">10 ERAS. ONE ENGINE.</span><span style="padding:0 32px">✦</span>
+    <span style="padding:0 32px">CHRONOS 2026</span><span style="padding:0 32px">✦</span>
+    <span style="padding:0 32px">BRUTALISM IS NOT DEAD</span><span style="padding:0 32px">✦</span>
+    <span style="padding:0 32px">DESIGN FOR EVERYONE</span><span style="padding:0 32px">✦</span>
+    <span style="padding:0 32px">10 ERAS. ONE ENGINE.</span><span style="padding:0 32px">✦</span>
+    <span style="padding:0 32px">CHRONOS 2026</span><span style="padding:0 32px">✦</span>
+  </div>
+</div>
+<!-- § 3. ARTICLE GRID -->
+<section id="latest" aria-labelledby="latest-heading">
+  <div class="chr-container" style="padding-top:60px;padding-bottom:20px"><h2 id="latest-heading" style="font-size:1rem;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:20px">— Latest Articles</h2></div>
+  <div class="feed-grid" data-reveal-group>
+    <article class="fi wide"><span class="fi-cat">Feature</span><h2 style="font-size:clamp(1.5rem,3vw,2.5rem);text-transform:uppercase;margin-bottom:16px;line-height:1">Gothic AI: When Algorithms Meet Medieval Aesthetics</h2><p style="color:var(--color-text-2);line-height:1.6;margin-bottom:20px">Exploring the intersections of 12th-century manuscript design with modern neural architecture. A surprisingly coherent design movement.</p><a href="#" class="chr-btn-primary" style="font-size:0.85rem;padding:10px 24px">Read More →</a></article>
+    <article class="fi"><span class="fi-cat">Opinion</span><h2 style="font-size:1.3rem;text-transform:uppercase;margin-bottom:12px">Brutalism in 2026: Why Thick Borders Still Win</h2><p style="color:var(--color-text-2);font-size:0.88rem;line-height:1.6">The aesthetic of raw honesty.</p><a href="#" style="font-weight:900;font-size:0.85rem;color:var(--color-primary)">READ →</a></article>
+    <article class="fi"><span class="fi-cat">Tech</span><h2 style="font-size:1.3rem;text-transform:uppercase;margin-bottom:12px">CSS Era Variables: How Chronos Changes Everything</h2><p style="color:var(--color-text-2);font-size:0.88rem;line-height:1.6">Data-era attribute on &lt;html&gt;. That's it.</p><a href="#" style="font-weight:900;font-size:0.85rem;color:var(--color-primary)">READ →</a></article>
+    <article class="fi"><span class="fi-cat">Interview</span><h2 style="font-size:1.3rem;text-transform:uppercase;margin-bottom:12px">Interview: A Designer Who Uses All 10 Eras Daily</h2><p style="color:var(--color-text-2);font-size:0.88rem;line-height:1.6">"I switch eras like I switch moods."</p><a href="#" style="font-weight:900;font-size:0.85rem;color:var(--color-primary)">READ →</a></article>
+    <article class="fi"><span class="fi-cat">Review</span><h2 style="font-size:1.3rem;text-transform:uppercase;margin-bottom:12px">Chronos vs. Bootstrap: An Honest Comparison</h2><p style="color:var(--color-text-2);font-size:0.88rem;line-height:1.6">Spoiler: They solve different problems.</p><a href="#" style="font-weight:900;font-size:0.85rem;color:var(--color-primary)">READ →</a></article>
+    <article class="fi full" style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+      <div><span class="fi-cat">Manifesto</span><h2 style="font-size:clamp(1.5rem,3vw,2.2rem);text-transform:uppercase;margin-bottom:16px;line-height:1.1">THE CHRONOS DECLARATION: DESIGN MUST TRANSCEND TIME</h2><p style="color:var(--color-text-2);line-height:1.6;margin-bottom:20px">Why building for one era is building for a moment. Why building for all eras is building for eternity. A founding manifesto.</p><a href="#" class="chr-btn-primary" style="font-size:0.85rem;padding:10px 24px">Read the Manifesto →</a></div>
+      <div style="height:250px;background:linear-gradient(135deg,var(--color-primary)22,var(--color-bg-3));border:var(--border-w) solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:4rem">📜</div>
+    </article>
+  </div>
+</section>
+<!-- § 4. STATS BAR -->
+<section class="chr-section-sm" style="background:var(--color-bg-2);border-top:var(--border-w) solid var(--color-border);border-bottom:var(--border-w) solid var(--color-border)">
+  <div class="chr-container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center" data-reveal-group>
+      <div><div style="font-size:3rem;font-weight:900;font-family:var(--font-heading);color:var(--color-primary)" data-count="10">0</div><div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3)">Design Eras</div></div>
+      <div><div style="font-size:3rem;font-weight:900;font-family:var(--font-heading);color:var(--color-primary)" data-count="65" data-suffix="+">0+</div><div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3)">Fonts</div></div>
+      <div><div style="font-size:3rem;font-weight:900;font-family:var(--font-heading);color:var(--color-primary)" data-count="10">0</div><div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3)">Layouts</div></div>
+      <div><div style="font-size:3rem;font-weight:900;font-family:var(--font-heading);color:var(--color-primary)" data-count="0">0</div><div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3)">Framework Deps.</div></div>
+    </div>
+  </div>
+</section>
+<!-- § 5. SUBSCRIBE CTA -->
+<section id="subscribe" class="chr-section" aria-labelledby="subscribe-heading">
+  <div class="chr-container" style="max-width:600px">
+    <div data-reveal>
+      <h2 id="subscribe-heading" class="chr-heading-xl" style="text-transform:uppercase;margin-bottom:24px">Get brutal design commentary in your inbox.</h2>
+      <form style="display:flex;gap:0;border:var(--border-w) solid var(--color-border)" aria-label="Newsletter">
+        <label for="bf-email" style="display:none">Email</label>
+        <input type="email" id="bf-email" placeholder="your@email.com" style="flex:1;padding:16px 20px;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);border:none;outline:none;font-size:0.95rem">
+        <button type="submit" style="padding:16px 28px;background:var(--color-primary);color:#fff;font-weight:900;font-size:0.9rem;text-transform:uppercase;border:none;cursor:pointer">SUBMIT</button>
+      </form>
+      <p style="font-size:0.78rem;color:var(--color-text-3);margin-top:12px">No spam. Cancel anytime. Raw design truth weekly.</p>
+    </div>
+  </div>
+</section>
+<!-- § 6. FOOTER -->
+<footer style="background:var(--color-primary);padding:40px 0" role="contentinfo">
+  <div class="chr-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <a href="index.html" style="font-family:var(--font-accent);font-weight:800;font-size:1.2rem;color:#fff">✦ CHRONOS FEED</a>
+    <p style="font-size:0.82rem;color:rgba(255,255,255,0.7)">© 2026 Chronos · Layout 03 Brutalist Feed</p>
+    <nav><ul style="list-style:none;display:flex;gap:20px"><li><a href="index.html" style="color:rgba(255,255,255,0.7);font-size:0.85rem">Home</a></li><li><a href="layout-04.html" style="color:rgba(255,255,255,0.7);font-size:0.85rem">Manuscript</a></li><li><a href="layout-09.html" style="color:rgba(255,255,255,0.7);font-size:0.85rem">Cyberpunk</a></li></ul></nav>
+  </div>
+</footer>
+<div id="chr-customizer-mount"></div>
+</body>
+</html>
