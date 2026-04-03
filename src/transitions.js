@@ -91,23 +91,74 @@ export function initCounters() {
  */
 export function initNavHighlight() {
   const sections = document.querySelectorAll('section[id]')
-  const links = document.querySelectorAll('.chr-nav-links a[href^="#"]')
+  const links = Array.from(document.querySelectorAll(
+    'header nav a[href^="#"], nav[role="navigation"] a[href^="#"], aside a[href^="#"]'
+  )).filter((link) => {
+    const href = link.getAttribute('href') || ''
+    return href.startsWith('#') && href !== '#main-content' && href !== '#' && document.querySelector(href)
+  })
   if (!sections.length || !links.length) return
 
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        links.forEach(link => {
-          link.style.color = ''
-          if (link.getAttribute('href') === `#${entry.target.id}`) {
-            link.style.color = 'var(--color-primary)'
-          }
-        })
+  const ratios = new Map()
+  const sectionList = Array.from(sections)
+
+  function setActive(activeId) {
+    links.forEach((link) => {
+      const isActive = link.getAttribute('href') === `#${activeId}`
+      link.classList.toggle('active', isActive)
+      if (isActive) {
+        link.setAttribute('aria-current', 'location')
+      } else {
+        link.removeAttribute('aria-current')
+      }
+
+      if (link.closest('.chr-nav-links')) {
+        link.style.color = isActive ? 'var(--color-primary)' : ''
       }
     })
-  }, { threshold: 0.5 })
+  }
 
-  sections.forEach(sec => obs.observe(sec))
+  function pickFallbackSection() {
+    const activationLine = window.innerHeight * 0.35
+    let fallbackId = sectionList[0].id
+
+    sectionList.forEach((section) => {
+      if (section.getBoundingClientRect().top <= activationLine) {
+        fallbackId = section.id
+      }
+    })
+
+    return fallbackId
+  }
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      ratios.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0)
+    })
+
+    let bestId = null
+    let bestRatio = 0
+
+    sectionList.forEach((section) => {
+      const ratio = ratios.get(section.id) || 0
+      if (ratio > bestRatio) {
+        bestRatio = ratio
+        bestId = section.id
+      }
+    })
+
+    setActive(bestId || pickFallbackSection())
+  }, {
+    threshold: [0, 0.15, 0.35, 0.55, 0.75],
+    rootMargin: '-15% 0px -35% 0px',
+  })
+
+  sectionList.forEach((section) => {
+    ratios.set(section.id, 0)
+    obs.observe(section)
+  })
+
+  setActive(pickFallbackSection())
 }
 
 /**

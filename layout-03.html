@@ -65,18 +65,68 @@
     </article>
   </div>
 </section>
-<!-- § 4. STATS BAR -->
+<!-- § 4. FEATURED COLUMNS -->
+<section id="features" class="chr-section-sm" style="background:var(--color-bg-2);border-top:var(--border-w) solid var(--color-border);border-bottom:var(--border-w) solid var(--color-border)" aria-labelledby="features-heading">
+  <div class="chr-container">
+    <div style="display:flex;justify-content:space-between;gap:20px;align-items:end;flex-wrap:wrap;margin-bottom:28px" data-reveal>
+      <div>
+        <div class="chr-heading-sm">Featured columns</div>
+        <h2 id="features-heading" class="chr-heading-xl" style="font-size:clamp(2rem,4vw,3rem)">Recurring tracks for critique, commentary, and visual analysis.</h2>
+      </div>
+      <p style="max-width:520px;color:var(--color-text-2);line-height:1.7">This section now exists as a real editorial module so the Features link lands on a usable demo block instead of a false navigation target.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px" data-reveal-group>
+      <article style="padding:24px;border:var(--border-w) solid var(--color-border);background:var(--color-bg)">
+        <div class="fi-cat" style="margin-bottom:14px">Column</div>
+        <h3 style="font-size:1.15rem;text-transform:uppercase;margin-bottom:10px">Era Breakdown</h3>
+        <p style="color:var(--color-text-2);line-height:1.7;font-size:0.92rem">A repeatable format for unpacking one design era at a time through references, typography, and layout logic.</p>
+      </article>
+      <article style="padding:24px;border:var(--border-w) solid var(--color-border);background:var(--color-bg)">
+        <div class="fi-cat" style="margin-bottom:14px">Roundup</div>
+        <h3 style="font-size:1.15rem;text-transform:uppercase;margin-bottom:10px">Signal Watch</h3>
+        <p style="color:var(--color-text-2);line-height:1.7;font-size:0.92rem">Short-form reporting for shifts in interface culture, motion language, and visual systems.</p>
+      </article>
+      <article style="padding:24px;border:var(--border-w) solid var(--color-border);background:var(--color-bg)">
+        <div class="fi-cat" style="margin-bottom:14px">Critique</div>
+        <h3 style="font-size:1.15rem;text-transform:uppercase;margin-bottom:10px">Studio Review</h3>
+        <p style="color:var(--color-text-2);line-height:1.7;font-size:0.92rem">A reusable card for teardown pieces, annotated screenshots, and opinion-led reviews.</p>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- § 5. STATS BAR -->
 <section class="chr-section-sm" style="background:var(--color-bg-2);border-top:var(--border-w) solid var(--color-border);border-bottom:var(--border-w) solid var(--color-border)">
   <div class="chr-container">
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center" data-reveal-group>
-      <div><div style="font-size:3rem;font-weight:900;font-family:var(--font-heading);color:var(--color-primary)" data-count="10">0</div><div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3)">Design Eras</div></div>
+      <div><div style="font-size:3rem;font-weight:900;font-family:var(--font-heading);color:var(--color-primary)" data-count="12">0</div><div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3)">Design Eras</div></div>
       <div><div style="font-size:3rem;font-weight:900;font-family:var(--font-heading);color:var(--color-primary)" data-count="65" data-suffix="+">0+</div><div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3)">Fonts</div></div>
-      <div><div style="font-size:3rem;font-weight:900;font-family:var(--font-heading);color:var(--color-primary)" data-count="10">0</div><div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3)">Layouts</div></div>
+      <div><div style="font-size:3rem;font-weight:900;font-family:var(--font-heading);color:var(--color-primary)" data-count="15">0</div><div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3)">Layouts</div></div>
       <div><div style="font-size:3rem;font-weight:900;font-family:var(--font-heading);color:var(--color-primary)" data-count="0">0</div><div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3)">Framework Deps.</div></div>
     </div>
   </div>
 </section>
-<!-- § 5. SUBSCRIBE CTA -->
+<!-- § 6. ARCHIVE DESK -->
+<section id="archive" class="chr-section-sm" aria-labelledby="archive-heading">
+  <div class="chr-container">
+    <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(260px,.7fr);gap:24px;align-items:start" data-reveal>
+      <div style="padding:28px;border:var(--border-w) solid var(--color-border);background:var(--color-bg)">
+        <div class="chr-heading-sm">Archive desk</div>
+        <h2 id="archive-heading" class="chr-heading-xl" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:12px">A browsable archive for issues, themes, and recurring series.</h2>
+        <p style="color:var(--color-text-2);line-height:1.7;max-width:700px">This block makes the archive link real. It shows how the feed can pivot from the latest articles into issue navigation, category access, and evergreen shelves.</p>
+      </div>
+      <div style="padding:28px;border:var(--border-w) solid var(--color-border);background:var(--color-bg)">
+        <div style="font-size:0.78rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px">Browse by desk</div>
+        <div style="display:grid;gap:10px">
+          <a href="#" style="display:flex;justify-content:space-between;gap:16px;padding-bottom:10px;border-bottom:var(--border-w) solid var(--color-border);font-weight:800;color:inherit"><span>Typography files</span><span style="color:var(--color-text-3)">18</span></a>
+          <a href="#" style="display:flex;justify-content:space-between;gap:16px;padding-bottom:10px;border-bottom:var(--border-w) solid var(--color-border);font-weight:800;color:inherit"><span>Interface critiques</span><span style="color:var(--color-text-3)">12</span></a>
+          <a href="#" style="display:flex;justify-content:space-between;gap:16px;padding-bottom:10px;border-bottom:var(--border-w) solid var(--color-border);font-weight:800;color:inherit"><span>Era essays</span><span style="color:var(--color-text-3)">09</span></a>
+          <a href="#" style="display:flex;justify-content:space-between;gap:16px;font-weight:800;color:inherit"><span>Studio dispatches</span><span style="color:var(--color-text-3)">07</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- § 7. SUBSCRIBE CTA -->
 <section id="subscribe" class="chr-section" aria-labelledby="subscribe-heading">
   <div class="chr-container" style="max-width:600px">
     <div data-reveal>

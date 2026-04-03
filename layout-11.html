@@ -3,63 +3,196 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Chronos Layout 11 - Heavy business website for enterprise consulting, operations, and large-scale transformation programs.">
+  <meta name="description" content="Chronos Layout 11 - Enterprise business site with report-style sections, sector coverage, and transformation briefing flow.">
   <title>Chronos | Enterprise Business</title>
   <script>(function(){try{var p=JSON.parse(localStorage.getItem('chronos-prefs'));if(p&&p.era)document.documentElement.setAttribute('data-era',p.era)}catch(e){}})()</script>
   <script type="module" src="/src/main.js"></script>
   <style>
     [x-cloak]{display:none!important}
     body{background:var(--color-bg);color:var(--color-text);overflow-x:hidden}
-    .enterprise-shell{padding:120px 0 88px;background:radial-gradient(circle at top right,color-mix(in srgb,var(--color-primary) 12%,transparent),transparent 36%),linear-gradient(180deg,var(--color-bg),var(--color-bg-2))}
-    .enterprise-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:40px;align-items:center}
-    .scoreboard{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-    .score-card,.service-card,.sector-card,.case-card,.timeline-card{background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)}
-    .score-card,.service-card,.sector-card,.case-card,.timeline-card{padding:24px}
-    .service-grid,.sector-grid,.case-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-    .timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
-    .enterprise-cta{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr);gap:24px;align-items:start;padding:34px;border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-bg-2)}
-    .enterprise-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .enterprise-form input,.enterprise-form select,.enterprise-form textarea{width:100%;padding:14px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg);color:var(--color-text);font:inherit;outline:none}
-    .enterprise-form textarea{grid-column:1 / -1;min-height:120px;resize:vertical}
-    .enterprise-form button{grid-column:1 / -1}
-    @media(max-width:1080px){.enterprise-grid,.enterprise-cta{grid-template-columns:1fr}.service-grid,.sector-grid,.case-grid{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:1fr 1fr}}
-    @media(max-width:720px){.service-grid,.sector-grid,.case-grid,.timeline,.enterprise-form{grid-template-columns:1fr}}
+    .eb-topline{border-bottom:1px solid var(--color-border);background:var(--color-bg-2)}
+    .eb-hero{padding:0 0 80px}
+    .eb-frame{display:grid;grid-template-columns:280px minmax(0,1fr);gap:32px}
+    .eb-rail{position:sticky;top:96px;align-self:start;display:grid;gap:16px}
+    .eb-panel,.eb-metric,.eb-case,.eb-sector,.eb-row,.eb-form-shell{background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)}
+    .eb-panel,.eb-case,.eb-sector,.eb-row,.eb-form-shell{padding:24px}
+    .eb-metric{padding:20px}
+    .eb-main{display:grid;gap:28px}
+    .eb-mast{padding:56px 0 28px;border-bottom:1px solid var(--color-border)}
+    .eb-headline{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:28px;align-items:end}
+    .eb-kpi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .eb-advisory{display:grid;grid-template-columns:1.2fr .8fr;gap:24px}
+    .eb-table{width:100%;border-collapse:collapse}
+    .eb-table th,.eb-table td{padding:12px 14px;border-bottom:1px solid var(--color-border);font-size:.9rem;text-align:left}
+    .eb-table th{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--color-text-3)}
+    .eb-sectors{display:grid;gap:14px}
+    .eb-sector{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:18px;align-items:center}
+    .eb-case-list{display:grid;gap:16px}
+    .eb-case{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:start}
+    .eb-tag{display:inline-flex;align-items:center;padding:5px 12px;border-radius:var(--radius-full);border:1px solid var(--color-border);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-2)}
+    .eb-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .eb-form input,.eb-form select,.eb-form textarea{width:100%;padding:14px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2);color:var(--color-text);font:inherit;outline:none}
+    .eb-form textarea,.eb-form button{grid-column:1 / -1}
+    .eb-form textarea{min-height:120px;resize:vertical}
+    @media(max-width:1120px){.eb-frame,.eb-headline,.eb-advisory{grid-template-columns:1fr}.eb-rail{position:static}.eb-kpi-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:760px){.eb-kpi-grid,.eb-form{grid-template-columns:1fr}.eb-sector,.eb-case{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
 <a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+
+<div class="eb-topline">
+  <div class="chr-container" style="display:flex;justify-content:space-between;gap:16px;align-items:center;padding:10px 0;font-size:.76rem;color:var(--color-text-2);text-transform:uppercase;letter-spacing:.08em">
+    <span>Layout 11 · Enterprise Business</span>
+    <span>Strategy · Operations · Transformation</span>
+  </div>
+</div>
+
 <header class="chr-nav" role="banner">
   <div class="chr-container chr-nav-inner">
-    <a href="index.html" class="chr-logo">CHRONOS</a>
-    <nav aria-label="Enterprise navigation"><ul class="chr-nav-links"><li><a href="#services">Services</a></li><li><a href="#sectors">Sectors</a></li><li><a href="#cases">Cases</a></li><li><a href="#contact">Contact</a></li></ul></nav>
-    <div style="display:flex;align-items:center;gap:12px"><a href="index.html" class="chr-btn-ghost" style="padding:10px 18px;font-size:.85rem">All layouts</a><a href="#contact" class="chr-btn-primary" style="padding:10px 22px;font-size:.85rem">Request briefing</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+    <a href="index.html" class="chr-logo">CHRONOS ADVISORY</a>
+    <nav aria-label="Enterprise navigation">
+      <ul class="chr-nav-links">
+        <li><a href="#priorities">Priorities</a></li>
+        <li><a href="#sectors">Sectors</a></li>
+        <li><a href="#cases">Cases</a></li>
+        <li><a href="#briefing">Briefing</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="index.html" class="chr-btn-ghost" style="padding:10px 18px;font-size:.85rem">All layouts</a>
+      <a href="#briefing" class="chr-btn-primary" style="padding:10px 22px;font-size:.85rem">Request briefing</a>
+      <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </header>
-<main id="main-content">
-  <section class="enterprise-shell" aria-labelledby="enterprise-heading">
-    <div class="chr-container enterprise-grid">
-      <div data-reveal>
-        <div class="chr-badge" style="margin-bottom:1.3rem">Layout 11 · Heavy Business Website</div>
-        <h1 id="enterprise-heading" class="chr-heading-xl" style="margin-bottom:1.4rem">Serious enterprise messaging for firms that sell scale, trust, and transformation.</h1>
-        <p style="font-size:1.04rem;color:var(--color-text-2);line-height:1.85;max-width:640px;margin-bottom:2rem">Layout 11 is built for consulting groups, B2B service companies, industrial operators, and enterprise platforms that need a heavier business tone than the current SaaS landing page.</p>
-        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:2rem"><a href="#services" class="chr-btn-primary" style="padding:16px 30px">Explore services</a><a href="#cases" class="chr-btn-ghost" style="padding:16px 26px">See case format</a></div>
-        <div style="display:flex;gap:28px;flex-wrap:wrap"><div><div class="chr-stat-number" style="font-size:2rem" data-count="38">0</div><div style="font-size:.82rem;color:var(--color-text-3)">Markets served</div></div><div><div class="chr-stat-number" style="font-size:2rem" data-count="240">0</div><div style="font-size:.82rem;color:var(--color-text-3)">Programs delivered</div></div><div><div class="chr-stat-number" style="font-size:2rem" data-count="15" data-prefix="$">$0</div><div style="font-size:.82rem;color:var(--color-text-3)">B portfolio value</div></div></div>
+
+<main id="main-content" class="eb-hero">
+  <div class="chr-container eb-frame">
+    <aside class="eb-rail">
+      <div class="eb-panel">
+        <div style="font-size:.72rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px">Executive brief</div>
+        <h2 style="font-size:1.1rem;margin-bottom:10px">A denser enterprise shell than the product-led layouts.</h2>
+        <p style="font-size:.9rem;color:var(--color-text-2);line-height:1.75">This page is designed for buyers who expect board-level language, operational framing, and procurement-safe structure.</p>
       </div>
-      <div class="scoreboard" data-reveal="right">
-        <div class="score-card"><div style="font-size:.75rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px">Transformation Office</div><div style="font-size:1.4rem;font-weight:800;margin-bottom:10px">Strategy, PMO, operating model, and enterprise change.</div><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7">A more executive, procurement-safe structure than the lighter marketing-oriented layouts.</p></div>
-        <div class="score-card"><div style="font-size:.75rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px">Board Reporting</div><div style="display:flex;align-items:end;gap:10px;margin-bottom:10px"><div style="font-size:2rem;font-weight:800;color:var(--color-primary)">92%</div><div style="font-size:.82rem;color:var(--color-text-3)">delivery confidence</div></div><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7">Designed to support metrics, governance messaging, and decision-making narratives.</p></div>
-        <div class="score-card"><div style="font-size:.75rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px">Coverage</div><div style="height:80px;border-radius:var(--radius-md);background:linear-gradient(135deg,color-mix(in srgb,var(--color-primary) 16%,transparent),color-mix(in srgb,var(--color-secondary) 16%,transparent));border:1px solid var(--color-border)"></div></div>
-        <div class="score-card"><div style="font-size:.75rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px">Client mix</div><div style="display:grid;gap:10px"><div style="display:flex;justify-content:space-between;font-size:.86rem"><span>Industry</span><strong>42%</strong></div><div style="height:8px;background:var(--color-bg-3);border-radius:999px;overflow:hidden"><div style="width:42%;height:100%;background:var(--color-primary)"></div></div><div style="display:flex;justify-content:space-between;font-size:.86rem"><span>Financial services</span><strong>31%</strong></div><div style="height:8px;background:var(--color-bg-3);border-radius:999px;overflow:hidden"><div style="width:31%;height:100%;background:var(--color-secondary)"></div></div></div></div>
+      <div class="eb-metric">
+        <div style="font-size:.72rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px">Programs led</div>
+        <div style="font-size:2.1rem;font-weight:800;color:var(--color-primary)" data-count="240">0</div>
       </div>
+      <div class="eb-metric">
+        <div style="font-size:.72rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px">Markets</div>
+        <div style="font-size:2.1rem;font-weight:800;color:var(--color-primary)" data-count="38">0</div>
+      </div>
+      <div class="eb-metric">
+        <div style="font-size:.72rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px">Portfolio value</div>
+        <div style="font-size:2.1rem;font-weight:800;color:var(--color-primary)" data-count="15" data-prefix="$">$0</div>
+      </div>
+    </aside>
+
+    <div class="eb-main">
+      <section class="eb-mast" aria-labelledby="enterprise-heading">
+        <div class="eb-headline">
+          <div data-reveal>
+            <div class="chr-badge" style="margin-bottom:1rem">Transformation office · operating model · enterprise delivery</div>
+            <h1 id="enterprise-heading" class="chr-heading-xl" style="margin-bottom:1rem">Enterprise messaging built like a report, not a startup pitch.</h1>
+            <p style="font-size:1.02rem;color:var(--color-text-2);line-height:1.85;max-width:720px">Layout 11 is for consulting groups, industrial platforms, B2B services, and transformation firms that need heavier credibility blocks than the standard SaaS hero-to-feature pattern.</p>
+          </div>
+          <div class="eb-panel" data-reveal="right">
+            <div style="font-size:.72rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px">Current focus</div>
+            <div style="display:grid;gap:12px">
+              <div class="eb-tag">Performance office</div>
+              <div class="eb-tag">Commercial transformation</div>
+              <div class="eb-tag">Program governance</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="priorities" aria-labelledby="priorities-heading">
+        <div style="display:flex;justify-content:space-between;gap:16px;align-items:end;flex-wrap:wrap;margin-bottom:20px" data-reveal>
+          <div>
+            <div class="chr-heading-sm">Priority matrix</div>
+            <h2 id="priorities-heading" class="chr-heading-xl">A more executive content shape for enterprise buyers.</h2>
+          </div>
+          <p style="max-width:480px;color:var(--color-text-2);line-height:1.75">This layout leans into summary blocks, maturity readouts, and case-led evidence instead of repeating a generic marketing cadence.</p>
+        </div>
+        <div class="eb-advisory" data-reveal-group>
+          <div class="eb-panel">
+            <table class="eb-table" aria-label="Enterprise priorities">
+              <thead>
+                <tr><th>Priority</th><th>Focus</th><th>Impact</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Strategy translation</td><td>Link board priorities to operating workstreams.</td><td>High</td></tr>
+                <tr><td>Performance office</td><td>Track delivery rhythm, dependencies, and value capture.</td><td>High</td></tr>
+                <tr><td>Commercial change</td><td>Redesign teams, controls, and customer execution.</td><td>Medium</td></tr>
+                <tr><td>Capability embed</td><td>Transfer governance and keep the operating rhythm alive.</td><td>Medium</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="eb-panel">
+            <div style="font-size:.72rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px">Delivery confidence</div>
+            <div class="eb-kpi-grid">
+              <div class="eb-metric"><div style="font-size:1.6rem;font-weight:800;color:var(--color-primary)">92%</div><div style="font-size:.8rem;color:var(--color-text-3)">Program confidence</div></div>
+              <div class="eb-metric"><div style="font-size:1.6rem;font-weight:800;color:var(--color-primary)">31%</div><div style="font-size:.8rem;color:var(--color-text-3)">Cycle-time gain</div></div>
+              <div class="eb-metric"><div style="font-size:1.6rem;font-weight:800;color:var(--color-primary)">11</div><div style="font-size:.8rem;color:var(--color-text-3)">Steering tracks</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sectors" aria-labelledby="sectors-heading">
+        <div style="margin-bottom:18px" data-reveal>
+          <div class="chr-heading-sm">Sector coverage</div>
+          <h2 id="sectors-heading" class="chr-heading-xl">Structured sector rows instead of another simple card grid.</h2>
+        </div>
+        <div class="eb-sectors" data-reveal-group>
+          <div class="eb-sector"><div style="font-size:.76rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em">FS</div><div><h3 style="font-size:1rem;margin-bottom:6px">Financial services transformation</h3><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7">Risk operations, claims, underwriting flow, and growth execution in regulated environments.</p></div><div class="eb-tag">Regulated</div></div>
+          <div class="eb-sector"><div style="font-size:.76rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em">IND</div><div><h3 style="font-size:1rem;margin-bottom:6px">Industrial and manufacturing</h3><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7">Plant network planning, frontline performance, procurement controls, and supply resilience.</p></div><div class="eb-tag">Operations</div></div>
+          <div class="eb-sector"><div style="font-size:.76rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em">PS</div><div><h3 style="font-size:1rem;margin-bottom:6px">Public and service delivery</h3><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7">Large stakeholder systems, service redesign, and high-accountability delivery structures.</p></div><div class="eb-tag">Multi-stakeholder</div></div>
+        </div>
+      </section>
+
+      <section id="cases" aria-labelledby="cases-heading">
+        <div style="margin-bottom:18px" data-reveal>
+          <div class="chr-heading-sm">Case evidence</div>
+          <h2 id="cases-heading" class="chr-heading-xl">Case-study rows with outcome framing.</h2>
+        </div>
+        <div class="eb-case-list" data-reveal-group>
+          <article class="eb-case"><div><div style="font-size:.76rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px">Global insurer</div><h3 style="font-size:1.06rem;margin-bottom:8px">Claims transformation office across three regions</h3><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.75">Illustrates room for challenge framing, program scope, governance rhythm, and quantified value realization.</p></div><div style="text-align:right"><div style="font-size:1.6rem;font-weight:800;color:var(--color-primary)">31%</div><div style="font-size:.78rem;color:var(--color-text-3)">faster turnaround</div></div></article>
+          <article class="eb-case"><div><div style="font-size:.76rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px">Industrial group</div><h3 style="font-size:1.06rem;margin-bottom:8px">Network planning and procurement control redesign</h3><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.75">Uses a denser format than the lighter landing pages, with stronger room for evidence and executive messaging.</p></div><div style="text-align:right"><div style="font-size:1.6rem;font-weight:800;color:var(--color-primary)">14%</div><div style="font-size:.78rem;color:var(--color-text-3)">cost reduction</div></div></article>
+        </div>
+      </section>
+
+      <section id="briefing" aria-labelledby="briefing-heading">
+        <div class="eb-form-shell" data-reveal>
+          <div style="max-width:760px;margin-bottom:18px">
+            <div class="chr-heading-sm">Executive briefing</div>
+            <h2 id="briefing-heading" class="chr-heading-xl" style="margin-bottom:10px">A more serious inquiry block for enterprise work.</h2>
+            <p style="color:var(--color-text-2);line-height:1.75">This remains demo-safe in source, but the shape is ready for enterprise qualification and briefing requests.</p>
+          </div>
+          <form class="eb-form" aria-label="Enterprise inquiry form" data-demo-message="Enterprise inquiry submitted. Connect this form to your own workflow.">
+            <input type="text" placeholder="Full name" autocomplete="name">
+            <input type="email" placeholder="Work email" autocomplete="email">
+            <input type="text" placeholder="Company" autocomplete="organization">
+            <select aria-label="Engagement type"><option>Transformation program</option><option>Advisory mandate</option><option>Operating model redesign</option></select>
+            <textarea placeholder="Describe the business context, stakeholders, and timeline."></textarea>
+            <button type="submit" class="chr-btn-primary">Submit inquiry</button>
+          </form>
+        </div>
+      </section>
     </div>
-  </section>
-  <section id="services" class="chr-section" aria-labelledby="services-heading"><div class="chr-container"><div style="text-align:center;max-width:720px;margin:0 auto 52px" data-reveal><div class="chr-heading-sm">Service model</div><h2 id="services-heading" class="chr-heading-xl">Built for complex buying cycles, not only quick product conversion.</h2></div><div class="service-grid" data-reveal-group><div class="service-card"><div class="chr-step-number">01</div><h3 style="margin:14px 0 10px;font-size:1.06rem">Corporate strategy</h3><p style="color:var(--color-text-2);line-height:1.75;font-size:.92rem">Messaging blocks for market positioning, capital allocation, transformation theses, and portfolio priorities.</p></div><div class="service-card"><div class="chr-step-number">02</div><h3 style="margin:14px 0 10px;font-size:1.06rem">Operations improvement</h3><p style="color:var(--color-text-2);line-height:1.75;font-size:.92rem">Supports heavier proof points: cycle-time reduction, service levels, productivity programs, and operating governance.</p></div><div class="service-card"><div class="chr-step-number">03</div><h3 style="margin:14px 0 10px;font-size:1.06rem">Managed delivery</h3><p style="color:var(--color-text-2);line-height:1.75;font-size:.92rem">A layout structure that can handle retainers, multi-phase engagements, implementation teams, and steering cadence.</p></div></div></div></section>
-  <section id="sectors" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="sectors-heading"><div class="chr-container"><div style="display:flex;justify-content:space-between;gap:20px;align-items:end;flex-wrap:wrap;margin-bottom:40px" data-reveal><div><div class="chr-heading-sm">Sector coverage</div><h2 id="sectors-heading" class="chr-heading-xl">One layout, multiple enterprise verticals.</h2></div><p style="max-width:520px;color:var(--color-text-2);line-height:1.75">This is the heavier business counterpart to lighter portfolio and product pages. Use it for procurement-friendly narratives and industry specialization.</p></div><div class="sector-grid" data-reveal-group><div class="sector-card"><h3 style="font-size:1rem;margin-bottom:10px">Financial Services</h3><p style="color:var(--color-text-2);line-height:1.7;font-size:.9rem">Risk, growth, compliance modernization, and customer operations for regulated businesses.</p></div><div class="sector-card"><h3 style="font-size:1rem;margin-bottom:10px">Manufacturing</h3><p style="color:var(--color-text-2);line-height:1.7;font-size:.9rem">Plant networks, planning, supply operations, and frontline performance programs.</p></div><div class="sector-card"><h3 style="font-size:1rem;margin-bottom:10px">Public Sector</h3><p style="color:var(--color-text-2);line-height:1.7;font-size:.9rem">Large-scale delivery, citizen services, and operating discipline across complex stakeholders.</p></div></div></div></section>
-  <section id="cases" class="chr-section" aria-labelledby="cases-heading"><div class="chr-container"><div style="text-align:center;max-width:720px;margin:0 auto 48px" data-reveal><div class="chr-heading-sm">Case structure</div><h2 id="cases-heading" class="chr-heading-xl">Use case-study blocks that can carry real enterprise detail.</h2></div><div class="case-grid" data-reveal-group><div class="case-card"><div style="font-size:.78rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Global insurer</div><h3 style="font-size:1.08rem;margin-bottom:10px">Claims operations redesign</h3><p style="color:var(--color-text-2);line-height:1.75;font-size:.9rem;margin-bottom:16px">Illustrates room for problem framing, intervention scope, operating metrics, and measurable outcomes.</p><a href="#" class="chr-btn-ghost" style="padding:12px 18px;font-size:.86rem" data-demo-message="Case-study details are demo-only">Open case</a></div><div class="case-card"><div style="font-size:.78rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Industrial group</div><h3 style="font-size:1.08rem;margin-bottom:10px">Network planning office</h3><p style="color:var(--color-text-2);line-height:1.75;font-size:.9rem;margin-bottom:16px">A heavier layout that supports executive summaries and structured implementation storytelling.</p><a href="#" class="chr-btn-ghost" style="padding:12px 18px;font-size:.86rem" data-demo-message="Case-study details are demo-only">Open case</a></div><div class="case-card"><div style="font-size:.78rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Services platform</div><h3 style="font-size:1.08rem;margin-bottom:10px">Commercial operating model</h3><p style="color:var(--color-text-2);line-height:1.75;font-size:.9rem;margin-bottom:16px">Balances trust signals, transformation messaging, and long-form enterprise credibility blocks.</p><a href="#" class="chr-btn-ghost" style="padding:12px 18px;font-size:.86rem" data-demo-message="Case-study details are demo-only">Open case</a></div></div></div></section>
-  <section class="chr-section-sm" style="background:var(--color-bg-2)" aria-labelledby="timeline-heading"><div class="chr-container"><div style="margin-bottom:34px" data-reveal><div class="chr-heading-sm">Program flow</div><h2 id="timeline-heading" class="chr-heading-xl">A delivery timeline that reads like a serious engagement.</h2></div><div class="timeline" data-reveal-group><div class="timeline-card"><div class="chr-step-number">01</div><h3 style="margin:12px 0 10px;font-size:1rem">Diagnostic</h3><p style="color:var(--color-text-2);font-size:.9rem;line-height:1.7">Assess current state, stakeholder map, and performance baseline.</p></div><div class="timeline-card"><div class="chr-step-number">02</div><h3 style="margin:12px 0 10px;font-size:1rem">Design</h3><p style="color:var(--color-text-2);font-size:.9rem;line-height:1.7">Translate priorities into workstreams, controls, and target decisions.</p></div><div class="timeline-card"><div class="chr-step-number">03</div><h3 style="margin:12px 0 10px;font-size:1rem">Execute</h3><p style="color:var(--color-text-2);font-size:.9rem;line-height:1.7">Run the PMO, unblock delivery, and track enterprise value realization.</p></div><div class="timeline-card"><div class="chr-step-number">04</div><h3 style="margin:12px 0 10px;font-size:1rem">Embed</h3><p style="color:var(--color-text-2);font-size:.9rem;line-height:1.7">Leave behind governance, capability transfer, and scalable operating rhythm.</p></div></div></div></section>
-  <section id="contact" class="chr-section" aria-labelledby="contact-heading"><div class="chr-container"><div class="enterprise-cta" data-reveal><div><div class="chr-heading-sm">Contact block</div><h2 id="contact-heading" class="chr-heading-xl" style="margin-bottom:12px">Request a capability briefing.</h2><p style="color:var(--color-text-2);line-height:1.8;max-width:620px;margin-bottom:1.4rem">This form stays demo-safe in source, but the structure is ready for enterprise inquiry flows, qualification, and account-based follow-up.</p><div style="display:flex;gap:20px;flex-wrap:wrap"><div><div style="font-size:.76rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em">HQ</div><div style="font-weight:700;margin-top:4px">London · Dubai · Singapore</div></div><div><div style="font-size:.76rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em">Contact</div><div style="font-weight:700;margin-top:4px">advisory@chronos.demo</div></div></div></div><form class="enterprise-form" aria-label="Enterprise inquiry form" data-demo-message="Enterprise inquiry submitted. Connect this form to your own workflow."><input type="text" placeholder="Full name" autocomplete="name"><input type="email" placeholder="Work email" autocomplete="email"><input type="text" placeholder="Company" autocomplete="organization"><select aria-label="Inquiry type"><option>Transformation program</option><option>Advisory mandate</option><option>Managed delivery</option></select><textarea placeholder="Describe the scope, stakeholders, and timeline."></textarea><button type="submit" class="chr-btn-primary">Submit inquiry</button></form></div></div></section>
+  </div>
 </main>
-<footer class="chr-footer"><div class="chr-container chr-footer-grid"><div><div class="chr-logo" style="margin-bottom:14px">CHRONOS</div><p style="color:var(--color-text-2);line-height:1.7;max-width:420px">Layout 11 adds a heavier business website pattern to the source set for enterprise services, consulting, and operations-led firms.</p></div><div><h3 class="chr-footer-heading">Related</h3><ul class="chr-footer-list"><li><a href="layout-05.html">Enterprise dashboard</a></li><li><a href="layout-01.html">Modern SaaS landing</a></li></ul></div><div><h3 class="chr-footer-heading">Browse</h3><ul class="chr-footer-list"><li><a href="index.html">All layouts</a></li><li><a href="layout-12.html">Medical layout</a></li></ul></div></div></footer>
+
+<footer class="chr-footer">
+  <div class="chr-container chr-footer-grid">
+    <div><div class="chr-logo" style="margin-bottom:14px">CHRONOS ADVISORY</div><p style="color:var(--color-text-2);line-height:1.7;max-width:420px">Layout 11 now uses a denser enterprise report structure instead of repeating the product landing cadence.</p></div>
+    <div><h3 class="chr-footer-heading">Related</h3><ul class="chr-footer-list"><li><a href="layout-05.html">Dashboard</a></li><li><a href="layout-12.html">Medical</a></li></ul></div>
+    <div><h3 class="chr-footer-heading">Browse</h3><ul class="chr-footer-list"><li><a href="index.html">All layouts</a></li><li><a href="layout-01.html">SaaS landing</a></li></ul></div>
+  </div>
+</footer>
+
 <div id="chr-customizer-mount"></div>
 </body>
 </html>

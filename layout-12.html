@@ -3,37 +3,198 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Chronos Layout 12 - Medical and healthcare website with appointment flow, departments, clinicians, and patient guidance.">
+  <meta name="description" content="Chronos Layout 12 - Medical and healthcare website with triage rail, departments, doctors, and appointment flow.">
   <title>Chronos | Medical Care</title>
   <script>(function(){try{var p=JSON.parse(localStorage.getItem('chronos-prefs'));if(p&&p.era)document.documentElement.setAttribute('data-era',p.era)}catch(e){}})()</script>
   <script type="module" src="/src/main.js"></script>
   <style>
     [x-cloak]{display:none!important}
-    body{background:var(--color-bg);color:var(--color-text);overflow-x:hidden}
-    .care-hero{padding:120px 0 80px;background:linear-gradient(180deg,color-mix(in srgb,var(--color-primary) 6%,transparent),var(--color-bg))}
-    .care-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:34px;align-items:start}
-    .care-panel,.dept-card,.doctor-card,.path-card,.metric-card{background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)}
-    .care-panel,.dept-card,.doctor-card,.path-card,.metric-card{padding:24px}
-    .dept-grid,.doctor-grid,.path-grid,.metrics-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-    .appt-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .appt-form input,.appt-form select,.appt-form textarea{width:100%;padding:14px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2);color:var(--color-text);font:inherit;outline:none}
-    .appt-form textarea,.appt-form button{grid-column:1 / -1}
-    .appt-form textarea{min-height:110px;resize:vertical}
-    @media(max-width:1080px){.care-grid{grid-template-columns:1fr}.dept-grid,.doctor-grid,.path-grid,.metrics-grid{grid-template-columns:1fr 1fr}}
-    @media(max-width:720px){.dept-grid,.doctor-grid,.path-grid,.metrics-grid,.appt-form{grid-template-columns:1fr}}
+    body{background:var(--color-bg);color:var(--color-text);--reveal-distance:18px;--group-reveal-distance:14px}
+    .care-strip{padding:10px 0;background:var(--color-bg-2);border-bottom:1px solid var(--color-border);font-size:0.78rem;color:var(--color-text-2)}
+    .care-intro{padding:80px 0 40px;border-bottom:1px solid var(--color-border)}
+    .care-shell{display:grid;grid-template-columns:minmax(250px,.55fr) minmax(0,1.45fr);gap:32px;align-items:start}
+    .care-rail{position:sticky;top:100px;display:grid;gap:18px}
+    .care-panel,.care-block,.doctor-row,.dept-row,.path-step{background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md)}
+    .care-panel,.care-block,.dept-row,.path-step{padding:22px}
+    .doctor-row{padding:18px 22px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center}
+    .doctor-avatar{width:56px;height:56px;border-radius:18px;background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));opacity:.18}
+    .dept-stack,.path-grid{display:grid;gap:18px}
+    .care-grid-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .care-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .care-form input,.care-form select,.care-form textarea{width:100%;padding:14px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2);color:var(--color-text);font:inherit;outline:none}
+    .care-form textarea,.care-form button{grid-column:1 / -1}
+    .care-form textarea{min-height:120px;resize:vertical}
+    @media(max-width:1040px){.care-shell,.care-grid-two{grid-template-columns:1fr}.care-rail{position:static}}
+    @media(max-width:720px){.care-form,.doctor-row{grid-template-columns:1fr}.doctor-row{justify-items:start}}
   </style>
 </head>
 <body>
 <a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
-<header class="chr-nav" role="banner"><div class="chr-container chr-nav-inner"><a href="index.html" class="chr-logo">CHRONOS CARE</a><nav aria-label="Medical navigation"><ul class="chr-nav-links"><li><a href="#departments">Departments</a></li><li><a href="#doctors">Doctors</a></li><li><a href="#pathway">Patient journey</a></li><li><a href="#appointment">Appointment</a></li></ul></nav><div style="display:flex;align-items:center;gap:12px"><a href="index.html" class="chr-btn-ghost" style="padding:10px 18px;font-size:.85rem">All layouts</a><a href="#appointment" class="chr-btn-primary" style="padding:10px 22px;font-size:.85rem">Book visit</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header>
+<div class="care-strip">
+  <div class="chr-container" style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
+    <span>24/7 urgent line | Diagnostics | Specialist consultations</span>
+    <span>Layout 12 | Medical website pattern</span>
+  </div>
+</div>
+<header class="chr-nav" role="banner">
+  <div class="chr-container chr-nav-inner">
+    <a href="index.html" class="chr-logo">CHRONOS CARE</a>
+    <nav aria-label="Medical navigation"><ul class="chr-nav-links"><li><a href="#departments">Departments</a></li><li><a href="#doctors">Doctors</a></li><li><a href="#pathway">Patient journey</a></li><li><a href="#appointment">Appointment</a></li></ul></nav>
+    <div style="display:flex;align-items:center;gap:12px"><a href="index.html" class="chr-btn-ghost" style="padding:10px 18px;font-size:.85rem">All layouts</a><a href="#appointment" class="chr-btn-primary" style="padding:10px 22px;font-size:.85rem">Book visit</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+  </div>
+</header>
 <main id="main-content">
-  <section class="care-hero" aria-labelledby="care-heading"><div class="chr-container care-grid"><div data-reveal><div class="chr-badge" style="margin-bottom:1.2rem">Layout 12 · Medical Website</div><h1 id="care-heading" class="chr-heading-xl" style="margin-bottom:1.3rem">A calmer, trust-led structure for clinics, hospitals, and care networks.</h1><p style="font-size:1.03rem;color:var(--color-text-2);line-height:1.85;max-width:620px;margin-bottom:1.8rem">Layout 12 adds a healthcare-specific pattern to Chronos with room for specialties, clinician profiles, patient guidance, and appointment conversion without feeling like a generic product site.</p><div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:2rem"><a href="#departments" class="chr-btn-primary" style="padding:16px 30px">Explore services</a><a href="#appointment" class="chr-btn-ghost" style="padding:16px 26px">Open appointment form</a></div><div class="metrics-grid" data-reveal-group><div class="metric-card"><div style="font-size:1.8rem;font-weight:800;color:var(--color-primary)">24/7</div><div style="font-size:.82rem;color:var(--color-text-3)">Urgent care coverage</div></div><div class="metric-card"><div style="font-size:1.8rem;font-weight:800;color:var(--color-primary)" data-count="42">0</div><div style="font-size:.82rem;color:var(--color-text-3)">Specialists</div></div><div class="metric-card"><div style="font-size:1.8rem;font-weight:800;color:var(--color-primary)">4.9/5</div><div style="font-size:.82rem;color:var(--color-text-3)">Patient rating</div></div></div></div><div class="care-panel" data-reveal="right"><div style="font-size:.78rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Fast access panel</div><h2 style="font-size:1.2rem;margin-bottom:14px">Need care today?</h2><div style="display:grid;gap:12px"><div style="padding:14px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2)"><strong>Emergency:</strong> 24/7 acute response and urgent triage.</div><div style="padding:14px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2)"><strong>Appointments:</strong> same-week specialist consultation windows.</div><div style="padding:14px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2)"><strong>Location:</strong> city campus, diagnostics center, day surgery unit.</div></div></div></div></section>
-  <section id="departments" class="chr-section" aria-labelledby="departments-heading"><div class="chr-container"><div style="text-align:center;max-width:700px;margin:0 auto 48px" data-reveal><div class="chr-heading-sm">Clinical departments</div><h2 id="departments-heading" class="chr-heading-xl">Room for specialties, not just a simple feature grid.</h2></div><div class="dept-grid" data-reveal-group><div class="dept-card"><h3 style="font-size:1.05rem;margin-bottom:10px">Cardiology</h3><p style="color:var(--color-text-2);line-height:1.75;font-size:.9rem">Consultation, diagnostics, follow-up planning, and preventive care programs.</p></div><div class="dept-card"><h3 style="font-size:1.05rem;margin-bottom:10px">Orthopedics</h3><p style="color:var(--color-text-2);line-height:1.75;font-size:.9rem">Joint care, trauma assessment, rehabilitation pathways, and sports medicine.</p></div><div class="dept-card"><h3 style="font-size:1.05rem;margin-bottom:10px">Women’s Health</h3><p style="color:var(--color-text-2);line-height:1.75;font-size:.9rem">Preventive care, specialist consultation, and continuity through diagnosis and treatment.</p></div></div></div></section>
-  <section id="doctors" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="doctors-heading"><div class="chr-container"><div style="display:flex;justify-content:space-between;gap:20px;align-items:end;flex-wrap:wrap;margin-bottom:38px" data-reveal><div><div class="chr-heading-sm">Care team</div><h2 id="doctors-heading" class="chr-heading-xl">Clinician profiles with a more credible healthcare tone.</h2></div><p style="max-width:520px;color:var(--color-text-2);line-height:1.75">This page is designed to hold doctor bios, credentials, specialties, and patient-oriented trust information without looking promotional.</p></div><div class="doctor-grid" data-reveal-group><div class="doctor-card"><div style="width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));opacity:.16;margin-bottom:16px"></div><h3 style="font-size:1.02rem;margin-bottom:6px">Dr. Lina Rahman</h3><p style="font-size:.82rem;color:var(--color-text-3);margin-bottom:10px">Consultant Cardiologist</p><p style="color:var(--color-text-2);line-height:1.7;font-size:.9rem">Non-invasive cardiac diagnostics, long-term monitoring, and preventive health planning.</p></div><div class="doctor-card"><div style="width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));opacity:.16;margin-bottom:16px"></div><h3 style="font-size:1.02rem;margin-bottom:6px">Dr. Omar Sheikh</h3><p style="font-size:.82rem;color:var(--color-text-3);margin-bottom:10px">Orthopedic Surgeon</p><p style="color:var(--color-text-2);line-height:1.7;font-size:.9rem">Joint reconstruction, injury pathways, and collaborative rehabilitation planning.</p></div><div class="doctor-card"><div style="width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));opacity:.16;margin-bottom:16px"></div><h3 style="font-size:1.02rem;margin-bottom:6px">Dr. Sara Mondal</h3><p style="font-size:.82rem;color:var(--color-text-3);margin-bottom:10px">Internal Medicine</p><p style="color:var(--color-text-2);line-height:1.7;font-size:.9rem">Continuity of care for complex adult medicine and coordinated specialist referrals.</p></div></div></div></section>
-  <section id="pathway" class="chr-section-sm" aria-labelledby="pathway-heading"><div class="chr-container"><div style="margin-bottom:34px" data-reveal><div class="chr-heading-sm">Patient journey</div><h2 id="pathway-heading" class="chr-heading-xl">A clearer flow from first contact to follow-up.</h2></div><div class="path-grid" data-reveal-group><div class="path-card"><div class="chr-step-number">01</div><h3 style="margin:12px 0 10px;font-size:1rem">Book</h3><p style="color:var(--color-text-2);font-size:.9rem;line-height:1.7">Choose a department, preferred time, and urgency level.</p></div><div class="path-card"><div class="chr-step-number">02</div><h3 style="margin:12px 0 10px;font-size:1rem">Assess</h3><p style="color:var(--color-text-2);font-size:.9rem;line-height:1.7">Triage, prepare records, and align the right specialist before the visit.</p></div><div class="path-card"><div class="chr-step-number">03</div><h3 style="margin:12px 0 10px;font-size:1rem">Treat</h3><p style="color:var(--color-text-2);font-size:.9rem;line-height:1.7">Consultation, diagnostics, treatment planning, and patient explanation.</p></div></div></div></section>
-  <section id="appointment" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="appointment-heading"><div class="chr-container"><div class="care-panel" data-reveal><div style="max-width:760px;margin-bottom:24px"><div class="chr-heading-sm">Appointment form</div><h2 id="appointment-heading" class="chr-heading-xl" style="margin-bottom:10px">A source-safe scheduling block for medical sites.</h2><p style="color:var(--color-text-2);line-height:1.75">The form remains demo-safe in source, but the structure is set up for appointments, triage notes, and department selection.</p></div><form class="appt-form" aria-label="Medical appointment form" data-demo-message="Medical appointment request submitted. Connect this form to your own booking system."><input type="text" placeholder="Patient name" autocomplete="name"><input type="email" placeholder="Email" autocomplete="email"><select aria-label="Department"><option>Cardiology</option><option>Orthopedics</option><option>Women’s Health</option></select><select aria-label="Visit type"><option>New consultation</option><option>Follow-up visit</option><option>Urgent review</option></select><textarea placeholder="Symptoms, question, or referral note"></textarea><button type="submit" class="chr-btn-primary">Request appointment</button></form></div></div></section>
+  <section class="care-intro" aria-labelledby="care-heading">
+    <div class="chr-container care-shell">
+      <aside class="care-rail" data-reveal="soft">
+        <div class="care-panel">
+          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3);margin-bottom:10px">Patient access</div>
+          <h2 style="font-size:1.2rem;margin-bottom:12px">Need care today?</h2>
+          <div style="display:grid;gap:12px">
+            <div style="padding:14px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2)"><strong>Emergency</strong><div style="font-size:0.84rem;color:var(--color-text-2);margin-top:4px">Acute triage and urgent response.</div></div>
+            <div style="padding:14px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2)"><strong>Appointments</strong><div style="font-size:0.84rem;color:var(--color-text-2);margin-top:4px">Same-week consultation windows.</div></div>
+            <div style="padding:14px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2)"><strong>Results</strong><div style="font-size:0.84rem;color:var(--color-text-2);margin-top:4px">Secure follow-up and review.</div></div>
+          </div>
+        </div>
+        <div class="care-panel">
+          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3);margin-bottom:12px">Trust markers</div>
+          <div style="display:grid;gap:10px">
+            <div style="display:flex;justify-content:space-between;gap:12px"><span>Specialists</span><strong>42</strong></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span>Response desk</span><strong>24/7</strong></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span>Patient rating</span><strong>4.9/5</strong></div>
+          </div>
+        </div>
+      </aside>
+      <div data-reveal="soft">
+        <div class="chr-badge" style="margin-bottom:1rem">Layout 12 | Medical Website</div>
+        <h1 id="care-heading" class="chr-heading-xl" style="margin-bottom:1rem">A calmer, more clinical structure for hospitals, clinics, and care networks.</h1>
+        <p style="font-size:1.02rem;color:var(--color-text-2);line-height:1.85;max-width:720px;margin-bottom:1.5rem">This page is organized like a healthcare website, not a generic product landing page. It has a patient access rail, department directory, doctor listing, care pathway, and appointment block that all behave as real sections.</p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:1.8rem"><a href="#departments" class="chr-btn-primary" style="padding:15px 28px">Explore departments</a><a href="#appointment" class="chr-btn-ghost" style="padding:15px 24px">Open appointment form</a></div>
+        <div class="care-grid-two" data-reveal-group="soft">
+          <div class="care-block">
+            <div style="font-size:0.78rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">Care philosophy</div>
+            <p style="color:var(--color-text-2);line-height:1.8;margin:0">Built for clarity, reassurance, and patient trust. The information density is higher than a normal landing page because medical sites need service access, clinician context, and next steps.</p>
+          </div>
+          <div class="care-block">
+            <div style="font-size:0.78rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">Service mix</div>
+            <p style="color:var(--color-text-2);line-height:1.8;margin:0">Primary care, diagnostics, specialist departments, treatment planning, and follow-up guidance in one source-safe demo structure.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="departments" class="chr-section" aria-labelledby="departments-heading">
+    <div class="chr-container care-shell">
+      <div>
+        <div class="chr-heading-sm">Clinical departments</div>
+        <h2 id="departments-heading" class="chr-heading-xl" style="margin-bottom:14px">A department directory instead of a generic feature grid.</h2>
+        <p style="color:var(--color-text-2);line-height:1.8;max-width:620px">Medical buyers often need room for specialties, referral notes, and service-specific context. This layout uses rows and details rather than generic marketing cards.</p>
+      </div>
+      <div class="dept-stack" data-reveal-group="soft">
+        <article class="dept-row">
+          <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:10px"><h3 style="font-size:1.05rem">Cardiology</h3><span style="font-size:0.8rem;color:var(--color-text-3)">Diagnostics, consultation, prevention</span></div>
+          <p style="color:var(--color-text-2);line-height:1.75;margin:0">Support for preventive screening, specialist review, imaging coordination, and long-term follow-up planning.</p>
+        </article>
+        <article class="dept-row">
+          <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:10px"><h3 style="font-size:1.05rem">Orthopedics</h3><span style="font-size:0.8rem;color:var(--color-text-3)">Trauma, joint care, rehabilitation</span></div>
+          <p style="color:var(--color-text-2);line-height:1.75;margin:0">A structure for injury pathways, surgery detail, recovery planning, and rehabilitation access across one department page.</p>
+        </article>
+        <article class="dept-row">
+          <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:10px"><h3 style="font-size:1.05rem">Women's Health</h3><span style="font-size:0.8rem;color:var(--color-text-3)">Preventive care, specialist support</span></div>
+          <p style="color:var(--color-text-2);line-height:1.75;margin:0">Useful for preventive guidance, appointments, continuity of care, and patient education without overselling the tone.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="doctors" class="chr-section-sm" style="background:var(--color-bg-2);border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border)" aria-labelledby="doctors-heading">
+    <div class="chr-container">
+      <div style="display:flex;justify-content:space-between;gap:20px;align-items:end;flex-wrap:wrap;margin-bottom:30px" data-reveal="soft">
+        <div>
+          <div class="chr-heading-sm">Doctor directory</div>
+          <h2 id="doctors-heading" class="chr-heading-xl">A clinician list with credentials and focus areas.</h2>
+        </div>
+        <p style="max-width:540px;color:var(--color-text-2);line-height:1.8">This section behaves more like a real provider directory than a team marketing block, which is what healthcare buyers actually need.</p>
+      </div>
+      <div style="display:grid;gap:16px" data-reveal-group="soft">
+        <article class="doctor-row">
+          <div class="doctor-avatar"></div>
+          <div>
+            <h3 style="font-size:1.02rem;margin-bottom:4px">Dr. Lina Rahman</h3>
+            <div style="font-size:0.82rem;color:var(--color-text-3);margin-bottom:8px">Consultant Cardiologist</div>
+            <p style="margin:0;color:var(--color-text-2);line-height:1.7;font-size:0.9rem">Non-invasive diagnostics, preventive cardiac planning, and long-term monitoring.</p>
+          </div>
+          <a href="#" class="chr-btn-ghost" style="padding:10px 16px;font-size:0.78rem" data-demo-message="Doctor profile is a demo view">View profile</a>
+        </article>
+        <article class="doctor-row">
+          <div class="doctor-avatar"></div>
+          <div>
+            <h3 style="font-size:1.02rem;margin-bottom:4px">Dr. Omar Sheikh</h3>
+            <div style="font-size:0.82rem;color:var(--color-text-3);margin-bottom:8px">Orthopedic Surgeon</div>
+            <p style="margin:0;color:var(--color-text-2);line-height:1.7;font-size:0.9rem">Joint reconstruction, injury pathways, and rehabilitation-aligned treatment planning.</p>
+          </div>
+          <a href="#" class="chr-btn-ghost" style="padding:10px 16px;font-size:0.78rem" data-demo-message="Doctor profile is a demo view">View profile</a>
+        </article>
+        <article class="doctor-row">
+          <div class="doctor-avatar"></div>
+          <div>
+            <h3 style="font-size:1.02rem;margin-bottom:4px">Dr. Sara Mondal</h3>
+            <div style="font-size:0.82rem;color:var(--color-text-3);margin-bottom:8px">Internal Medicine</div>
+            <p style="margin:0;color:var(--color-text-2);line-height:1.7;font-size:0.9rem">Continuity of care for complex adult medicine and specialist coordination.</p>
+          </div>
+          <a href="#" class="chr-btn-ghost" style="padding:10px 16px;font-size:0.78rem" data-demo-message="Doctor profile is a demo view">View profile</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="pathway" class="chr-section" aria-labelledby="pathway-heading">
+    <div class="chr-container care-shell">
+      <div>
+        <div class="chr-heading-sm">Patient journey</div>
+        <h2 id="pathway-heading" class="chr-heading-xl" style="margin-bottom:14px">A care pathway from first contact to follow-up.</h2>
+        <p style="color:var(--color-text-2);line-height:1.8;max-width:620px">Medical sites need more than a vague process block. This pattern gives space for triage, records, consultation, and post-visit follow-up.</p>
+      </div>
+      <div class="path-grid" data-reveal-group="soft">
+        <div class="path-step"><div class="chr-step-number">01</div><h3 style="margin:12px 0 8px;font-size:1rem">Request</h3><p style="margin:0;color:var(--color-text-2);line-height:1.7;font-size:0.9rem">Choose department, urgency, and preferred time.</p></div>
+        <div class="path-step"><div class="chr-step-number">02</div><h3 style="margin:12px 0 8px;font-size:1rem">Prepare</h3><p style="margin:0;color:var(--color-text-2);line-height:1.7;font-size:0.9rem">Collect records, confirm referral needs, and assign the right clinician.</p></div>
+        <div class="path-step"><div class="chr-step-number">03</div><h3 style="margin:12px 0 8px;font-size:1rem">Treat</h3><p style="margin:0;color:var(--color-text-2);line-height:1.7;font-size:0.9rem">Consultation, diagnostics, explanation, and planning.</p></div>
+        <div class="path-step"><div class="chr-step-number">04</div><h3 style="margin:12px 0 8px;font-size:1rem">Follow up</h3><p style="margin:0;color:var(--color-text-2);line-height:1.7;font-size:0.9rem">Results, patient guidance, and future review scheduling.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="appointment" class="chr-section-sm" style="background:var(--color-bg-2);border-top:1px solid var(--color-border)" aria-labelledby="appointment-heading">
+    <div class="chr-container care-shell">
+      <div>
+        <div class="chr-heading-sm">Appointment desk</div>
+        <h2 id="appointment-heading" class="chr-heading-xl" style="margin-bottom:14px">A source-safe booking form with realistic medical fields.</h2>
+        <p style="color:var(--color-text-2);line-height:1.8;max-width:620px">The form remains demo-safe in source, but the structure is ready for appointments, urgency flags, department selection, and referral notes.</p>
+      </div>
+      <div class="care-panel" data-reveal="soft">
+        <form class="care-form" aria-label="Medical appointment form" data-demo-message="Medical appointment request submitted. Connect this form to your own booking system.">
+          <input type="text" placeholder="Patient name" autocomplete="name">
+          <input type="email" placeholder="Email" autocomplete="email">
+          <select aria-label="Department"><option>Cardiology</option><option>Orthopedics</option><option>Women's Health</option></select>
+          <select aria-label="Urgency"><option>Routine consultation</option><option>Follow-up visit</option><option>Priority review</option></select>
+          <textarea placeholder="Symptoms, question, or referral note"></textarea>
+          <button type="submit" class="chr-btn-primary">Request appointment</button>
+        </form>
+      </div>
+    </div>
+  </section>
 </main>
-<footer class="chr-footer"><div class="chr-container chr-footer-grid"><div><div class="chr-logo" style="margin-bottom:14px">CHRONOS CARE</div><p style="color:var(--color-text-2);line-height:1.7;max-width:420px">Layout 12 adds a medical website pattern focused on care pathways, clinicians, and appointment flows.</p></div><div><h3 class="chr-footer-heading">Related</h3><ul class="chr-footer-list"><li><a href="layout-13.html">Education layout</a></li><li><a href="layout-11.html">Enterprise layout</a></li></ul></div><div><h3 class="chr-footer-heading">Browse</h3><ul class="chr-footer-list"><li><a href="index.html">All layouts</a></li><li><a href="layout-01.html">Modern landing</a></li></ul></div></div></footer>
+<footer class="chr-footer">
+  <div class="chr-container chr-footer-grid">
+    <div>
+      <div class="chr-logo" style="margin-bottom:14px">CHRONOS CARE</div>
+      <p style="color:var(--color-text-2);line-height:1.7;max-width:420px">Layout 12 is now structured as a medical website with a patient access rail, department rows, provider directory, and real appointment flow.</p>
+    </div>
+    <div><h3 class="chr-footer-heading">Related</h3><ul class="chr-footer-list"><li><a href="layout-13.html">Education layout</a></li><li><a href="layout-11.html">Enterprise layout</a></li></ul></div>
+    <div><h3 class="chr-footer-heading">Browse</h3><ul class="chr-footer-list"><li><a href="index.html">All layouts</a></li><li><a href="layout-01.html">Modern landing</a></li></ul></div>
+  </div>
+</footer>
 <div id="chr-customizer-mount"></div>
 </body>
 </html>

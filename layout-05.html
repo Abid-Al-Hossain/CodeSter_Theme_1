@@ -9,7 +9,7 @@
   <script type="module" src="/src/main.js"></script>
   <style>
     [x-cloak]{display:none!important}
-    body{display:flex;min-height:100vh;flex-direction:row}
+    body{display:flex;min-height:100vh;flex-direction:row;--reveal-distance:34px;--group-reveal-distance:26px}
     .db-sidebar{width:256px;flex-shrink:0;background:var(--color-primary);color:#fff;display:flex;flex-direction:column;padding:24px 0;position:sticky;top:0;height:100vh;overflow-y:auto;transition:width var(--dur) var(--ease)}
     .db-logo{padding:0 24px 24px;font-family:var(--font-accent);font-weight:800;font-size:1.2rem;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:16px}
     .db-nav-label{padding:16px 24px 8px;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.15em;opacity:0.5}
@@ -28,6 +28,10 @@
     .panel{background:var(--color-bg);border:var(--border-w) solid var(--color-border);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)}
     .panel-header{padding:20px 24px;border-bottom:var(--border-w) solid var(--color-border);display:flex;justify-content:space-between;align-items:center}
     .panel-body{padding:0}
+    .analytics-grid,.users-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-bottom:24px}
+    .user-row{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:16px 0;border-bottom:var(--border-w) solid var(--color-bg-2)}
+    .user-row:last-child{border-bottom:none}
+    .user-avatar{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));opacity:0.22}
     table{width:100%;border-collapse:collapse}
     th{padding:12px 16px;text-align:left;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-text-3);border-bottom:var(--border-w) solid var(--color-bg-2)}
     td{padding:14px 16px;font-size:0.88rem;border-bottom:var(--border-w) solid var(--color-bg-2)}
@@ -38,12 +42,12 @@
     .badge-blue{background:rgba(59,130,246,0.1);color:#3b82f6}
     .badge-red{background:rgba(239,68,68,0.1);color:#ef4444}
     .badge-yellow{background:rgba(245,158,11,0.1);color:#d97706}
-    @media(max-width:768px){body{flex-direction:column}.db-sidebar{width:100%;height:auto;position:relative;padding:16px 0}.db-topbar{padding:16px 20px;height:auto;align-items:flex-start;gap:16px;flex-direction:column}.db-content{padding:20px}.stat-grid{grid-template-columns:1fr 1fr}table{display:block;overflow-x:auto;white-space:nowrap}}
-    @media(max-width:520px){.stat-grid{grid-template-columns:1fr}}
+    @media(max-width:768px){body{flex-direction:column}.db-sidebar{width:100%;height:auto;position:relative;padding:16px 0}.db-topbar{padding:16px 20px;height:auto;align-items:flex-start;gap:16px;flex-direction:column}.db-content{padding:20px}.stat-grid,.analytics-grid,.users-grid{grid-template-columns:1fr 1fr}table{display:block;overflow-x:auto;white-space:nowrap}}
+    @media(max-width:520px){.stat-grid,.analytics-grid,.users-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-<nav class="db-sidebar" role="navigation" aria-label="Dashboard navigation">
+<nav class="db-sidebar" role="navigation" aria-label="Dashboard navigation" data-reveal="left">
   <div class="db-logo">CHRONOS</div>
   <div class="db-nav-label">Main</div>
   <a href="#overview" class="db-nav-item active">Overview</a>
@@ -82,7 +86,7 @@
   <main class="db-content" id="main-content">
     <section id="overview" aria-labelledby="overview-h">
       <h2 id="overview-h" style="font-size:1rem;font-weight:700;margin-bottom:20px;color:var(--color-text-2)">Overview - demo workspace snapshot</h2>
-      <div class="stat-grid" data-reveal-group>
+      <div class="stat-grid" data-reveal-group="right">
         <div class="stat-card">
           <div class="stat-label">Total Revenue</div>
           <div class="stat-val" data-count="124500" data-prefix="$">$0</div>
@@ -105,7 +109,7 @@
         </div>
       </div>
 
-      <div class="panel" style="margin-bottom:24px" data-reveal>
+      <div class="panel" style="margin-bottom:24px" data-reveal="right">
         <div class="panel-header">
           <span style="font-weight:700;font-size:0.9rem">Revenue Trend</span>
           <select style="font-size:0.78rem;padding:4px 8px;border:var(--border-w) solid var(--color-border);border-radius:var(--radius-sm);background:var(--color-bg);color:var(--color-text)">
@@ -128,7 +132,54 @@
       </div>
     </section>
 
-    <section id="transactions" aria-labelledby="tx-h" data-reveal>
+    <section id="analytics" aria-labelledby="analytics-h" style="margin-top:32px">
+      <h2 id="analytics-h" style="font-size:1rem;font-weight:700;margin-bottom:20px;color:var(--color-text-2)">Analytics - live dashboard patterns for growth, retention, and acquisition</h2>
+      <div class="analytics-grid" data-reveal-group="right">
+        <div class="panel">
+          <div class="panel-header">
+            <span style="font-weight:700;font-size:0.9rem">Acquisition Mix</span>
+            <span style="font-size:0.76rem;color:var(--color-text-3)">This quarter</span>
+          </div>
+          <div style="padding:24px">
+            <div style="display:grid;gap:14px">
+              <div>
+                <div style="display:flex;justify-content:space-between;gap:12px;font-size:0.82rem;margin-bottom:6px"><span>Organic search</span><span style="color:var(--color-text-3)">38%</span></div>
+                <div style="height:10px;background:var(--color-bg-2);border-radius:999px;overflow:hidden"><div style="width:38%;height:100%;background:var(--color-primary)"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;gap:12px;font-size:0.82rem;margin-bottom:6px"><span>Direct</span><span style="color:var(--color-text-3)">26%</span></div>
+                <div style="height:10px;background:var(--color-bg-2);border-radius:999px;overflow:hidden"><div style="width:26%;height:100%;background:var(--color-secondary)"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;gap:12px;font-size:0.82rem;margin-bottom:6px"><span>Referral</span><span style="color:var(--color-text-3)">21%</span></div>
+                <div style="height:10px;background:var(--color-bg-2);border-radius:999px;overflow:hidden"><div style="width:21%;height:100%;background:var(--color-accent)"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;gap:12px;font-size:0.82rem;margin-bottom:6px"><span>Paid campaigns</span><span style="color:var(--color-text-3)">15%</span></div>
+                <div style="height:10px;background:var(--color-bg-2);border-radius:999px;overflow:hidden"><div style="width:15%;height:100%;background:color-mix(in srgb,var(--color-primary) 65%, var(--color-secondary))"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <span style="font-weight:700;font-size:0.9rem">Retention Pulse</span>
+            <span style="font-size:0.76rem;color:var(--color-text-3)">Weekly active cohort</span>
+          </div>
+          <div style="padding:24px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:flex-end;height:190px">
+            <div style="height:62%;background:var(--color-bg-2);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+            <div style="height:71%;background:var(--color-bg-2);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+            <div style="height:68%;background:var(--color-bg-2);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+            <div style="height:77%;background:var(--color-bg-2);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+            <div style="height:84%;background:var(--color-bg-2);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+            <div style="height:88%;background:linear-gradient(to top,var(--color-secondary),color-mix(in srgb,var(--color-secondary) 15%,transparent));border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+            <div style="height:100%;background:linear-gradient(to top,var(--color-primary),color-mix(in srgb,var(--color-primary) 15%,transparent));border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="transactions" aria-labelledby="tx-h" data-reveal="right">
       <div class="panel">
         <div class="panel-header">
           <span style="font-weight:700;font-size:0.9rem">Recent Transactions</span>
@@ -147,6 +198,45 @@
               <tr><td><div style="font-weight:600">Retro Runner</div><div style="font-size:0.75rem;color:var(--color-text-3)">retro@example.com</div></td><td style="color:var(--color-text-2)">Sep 29, 2026</td><td style="font-weight:700">$79.00</td><td>Retro</td><td><span class="badge badge-yellow">Pending</span></td></tr>
             </tbody>
           </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="users" aria-labelledby="users-h" style="margin-top:32px" data-reveal="right">
+      <div class="panel">
+        <div class="panel-header">
+          <span id="users-h" style="font-weight:700;font-size:0.9rem">Users - active accounts, teams, and owner visibility</span>
+          <a href="#" class="chr-btn-ghost" style="font-size:0.78rem;padding:6px 16px" data-demo-message="User export is a demo action">Export users</a>
+        </div>
+        <div style="padding:24px">
+          <div class="users-grid">
+            <div>
+              <div class="user-row">
+                <div class="user-avatar"></div>
+                <div><div style="font-weight:700">Maya Rahman</div><div style="font-size:0.78rem;color:var(--color-text-3)">Product owner</div></div>
+                <span class="badge badge-green">Online</span>
+              </div>
+              <div class="user-row">
+                <div class="user-avatar"></div>
+                <div><div style="font-weight:700">Tariq Morshed</div><div style="font-size:0.78rem;color:var(--color-text-3)">Growth analyst</div></div>
+                <span class="badge badge-blue">Reviewing</span>
+              </div>
+              <div class="user-row">
+                <div class="user-avatar"></div>
+                <div><div style="font-weight:700">Lina Chowdhury</div><div style="font-size:0.78rem;color:var(--color-text-3)">Finance admin</div></div>
+                <span class="badge badge-yellow">Idle</span>
+              </div>
+            </div>
+            <div style="padding:20px;border:var(--border-w) solid var(--color-bg-2);border-radius:var(--radius-md);background:var(--color-bg-2)">
+              <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3);margin-bottom:14px">Access summary</div>
+              <div style="display:grid;gap:12px">
+                <div style="display:flex;justify-content:space-between;gap:12px"><span>Workspace members</span><strong>128</strong></div>
+                <div style="display:flex;justify-content:space-between;gap:12px"><span>Admins</span><strong>9</strong></div>
+                <div style="display:flex;justify-content:space-between;gap:12px"><span>Pending invites</span><strong>14</strong></div>
+                <div style="display:flex;justify-content:space-between;gap:12px"><span>2FA enabled</span><strong>92%</strong></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

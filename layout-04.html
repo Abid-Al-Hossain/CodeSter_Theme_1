@@ -9,7 +9,7 @@
   <script type="module" src="/src/main.js"></script>
   <style>
     [x-cloak]{display:none!important}
-    body{background:var(--color-bg);color:var(--color-text)}
+    body{background:var(--color-bg);color:var(--color-text);--reveal-distance:14px;--group-reveal-distance:12px}
     .ms-container{width:100%;max-width:900px;margin:0 auto;padding:0 1.5rem}
     .ms-rule{height:1px;background:linear-gradient(to right,transparent,var(--color-border),transparent)}
     .ms-ornament{text-align:center;font-size:1rem;letter-spacing:.28em;color:var(--color-primary)}
@@ -44,7 +44,7 @@
   <section id="chapter-1" class="chr-section" aria-labelledby="preface-heading">
     <div class="ms-container">
       <div class="ms-rule"></div>
-      <div style="text-align:center;padding:56px 0" data-reveal>
+      <div style="text-align:center;padding:56px 0" data-reveal="soft">
         <div style="font-size:.74rem;text-transform:uppercase;letter-spacing:.28em;color:var(--color-text-3)">Chapter I</div>
         <h1 id="preface-heading" style="font-size:clamp(2.4rem,5vw,4rem);font-style:italic;margin:12px 0 20px">A manuscript for a multi-era interface system</h1>
         <p style="max-width:700px;margin:0 auto;color:var(--color-text-2);line-height:1.9">
@@ -57,7 +57,7 @@
 
   <section id="chapter-2" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="eras-heading">
     <div class="ms-container">
-      <div data-reveal>
+      <div data-reveal="soft">
         <div style="text-align:center;margin-bottom:48px">
           <div style="font-size:.74rem;text-transform:uppercase;letter-spacing:.28em;color:var(--color-text-3)">Chapter II</div>
           <h2 id="eras-heading" style="font-size:2.2rem;font-style:italic;margin-top:8px">The Twelve Eras Defined</h2>
@@ -79,7 +79,7 @@
 
   <section id="chapter-3" class="chr-section" aria-labelledby="notes-heading">
     <div class="ms-container">
-      <div data-reveal>
+      <div data-reveal="soft">
         <div style="text-align:center;margin-bottom:48px">
           <div style="font-size:.74rem;text-transform:uppercase;letter-spacing:.28em;color:var(--color-text-3)">Chapter III</div>
           <h2 id="notes-heading" style="font-size:2.2rem;font-style:italic;margin-top:8px">Technical marginalia</h2>
@@ -87,7 +87,7 @@
         <div class="ms-content">
           <p>This chapter records the implementation notes that matter in the current finalization phase.</p>
         </div>
-        <div class="note-grid" data-reveal-group>
+        <div class="note-grid" data-reveal-group="soft">
           <div class="note-card">
             <h3 style="font-size:1rem;margin-bottom:8px;font-style:italic">I. The token system</h3>
             <p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7">All design tokens live as CSS custom properties on the root. Eras override the token set through the `data-era` attribute.</p>
@@ -110,7 +110,7 @@
   </section>
 
   <section class="chr-section-sm" style="background:var(--color-bg-2)" aria-labelledby="closing-heading">
-    <div class="ms-container" style="text-align:center" data-reveal>
+    <div class="ms-container" style="text-align:center" data-reveal="soft">
       <div class="ms-ornament">CHRONOS</div>
       <h2 id="closing-heading" style="font-size:1.8rem;font-style:italic;margin-bottom:1rem">Open the full Chronos compendium</h2>
       <p style="color:var(--color-text-2);margin-bottom:2rem">All 15 layouts. All 12 eras. One shared customization system across the source product.</p>

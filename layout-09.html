@@ -9,7 +9,7 @@
   <script type="module" src="/src/main.js"></script>
   <style>
     [x-cloak]{display:none!important}
-    body{background:var(--color-bg);color:var(--color-text);overflow-x:hidden}
+    body{background:var(--color-bg);color:var(--color-text);overflow-x:hidden;--reveal-distance:56px;--group-reveal-distance:44px}
     .neon-box{border:1px solid var(--color-primary);box-shadow:0 0 0 1px var(--color-primary),inset 0 0 20px color-mix(in srgb,var(--color-primary) 5%,transparent)}
     .glitch-wrap{position:relative;display:inline-block}
     .glitch-clone{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
@@ -17,12 +17,12 @@
     .glitch-wrap:hover .glitch-clone:last-child{color:var(--color-secondary);animation:glitch-b .4s steps(3) infinite;clip-path:polygon(0 65%,100% 65%,100% 85%,0 85%);transform:translateX(3px)}
     @keyframes glitch-a{0%,100%{transform:translateX(-3px)}50%{transform:translateX(3px)}}
     @keyframes glitch-b{0%,100%{transform:translateX(3px)}50%{transform:translateX(-3px)}}
-    .service-block{border:1px solid var(--color-border);padding:32px;position:relative;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+    .service-block{border:1px solid var(--color-border);padding:32px;position:relative;overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .25s var(--ease)}
     .service-block::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,color-mix(in srgb,var(--color-primary) 6%,transparent),transparent);opacity:0;transition:opacity .3s}
-    .service-block:hover{border-color:var(--color-primary);box-shadow:0 0 20px color-mix(in srgb,var(--color-primary) 16%,transparent)}
+    .service-block:hover{border-color:var(--color-primary);box-shadow:0 0 20px color-mix(in srgb,var(--color-primary) 16%,transparent);transform:translateX(10px) skewX(-2deg)}
     .service-block:hover::before{opacity:1}
-    .work-item{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;padding:24px;border-bottom:1px solid var(--color-border);transition:background .2s,padding .3s var(--ease);cursor:pointer}
-    .work-item:hover{background:color-mix(in srgb,var(--color-primary) 3%,transparent);padding-left:40px}
+    .work-item{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;padding:24px;border-bottom:1px solid var(--color-border);transition:background .2s,padding .3s var(--ease),transform .25s var(--ease);cursor:pointer}
+    .work-item:hover{background:color-mix(in srgb,var(--color-primary) 3%,transparent);padding-left:40px;transform:translateX(8px)}
     .work-num{font-family:var(--font-mono);font-size:.75rem;color:var(--color-text-3);min-width:32px}
     .work-arrow{color:var(--color-primary);opacity:0;transform:translateX(-10px);transition:all .2s}
     .work-item:hover .work-arrow{opacity:1;transform:translateX(0)}
@@ -61,7 +61,7 @@
   <section id="hero" style="min-height:90vh;display:flex;align-items:center;padding:100px 0;position:relative;overflow:hidden" aria-labelledby="cyber-heading">
     <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,color-mix(in srgb,var(--color-primary) 3%,transparent) 2px,color-mix(in srgb,var(--color-primary) 3%,transparent) 4px);pointer-events:none" aria-hidden="true"></div>
     <div class="chr-container" style="position:relative;z-index:2">
-      <div data-reveal>
+      <div data-reveal="left">
         <div style="font-family:var(--font-mono);font-size:.75rem;color:var(--color-primary);margin-bottom:24px;letter-spacing:.1em">&gt; CHRONOS agency mode online...</div>
         <h1 id="cyber-heading" style="font-size:clamp(3.2rem,12vw,8.5rem);font-weight:900;text-transform:uppercase;line-height:.85;margin-bottom:32px">
           <span class="glitch-wrap">NEURAL<span class="glitch-clone" aria-hidden="true">NEURAL</span><span class="glitch-clone" aria-hidden="true">NEURAL</span></span>
@@ -89,11 +89,11 @@
 
   <section id="work" class="chr-section-sm" aria-labelledby="work-heading">
     <div class="chr-container">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--color-border);gap:16px;flex-wrap:wrap" data-reveal>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--color-border);gap:16px;flex-wrap:wrap" data-reveal="left">
         <h2 id="work-heading" style="font-family:var(--font-accent);font-size:1.4rem;font-weight:900;text-transform:uppercase">Selected_Work</h2>
         <span style="font-family:var(--font-mono);font-size:.8rem;color:var(--color-text-3)">12 reference projects / 3 shown</span>
       </div>
-      <div data-reveal-group>
+      <div data-reveal-group="right">
         <div class="work-item"><div class="work-num">01</div><div><div style="font-size:.72rem;color:var(--color-text-3);font-family:var(--font-mono);margin-bottom:4px">BRANDING Â· 2026</div><div style="font-size:1.45rem;font-weight:900;text-transform:uppercase">FLUX_MUSIC</div><div style="font-size:.85rem;color:var(--color-text-2)">Identity system for a streaming platform prototype</div></div><div class="work-arrow" aria-hidden="true">-&gt;</div></div>
         <div class="work-item"><div class="work-num">02</div><div><div style="font-size:.72rem;color:var(--color-text-3);font-family:var(--font-mono);margin-bottom:4px">WEB Â· 2026</div><div style="font-size:1.45rem;font-weight:900;text-transform:uppercase">NEON.DAO</div><div style="font-size:.85rem;color:var(--color-text-2)">Data-heavy governance interface with stark terminal styling</div></div><div class="work-arrow" aria-hidden="true">-&gt;</div></div>
         <div class="work-item"><div class="work-num">03</div><div><div style="font-size:.72rem;color:var(--color-text-3);font-family:var(--font-mono);margin-bottom:4px">SPATIAL Â· 2025</div><div style="font-size:1.45rem;font-weight:900;text-transform:uppercase">VOID_LAB</div><div style="font-size:.85rem;color:var(--color-text-2)">Mixed-reality gallery concept for digital art launches</div></div><div class="work-arrow" aria-hidden="true">-&gt;</div></div>
@@ -103,8 +103,8 @@
 
   <section id="services" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="services-heading">
     <div class="chr-container">
-      <h2 id="services-heading" style="font-family:var(--font-accent);font-size:1.4rem;font-weight:900;text-transform:uppercase;margin-bottom:32px" data-reveal>Services.Array()</h2>
-      <div class="services-grid" data-reveal-group>
+      <h2 id="services-heading" style="font-family:var(--font-accent);font-size:1.4rem;font-weight:900;text-transform:uppercase;margin-bottom:32px" data-reveal="right">Services.Array()</h2>
+      <div class="services-grid" data-reveal-group="left">
         <div class="service-block"><div style="font-family:var(--font-mono);font-size:.7rem;color:var(--color-primary);margin-bottom:16px">// 01</div><h3 style="font-size:1.1rem;font-weight:900;text-transform:uppercase;margin-bottom:8px">Neural_UI</h3><p style="font-size:.86rem;color:var(--color-text-2);line-height:1.7">Interface direction for AI, data, and launch-driven products.</p></div>
         <div class="service-block"><div style="font-family:var(--font-mono);font-size:.7rem;color:var(--color-secondary);margin-bottom:16px">// 02</div><h3 style="font-size:1.1rem;font-weight:900;text-transform:uppercase;margin-bottom:8px">Glitch_Brand</h3><p style="font-size:.86rem;color:var(--color-text-2);line-height:1.7">Brand systems that can shift across Chronos eras without rewriting structure.</p></div>
         <div class="service-block"><div style="font-family:var(--font-mono);font-size:.7rem;color:var(--color-accent);margin-bottom:16px">// 03</div><h3 style="font-size:1.1rem;font-weight:900;text-transform:uppercase;margin-bottom:8px">System_Dev</h3><p style="font-size:.86rem;color:var(--color-text-2);line-height:1.7">Reusable sections, tokens, and layout logic built for source-level refinement.</p></div>
@@ -114,8 +114,8 @@
 
   <section id="clients" class="chr-section-sm" aria-labelledby="clients-heading">
     <div class="chr-container">
-      <h2 id="clients-heading" style="font-family:var(--font-accent);font-size:1rem;font-weight:900;text-transform:uppercase;color:var(--color-text-3);margin-bottom:40px;text-align:center" data-reveal>Clients.Map(name =&gt; trust)</h2>
-      <div class="clients-grid" data-reveal-group>
+      <h2 id="clients-heading" style="font-family:var(--font-accent);font-size:1rem;font-weight:900;text-transform:uppercase;color:var(--color-text-3);margin-bottom:40px;text-align:center" data-reveal="scale">Clients.Map(name =&gt; trust)</h2>
+      <div class="clients-grid" data-reveal-group="scale">
         <div style="padding:24px;border:1px solid var(--color-border);font-family:var(--font-mono);font-size:.85rem;font-weight:700;color:var(--color-text-2)">FLUX.IO</div>
         <div style="padding:24px;border:1px solid var(--color-border);font-family:var(--font-mono);font-size:.85rem;font-weight:700;color:var(--color-text-2)">NEON DAO</div>
         <div style="padding:24px;border:1px solid var(--color-border);font-family:var(--font-mono);font-size:.85rem;font-weight:700;color:var(--color-text-2)">VOID LAB</div>
@@ -127,7 +127,7 @@
 
   <section id="contact" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="contact-heading">
     <div class="chr-container contact-grid" style="align-items:start">
-      <div data-reveal>
+      <div data-reveal="left">
         <div style="font-family:var(--font-mono);font-size:.75rem;color:var(--color-primary);margin-bottom:16px">&gt; START_PROJECT()</div>
         <h2 id="contact-heading" style="font-size:clamp(2rem,5vw,3.5rem);font-weight:900;text-transform:uppercase;margin-bottom:1.5rem;line-height:1">Start a project</h2>
         <p style="color:var(--color-text-2);line-height:1.8;margin-bottom:2rem">
@@ -135,7 +135,7 @@
         </p>
         <div style="font-family:var(--font-mono);font-size:.9rem;color:var(--color-primary)">hello@chronos.demo<br><span style="color:var(--color-text-3)">@chronos_agency</span></div>
       </div>
-      <div data-reveal>
+      <div data-reveal="right">
         <form style="display:flex;flex-direction:column;gap:16px" aria-label="Contact form" data-demo-message="Demo contact form submitted. Connect this form to your own endpoint.">
           <div>
             <label for="cy-name" style="display:block;font-family:var(--font-mono);font-size:.72rem;color:var(--color-text-3);margin-bottom:6px">NAME.STRING:</label>
