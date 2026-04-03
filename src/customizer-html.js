@@ -152,7 +152,10 @@ export const CUSTOMIZER_HTML = /* html */`
   </div><!-- /cust-body -->
 
   <!-- Footer -->
-  <div class="cust-footer" style="padding:16px; border-top:1px solid var(--color-border); background:var(--color-bg); flex-shrink:0;">
+  <div class="cust-footer" style="padding:16px; border-top:1px solid var(--color-border); background:var(--color-bg); flex-shrink:0; display:flex; flex-direction:column; gap:8px;">
+    <a href="index.html" class="chr-btn-primary" style="font-size:0.75rem;padding:10px 16px;width:100%;justify-content:center; text-decoration:none;">
+      ← View All Layouts
+    </a>
     <button class="chr-btn-ghost" style="font-size:0.75rem;padding:10px 16px;width:100%;justify-content:center"
       @click="$store.chr.reset()">
       ↺ Reset Theme to Defaults

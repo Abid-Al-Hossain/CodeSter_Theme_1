@@ -94,6 +94,8 @@ Alpine.store('chr', {
   era: 'modern',
   fonts: { heading: 'Outfit', body: 'Inter', mono: 'JetBrains Mono', accent: 'Syne' },
   colors: { primary: '#2563eb', secondary: '#6366f1', accent: '#38bdf8', bg: '#ffffff', bg2: '#f8fafc', text: '#0f172a' },
+  hasCustomFonts: false,
+  hasCustomColors: false,
   exportCSS: '',
   exportCopied: false,
 
@@ -102,13 +104,15 @@ Alpine.store('chr', {
     const saved = loadPrefs()
     if (saved) {
       if (saved.era) { this.era = saved.era; await applyEra(saved.era) }
-      if (saved.fonts) {
+      if (saved.fonts && saved.hasCustomFonts) {
+        this.hasCustomFonts = true
         for (const [role, font] of Object.entries(saved.fonts)) {
           this.fonts[role] = font
           await applyFont(role, font)
         }
       }
-      if (saved.colors) {
+      if (saved.colors && saved.hasCustomColors) {
+        this.hasCustomColors = true
         for (const [token, value] of Object.entries(saved.colors)) {
           this.colors[token] = value
           this.applyColorToken(token, value)
@@ -121,6 +125,15 @@ Alpine.store('chr', {
   async setEra(era) {
     this.era = era
     await applyEra(era)
+    
+    // Clear inline custom tokens on :root so the raw era CSS applies
+    Object.values(this.colorTokenMap).forEach(vars => {
+      vars.forEach(v => document.documentElement.style.removeProperty(`--${v}`))
+    })
+    ['heading', 'body', 'mono', 'accent'].forEach(role => {
+      document.documentElement.style.removeProperty(`--font-${role}`)
+    })
+
     // Sync font pickers to era defaults
     const defaults = ERA_DEFAULT_FONTS[era]
     if (defaults) {
@@ -131,7 +144,21 @@ Alpine.store('chr', {
         if (defaults[role]) sel.value = defaults[role]
       })
     }
+    
+    this.hasCustomFonts = false
+    this.hasCustomColors = false
     this.save()
+
+    // Read computed colors after a small delay to sync color pickers
+    setTimeout(() => {
+      const style = getComputedStyle(document.documentElement)
+      this.colors.primary   = style.getPropertyValue('--color-primary').trim()
+      this.colors.secondary = style.getPropertyValue('--color-secondary').trim()
+      this.colors.accent    = style.getPropertyValue('--color-accent').trim()
+      this.colors.bg        = style.getPropertyValue('--color-bg').trim()
+      this.colors.bg2       = style.getPropertyValue('--color-bg-2').trim()
+      this.colors.text      = style.getPropertyValue('--color-text').trim()
+    }, 50)
   },
 
   // ── Color change token map ───────────────────────────────
@@ -150,6 +177,7 @@ Alpine.store('chr', {
   },
 
   setColor(token, value) {
+    this.hasCustomColors = true
     this.colors[token] = value
     this.applyColorToken(token, value)
     this.save()
@@ -159,6 +187,7 @@ Alpine.store('chr', {
   applyPalette(name) {
     const palette = PALETTES[name]
     if (!palette) return
+    this.hasCustomColors = true
     Object.entries(palette).forEach(([token, value]) => {
       this.colors[token] = value
       this.applyColorToken(token, value)
@@ -168,6 +197,7 @@ Alpine.store('chr', {
 
   // ── Font change ─────────────────────────────────────────
   async setFont(role, fontName) {
+    this.hasCustomFonts = true
     this.fonts[role] = fontName
     await applyFont(role, fontName)
     this.save()
@@ -212,12 +242,20 @@ Alpine.store('chr', {
 
   // ── Save to localStorage ─────────────────────────────────
   save() {
-    savePrefs({ era: this.era, fonts: this.fonts, colors: this.colors })
+    savePrefs({ 
+      era: this.era, 
+      fonts: this.fonts, 
+      colors: this.colors,
+      hasCustomFonts: this.hasCustomFonts,
+      hasCustomColors: this.hasCustomColors
+    })
   },
 
   // ── Reset to defaults ────────────────────────────────────
   async reset() {
     this.era = 'modern'
+    this.hasCustomFonts = false
+    this.hasCustomColors = false
     this.colors = { primary: '#2563eb', secondary: '#6366f1', accent: '#38bdf8', bg: '#ffffff', bg2: '#f8fafc', text: '#0f172a' }
     this.fonts = { heading: 'Outfit', body: 'Inter', mono: 'JetBrains Mono', accent: 'Syne' }
     await applyEra('modern')
