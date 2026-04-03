@@ -112,6 +112,41 @@ export const CUSTOMIZER_HTML = /* html */ `
             <div class="layout-link-meta">Layout 10</div>
           </div>
         </a>
+        <a href="layout-11.html" class="layout-list-link">
+          <div class="layout-thumb-frame layout-mini-thumb"><svg viewBox="0 0 160 100" preserveAspectRatio="none" class="layout-thumb-svg"><rect width="160" height="100" fill="#f5f8fc"/><rect width="160" height="12" fill="#dbe7f2"/><rect x="12" y="22" width="62" height="6" rx="3" fill="#183153"/><rect x="12" y="34" width="54" height="4" rx="2" fill="#6f8296"/><rect x="12" y="48" width="48" height="22" rx="5" fill="#ffffff" stroke="#d0dcea"/><rect x="66" y="48" width="38" height="22" rx="5" fill="#eef4f8"/><rect x="110" y="22" width="38" height="48" rx="6" fill="#1e3a6e" opacity=".14"/><rect x="110" y="30" width="26" height="4" rx="2" fill="#1e3a6e"/><rect x="110" y="40" width="32" height="4" rx="2" fill="#7a8ea8"/></svg></div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div class="layout-link-title">Enterprise Business</div>
+            <div class="layout-link-meta">Layout 11</div>
+          </div>
+        </a>
+        <a href="layout-12.html" class="layout-list-link">
+          <div class="layout-thumb-frame layout-mini-thumb"><svg viewBox="0 0 160 100" preserveAspectRatio="none" class="layout-thumb-svg"><rect width="160" height="100" fill="#fbfcfd"/><rect x="10" y="18" width="86" height="28" rx="6" fill="#eef3f7"/><rect x="104" y="18" width="46" height="54" rx="6" fill="#ffffff" stroke="#e8e7e3"/><rect x="18" y="26" width="34" height="4" rx="2" fill="#111111"/><rect x="18" y="36" width="54" height="4" rx="2" fill="#979792"/><rect x="10" y="54" width="66" height="24" rx="6" fill="#ffffff" stroke="#e8e7e3"/><circle cx="126" cy="38" r="10" fill="#14b8a6" opacity=".18"/><rect x="114" y="56" width="24" height="4" rx="2" fill="#5b5b56"/></svg></div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div class="layout-link-title">Medical Care</div>
+            <div class="layout-link-meta">Layout 12</div>
+          </div>
+        </a>
+        <a href="layout-13.html" class="layout-list-link">
+          <div class="layout-thumb-frame layout-mini-thumb"><svg viewBox="0 0 160 100" preserveAspectRatio="none" class="layout-thumb-svg"><rect width="160" height="100" fill="#f7faf5"/><rect x="10" y="16" width="72" height="40" rx="6" fill="#eef4ea"/><rect x="90" y="16" width="60" height="40" rx="6" fill="#ffffff" stroke="#c2d9bc"/><rect x="18" y="24" width="36" height="4" rx="2" fill="#1a2e1b"/><rect x="18" y="34" width="50" height="4" rx="2" fill="#7a9e7b"/><rect x="10" y="64" width="40" height="18" rx="5" fill="#ffffff" stroke="#c2d9bc"/><rect x="56" y="64" width="40" height="18" rx="5" fill="#ffffff" stroke="#c2d9bc"/><rect x="102" y="64" width="48" height="18" rx="5" fill="#3d6e3e" opacity=".15"/></svg></div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div class="layout-link-title">Education Campus</div>
+            <div class="layout-link-meta">Layout 13</div>
+          </div>
+        </a>
+        <a href="layout-14.html" class="layout-list-link">
+          <div class="layout-thumb-frame layout-mini-thumb"><svg viewBox="0 0 160 100" preserveAspectRatio="none" class="layout-thumb-svg"><rect width="160" height="100" fill="#e9fdff"/><rect x="12" y="18" width="84" height="30" rx="8" fill="#ffffff" opacity=".72" stroke="#ffffff"/><rect x="104" y="18" width="44" height="40" rx="10" fill="#ffffff" opacity=".72" stroke="#ffffff"/><rect x="20" y="26" width="42" height="5" rx="2.5" fill="#083344"/><rect x="20" y="36" width="54" height="4" rx="2" fill="#2993b8"/><rect x="14" y="60" width="40" height="22" rx="8" fill="#62d0ff"/><rect x="60" y="60" width="40" height="22" rx="8" fill="#7dd3fc"/><rect x="106" y="64" width="40" height="18" rx="8" fill="#2dd4bf" opacity=".6"/></svg></div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div class="layout-link-title">Travel Explorer</div>
+            <div class="layout-link-meta">Layout 14</div>
+          </div>
+        </a>
+        <a href="layout-15.html" class="layout-list-link">
+          <div class="layout-thumb-frame layout-mini-thumb"><svg viewBox="0 0 160 100" preserveAspectRatio="none" class="layout-thumb-svg"><rect width="160" height="100" fill="#fbfdff"/><rect x="10" y="16" width="76" height="44" rx="6" fill="#ffffff" stroke="#dde7f1"/><rect x="94" y="16" width="56" height="52" rx="6" fill="#ffffff" stroke="#dde7f1"/><rect x="18" y="24" width="12" height="12" rx="4" fill="#2563eb" opacity=".2"/><rect x="36" y="24" width="38" height="4" rx="2" fill="#0f172a"/><rect x="36" y="34" width="30" height="4" rx="2" fill="#8aa0b5"/><rect x="18" y="44" width="56" height="8" rx="4" fill="#f3f7fb"/><rect x="102" y="24" width="34" height="4" rx="2" fill="#2563eb"/><rect x="102" y="36" width="40" height="4" rx="2" fill="#14b8a6"/><rect x="102" y="52" width="28" height="4" rx="2" fill="#8aa0b5"/></svg></div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div class="layout-link-title">Social Community</div>
+            <div class="layout-link-meta">Layout 15</div>
+          </div>
+        </a>
       </div>
       <div style="margin-top:20px;padding:12px;background:var(--color-bg-2);border-radius:var(--radius-md);border:1px solid var(--color-border)">
         <p style="font-size:0.75rem;color:var(--color-text-2);margin:0;line-height:1.5">

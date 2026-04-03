@@ -1,12 +1,12 @@
-# Chronos v2
+﻿# Chronos v2
 
-Chronos v2 is a multi-era HTML theme source project built around one shared customization system instead of a single fixed visual style. The current source workspace contains 10 layouts, 12 design eras, 16 preset palettes, and 65+ Google Fonts that can be mixed live through the shared customizer.
+Chronos v2 is a multi-era HTML theme source project built around one shared customization system instead of a single fixed visual style. The current source workspace contains 15 layouts, 12 design eras, 16 preset palettes, and 65+ Google Fonts that can be mixed live through the shared customizer.
 
 This phase is the product-finalization phase. The project is being refined in source first, and release packaging is intentionally deferred to a later shipping pass.
 
 ## Product scope
 
-- 10 source layouts
+- 15 source layouts
 - 12 eras: Modern, Gothic, Futuristic, Retro, Cyberpunk, Brutalist, Minimalist, Eco, Corporate, Artistic, Apocalyptic, Liquid
 - 16 preset palettes plus custom color controls
 - 65+ Google Fonts with separate heading, body, accent, and mono roles
@@ -45,7 +45,7 @@ Because the source project uses Vite module entrypoints, use it through the deve
 ## Project structure
 
 - `index.html` - layout directory hub
-- `layout-01.html` through `layout-10.html` - the 10 source layouts
+- `layout-01.html` through `layout-15.html` - the 15 source layouts
 - `src/style.css` - global design tokens, eras, utilities, and component styles
 - `src/main.js` - shared page runtime for demo actions, date handling, and countdowns
 - `src/customizer.js` - Alpine store and customization logic
@@ -64,3 +64,5 @@ Because the source project uses Vite module entrypoints, use it through the deve
 
 - The source project keeps demo content intentionally neutral where licensing, support, or marketplace-specific language would be premature.
 - Release packaging, buyer-facing file structure, and deployment portability are separate concerns for the shipping phase.
+
+
