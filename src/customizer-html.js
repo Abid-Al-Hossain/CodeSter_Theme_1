@@ -38,10 +38,36 @@ export const CUSTOMIZER_HTML = /* html */`
     <button class="cust-tab" :class="$store.chr.activeTab==='colors'?'active':''" @click="$store.chr.activeTab='colors'" role="tab">Colors</button>
     <button class="cust-tab" :class="$store.chr.activeTab==='fonts'?'active':''" @click="$store.chr.activeTab='fonts'" role="tab">Fonts</button>
     <button class="cust-tab" :class="$store.chr.activeTab==='export'?'active':''" @click="$store.chr.activeTab='export';$store.chr.generateExport()" role="tab">Export</button>
+    <button class="cust-tab" :class="$store.chr.activeTab==='layouts'?'active':''" @click="$store.chr.activeTab='layouts'" role="tab">Layouts</button>
   </div>
 
   <!-- Body -->
   <div class="cust-body">
+
+    <!-- ── LAYOUTS TAB ─────────────────────────────── -->
+    <div x-show="$store.chr.activeTab==='layouts'" x-cloak>
+      <span class="cust-label" style="display:flex;justify-content:space-between;align-items:center">
+        Theme Templates
+        <a href="index.html" style="font-size:0.7rem;font-weight:normal;color:var(--color-primary);text-decoration:underline">View Index</a>
+      </span>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <a href="layout-01.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">🏢 01 · SaaS Landing Page</a>
+        <a href="layout-02.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">🎨 02 · Creative Portfolio</a>
+        <a href="layout-03.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">🧱 03 · Editorial Feed</a>
+        <a href="layout-04.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">📜 04 · Text Manuscript</a>
+        <a href="layout-05.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">💻 05 · Web App Dashboard</a>
+        <a href="layout-06.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">✨ 06 · Artistic Showcase</a>
+        <a href="layout-07.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">🚀 07 · Launch Page</a>
+        <a href="layout-08.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">📓 08 · Minimal Journal</a>
+        <a href="layout-09.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">⚡ 09 · Digital Agency</a>
+        <a href="layout-10.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">🏰 10 · Institutional Archive</a>
+      </div>
+      <div style="margin-top:20px;padding:12px;background:var(--color-bg-2);border-radius:var(--radius-md);border:1px solid var(--color-border)">
+        <p style="font-size:0.75rem;color:var(--color-text-2);margin:0;line-height:1.5">
+          <strong>Tip:</strong> Your Era and Customizations persist seamlessly when navigating between layouts!
+        </p>
+      </div>
+    </div>
 
     <!-- ── ERA TAB ─────────────────────────────────── -->
     <div x-show="$store.chr.activeTab==='era'" x-cloak>
@@ -57,6 +83,8 @@ export const CUSTOMIZER_HTML = /* html */`
         <button class="era-card" :class="$store.chr.era==='eco'?'active':''" @click="$store.chr.setEra('eco')">🌿 Eco</button>
         <button class="era-card" :class="$store.chr.era==='corporate'?'active':''" @click="$store.chr.setEra('corporate')">💼 Corporate</button>
         <button class="era-card" :class="$store.chr.era==='artistic'?'active':''" @click="$store.chr.setEra('artistic')">🎨 Artistic</button>
+        <button class="era-card" :class="$store.chr.era==='apocalyptic'?'active':''" @click="$store.chr.setEra('apocalyptic')">🩸 Apocalyptic</button>
+        <button class="era-card" :class="$store.chr.era==='liquid'?'active':''" @click="$store.chr.setEra('liquid')">💧 Liquid</button>
       </div>
 
       <span class="cust-label" style="margin-top:20px">Era Info</span>
@@ -170,9 +198,6 @@ export const CUSTOMIZER_HTML = /* html */`
 
   <!-- Footer -->
   <div class="cust-footer" style="padding:16px; border-top:1px solid var(--color-border); background:var(--color-bg); flex-shrink:0; display:flex; flex-direction:column; gap:8px;">
-    <a href="index.html" class="chr-btn-primary" style="font-size:0.75rem;padding:10px 16px;width:100%;justify-content:center; text-decoration:none;">
-      ← View All Layouts
-    </a>
     <button class="chr-btn-ghost" style="font-size:0.75rem;padding:10px 16px;width:100%;justify-content:center"
       @click="$store.chr.reset()">
       ↺ Reset Theme to Defaults

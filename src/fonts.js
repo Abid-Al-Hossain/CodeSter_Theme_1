@@ -66,4 +66,6 @@ export const ERA_DEFAULT_FONTS = {
   eco:        { heading: 'Sora', body: 'DM Sans', mono: 'Source Code Pro', accent: 'Nunito' },
   corporate:  { heading: 'Manrope', body: 'Inter', mono: 'IBM Plex Mono', accent: 'Work Sans' },
   artistic:   { heading: 'Unbounded', body: 'Syne', mono: 'Fira Code', accent: 'Anton' },
+  apocalyptic:{ heading: 'UnifrakturMaguntia', body: 'Fira Code', mono: 'Space Mono', accent: 'Almendra' },
+  liquid:     { heading: 'Outfit', body: 'Inter', mono: 'DM Mono', accent: 'Syne' }
 }
