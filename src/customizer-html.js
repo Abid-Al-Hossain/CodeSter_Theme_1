@@ -50,17 +50,77 @@ export const CUSTOMIZER_HTML = /* html */`
         Theme Templates
         <a href="index.html" style="font-size:0.7rem;font-weight:normal;color:var(--color-primary);text-decoration:underline">View Index</a>
       </span>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <a href="layout-01.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">🏢 01 · SaaS Landing Page</a>
-        <a href="layout-02.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">🎨 02 · Creative Portfolio</a>
-        <a href="layout-03.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">🧱 03 · Editorial Feed</a>
-        <a href="layout-04.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">📜 04 · Text Manuscript</a>
-        <a href="layout-05.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">💻 05 · Web App Dashboard</a>
-        <a href="layout-06.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">✨ 06 · Artistic Showcase</a>
-        <a href="layout-07.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">🚀 07 · Launch Page</a>
-        <a href="layout-08.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">📓 08 · Minimal Journal</a>
-        <a href="layout-09.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">⚡ 09 · Digital Agency</a>
-        <a href="layout-10.html" class="chr-btn-ghost" style="text-align:left;justify-content:flex-start;font-size:0.82rem;padding:8px 12px">🏰 10 · Institutional Archive</a>
+      <div style="display:flex;flex-direction:column;gap:8px;max-height:450px;overflow-y:auto;padding-right:4px">
+        <a href="layout-01.html" style="display:flex;align-items:center;gap:12px;padding:8px;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);text-decoration:none;transition:border-color 0.2s,transform 0.2s" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+          <div style="width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));flex-shrink:0">🏢</div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--color-text);line-height:1.2">SaaS Landing Page</div>
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-text-3)">Layout 01</div>
+          </div>
+        </a>
+        <a href="layout-02.html" style="display:flex;align-items:center;gap:12px;padding:8px;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);text-decoration:none;transition:border-color 0.2s,transform 0.2s" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+          <div style="width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:linear-gradient(135deg,#3b82f6,#10b981);flex-shrink:0">🎨</div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--color-text);line-height:1.2">Creative Portfolio</div>
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-text-3)">Layout 02</div>
+          </div>
+        </a>
+        <a href="layout-03.html" style="display:flex;align-items:center;gap:12px;padding:8px;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);text-decoration:none;transition:border-color 0.2s,transform 0.2s" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+          <div style="width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:linear-gradient(135deg,#ef4444,#f59e0b);flex-shrink:0">🧱</div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--color-text);line-height:1.2">Editorial Feed</div>
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-text-3)">Layout 03</div>
+          </div>
+        </a>
+        <a href="layout-04.html" style="display:flex;align-items:center;gap:12px;padding:8px;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);text-decoration:none;transition:border-color 0.2s,transform 0.2s" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+          <div style="width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:linear-gradient(135deg,#8b5cf6,#ec4899);flex-shrink:0">📜</div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--color-text);line-height:1.2">Text Manuscript</div>
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-text-3)">Layout 04</div>
+          </div>
+        </a>
+        <a href="layout-05.html" style="display:flex;align-items:center;gap:12px;padding:8px;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);text-decoration:none;transition:border-color 0.2s,transform 0.2s" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+          <div style="width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:linear-gradient(135deg,#14b8a6,#06b6d4);flex-shrink:0">💻</div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--color-text);line-height:1.2">Web App Dashboard</div>
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-text-3)">Layout 05</div>
+          </div>
+        </a>
+        <a href="layout-06.html" style="display:flex;align-items:center;gap:12px;padding:8px;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);text-decoration:none;transition:border-color 0.2s,transform 0.2s" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+          <div style="width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:linear-gradient(135deg,#f43f5e,#8b5cf6);flex-shrink:0">✨</div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--color-text);line-height:1.2">Artistic Showcase</div>
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-text-3)">Layout 06</div>
+          </div>
+        </a>
+        <a href="layout-07.html" style="display:flex;align-items:center;gap:12px;padding:8px;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);text-decoration:none;transition:border-color 0.2s,transform 0.2s" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+          <div style="width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:linear-gradient(135deg,#0ea5e9,#38bdf8);flex-shrink:0">🚀</div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--color-text);line-height:1.2">Launch Page</div>
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-text-3)">Layout 07</div>
+          </div>
+        </a>
+        <a href="layout-08.html" style="display:flex;align-items:center;gap:12px;padding:8px;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);text-decoration:none;transition:border-color 0.2s,transform 0.2s" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+          <div style="width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:linear-gradient(135deg,#64748b,#94a3b8);flex-shrink:0">📓</div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--color-text);line-height:1.2">Minimal Journal</div>
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-text-3)">Layout 08</div>
+          </div>
+        </a>
+        <a href="layout-09.html" style="display:flex;align-items:center;gap:12px;padding:8px;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);text-decoration:none;transition:border-color 0.2s,transform 0.2s" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+          <div style="width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:linear-gradient(135deg,#10b981,#3b82f6);flex-shrink:0">⚡</div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--color-text);line-height:1.2">Digital Agency</div>
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-text-3)">Layout 09</div>
+          </div>
+        </a>
+        <a href="layout-10.html" style="display:flex;align-items:center;gap:12px;padding:8px;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);text-decoration:none;transition:border-color 0.2s,transform 0.2s" onmouseover="this.style.borderColor='var(--color-primary)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+          <div style="width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:linear-gradient(135deg,#b91c1c,#dc2626);flex-shrink:0">🏰</div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--color-text);line-height:1.2">Institutional Archive</div>
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-text-3)">Layout 10</div>
+          </div>
+        </a>
       </div>
       <div style="margin-top:20px;padding:12px;background:var(--color-bg-2);border-radius:var(--radius-md);border:1px solid var(--color-border)">
         <p style="font-size:0.75rem;color:var(--color-text-2);margin:0;line-height:1.5">
@@ -98,14 +158,22 @@ export const CUSTOMIZER_HTML = /* html */`
     <div x-show="$store.chr.activeTab==='colors'" x-cloak>
       <span class="cust-label">Preset Palettes</span>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">
-        <button class="chr-btn-ghost" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('electric')">⚡ Electric</button>
-        <button class="chr-btn-ghost" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('sunset')">🌅 Sunset</button>
-        <button class="chr-btn-ghost" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('forest')">🌲 Forest</button>
-        <button class="chr-btn-ghost" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('lavender')">💜 Lavender</button>
-        <button class="chr-btn-ghost" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('rose')">🌹 Rose</button>
-        <button class="chr-btn-ghost" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('midnight')">🌙 Midnight</button>
-        <button class="chr-btn-ghost" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('ocean')">🌊 Ocean</button>
-        <button class="chr-btn-ghost" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('ember')">🔥 Ember</button>
+        <button :class="$store.chr.activePalette === 'electric' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('electric')">⚡ Electric</button>
+        <button :class="$store.chr.activePalette === 'sunset' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('sunset')">🌅 Sunset</button>
+        <button :class="$store.chr.activePalette === 'forest' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('forest')">🌲 Forest</button>
+        <button :class="$store.chr.activePalette === 'lavender' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('lavender')">💜 Lavender</button>
+        <button :class="$store.chr.activePalette === 'rose' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('rose')">🌹 Rose</button>
+        <button :class="$store.chr.activePalette === 'midnight' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('midnight')">🌙 Midnight</button>
+        <button :class="$store.chr.activePalette === 'ocean' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('ocean')">🌊 Ocean</button>
+        <button :class="$store.chr.activePalette === 'ember' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('ember')">🔥 Ember</button>
+        <button :class="$store.chr.activePalette === 'mint' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('mint')">🌿 Mint</button>
+        <button :class="$store.chr.activePalette === 'grayscale' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('grayscale')">💿 Chrome</button>
+        <button :class="$store.chr.activePalette === 'obsidian' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('obsidian')">🪨 Obsidian</button>
+        <button :class="$store.chr.activePalette === 'gold' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('gold')">👑 Gold</button>
+        <button :class="$store.chr.activePalette === 'toxic' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('toxic')">☢️ Toxic</button>
+        <button :class="$store.chr.activePalette === 'bubblegum' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('bubblegum')">🍬 Bubblegum</button>
+        <button :class="$store.chr.activePalette === 'clay' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('clay')">🏺 Clay</button>
+        <button :class="$store.chr.activePalette === 'abyss' ? 'chr-btn-primary' : 'chr-btn-ghost'" style="font-size:0.72rem;padding:6px 12px" @click="$store.chr.applyPalette('abyss')">🌌 Abyss</button>
       </div>
 
       <span class="cust-label">Fine-Tune Colors</span>

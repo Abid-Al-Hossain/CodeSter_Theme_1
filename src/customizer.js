@@ -7,14 +7,22 @@ import { CUSTOMIZER_HTML } from './customizer-html.js'
 
 // ── Preset Color Palettes ──────────────────────────────────
 const PALETTES = {
-  electric:  { primary: '#2563eb', secondary: '#6366f1', accent: '#38bdf8', bg: '#ffffff', text: '#0f172a' },
-  sunset:    { primary: '#f97316', secondary: '#ec4899', accent: '#fbbf24', bg: '#0c0a09', text: '#fafaf9' },
-  forest:    { primary: '#16a34a', secondary: '#15803d', accent: '#86efac', bg: '#f0fdf4', text: '#14532d' },
-  lavender:  { primary: '#7c3aed', secondary: '#9333ea', accent: '#c4b5fd', bg: '#faf5ff', text: '#3b0764' },
-  rose:      { primary: '#e11d48', secondary: '#be185d', accent: '#fda4af', bg: '#fff1f2', text: '#4c0519' },
-  midnight:  { primary: '#6366f1', secondary: '#8b5cf6', accent: '#818cf8', bg: '#030712', text: '#e0e7ff' },
-  ocean:     { primary: '#0ea5e9', secondary: '#0284c7', accent: '#38bdf8', bg: '#f0f9ff', text: '#0c4a6e' },
-  ember:     { primary: '#dc2626', secondary: '#b91c1c', accent: '#fca5a5', bg: '#fef2f2', text: '#450a0a' },
+  electric:   { primary: '#2563eb', secondary: '#4f46e5', accent: '#38bdf8', bg: '#ffffff', bg2: '#f8fafc', text: '#0f172a' },
+  sunset:     { primary: '#ea580c', secondary: '#dc2626', accent: '#fbbf24', bg: '#0f0a05', bg2: '#1a100a', text: '#fff7ed' },
+  forest:     { primary: '#16a34a', secondary: '#15803d', accent: '#86efac', bg: '#f0fdf4', bg2: '#dcfce7', text: '#14532d' },
+  lavender:   { primary: '#7c3aed', secondary: '#9333ea', accent: '#c4b5fd', bg: '#faf5ff', bg2: '#f3e8ff', text: '#3b0764' },
+  rose:       { primary: '#e11d48', secondary: '#be185d', accent: '#fda4af', bg: '#fff1f2', bg2: '#ffe4e6', text: '#4c0519' },
+  midnight:   { primary: '#818cf8', secondary: '#a5b4fc', accent: '#c7d2fe', bg: '#020617', bg2: '#0f172a', text: '#e0e7ff' },
+  ocean:      { primary: '#0ea5e9', secondary: '#0284c7', accent: '#38bdf8', bg: '#f0f9ff', bg2: '#e0f2fe', text: '#0c4a6e' },
+  ember:      { primary: '#f59e0b', secondary: '#ea580c', accent: '#fcd34d', bg: '#1c1917', bg2: '#292524', text: '#fffbeb' },
+  mint:       { primary: '#10b981', secondary: '#059669', accent: '#34d399', bg: '#ffffff', bg2: '#ecfdf5', text: '#064e3b' },
+  grayscale:  { primary: '#475569', secondary: '#334155', accent: '#94a3b8', bg: '#f8fafc', bg2: '#f1f5f9', text: '#0f172a' },
+  obsidian:   { primary: '#94a3b8', secondary: '#64748b', accent: '#cbd5e1', bg: '#050505', bg2: '#111111', text: '#f1f5f9' },
+  gold:       { primary: '#d97706', secondary: '#b45309', accent: '#fcd34d', bg: '#fffbeb', bg2: '#fef3c7', text: '#451a03' },
+  toxic:      { primary: '#84cc16', secondary: '#65a30d', accent: '#bef264', bg: '#052e16', bg2: '#064e3b', text: '#f7fee7' },
+  bubblegum:  { primary: '#d946ef', secondary: '#c026d3', accent: '#f0abfc', bg: '#fdf4ff', bg2: '#fae8ff', text: '#4a044e' },
+  clay:       { primary: '#8a3a2b', secondary: '#702d22', accent: '#cd5c5c', bg: '#f5ebe0', bg2: '#edddcd', text: '#3b2f2f' },
+  abyss:      { primary: '#22d3ee', secondary: '#06b6d4', accent: '#67e8f9', bg: '#000814', bg2: '#001d3d', text: '#cffafe' }
 }
 
 // ── Build font <select> options HTML ──────────────────────
@@ -96,6 +104,7 @@ Alpine.store('chr', {
   colors: { primary: '#2563eb', secondary: '#6366f1', accent: '#38bdf8', bg: '#ffffff', bg2: '#f8fafc', text: '#0f172a' },
   hasCustomFonts: false,
   hasCustomColors: false,
+  activePalette: '',
   exportCSS: '',
   exportCopied: false,
 
@@ -117,6 +126,9 @@ Alpine.store('chr', {
           this.colors[token] = value
           this.applyColorToken(token, value)
         }
+      }
+      if (saved.activePalette) {
+        this.activePalette = saved.activePalette
       }
     }
   },
@@ -147,6 +159,7 @@ Alpine.store('chr', {
     
     this.hasCustomFonts = false
     this.hasCustomColors = false
+    this.activePalette = ''
     this.save()
 
     // Read computed colors after a small delay to sync color pickers
@@ -178,6 +191,7 @@ Alpine.store('chr', {
 
   setColor(token, value) {
     this.hasCustomColors = true
+    this.activePalette = 'custom'
     this.colors[token] = value
     this.applyColorToken(token, value)
     this.save()
@@ -188,6 +202,7 @@ Alpine.store('chr', {
     const palette = PALETTES[name]
     if (!palette) return
     this.hasCustomColors = true
+    this.activePalette = name
     Object.entries(palette).forEach(([token, value]) => {
       this.colors[token] = value
       this.applyColorToken(token, value)
@@ -247,7 +262,8 @@ Alpine.store('chr', {
       fonts: this.fonts, 
       colors: this.colors,
       hasCustomFonts: this.hasCustomFonts,
-      hasCustomColors: this.hasCustomColors
+      hasCustomColors: this.hasCustomColors,
+      activePalette: this.activePalette
     })
   },
 
@@ -256,6 +272,7 @@ Alpine.store('chr', {
     this.era = 'modern'
     this.hasCustomFonts = false
     this.hasCustomColors = false
+    this.activePalette = ''
     this.colors = { primary: '#2563eb', secondary: '#6366f1', accent: '#38bdf8', bg: '#ffffff', bg2: '#f8fafc', text: '#0f172a' }
     this.fonts = { heading: 'Outfit', body: 'Inter', mono: 'JetBrains Mono', accent: 'Syne' }
     await applyEra('modern')
