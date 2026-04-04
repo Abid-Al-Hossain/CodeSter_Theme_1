@@ -155,7 +155,7 @@ export const CUSTOMIZER_HTML = /* html */ `
       </div>
       <div style="margin-top:20px;padding:12px;background:var(--color-bg-2);border-radius:var(--radius-md);border:1px solid var(--color-border)">
         <p style="font-size:0.75rem;color:var(--color-text-2);margin:0;line-height:1.5">
-          <strong>Tip:</strong> Era, font, and palette choices stay with you while moving between layouts.
+          <strong>Tip:</strong> Each layout remembers its own choices locally, so a first visit still opens in that layout's default era.
         </p>
       </div>
     </div>

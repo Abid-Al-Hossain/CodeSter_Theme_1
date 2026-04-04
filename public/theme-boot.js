@@ -53,8 +53,24 @@
     return ((rgb.r * 299) + (rgb.g * 587) + (rgb.b * 114)) / 1000 < 150
   }
 
+  function getCurrentPageKey() {
+    return window.location.pathname.split('/').pop() || 'index.html'
+  }
+
+  function getPrefsKey() {
+    var namespace = document.documentElement.getAttribute('data-prefs-key') || 'chronos-prefs'
+    return document.documentElement.hasAttribute('data-prefs-key')
+      ? namespace
+      : namespace + ':' + getCurrentPageKey()
+  }
+
   try {
-    var prefs = JSON.parse(localStorage.getItem('chronos-prefs'))
+    var prefs = JSON.parse(localStorage.getItem(getPrefsKey()))
+    var currentEra = document.documentElement.getAttribute('data-era')
+    if (currentEra && !document.documentElement.hasAttribute('data-original-era')) {
+      document.documentElement.setAttribute('data-original-era', currentEra)
+    }
+
     if (!prefs) return
 
     if (prefs.era) {

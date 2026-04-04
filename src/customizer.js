@@ -81,7 +81,7 @@ const CUSTOM_COLOR_VARS = [
   'color-border-2',
 ]
 
-const PREFS_KEY = 'chronos-prefs'
+const PREFS_NAMESPACE = document.documentElement.getAttribute('data-prefs-key') || 'chronos-prefs'
 const CUSTOMIZER_ENABLED = true
 const DEFAULT_FONTS = {
   heading: 'Plus Jakarta Sans',
@@ -91,8 +91,11 @@ const DEFAULT_FONTS = {
 }
 
 // EXPORT_DEFAULT_THEME_START
+// Wait for document to be parsed ideally, but since this module runs after HTML load, document elements exist
+const initialEra = document.documentElement.getAttribute('data-original-era') || document.documentElement.getAttribute('data-era') || 'modern'
+
 const DEFAULT_THEME = {
-  era: 'modern',
+  era: initialEra,
   fonts: { ...DEFAULT_FONTS },
   colors: { ...DEFAULT_COLORS },
   hasCustomFonts: false,
@@ -249,18 +252,28 @@ function buildDerivedColorTokens(colors) {
 function savePrefs(prefs) {
   if (!CUSTOMIZER_ENABLED) return
   try {
-    localStorage.setItem(PREFS_KEY, JSON.stringify(prefs))
+    localStorage.setItem(getPrefsKey(), JSON.stringify(prefs))
   } catch {}
 }
 
 function loadPrefs() {
   if (!CUSTOMIZER_ENABLED) return null
   try {
-    const raw = localStorage.getItem(PREFS_KEY)
+    const raw = localStorage.getItem(getPrefsKey())
     return raw ? JSON.parse(raw) : null
   } catch {
     return null
   }
+}
+
+function getCurrentPageKey() {
+  return window.location.pathname.split('/').pop()?.toLowerCase() || 'index.html'
+}
+
+function getPrefsKey() {
+  return document.documentElement.hasAttribute('data-prefs-key')
+    ? PREFS_NAMESPACE
+    : `${PREFS_NAMESPACE}:${getCurrentPageKey()}`
 }
 
 function buildBootTheme(prefs) {
@@ -389,6 +402,8 @@ Alpine.store('chr', {
 
   async init() {
     const preset = cloneThemePreset(loadPrefs() || DEFAULT_THEME)
+    // Synchronize with the document era, since theme-boot.js enforces first-visit isolated logic
+    preset.era = document.documentElement.getAttribute('data-era') || preset.era
     const eraDefaults = ERA_DEFAULT_FONTS[preset.era] || DEFAULT_THEME.fonts
 
     this.era = preset.era
@@ -574,7 +589,7 @@ Alpine.store('chr', {
 
     this.syncColorInputsFromComputed()
     if (CUSTOMIZER_ENABLED) {
-      localStorage.removeItem(PREFS_KEY)
+      localStorage.removeItem(getPrefsKey())
     }
   },
 })

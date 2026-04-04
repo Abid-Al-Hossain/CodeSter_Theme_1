@@ -114,7 +114,6 @@ function rewriteCustomizerSource(theme, { keepCustomizer, storageKey }) {
   let source = customizerRaw
 
   source = stripMarkedBlocks(source, '// DOWNLOAD_FEATURE_START', '// DOWNLOAD_FEATURE_END')
-  source = source.replace(/const PREFS_KEY = 'chronos-prefs'/, `const PREFS_KEY = '${storageKey}'`)
   source = source.replace(/const CUSTOMIZER_ENABLED = true/, `const CUSTOMIZER_ENABLED = ${keepCustomizer ? 'true' : 'false'}`)
   source = source.replace(
     /\/\/ EXPORT_DEFAULT_THEME_START[\s\S]*?\/\/ EXPORT_DEFAULT_THEME_END/,
@@ -157,6 +156,7 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
   ])
 
   doc.documentElement.setAttribute('data-era', theme.era)
+  doc.documentElement.setAttribute('data-prefs-key', storageKey)
 
   const bootScript = Array.from(doc.head.querySelectorAll('script'))
     .find((script) => script.src?.includes('theme-boot.js') || script.textContent?.includes("localStorage.getItem('chronos-prefs')"))

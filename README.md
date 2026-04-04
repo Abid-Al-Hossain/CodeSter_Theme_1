@@ -10,7 +10,7 @@ This phase is the product-finalization phase. The project is being refined in so
 - 12 eras: Modern, Gothic, Futuristic, Retro, Cyberpunk, Brutalist, Minimalist, Eco, Corporate, Artistic, Apocalyptic, Liquid
 - 16 preset palettes plus custom color controls
 - 65+ Google Fonts with separate heading, body, accent, and mono roles
-- Shared customizer with persistence, reset, and current-layout package download
+- Shared customizer with per-layout persistence, reset, and current-layout package download
 - Vite 8 development and build workflow
 
 ## Tech stack
