@@ -18,7 +18,7 @@
     
     /* Parallax Hero Wrapper */
     .hero-parallax-stage { flex:1; min-width:300px; position:relative; overflow:hidden; }
-    .hero-bg { position:absolute; inset:-5%; background:url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80') center/cover no-repeat; transform:translate(calc(var(--px, 0) * 1%), calc(var(--py, 0) * 1%)) scale(1.05); transition:transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); will-change:transform; }
+    .hero-bg { position:absolute; inset:-5%; background:radial-gradient(circle at 22% 24%, rgba(255,255,255,0.25), transparent 18%), radial-gradient(circle at 72% 18%, rgba(125,211,252,0.45), transparent 22%), linear-gradient(150deg, #0f3b5f 0%, #176b8c 32%, #2b9fc3 58%, #86d9f7 100%); transform:translate(calc(var(--px, 0) * 1%), calc(var(--py, 0) * 1%)) scale(1.05); transition:transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); will-change:transform; }
     
     /* Ken Burns Destination Tiles */
     .destination-tile{position:relative;overflow:hidden;border-radius:24px;display:flex;align-items:flex-end;padding:34px;text-decoration:none;color:#fff;background:var(--color-surface); box-shadow:0 10px 40px rgba(0,0,0,0.15);}
@@ -67,8 +67,8 @@
   </div>
 </header>
 <main id="main-content">
-  <!-- § 1. SPLIT HERO & BOOKING -->
-  <section class="travel-hero" style="padding:0;min-height:100vh;display:flex;align-items:stretch;flex-wrap:wrap; margin-top:-100px;" aria-labelledby="travel-heading">
+  <!-- 1. SPLIT HERO & BOOKING -->
+  <section id="plan" class="travel-hero" style="padding:0;min-height:100vh;display:flex;align-items:stretch;flex-wrap:wrap; margin-top:-100px;" aria-labelledby="travel-heading">
     <div class="hero-parallax-stage" id="hero-stage">
       <div class="hero-bg"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.1)); z-index:1;"></div>
@@ -103,21 +103,21 @@
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:30px;grid-auto-rows:400px" data-reveal-group="zoom">
         <a href="#" class="destination-tile" style="grid-column:1 / -1;background:var(--color-primary)">
-          <div class="dest-bg" style="background-image:url('https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+          <div class="dest-bg" style="background-image:linear-gradient(160deg, rgba(18,58,95,0.25), rgba(1,19,34,0.78)), radial-gradient(circle at 28% 24%, rgba(255,255,255,0.28), transparent 18%), linear-gradient(135deg, #245c78 0%, #3ca6cb 42%, #7de3f7 100%);"></div>
           <div class="dest-content">
             <h3 style="font-size:2.8rem;font-weight:800;margin-bottom:10px;letter-spacing:-0.02em;">Japanese Alps</h3>
             <p style="opacity:0.9;font-size:1.2rem;line-height:1.6;font-weight:300;">Winter retreats and hot springs.</p>
           </div>
         </a>
         <a href="#" class="destination-tile" style="background:var(--color-secondary)">
-          <div class="dest-bg" style="background-image:url('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+          <div class="dest-bg" style="background-image:linear-gradient(160deg, rgba(48,20,8,0.18), rgba(14,26,39,0.72)), radial-gradient(circle at 74% 28%, rgba(255,228,181,0.42), transparent 24%), linear-gradient(135deg, #52403b 0%, #8d6d52 42%, #d7a86e 100%);"></div>
           <div class="dest-content">
             <h3 style="font-size:2rem;font-weight:800;margin-bottom:8px;letter-spacing:-0.01em;">Venice</h3>
             <p style="opacity:0.9;font-size:1.1rem;font-weight:300;">Canals and culture.</p>
           </div>
         </a>
         <a href="#" class="destination-tile" style="background:var(--color-accent)">
-          <div class="dest-bg" style="background-image:url('https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+          <div class="dest-bg" style="background-image:linear-gradient(160deg, rgba(22,10,32,0.16), rgba(10,18,35,0.72)), radial-gradient(circle at 32% 22%, rgba(255,205,148,0.32), transparent 20%), linear-gradient(135deg, #513a73 0%, #9571b7 45%, #e6c58a 100%);"></div>
           <div class="dest-content">
             <h3 style="font-size:2rem;font-weight:800;margin-bottom:8px;letter-spacing:-0.01em;">Dubai</h3>
             <p style="opacity:0.9;font-size:1.1rem;font-weight:300;">Desert luxury.</p>
@@ -174,7 +174,7 @@
     </div>
   </section>
 
-  <!-- § 4. EDITORIAL STORIES -->
+  <!-- 4. EDITORIAL STORIES -->
   <section id="stories" style="padding:120px 0;background:var(--color-bg-2);border-top:1px solid color-mix(in srgb, var(--color-border) 40%, transparent)" aria-labelledby="stories-heading">
     <div class="chr-container">
       <div style="text-align:center;margin-bottom:70px" data-reveal="soft">
@@ -183,7 +183,7 @@
       </div>
       <div class="stories-grid" data-reveal-group="zoom">
         <article class="story-card travel-glass">
-          <div class="story-img-wrap"><div class="story-img" style="background-image:url('https://images.unsplash.com/photo-1542382257-80da9fb9f5abc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div></div>
+          <div class="story-img-wrap"><div class="story-img" style="background-image:linear-gradient(140deg, rgba(7,22,38,0.3), rgba(1,19,34,0.68)), radial-gradient(circle at 24% 24%, rgba(255,255,255,0.24), transparent 18%), linear-gradient(135deg, #2d6a8d 0%, #57b5d8 48%, #a7ecff 100%);"></div></div>
           <div class="story-content">
             <div style="font-size:0.85rem;color:var(--color-primary);text-transform:uppercase;font-weight:700;letter-spacing:0.05em">Guide</div>
             <h3 style="font-size:1.5rem;font-weight:800;line-height:1.3;letter-spacing:-0.01em;">When to travel the coast</h3>
@@ -192,7 +192,7 @@
           </div>
         </article>
         <article class="story-card travel-glass">
-          <div class="story-img-wrap"><div class="story-img" style="background-image:url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div></div>
+          <div class="story-img-wrap"><div class="story-img" style="background-image:linear-gradient(140deg, rgba(45,27,15,0.28), rgba(20,26,40,0.72)), radial-gradient(circle at 78% 26%, rgba(255,232,186,0.26), transparent 18%), linear-gradient(135deg, #745341 0%, #b6855f 44%, #f1c59d 100%);"></div></div>
           <div class="story-content">
             <div style="font-size:0.85rem;color:var(--color-accent);text-transform:uppercase;font-weight:700;letter-spacing:0.05em">Journal</div>
             <h3 style="font-size:1.5rem;font-weight:800;line-height:1.3;letter-spacing:-0.01em;">A three-day city map</h3>
@@ -201,7 +201,7 @@
           </div>
         </article>
         <article class="story-card travel-glass">
-          <div class="story-img-wrap"><div class="story-img" style="background-image:url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div></div>
+          <div class="story-img-wrap"><div class="story-img" style="background-image:linear-gradient(140deg, rgba(12,25,20,0.24), rgba(11,26,22,0.72)), radial-gradient(circle at 30% 18%, rgba(229,255,235,0.2), transparent 16%), linear-gradient(135deg, #32594a 0%, #4f9c82 46%, #bce7d4 100%);"></div></div>
           <div class="story-content">
             <div style="font-size:0.85rem;color:var(--color-secondary);text-transform:uppercase;font-weight:700;letter-spacing:0.05em">Retreat</div>
             <h3 style="font-size:1.5rem;font-weight:800;line-height:1.3;letter-spacing:-0.01em;">Slow travel in the hills</h3>

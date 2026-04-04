@@ -65,7 +65,7 @@
 <header class="chr-nav" role="banner" style="background: color-mix(in srgb, var(--color-bg) 85%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);">
   <div class="chr-container chr-nav-inner">
     <a href="index.html" class="chr-logo" style="font-weight: 700; letter-spacing: -0.02em;">CHRONOS ACADEMY</a>
-    <nav aria-label="Education navigation"><ul class="chr-nav-links"><li><a href="#programs">Programs</a></li><li><a href="#faculty">Faculty</a></li><li><a href="#journey">Admissions</a></li><li><a href="#apply">Apply</a></li></ul></nav>
+    <nav aria-label="Education navigation"><ul class="chr-nav-links"><li><a href="#curriculum">Programs</a></li><li><a href="#faculty">Faculty</a></li><li><a href="#journey">Admissions</a></li><li><a href="#apply">Apply</a></li></ul></nav>
     <div style="display:flex;align-items:center;gap:12px"><a href="index.html" class="chr-btn-outline" style="padding:10px 18px;font-size:.85rem; border-radius:100px;">All layouts</a><a href="#apply" class="chr-btn-primary" style="padding:12px 24px;font-size:.9rem; border-radius:100px; box-shadow:0 4px 12px color-mix(in srgb, var(--color-primary) 30%, transparent);">Start application</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
 </header>
@@ -86,7 +86,7 @@
     </div>
   </section>
 
-  <!-- § 2. STUDENT LIFE BENTO -->
+  <!-- 2. STUDENT LIFE BENTO -->
   <section id="student-life" style="padding:120px 0;background:linear-gradient(to bottom, var(--color-bg), var(--color-bg-2))" aria-labelledby="life-heading">
     <div class="chr-container">
       <div style="text-align:center;margin-bottom:60px" data-reveal="soft">
@@ -138,7 +138,45 @@
     </div>
   </section>
 
-  <!-- § 3. CURRICULUM PATHWAY -->
+  <section id="faculty" style="padding:120px 0;border-top:1px solid color-mix(in srgb, var(--color-border) 35%, transparent)" aria-labelledby="faculty-heading">
+    <div class="chr-container">
+      <div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:60px;gap:20px;flex-wrap:wrap" data-reveal="soft">
+        <div>
+          <div class="chr-heading-sm" style="color:var(--color-primary);font-weight:700;">Faculty spotlight</div>
+          <h2 id="faculty-heading" style="font-size:3rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0">Mentors across theory and practice</h2>
+        </div>
+        <p style="max-width:520px;color:var(--color-text-2);line-height:1.8;margin:0;font-size:1.05rem">This section makes the faculty promise real by giving the layout a clear academic authority layer instead of relying on generic campus copy.</p>
+      </div>
+      <div class="faculty-grid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px" data-reveal-group="zoom">
+        <article class="bento-card" style="padding:34px">
+          <div class="bento-content">
+            <div style="width:58px;height:58px;border-radius:18px;background:color-mix(in srgb,var(--color-primary) 16%,transparent);display:flex;align-items:center;justify-content:center;color:var(--color-primary);font-size:1.4rem;margin-bottom:24px;">A</div>
+            <h3 style="font-size:1.45rem;font-weight:800;letter-spacing:-0.01em;margin-bottom:8px">Prof. Naila Faruq</h3>
+            <div style="font-size:0.85rem;color:var(--color-primary);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:16px">Systems Design</div>
+            <p style="color:var(--color-text-2);line-height:1.8;margin:0">Guides studio-based work on interface systems, visual language, and research-to-product translation.</p>
+          </div>
+        </article>
+        <article class="bento-card" style="padding:34px">
+          <div class="bento-content">
+            <div style="width:58px;height:58px;border-radius:18px;background:color-mix(in srgb,var(--color-primary) 16%,transparent);display:flex;align-items:center;justify-content:center;color:var(--color-primary);font-size:1.4rem;margin-bottom:24px;">R</div>
+            <h3 style="font-size:1.45rem;font-weight:800;letter-spacing:-0.01em;margin-bottom:8px">Dr. Rehan Chowdhury</h3>
+            <div style="font-size:0.85rem;color:var(--color-primary);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:16px">Applied Computing</div>
+            <p style="color:var(--color-text-2);line-height:1.8;margin:0">Leads the applied technology track with a focus on interactive systems, prototyping, and production logic.</p>
+          </div>
+        </article>
+        <article class="bento-card" style="padding:34px">
+          <div class="bento-content">
+            <div style="width:58px;height:58px;border-radius:18px;background:color-mix(in srgb,var(--color-primary) 16%,transparent);display:flex;align-items:center;justify-content:center;color:var(--color-primary);font-size:1.4rem;margin-bottom:24px;">M</div>
+            <h3 style="font-size:1.45rem;font-weight:800;letter-spacing:-0.01em;margin-bottom:8px">Prof. Mira Solano</h3>
+            <div style="font-size:0.85rem;color:var(--color-primary);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:16px">Critical Practice</div>
+            <p style="color:var(--color-text-2);line-height:1.8;margin:0">Frames the humanities, writing, and research side of the campus so the program mix feels complete and credible.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CURRICULUM PATHWAY -->
   <section id="curriculum" style="padding:120px 0" aria-labelledby="curriculum-heading">
     <div class="chr-container" style="display:grid;grid-template-columns:1fr 2fr;gap:60px">
       <div data-reveal="left" style="position:sticky;top:120px;">
@@ -175,7 +213,42 @@
     </div>
   </section>
 
-  <!-- § 4. ADMISSIONS TRACKER -->
+  <section id="journey" style="padding:120px 0;background:linear-gradient(to bottom, var(--color-bg), var(--color-bg-2));border-top:1px solid color-mix(in srgb, var(--color-border) 35%, transparent)" aria-labelledby="journey-heading">
+    <div class="chr-container">
+      <div style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:50px" data-reveal="soft">
+        <div>
+          <div class="chr-heading-sm" style="color:var(--color-primary);font-weight:700;">Admissions journey</div>
+          <h2 id="journey-heading" style="font-size:3rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0">A clearer route into the campus</h2>
+        </div>
+        <p style="max-width:520px;color:var(--color-text-2);line-height:1.8;margin:0;font-size:1.05rem">This stage gives the education layout a real admissions board before the form, so the navigation and the story both stay honest.</p>
+      </div>
+      <div class="deadline-grid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px" data-reveal-group="right">
+        <article class="bento-card" style="padding:32px">
+          <div class="bento-content">
+            <div class="chr-badge" style="margin-bottom:16px">Step 01</div>
+            <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:10px;letter-spacing:-0.01em">Explore tracks</h3>
+            <p style="color:var(--color-text-2);line-height:1.8;margin:0">Review the curriculum, studio culture, and faculty mentors to decide which path fits your goals.</p>
+          </div>
+        </article>
+        <article class="bento-card" style="padding:32px">
+          <div class="bento-content">
+            <div class="chr-badge" style="margin-bottom:16px">Step 02</div>
+            <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:10px;letter-spacing:-0.01em">Prepare records</h3>
+            <p style="color:var(--color-text-2);line-height:1.8;margin:0">Gather transcripts, supporting material, and a short statement before entering the application flow.</p>
+          </div>
+        </article>
+        <article class="bento-card" style="padding:32px">
+          <div class="bento-content">
+            <div class="chr-badge" style="margin-bottom:16px">Step 03</div>
+            <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:10px;letter-spacing:-0.01em">Submit and track</h3>
+            <p style="color:var(--color-text-2);line-height:1.8;margin:0">Move into the admissions tracker below and keep the application state visible inside one coherent interface.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ADMISSIONS TRACKER -->
   <section id="apply" style="padding:120px 0;background:var(--color-bg-2);" aria-labelledby="apply-heading">
     <div class="chr-container">
       <div style="text-align:center;margin-bottom:60px" data-reveal="soft">

@@ -136,7 +136,7 @@
     </div>
   </section>
 
-  <!-- § 3. DOCTOR CAROUSEL -->
+  <!-- 3. DOCTOR CAROUSEL -->
   <section id="doctors" style="padding:120px 0;overflow:hidden" aria-labelledby="doctors-heading">
     <div class="chr-container" style="display:flex;justify-content:space-between;align-items:end;margin-bottom:60px;flex-wrap:wrap;gap:20px" data-reveal="soft">
       <div>
@@ -151,28 +151,109 @@
         <h3 style="font-size:1.3rem;margin-bottom:6px;font-weight:700;">Dr. Lina Rahman</h3>
         <div style="font-size:0.9rem;color:var(--color-primary);margin-bottom:20px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;">Cardiology</div>
         <p style="color:var(--color-text-2);font-size:1rem;margin-bottom:24px;line-height:1.6">Non-invasive diagnostics and preventive cardiac planning.</p>
-        <button class="chr-btn-primary" style="width:100%;justify-content:center;border-radius:100px;">Book Appointment</button>
+        <a href="#appointment" class="chr-btn-primary" style="width:100%;justify-content:center;border-radius:100px;">Book Appointment</a>
       </div>
       <div class="doctor-card" style="min-width:320px;scroll-snap-align:center;padding:40px 30px;text-align:center">
         <div class="doctor-avatar" style="background:linear-gradient(135deg,var(--color-secondary),var(--color-primary))"></div>
         <h3 style="font-size:1.3rem;margin-bottom:6px;font-weight:700;">Dr. Omar Sheikh</h3>
         <div style="font-size:0.9rem;color:var(--color-primary);margin-bottom:20px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;">Orthopedics</div>
         <p style="color:var(--color-text-2);font-size:1rem;margin-bottom:24px;line-height:1.6">Joint reconstruction and injury pathways.</p>
-        <button class="chr-btn-primary" style="width:100%;justify-content:center;border-radius:100px;">Book Appointment</button>
+        <a href="#appointment" class="chr-btn-primary" style="width:100%;justify-content:center;border-radius:100px;">Book Appointment</a>
       </div>
       <div class="doctor-card" style="min-width:320px;scroll-snap-align:center;padding:40px 30px;text-align:center">
         <div class="doctor-avatar" style="background:linear-gradient(135deg,var(--color-accent),var(--color-primary))"></div>
         <h3 style="font-size:1.3rem;margin-bottom:6px;font-weight:700;">Dr. Sara Mondal</h3>
         <div style="font-size:0.9rem;color:var(--color-primary);margin-bottom:20px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;">Internal Medicine</div>
         <p style="color:var(--color-text-2);font-size:1rem;margin-bottom:24px;line-height:1.6">Continuity of care for complex adult medicine.</p>
-        <button class="chr-btn-primary" style="width:100%;justify-content:center;border-radius:100px;">Book Appointment</button>
+        <a href="#appointment" class="chr-btn-primary" style="width:100%;justify-content:center;border-radius:100px;">Book Appointment</a>
       </div>
       <div class="doctor-card" style="min-width:320px;scroll-snap-align:center;padding:40px 30px;text-align:center">
         <div class="doctor-avatar" style="background:linear-gradient(135deg,var(--color-secondary),var(--color-accent))"></div>
         <h3 style="font-size:1.3rem;margin-bottom:6px;font-weight:700;">Dr. Liam Chen</h3>
         <div style="font-size:0.9rem;color:var(--color-primary);margin-bottom:20px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;">Neurology</div>
         <p style="color:var(--color-text-2);font-size:1rem;margin-bottom:24px;line-height:1.6">Advanced neurodiagnostics and treatment.</p>
-        <button class="chr-btn-primary" style="width:100%;justify-content:center;border-radius:100px;">Book Appointment</button>
+        <a href="#appointment" class="chr-btn-primary" style="width:100%;justify-content:center;border-radius:100px;">Book Appointment</a>
+      </div>
+    </div>
+  </section>
+  <section id="pathway" style="padding:120px 0;background:var(--color-bg-2);border-top:1px solid color-mix(in srgb, var(--color-border) 40%, transparent)" aria-labelledby="pathway-heading">
+    <div class="chr-container">
+      <div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:50px;gap:20px;flex-wrap:wrap" data-reveal="soft">
+        <div>
+          <div class="chr-heading-sm" style="color:var(--color-primary);font-weight:700;">Patient journey</div>
+          <h2 id="pathway-heading" style="font-size:2.8rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:0">From triage to follow-up</h2>
+        </div>
+        <p style="max-width:520px;color:var(--color-text-2);line-height:1.8;margin:0;font-size:1.05rem">This section makes the navigation promise real by mapping a patient-safe flow: intake, review, visit, and care continuity.</p>
+      </div>
+      <div class="care-grid-two path-grid" data-reveal-group="right">
+        <article class="glass-panel care-panel">
+          <div class="chr-badge" style="margin-bottom:16px">01 / Intake</div>
+          <h3 style="font-size:1.4rem;font-weight:700;margin-bottom:12px">Urgent line and digital triage</h3>
+          <p style="color:var(--color-text-2);line-height:1.8;margin:0">Start with symptoms, urgency, insurance, and preferred location before routing to the right clinical team.</p>
+        </article>
+        <article class="glass-panel care-panel">
+          <div class="chr-badge" style="margin-bottom:16px">02 / Review</div>
+          <h3 style="font-size:1.4rem;font-weight:700;margin-bottom:12px">Specialist review and prep</h3>
+          <p style="color:var(--color-text-2);line-height:1.8;margin:0">Collect prerequisite labs, prior records, and department-specific forms before the visit is confirmed.</p>
+        </article>
+        <article class="glass-panel care-panel">
+          <div class="chr-badge" style="margin-bottom:16px">03 / Visit</div>
+          <h3 style="font-size:1.4rem;font-weight:700;margin-bottom:12px">On-site consultation</h3>
+          <p style="color:var(--color-text-2);line-height:1.8;margin:0">Use the provider directory, time windows, and room preparation messaging to present a credible clinic flow.</p>
+        </article>
+        <article class="glass-panel care-panel">
+          <div class="chr-badge" style="margin-bottom:16px">04 / Follow-up</div>
+          <h3 style="font-size:1.4rem;font-weight:700;margin-bottom:12px">Recovery and continuity</h3>
+          <p style="color:var(--color-text-2);line-height:1.8;margin:0">Surface results, post-visit notes, medication reminders, and the next checkpoint inside the same account shell.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section id="appointment" style="padding:120px 0" aria-labelledby="appointment-heading">
+    <div class="chr-container care-grid-two" style="align-items:start">
+      <div data-reveal="left">
+        <div class="chr-heading-sm" style="color:var(--color-primary);font-weight:700;">Appointment desk</div>
+        <h2 id="appointment-heading" style="font-size:2.9rem;font-weight:700;letter-spacing:-0.02em;line-height:1.05;margin:14px 0 18px">Book a real visit block.</h2>
+        <p style="color:var(--color-text-2);line-height:1.8;font-size:1.08rem;max-width:520px">This form gives the medical layout a genuine appointment target instead of a fake CTA. It stays demo-safe while preserving a believable healthcare structure.</p>
+        <div class="glass-panel care-panel" style="margin-top:28px">
+          <div style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-text-3);margin-bottom:12px">Availability</div>
+          <div style="display:grid;gap:14px">
+            <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap"><strong>Downtown clinic</strong><span style="color:var(--color-text-2)">Mon-Fri / 8:00-18:00</span></div>
+            <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap"><strong>Diagnostics wing</strong><span style="color:var(--color-text-2)">Sat / 9:00-14:00</span></div>
+            <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap"><strong>Virtual consults</strong><span style="color:var(--color-text-2)">Daily / 10:00-20:00</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="glass-panel care-panel" data-reveal="right">
+        <form class="care-form" aria-label="Appointment request">
+          <input type="text" placeholder="Full name" autocomplete="name">
+          <input type="email" placeholder="Email address" autocomplete="email">
+          <div class="care-grid-two">
+            <select>
+              <option>Choose department</option>
+              <option>Cardiology</option>
+              <option>Orthopedics</option>
+              <option>Neurology</option>
+              <option>Internal Medicine</option>
+            </select>
+            <input type="date">
+          </div>
+          <div class="care-grid-two">
+            <select>
+              <option>Visit type</option>
+              <option>New consultation</option>
+              <option>Follow-up</option>
+              <option>Diagnostics</option>
+            </select>
+            <select>
+              <option>Preferred format</option>
+              <option>In person</option>
+              <option>Virtual</option>
+            </select>
+          </div>
+          <textarea rows="5" placeholder="Symptoms, goals, or insurance notes"></textarea>
+          <button type="submit" class="chr-btn-primary">Request appointment</button>
+        </form>
       </div>
     </div>
   </section>
