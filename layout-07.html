@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Chronos Layout 07 - Futuristic launch page with a live relative countdown, glass panels, and multi-era presentation.">
+  <meta name="description" content="Chronos Layout 07 - Futuristic launch page with a fixed launch countdown, glass panels, and multi-era presentation.">
   <title>Chronos | Futuristic Launch</title>
-  <script>(function(){try{var p=JSON.parse(localStorage.getItem('chronos-prefs'));if(p&&p.era)document.documentElement.setAttribute('data-era',p.era)}catch(e){}})()</script>
+  <script src="./theme-boot.js"></script>
   <script type="module" src="/src/main.js"></script>
   <style>
     [x-cloak]{display:none!important}
@@ -73,7 +73,7 @@
           Use this layout for launch pages, waitlists, and product reveals. The page now reflects the real Chronos product: 15 layouts, 12 eras, 16 preset palettes, and 65+ font choices managed from one shared customizer.
         </p>
 
-        <div class="countdown-grid" data-countdown data-launch-offset-days="120" aria-label="Countdown to launch window" data-reveal-group>
+        <div class="countdown-grid" data-countdown data-launch-date="2026-12-01T00:00:00Z" aria-label="Countdown to launch window" data-reveal-group>
           <div class="count-item"><span class="count-val" data-countdown-days>00</span><div class="count-label">Days</div></div>
           <div class="count-item"><span class="count-val" data-countdown-hours>00</span><div class="count-label">Hours</div></div>
           <div class="count-item"><span class="count-val" data-countdown-mins>00</span><div class="count-label">Minutes</div></div>
@@ -105,7 +105,7 @@
           <div class="prompt" style="margin-top:10px">$ chronos --preview layout-07</div>
         </div>
         <p style="margin:22px 0 0;color:var(--color-text-2);font-size:.9rem;line-height:1.7">
-          The countdown is intentionally relative to the current date, so this source demo does not ship with an expired launch moment.
+          The countdown now points to one fixed launch date, so it behaves like a real launch timer across reloads and sessions.
         </p>
       </aside>
     </div>
@@ -168,7 +168,7 @@
     <div class="chr-container">
       <div class="feature-grid" data-reveal-group>
         <div class="glass-card" style="text-align:center"><div style="font-family:var(--font-accent);font-size:1.8rem;color:var(--color-primary);margin-bottom:14px">01</div><div style="font-family:var(--font-accent);font-weight:700;font-size:.95rem;text-transform:uppercase">Launch headline</div></div>
-        <div class="glass-card" style="text-align:center"><div style="font-family:var(--font-accent);font-size:1.8rem;color:var(--color-primary);margin-bottom:14px">02</div><div style="font-family:var(--font-accent);font-weight:700;font-size:.95rem;text-transform:uppercase">Relative countdown</div></div>
+        <div class="glass-card" style="text-align:center"><div style="font-family:var(--font-accent);font-size:1.8rem;color:var(--color-primary);margin-bottom:14px">02</div><div style="font-family:var(--font-accent);font-weight:700;font-size:.95rem;text-transform:uppercase">Fixed launch countdown</div></div>
         <div class="glass-card" style="text-align:center"><div style="font-family:var(--font-accent);font-size:1.8rem;color:var(--color-primary);margin-bottom:14px">03</div><div style="font-family:var(--font-accent);font-weight:700;font-size:.95rem;text-transform:uppercase">Waitlist form</div></div>
       </div>
     </div>

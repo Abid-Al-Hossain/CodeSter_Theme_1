@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Chronos Layout 13 - Education website with program explorer, admissions board, faculty spotlight, and campus structure.">
   <title>Chronos | Education Campus</title>
-  <script>(function(){try{var p=JSON.parse(localStorage.getItem('chronos-prefs'));if(p&&p.era)document.documentElement.setAttribute('data-era',p.era)}catch(e){}})()</script>
+  <script src="./theme-boot.js"></script>
   <script type="module" src="/src/main.js"></script>
   <style>
     [x-cloak]{display:none!important}
@@ -16,15 +16,16 @@
     .edu-board{position:sticky;top:100px;display:grid;gap:18px}
     .edu-panel,.program-band,.deadline-card,.faculty-spotlight,.faculty-mini,.apply-panel{background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md)}
     .edu-panel,.program-band,.deadline-card,.faculty-spotlight,.faculty-mini,.apply-panel{padding:22px}
-    .program-stack,.deadline-grid,.faculty-grid{display:grid;gap:18px}
+    .program-stack,.deadline-grid,.faculty-grid,.edu-metrics{display:grid;gap:18px}
     .faculty-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+    .edu-metrics{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
     .faculty-mini-list{display:grid;gap:14px}
     .apply-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
     .apply-form input,.apply-form select,.apply-form textarea{width:100%;padding:14px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2);color:var(--color-text);font:inherit;outline:none}
     .apply-form textarea,.apply-form button{grid-column:1 / -1}
     .apply-form textarea{min-height:120px;resize:vertical}
     @media(max-width:1040px){.edu-shell,.faculty-grid,.deadline-grid{grid-template-columns:1fr}.edu-board{position:static}}
-    @media(max-width:720px){.apply-form{grid-template-columns:1fr}}
+    @media(max-width:720px){.apply-form,.edu-metrics{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -50,7 +51,7 @@
         <h1 id="edu-heading" class="chr-heading-xl" style="margin-bottom:1rem">An academic structure with admissions logic, program depth, and campus rhythm.</h1>
         <p style="font-size:1.03rem;color:var(--color-text-2);line-height:1.85;max-width:720px;margin-bottom:1.6rem">This is no longer a generic marketing shell. It reads more like a school or institute website with an admissions board, program explorer, faculty spotlight, and application desk.</p>
         <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:1.8rem"><a href="#programs" class="chr-btn-primary" style="padding:15px 28px">Explore programs</a><a href="#journey" class="chr-btn-ghost" style="padding:15px 24px">View admission timeline</a></div>
-        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px" data-reveal-group>
+        <div class="edu-metrics" data-reveal-group>
           <div class="edu-panel"><div style="font-size:1.8rem;font-weight:800;color:var(--color-primary)">12</div><div style="font-size:0.82rem;color:var(--color-text-3)">Learning tracks</div></div>
           <div class="edu-panel"><div style="font-size:1.8rem;font-weight:800;color:var(--color-primary)" data-count="4800">0</div><div style="font-size:0.82rem;color:var(--color-text-3)">Active learners</div></div>
           <div class="edu-panel"><div style="font-size:1.8rem;font-weight:800;color:var(--color-primary)">91%</div><div style="font-size:0.82rem;color:var(--color-text-3)">Completion rate</div></div>

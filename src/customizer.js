@@ -103,16 +103,16 @@ const DEFAULT_THEME = {
 
 // DOWNLOAD_FEATURE_START
 const DOWNLOAD_LAYOUT_OPTIONS = [
-  { file: 'layout-01.html', short: 'L01', label: 'SaaS Landing Page' },
+  { file: 'layout-01.html', short: 'L01', label: 'Modern SaaS Landing' },
   { file: 'layout-02.html', short: 'L02', label: 'Creative Portfolio' },
   { file: 'layout-03.html', short: 'L03', label: 'Editorial Feed' },
   { file: 'layout-04.html', short: 'L04', label: 'Text Manuscript' },
   { file: 'layout-05.html', short: 'L05', label: 'Web App Dashboard' },
   { file: 'layout-06.html', short: 'L06', label: 'Artistic Showcase' },
-  { file: 'layout-07.html', short: 'L07', label: 'Launch Page' },
+  { file: 'layout-07.html', short: 'L07', label: 'Futuristic Launch' },
   { file: 'layout-08.html', short: 'L08', label: 'Minimal Journal' },
-  { file: 'layout-09.html', short: 'L09', label: 'Digital Agency' },
-  { file: 'layout-10.html', short: 'L10', label: 'Institutional Archive' },
+  { file: 'layout-09.html', short: 'L09', label: 'Cyberpunk Agency' },
+  { file: 'layout-10.html', short: 'L10', label: 'Gothic Archive' },
   { file: 'layout-11.html', short: 'L11', label: 'Enterprise Business' },
   { file: 'layout-12.html', short: 'L12', label: 'Medical Care' },
   { file: 'layout-13.html', short: 'L13', label: 'Education Campus' },
@@ -263,6 +263,49 @@ function loadPrefs() {
   }
 }
 
+function buildBootTheme(prefs) {
+  const preset = cloneThemePreset(prefs || DEFAULT_THEME)
+  const eraDefaults = ERA_DEFAULT_FONTS[preset.era] || DEFAULT_THEME.fonts
+
+  return {
+    era: preset.era,
+    fonts: { ...eraDefaults, ...preset.fonts },
+    colors: { ...DEFAULT_COLORS, ...preset.colors, surface: preset.colors.surface || preset.colors.bg2 || DEFAULT_COLORS.surface },
+    hasCustomFonts: preset.hasCustomFonts,
+    hasCustomColors: preset.hasCustomColors,
+  }
+}
+
+function preloadFonts(fonts) {
+  const families = [...new Set(Object.values(fonts || {}).filter(Boolean))]
+  if (!families.length || document.querySelector('link[data-chronos-preload-fonts="true"]')) return
+
+  const link = document.createElement('link')
+  link.rel = 'stylesheet'
+  link.dataset.chronosPreloadFonts = 'true'
+  link.href = `https://fonts.googleapis.com/css2?display=swap&family=${families.map((font) => encodeURIComponent(font).replace(/%20/g, '+')).join('&family=')}`
+  document.head.appendChild(link)
+}
+
+function applyBootTheme(prefs) {
+  const theme = buildBootTheme(prefs)
+  document.documentElement.setAttribute('data-era', theme.era)
+
+  if (prefs?.hasCustomFonts && theme.fonts) {
+    preloadFonts(theme.fonts)
+    Object.entries(theme.fonts).forEach(([role, font]) => {
+      setVar(`font-${role}`, `'${font}', sans-serif`)
+    })
+  }
+
+  if (prefs?.hasCustomColors && theme.colors) {
+    const tokens = buildDerivedColorTokens(theme.colors)
+    Object.entries(tokens).forEach(([token, value]) => {
+      setVar(token, value)
+    })
+  }
+}
+
 async function applyEra(era) {
   document.documentElement.setAttribute('data-era', era)
   const eraFonts = ERA_DEFAULT_FONTS[era]
@@ -318,6 +361,11 @@ function getThemePresetFromStore(store) {
   }
 }
 // DOWNLOAD_FEATURE_END
+
+const INITIAL_PREFS = loadPrefs()
+if (INITIAL_PREFS) {
+  applyBootTheme(INITIAL_PREFS)
+}
 
 Alpine.store('chr', {
   open: false,
@@ -557,11 +605,6 @@ Alpine.data('chrFontDropdown', (role) => ({
 window.Alpine = Alpine
 
 document.addEventListener('DOMContentLoaded', () => {
-  const prefs = loadPrefs()
-  if (prefs?.era) {
-    document.documentElement.setAttribute('data-era', prefs.era)
-  }
-
   const mount = document.getElementById('chr-customizer-mount')
   if (CUSTOMIZER_ENABLED && mount) {
     mount.innerHTML = CUSTOMIZER_HTML

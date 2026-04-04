@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Chronos Layout 15 - Social and community website with app-like feed, side rails, creator tools, and trust messaging.">
   <title>Chronos | Social Community</title>
-  <script>(function(){try{var p=JSON.parse(localStorage.getItem('chronos-prefs'));if(p&&p.era)document.documentElement.setAttribute('data-era',p.era)}catch(e){}})()</script>
+  <script src="./theme-boot.js"></script>
   <script type="module" src="/src/main.js"></script>
   <style>
     [x-cloak]{display:none!important}
@@ -28,6 +28,7 @@
     .sc-inline-actions{display:flex;gap:18px;flex-wrap:wrap;font-size:.82rem;color:var(--color-text-2)}
     .sc-groups{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     .sc-group-card{display:grid;gap:10px}
+    .sc-triple{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
     .sc-feed-card,.sc-group-card,.sc-stat{transition:transform .24s var(--ease),box-shadow .24s var(--ease)}
     .sc-feed-card:hover,.sc-group-card:hover,.sc-stat:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
     .sc-side-title{font-size:.74rem;text-transform:uppercase;letter-spacing:.12em;color:var(--color-text-3);margin-bottom:12px}
@@ -38,7 +39,7 @@
     .sc-form input,.sc-form select,.sc-form textarea{width:100%;padding:13px 14px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2);color:var(--color-text);font:inherit;outline:none}
     .sc-form textarea{min-height:96px;resize:vertical}
     @media(max-width:1180px){.sc-shell{grid-template-columns:220px minmax(0,1fr)}.sc-right{display:none}}
-    @media(max-width:860px){.sc-shell{grid-template-columns:1fr}.sc-left{position:static;height:auto;border-right:none;border-bottom:1px solid var(--color-border)}.sc-main{padding:20px}.sc-groups{grid-template-columns:1fr}}
+    @media(max-width:860px){.sc-shell{grid-template-columns:1fr}.sc-left{position:static;height:auto;border-right:none;border-bottom:1px solid var(--color-border)}.sc-main{padding:20px}.sc-groups,.sc-triple{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -126,7 +127,7 @@
     <section id="creators" class="sc-card" aria-labelledby="creators-heading" data-reveal="right">
       <div class="chr-heading-sm">Creator tools</div>
       <h2 id="creators-heading" class="chr-heading-xl" style="margin-bottom:16px">Support hosts, creators, and moderators in the same shell.</h2>
-      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px" data-reveal-group="right">
+      <div class="sc-triple" data-reveal-group="right">
         <div class="sc-stat"><strong>Host communities</strong><p style="margin-top:10px;color:var(--color-text-2);line-height:1.75">Event prompts, gated spaces, and recurring discussion cycles.</p></div>
         <div class="sc-stat"><strong>Publish updates</strong><p style="margin-top:10px;color:var(--color-text-2);line-height:1.75">Announcement cards, feed moments, and premium content notices.</p></div>
         <div class="sc-stat"><strong>Grow membership</strong><p style="margin-top:10px;color:var(--color-text-2);line-height:1.75">Invite paths, onboarding flows, and creator-led retention mechanics.</p></div>
@@ -136,7 +137,7 @@
     <section id="safety" class="sc-card" aria-labelledby="safety-heading" data-reveal="left">
       <div class="chr-heading-sm">Trust and safety</div>
       <h2 id="safety-heading" class="chr-heading-xl" style="margin-bottom:16px">A social site needs visible safety structure.</h2>
-      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px" data-reveal-group="left">
+      <div class="sc-triple" data-reveal-group="left">
         <div class="sc-stat"><strong>Moderation paths</strong><p style="margin-top:10px;color:var(--color-text-2);line-height:1.75">Report, review, and escalation language for healthy spaces.</p></div>
         <div class="sc-stat"><strong>Privacy controls</strong><p style="margin-top:10px;color:var(--color-text-2);line-height:1.75">Different visibility models for public, private, and cohort communities.</p></div>
         <div class="sc-stat"><strong>Healthy prompts</strong><p style="margin-top:10px;color:var(--color-text-2);line-height:1.75">Contribution design that avoids noisy, manipulative engagement cues.</p></div>

@@ -1,6 +1,8 @@
 import './style.css'
 import './customizer.js'
 
+const DEFAULT_LAUNCH_DATE = '2026-12-01T00:00:00Z'
+
 function showDemoToast(message) {
   let toast = document.getElementById('chr-demo-toast')
   if (!toast) {
@@ -53,8 +55,9 @@ function initCurrentDate() {
 
 function initCountdowns() {
   document.querySelectorAll('[data-countdown]').forEach((countdown) => {
-    const offsetDays = Number(countdown.dataset.launchOffsetDays || '120')
-    const targetTime = Date.now() + (offsetDays * 24 * 60 * 60 * 1000)
+    const launchDate = countdown.dataset.launchDate || DEFAULT_LAUNCH_DATE
+    const parsedTarget = Date.parse(launchDate)
+    const targetTime = Number.isNaN(parsedTarget) ? Date.parse(DEFAULT_LAUNCH_DATE) : parsedTarget
     const daysNode = countdown.querySelector('[data-countdown-days]')
     const hoursNode = countdown.querySelector('[data-countdown-hours]')
     const minsNode = countdown.querySelector('[data-countdown-mins]')
