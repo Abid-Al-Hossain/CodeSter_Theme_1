@@ -7,150 +7,146 @@
   <title>Chronos | Minimal Journal</title>
   <script src="./theme-boot.js"></script>
   <script type="module" src="/src/main.js"></script>
-  <style>
+<style>
     [x-cloak]{display:none!important}
-    body{background:var(--color-bg);color:var(--color-text);--reveal-distance:14px;--group-reveal-distance:12px}
-    .j-container{max-width:680px;margin:0 auto;padding:0 1.5rem}
+    body{background:var(--color-bg);color:var(--color-text);--reveal-distance:30px;--group-reveal-distance:20px; font-weight: 300; position:relative;}
+    /* Grain overlay */
+    body::after { content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.08"/></svg>'); pointer-events: none; z-index: 99999; mix-blend-mode: overlay; }
+
+    .j-container{max-width:800px;margin:0 auto;padding:0 2rem}
     .j-header{border-bottom:1px solid var(--color-border);padding:20px 0;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:80px}
-    .j-issue{font-size:0.7rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:0.2em}
-    .j-body p{font-size:1.1rem;line-height:1.9;margin-bottom:1.8rem;color:var(--color-text)}
-    .j-body h2{font-size:1.6rem;font-weight:700;margin:3rem 0 1.2rem;letter-spacing:-0.02em}
-    .j-body h3{font-size:1.2rem;font-weight:700;margin:2rem 0 0.8rem}
-    .j-pull-quote{margin:3rem 0;padding-left:28px;border-left:3px solid var(--color-text);font-size:1.3rem;line-height:1.5;font-style:italic;color:var(--color-text-2)}
-    .j-rule{border:none;border-top:1px solid var(--color-border);margin:3rem 0}
+    .j-issue{font-size:0.75rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:0.3em;font-weight:600;}
+    
+    .j-body-first::first-letter { font-size: 5.5rem; float: left; line-height: 0.8; padding-right: 12px; font-weight: 400; color: var(--color-primary); font-family: var(--font-heading); margin-top: 4px; }
+    .j-body p{font-size:1.35rem;line-height:2.1;margin-bottom:2.5rem;color:var(--color-text);opacity:0.9}
+    .j-body h2{font-size:2.2rem;font-weight:400;margin:4rem 0 1.5rem;letter-spacing:-0.03em; font-family:var(--font-heading)}
+    .j-body h3{font-size:1.4rem;font-weight:400;margin:2rem 0 1rem;font-family:var(--font-heading)}
+    
+    .j-pull-quote{margin:4rem 0;padding: 40px; border-left:4px solid var(--color-primary);font-size:2.2rem;line-height:1.4;font-style:italic;color:var(--color-text-2); background: color-mix(in srgb, var(--color-bg-2) 50%, transparent); font-family: var(--font-heading); letter-spacing:-0.02em;}
+    .j-rule{border:none;border-top:1px solid var(--color-border);margin:4rem auto;width: 50%; opacity: 0.5;}
     .j-tags{display:flex;gap:8px;flex-wrap:wrap;margin:1.5rem 0}
-    .j-tag{padding:4px 12px;border:1px solid var(--color-border);border-radius:var(--radius-full);font-size:0.75rem;color:var(--color-text-2)}
-    .j-post-card{border-bottom:1px solid var(--color-border);padding:32px 0;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
-    .j-reading-time{font-size:0.72rem;color:var(--color-text-3);white-space:nowrap;margin-top:4px}
-    .j-post-image{width:100px;height:80px;background:var(--color-bg-3);border-radius:var(--radius-sm);flex-shrink:0;border:1px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:700;color:var(--color-text-3)}
-    .note-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-    .note-card{padding:22px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg)}
-    .progress{position:fixed;top:0;left:0;height:2px;background:var(--color-text);z-index:9999;width:0;transition:width 0.1s linear}
+    .j-tag{padding:6px 16px;border:1px solid var(--color-border);border-radius:var(--radius-full);font-size:0.8rem;color:var(--color-text-2); transition: all 0.3s;}
+    .j-tag:hover { background: var(--color-text); color: var(--color-bg); }
+    
+    .j-post-card{border-bottom:1px solid var(--color-border);padding:40px 0;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:start; transition: padding 0.4s ease, opacity 0.4s;}
+    .j-post-card:hover { padding-left: 20px; opacity: 1; border-color: var(--color-primary); }
+    .j-post-card h3 { transition: color 0.3s; }
+    .j-post-card:hover h3 { color: var(--color-primary); }
+    
+    .j-reading-time{font-size:0.8rem;color:var(--color-text-3);white-space:nowrap;margin-top:8px}
+    .j-post-image{width:120px;height:100px;background:var(--color-bg-2);border-radius:var(--radius-none);flex-shrink:0;border:1px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:400;color:var(--color-text-3);font-family:var(--font-heading); transition: transform 0.5s ease;}
+    .j-post-card:hover .j-post-image { transform: scale(1.05); border-color: var(--color-primary); }
+    
+    .note-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}
+    .note-card{padding:40px;border:1px solid var(--color-border);border-radius:var(--radius-none);background:var(--color-bg);transition: transform 0.4s ease, box-shadow 0.4s ease;}
+    .note-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--color-primary); }
+    
+    .progress{position:fixed;top:0;left:0;height:4px;background:var(--color-primary);z-index:9999;width:0;transition:width 0.1s linear}
     @media(max-width:720px){.j-post-card,.note-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
 <div class="progress" id="reading-progress" aria-hidden="true"></div>
 <a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
-<header class="chr-nav" role="banner">
+<header class="chr-nav" role="banner" style="background: color-mix(in srgb, var(--color-bg) 90%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);">
   <div class="chr-container chr-nav-inner">
-    <a href="index.html" class="chr-logo">CHRONOS</a>
-    <nav><ul class="chr-nav-links"><li><a href="#essays">Essays</a></li><li><a href="#notes">Notes</a></li><li><a href="#reading">Reading</a></li><li><a href="#archive">Archive</a></li></ul></nav>
-    <div style="display:flex;gap:12px;align-items:center"><a href="#subscribe" class="chr-btn-primary" style="padding:10px 22px;font-size:0.85rem">Subscribe</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+    <a href="index.html" class="chr-logo" style="font-weight:400;letter-spacing:0.1em;">CHRONOS.</a>
+    <nav><ul class="chr-nav-links"><li><a href="#essays" style="font-weight:400;">Essays</a></li><li><a href="#notes" style="font-weight:400;">Notes</a></li><li><a href="#reading" style="font-weight:400;">Reading</a></li><li><a href="#archive" style="font-weight:400;">Archive</a></li></ul></nav>
+    <div style="display:flex;gap:12px;align-items:center"><a href="#subscribe" class="chr-btn-outline" style="padding:10px 22px;font-size:0.85rem;border-radius:0;">Subscribe</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
 </header>
 <main id="main-content">
-<div style="background:var(--color-bg);padding:80px 0 0">
-  <div class="j-container">
-    <div class="j-header">
-      <span class="j-issue">Chronos Journal | Volume I | Issue 08</span>
-      <span class="j-issue">October 2026</span>
+<div style="background:var(--color-bg);padding:160px 0 80px">
+  <div class="j-container" style="max-width:700px;text-align:center">
+    <div class="j-header" style="justify-content:center;flex-direction:column;align-items:center;border-bottom:none;margin-bottom:60px;gap:12px">
+      <span class="j-issue">Chronos Journal // Essay</span>
+      <span class="j-issue" style="color:var(--color-text)">Vol. I — Issue 08</span>
     </div>
-    <div data-reveal="soft">
-      <div class="j-tags"><span class="j-tag">Design</span><span class="j-tag">Philosophy</span><span class="j-tag">Craft</span></div>
-      <h1 style="font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;letter-spacing:-0.03em;line-height:1.1;margin-bottom:24px">The case for designing across all eras simultaneously</h1>
-      <p style="font-size:1.1rem;color:var(--color-text-2);line-height:1.6;margin-bottom:32px">On minimalism, historic memory, and why the best systems do not trap a product inside one visual moment.</p>
-      <div style="display:flex;gap:16px;align-items:center;margin-bottom:56px">
-        <div style="width:36px;height:36px;background:var(--color-text);border-radius:50%"></div>
-        <div><div style="font-size:0.9rem;font-weight:600">Chronos Editorial</div><div style="font-size:0.78rem;color:var(--color-text-3)">12 min read | October 3, 2026</div></div>
+    <div data-reveal>
+      <h1 style="font-size:clamp(3.5rem,8vw,5.5rem);font-weight:400;letter-spacing:-0.04em;line-height:0.95;margin-bottom:40px;font-family:var(--font-heading)">The Void<br><span style="color:var(--color-text-2);font-style:italic;">in Design.</span></h1>
+      <p style="font-size:1.4rem;color:var(--color-text-2);line-height:1.6;margin-bottom:50px;font-family:var(--font-body);max-width:550px;margin-left:auto;margin-right:auto;">On minimalism, negative space, and why the best systems are almost completely invisible.</p>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:20px; border-top: 1px solid var(--color-border); padding-top: 30px; width: 60%; margin: 0 auto;">
+        <div style="font-size:0.95rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase">Chronos Editorial</div>
+        <div style="font-size:0.85rem;color:var(--color-text-3)">Reading time: 12 min &middot; Published Oct 2026</div>
       </div>
     </div>
   </div>
 </div>
-<section id="essays" style="padding-bottom:80px">
-  <div class="j-container j-body">
-    <div data-reveal="soft">
-      <p>The history of design is not a straight line toward perfection. It is a sequence of arguments, each era pushing back on the excesses of the last while preserving the parts that still matter.</p>
-      <p>Minimalism has always defined itself through subtraction. What changes across decades is not the instinct to reduce, but the thing being reduced: ornament, texture, chrome, noise, friction, hype.</p>
-      <div class="j-pull-quote">Good design can be quiet without becoming forgettable.</div>
+<section id="essays" style="padding-bottom:120px">
+  <div class="j-container j-body" style="max-width:680px">
+    <div data-reveal>
+      <p class="j-body-first">The history of design is not a straight line toward perfection. It is a sequence of arguments, each era pushing back on the excesses of the last while preserving the parts that still matter.</p>
+      <p>Minimalism has always defined itself through subtraction. What changes across decades is not the instinct to reduce, but the thing being reduced: ornament, texture, chrome, noise, friction, hype. When we remove the unnecessary, we are forced to stare directly at the structure that remains.</p>
+      <div class="j-pull-quote">"Good design can be entirely quiet without ever becoming forgettable."</div>
       <p>That is what makes Chronos interesting as a system rather than a style pack. The Minimalist era is not empty. It is informed by every other era in the engine and made stronger because of that memory.</p>
       <hr class="j-rule">
-      <h2>The system, not the moment</h2>
+      <h2 style="text-align:center;font-weight:400;font-size:2.5rem;margin-bottom:40px">The System, Not the Moment</h2>
       <p>Most themes are snapshots of taste. They answer the question of what a site should look like right now. Chronos is more useful when it answers a different question: what token system can generate many valid looks over time?</p>
-      <p>If the palette, typography, spacing, radius, and surface behavior are abstracted properly, the layout outlives the trend. That is the value proposition the journal is trying to communicate.</p>
-      <h3>What this means for the buyer</h3>
-      <p>Instead of purchasing one aesthetic lane, the buyer gains a structure that can move from minimal to cyberpunk to gothic without rebuilding the page architecture each time.</p>
+      <p style="margin-bottom:60px">If the palette, typography, spacing, radius, and surface behavior are abstracted properly, the layout outlives the trend. That is the value proposition the journal is trying to communicate.</p>
     </div>
   </div>
 </section>
-<section id="notes" style="background:var(--color-bg-2);padding:72px 0;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border)" aria-labelledby="notes-heading">
-  <div class="j-container">
-    <div style="display:flex;justify-content:space-between;gap:20px;align-items:end;flex-wrap:wrap;margin-bottom:28px" data-reveal="soft">
-      <div>
-        <div class="j-issue" style="margin-bottom:10px">Field notes</div>
-        <h2 id="notes-heading" style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">Short notes for fragments, references, and draft observations.</h2>
-      </div>
-      <p style="max-width:420px;color:var(--color-text-2);line-height:1.75">This section now exists as a real content block, so the Notes link lands on an actual journal pattern instead of a false promise.</p>
+<section id="notes" style="padding:120px 0;border-top:1px solid color-mix(in srgb, var(--color-border) 50%, transparent);background:var(--color-bg-2)" aria-labelledby="notes-heading">
+  <div class="j-container" style="max-width:1000px">
+    <div style="text-align:center;margin-bottom:80px" data-reveal>
+      <div class="j-issue" style="margin-bottom:24px">Field Notes</div>
+      <h2 id="notes-heading" style="font-size:2.5rem;font-weight:400;letter-spacing:-0.03em;font-family:var(--font-heading)">Fragmentary Observations.</h2>
     </div>
-    <div class="note-grid" data-reveal-group="soft">
+    <div class="note-grid" data-reveal-group>
       <article class="note-card">
-        <div class="j-issue" style="margin-bottom:10px">Observation 01</div>
-        <p style="font-size:0.95rem;line-height:1.75;color:var(--color-text-2);margin:0">Minimal layouts feel stronger when the spacing system does more expressive work than the ornament layer.</p>
+        <div class="j-issue" style="margin-bottom:20px;color:var(--color-text-3)">Observation 01</div>
+        <p style="font-size:1.15rem;line-height:1.9;color:var(--color-text);margin:0;font-style:italic">Minimal layouts feel stronger when the spacing system does more expressive work than the ornament layer.</p>
       </article>
       <article class="note-card">
-        <div class="j-issue" style="margin-bottom:10px">Observation 02</div>
-        <p style="font-size:0.95rem;line-height:1.75;color:var(--color-text-2);margin:0">A journal page becomes more credible when it supports long essays, short notes, and archive browsing in the same shell.</p>
+        <div class="j-issue" style="margin-bottom:20px;color:var(--color-text-3)">Observation 02</div>
+        <p style="font-size:1.15rem;line-height:1.9;color:var(--color-text);margin:0;font-style:italic">A journal page becomes more credible when it supports long essays, short notes, and archive browsing in the same shell.</p>
       </article>
       <article class="note-card">
-        <div class="j-issue" style="margin-bottom:10px">Observation 03</div>
-        <p style="font-size:0.95rem;line-height:1.75;color:var(--color-text-2);margin:0">Era switching matters more when the underlying information hierarchy already feels stable and intentional.</p>
+        <div class="j-issue" style="margin-bottom:20px;color:var(--color-text-3)">Observation 03</div>
+        <p style="font-size:1.15rem;line-height:1.9;color:var(--color-text);margin:0;font-style:italic">Era switching matters more when the underlying information hierarchy already feels stable and intentional.</p>
       </article>
     </div>
   </div>
 </section>
-<section id="reading" style="background:var(--color-bg);padding:80px 0" aria-labelledby="related-heading">
-  <div class="j-container">
-    <h2 id="related-heading" style="font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:32px" data-reveal="soft">Related essays</h2>
-    <div data-reveal-group="soft">
-      <div class="j-post-card">
+<section id="reading" style="background:var(--color-bg);padding:120px 0" aria-labelledby="related-heading">
+  <div class="j-container" style="max-width:800px">
+    <h2 id="related-heading" style="font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:50px;color:var(--color-primary);border-bottom:1px solid var(--color-border);padding-bottom:20px" data-reveal>Related Reading</h2>
+    <div style="display:flex;flex-direction:column;gap:0" data-reveal-group>
+      <a href="#" class="j-post-card" style="text-decoration:none;color:inherit;">
         <div>
-          <div class="j-tags"><span class="j-tag">Gothic</span><span class="j-tag">History</span></div>
-          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:4px;line-height:1.3"><a href="#" style="color:inherit">On the gothic era and why darkness still communicates seriousness</a></h3>
-          <div class="j-reading-time">8 min read | September 2026</div>
+          <div class="j-issue" style="margin-bottom:12px">History</div>
+          <h3 style="font-size:1.8rem;font-weight:400;margin-bottom:14px;line-height:1.3;font-family:var(--font-heading)">Why darkness still communicates seriousness</h3>
+          <div class="j-reading-time">9 min read</div>
         </div>
         <div class="j-post-image">Essay</div>
-      </div>
-      <div class="j-post-card">
+      </a>
+      <a href="#" class="j-post-card" style="text-decoration:none;color:inherit;">
         <div>
-          <div class="j-tags"><span class="j-tag">Brutalism</span><span class="j-tag">Politics</span></div>
-          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:4px;line-height:1.3"><a href="#" style="color:inherit">Brutalism as protest: thick borders and radical honesty</a></h3>
-          <div class="j-reading-time">6 min read | August 2026</div>
+          <div class="j-issue" style="margin-bottom:12px">Politics</div>
+          <h3 style="font-size:1.8rem;font-weight:400;margin-bottom:14px;line-height:1.3;font-family:var(--font-heading)">Brutalism as protest and radical honesty</h3>
+          <div class="j-reading-time">14 min read</div>
         </div>
         <div class="j-post-image">Notes</div>
-      </div>
-      <div class="j-post-card">
+      </a>
+      <a href="#" class="j-post-card" style="text-decoration:none;color:inherit;">
         <div>
-          <div class="j-tags"><span class="j-tag">Futuristic</span><span class="j-tag">Systems</span></div>
-          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:4px;line-height:1.3"><a href="#" style="color:inherit">Glass and light: the grammar of futuristic surface design</a></h3>
-          <div class="j-reading-time">10 min read | July 2026</div>
+          <div class="j-issue" style="margin-bottom:12px">Systems</div>
+          <h3 style="font-size:1.8rem;font-weight:400;margin-bottom:14px;line-height:1.3;font-family:var(--font-heading)">The grammar of futuristic surface design</h3>
+          <div class="j-reading-time">7 min read</div>
         </div>
         <div class="j-post-image">Study</div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
-<section id="subscribe" style="padding:80px 0" aria-labelledby="sub-heading">
-  <div class="j-container" data-reveal="soft">
-    <h2 id="sub-heading" style="font-size:1.6rem;font-weight:700;margin-bottom:8px">Subscribe to the journal</h2>
-    <p style="color:var(--color-text-2);margin-bottom:24px;font-size:0.9rem">Long-form design thinking, monthly. Quiet editing, stronger systems, and no hype theater.</p>
-    <form class="chr-newsletter-form" aria-label="Subscribe">
-      <label for="j-email" style="display:none">Email</label>
-      <input type="email" id="j-email" placeholder="your@email.com" autocomplete="email">
-      <button type="submit">Subscribe</button>
+<section id="subscribe" style="padding:120px 0;border-top:1px solid var(--color-border);text-align:center;background:var(--color-bg-2)" aria-labelledby="sub-heading">
+  <div class="j-container" style="max-width:600px" data-reveal>
+    <h2 id="sub-heading" style="font-size:2.8rem;font-weight:400;margin-bottom:24px;font-family:var(--font-heading);letter-spacing:-0.02em">Subscribe</h2>
+    <p style="color:var(--color-text-2);margin-bottom:50px;font-size:1.15rem;line-height:1.7">Long-form design thinking, monthly. Quiet editing, stronger systems, and no hype theater.</p>
+    <form class="chr-newsletter-form" style="display:flex;flex-direction:row;gap:0;border:1px solid var(--color-primary);" aria-label="Subscribe">
+      <input type="email" id="j-email" placeholder="Your email address" autocomplete="email" style="flex:1;padding:24px;border:none;background:var(--color-bg);outline:none;font-size:1rem;color:var(--color-text)">
+      <button type="submit" style="padding:24px 40px;background:var(--color-primary);color:var(--color-bg);border:none;cursor:pointer;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;transition:opacity 0.2s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Submit</button>
     </form>
-  </div>
-</section>
-<section id="archive" style="background:var(--color-bg-3);border-top:1px solid var(--color-border);padding:64px 0" aria-labelledby="archive-heading">
-  <div class="j-container" data-reveal="soft">
-    <h2 id="archive-heading" style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--color-text-3);margin-bottom:24px">Archive by subject</h2>
-    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
-      <a href="#" style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--color-border);color:inherit;font-size:0.88rem"><span>Typography and lettering</span><span style="color:var(--color-text-3)">01</span></a>
-      <a href="#" style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--color-border);color:inherit;font-size:0.88rem"><span>Architecture</span><span style="color:var(--color-text-3)">02</span></a>
-      <a href="#" style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--color-border);color:inherit;font-size:0.88rem"><span>Color theory</span><span style="color:var(--color-text-3)">03</span></a>
-      <a href="#" style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--color-border);color:inherit;font-size:0.88rem"><span>Systems design</span><span style="color:var(--color-text-3)">04</span></a>
-      <a href="#" style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--color-border);color:inherit;font-size:0.88rem"><span>Philosophy of form</span><span style="color:var(--color-text-3)">05</span></a>
-      <a href="#" style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--color-border);color:inherit;font-size:0.88rem"><span>Photography</span><span style="color:var(--color-text-3)">06</span></a>
-    </div>
   </div>
 </section>
 </main>

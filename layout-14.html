@@ -7,152 +7,208 @@
   <title>Chronos | Travel Explorer</title>
   <script src="./theme-boot.js"></script>
   <script type="module" src="/src/main.js"></script>
-  <style>
+<style>
     [x-cloak]{display:none!important}
     body{background:var(--color-bg);color:var(--color-text);--reveal-distance:38px;--group-reveal-distance:30px}
     .travel-hero{padding:90px 0 36px;background:radial-gradient(circle at top left,color-mix(in srgb,var(--color-primary) 20%,transparent),transparent 30%),linear-gradient(180deg,color-mix(in srgb,var(--color-accent) 18%,transparent),transparent 60%)}
     .travel-shell{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:28px;align-items:start}
-    .travel-glass,.route-card,.story-card,.plan-card,.destination-tile{background:var(--color-surface);backdrop-filter:blur(var(--blur-glass));border:1px solid var(--color-border);box-shadow:var(--shadow-md);border-radius:var(--radius-lg)}
-    .travel-glass,.route-card,.story-card,.plan-card,.destination-tile{padding:22px}
+    
+    .travel-glass,.route-card,.story-card,.plan-card{background:color-mix(in srgb, var(--color-bg) 85%, transparent);backdrop-filter:blur(24px) saturate(150%);border:1px solid color-mix(in srgb, var(--color-border) 40%, transparent);box-shadow:0 4px 30px rgba(0,0,0,0.06);border-radius:24px}
+    .travel-glass,.route-card,.story-card,.plan-card{padding:30px}
+    
+    /* Parallax Hero Wrapper */
+    .hero-parallax-stage { flex:1; min-width:300px; position:relative; overflow:hidden; }
+    .hero-bg { position:absolute; inset:-5%; background:url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80') center/cover no-repeat; transform:translate(calc(var(--px, 0) * 1%), calc(var(--py, 0) * 1%)) scale(1.05); transition:transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); will-change:transform; }
+    
+    /* Ken Burns Destination Tiles */
+    .destination-tile{position:relative;overflow:hidden;border-radius:24px;display:flex;align-items:flex-end;padding:34px;text-decoration:none;color:#fff;background:var(--color-surface); box-shadow:0 10px 40px rgba(0,0,0,0.15);}
+    .dest-bg {position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 1.8s cubic-bezier(0.2, 0.8, 0.2, 1);opacity:0.8; z-index:1;}
+    .destination-tile:hover .dest-bg { transform: scale(1.1) rotate(1deg); }
+    .destination-tile::after { content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); z-index:2; transition:opacity 0.5s; opacity:0.9; }
+    .destination-tile:hover::after { opacity:1; }
+    .dest-content { position:relative; z-index:3; transition:transform 0.5s; transform:translateY(10px); }
+    .destination-tile:hover .dest-content { transform:translateY(0); }
+    
     .travel-rail{position:sticky;top:100px;display:grid;gap:18px}
     .destination-mosaic{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
     .destination-stack{display:grid;gap:18px}
     .route-grid{display:grid;gap:16px}
-    .stories-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-    .route-card{transition:transform .28s var(--ease),box-shadow .28s var(--ease)}
-    .route-card:hover{transform:translateX(10px) translateY(-2px);box-shadow:var(--shadow-lg)}
-    .story-card{transition:transform .28s var(--ease),box-shadow .28s var(--ease)}
-    .story-card:hover{transform:translateY(-6px) translateX(4px);box-shadow:var(--shadow-lg)}
-    .plan-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-    .plan-form input,.plan-form select,.plan-form textarea{width:100%;padding:14px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:rgba(255,255,255,0.55);color:var(--color-text);font:inherit;outline:none}
+    .stories-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+    
+    .route-card{transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+    .route-card:hover{transform:translateX(10px) translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,0.08); border-color:color-mix(in srgb, var(--color-primary) 30%, transparent);}
+    
+    /* Ken Burns Story Cards */
+    .story-card{overflow:hidden; position:relative; z-index:1; border-radius:24px; padding:0; display:flex; flex-direction:column;}
+    .story-card::before { content:''; position:absolute; inset:0; background:var(--color-bg); z-index:-2; }
+    .story-img-wrap { width:100%; height:200px; overflow:hidden; position:relative; }
+    .story-img { width:100%; height:100%; background-size:cover; background-position:center; transition:transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); transform:scale(1.02); }
+    .story-card:hover .story-img { transform:scale(1.12); }
+    .story-content { padding:30px; display:flex; flex-direction:column; gap:16px; flex:1; background:color-mix(in srgb, var(--color-bg) 90%, transparent); backdrop-filter:blur(10px); }
+    .story-card:hover{transform:translateY(-8px);box-shadow:0 25px 50px rgba(0,0,0,0.1); border-color:var(--color-primary);}
+    
+    .plan-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .plan-form input,.plan-form select,.plan-form textarea{width:100%;padding:18px 20px;border:1px solid color-mix(in srgb, var(--color-border) 60%, transparent);border-radius:16px;background:color-mix(in srgb, var(--color-bg) 60%, transparent);color:var(--color-text);font:inherit;outline:none; transition:all 0.3s;}
+    .plan-form input:focus, .plan-form select:focus { border-color:var(--color-primary); box-shadow:inset 0 0 0 1px var(--color-primary), 0 0 0 4px color-mix(in srgb, var(--color-primary) 15%, transparent); background:var(--color-bg); }
     .plan-form textarea,.plan-form button{grid-column:1 / -1}
-    .plan-form textarea{min-height:110px;resize:vertical}
+    .plan-form textarea{min-height:140px;resize:vertical}
+    
     @media(max-width:1040px){.travel-shell,.destination-mosaic,.stories-grid{grid-template-columns:1fr}.travel-rail{position:static}}
     @media(max-width:720px){.plan-form{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
 <a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
-<header class="chr-nav" role="banner">
-  <div class="chr-container chr-nav-inner">
-    <a href="index.html" class="chr-logo">CHRONOS TRAVEL</a>
+<header class="chr-nav" role="banner" style="background:transparent; border:none; padding-top:20px;">
+  <div class="chr-container chr-nav-inner travel-glass" style="border-radius:100px; padding-left:30px; padding-right:16px;">
+    <a href="index.html" class="chr-logo" style="font-weight:800; letter-spacing:-0.02em;">CHRONOS TRAVEL</a>
     <nav aria-label="Travel navigation"><ul class="chr-nav-links"><li><a href="#destinations">Destinations</a></li><li><a href="#journey">Itinerary</a></li><li><a href="#stories">Stories</a></li><li><a href="#plan">Plan trip</a></li></ul></nav>
-    <div style="display:flex;align-items:center;gap:12px"><a href="index.html" class="chr-btn-ghost" style="padding:10px 18px;font-size:.85rem">All layouts</a><a href="#plan" class="chr-btn-primary" style="padding:10px 22px;font-size:.85rem">Plan a trip</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+    <div style="display:flex;align-items:center;gap:12px"><a href="index.html" class="chr-btn-outline" style="padding:12px 20px;font-size:.9rem;border-radius:100px;">All layouts</a><a href="#plan" class="chr-btn-primary" style="padding:12px 26px;font-size:.9rem;border-radius:100px;box-shadow:0 4px 15px color-mix(in srgb, var(--color-primary) 30%, transparent);">Plan a trip</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
 </header>
 <main id="main-content">
-  <section class="travel-hero" aria-labelledby="travel-heading">
-    <div class="chr-container travel-shell">
-      <div data-reveal="left">
-        <div class="chr-badge" style="margin-bottom:1rem">Layout 14 | Travel Website</div>
-        <h1 id="travel-heading" class="chr-heading-xl" style="margin-bottom:1rem">A destination-led travel layout with story bands, route planning, and itinerary flow.</h1>
-        <p style="font-size:1.03rem;color:var(--color-text-2);line-height:1.85;max-width:720px;margin-bottom:1.5rem">Instead of another generic hero and cards page, this layout behaves more like a travel feature: destination mosaic, route cards, editorial travel stories, and a planning desk.</p>
-        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:1.8rem"><a href="#destinations" class="chr-btn-primary" style="padding:15px 28px">Browse destinations</a><a href="#journey" class="chr-btn-ghost" style="padding:15px 24px">See sample route</a></div>
-        <div class="destination-mosaic" data-reveal-group="scale">
-          <article class="destination-tile" style="min-height:280px;display:flex;flex-direction:column;justify-content:end;background:linear-gradient(160deg,#6fd6ff,#2db5ff)">
-            <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.8);margin-bottom:8px">Coastal route</div>
-            <h2 style="font-size:1.9rem;color:#fff;margin-bottom:8px">Blue Coast Escape</h2>
-            <p style="margin:0;color:rgba(255,255,255,0.84);line-height:1.7">Island crossings, boutique stays, and slow-water itineraries.</p>
-          </article>
-          <div class="destination-stack">
-            <article class="destination-tile" style="min-height:130px;background:linear-gradient(160deg,#71f2e7,#3cb5ff)">
-              <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(15,35,60,0.6);margin-bottom:8px">Mountain path</div>
-              <h3 style="font-size:1.1rem;margin-bottom:6px">Highland Passage</h3>
-              <p style="margin:0;color:rgba(15,35,60,0.78);line-height:1.6;font-size:0.9rem">Cabins, ridge walks, and guided viewpoints.</p>
-            </article>
-            <article class="destination-tile" style="min-height:130px;background:linear-gradient(160deg,#b0f5ff,#78c4ff)">
-              <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(15,35,60,0.6);margin-bottom:8px">City break</div>
-              <h3 style="font-size:1.1rem;margin-bottom:6px">Old City Weekend</h3>
-              <p style="margin:0;color:rgba(15,35,60,0.78);line-height:1.6;font-size:0.9rem">Markets, museums, and culinary pacing.</p>
-            </article>
-          </div>
-        </div>
+  <!-- § 1. SPLIT HERO & BOOKING -->
+  <section class="travel-hero" style="padding:0;min-height:100vh;display:flex;align-items:stretch;flex-wrap:wrap; margin-top:-100px;" aria-labelledby="travel-heading">
+    <div class="hero-parallax-stage" id="hero-stage">
+      <div class="hero-bg"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.1)); z-index:1;"></div>
+      <div style="position:absolute;bottom:10%;left:10%;color:#fff;max-width:550px;padding-right:20px; z-index:2;">
+        <div class="chr-badge" style="margin-bottom:1.5rem;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.2);color:#fff; border-radius:100px; padding:8px 24px;">Featured Destination</div>
+        <h1 id="travel-heading" style="font-size:clamp(3rem, 7vw, 5rem);font-weight:800;margin-bottom:1.5rem;line-height:1.05;letter-spacing:-0.03em;">The Alpine<br>Experience</h1>
+        <p style="font-size:1.2rem;line-height:1.6;opacity:0.9">Seven days of epic mountain passes, luxury cabins, and clear azure lakes.</p>
       </div>
-      <aside class="travel-rail" data-reveal="right">
-        <div class="travel-glass">
-          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3);margin-bottom:10px">Trip snapshot</div>
-          <div style="display:grid;gap:10px">
-            <div style="display:flex;justify-content:space-between;gap:12px"><span>Routes</span><strong>42</strong></div>
-            <div style="display:flex;justify-content:space-between;gap:12px"><span>Guided days</span><strong>180</strong></div>
-            <div style="display:flex;justify-content:space-between;gap:12px"><span>Traveler score</span><strong>4.8/5</strong></div>
-          </div>
-        </div>
-        <div class="travel-glass">
-          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3);margin-bottom:10px">Travel styles</div>
-          <p style="margin:0;color:var(--color-text-2);line-height:1.8">Leisure, culture, route-based adventure, retreat travel, and hospitality-led experiences.</p>
-        </div>
-      </aside>
+    </div>
+    <div style="flex:0 1 540px;background:var(--color-bg);padding:120px 50px 80px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid color-mix(in srgb, var(--color-border) 40%, transparent); box-shadow:-20px 0 50px rgba(0,0,0,0.05); z-index:3;" data-reveal="right">
+      <h2 style="font-size:2.4rem;font-weight:800;margin-bottom:14px;letter-spacing:-0.02em;">Plan Your Journey</h2>
+      <p style="color:var(--color-text-2);margin-bottom:40px;font-size:1.1rem;line-height:1.7;">Our experts will craft a personalized itinerary.</p>
+      <form class="plan-form" aria-label="Travel Inquiry">
+        <input type="text" placeholder="Where to?" style="font-size:1.1rem;grid-column:1/-1;">
+        <input type="date" style="font-size:1.1rem;color:var(--color-text-2);">
+        <input type="number" placeholder="Guests" min="1" style="font-size:1.1rem;">
+        <select style="font-size:1.1rem;grid-column:1/-1;appearance:none;cursor:pointer;"><option>Luxury Retreat</option><option>Adventure</option><option>Cultural Dive</option></select>
+        <button class="chr-btn-primary" style="padding:22px;font-size:1.1rem;justify-content:center;margin-top:10px;border-radius:100px;font-weight:700;">Request Proposal</button>
+      </form>
     </div>
   </section>
 
-  <section id="destinations" class="chr-section" aria-labelledby="destinations-heading">
-    <div class="chr-container travel-shell">
-      <div>
-        <div class="chr-heading-sm">Destination collection</div>
-        <h2 id="destinations-heading" class="chr-heading-xl" style="margin-bottom:14px">A destination area built from tiles and stories, not generic service cards.</h2>
-        <p style="color:var(--color-text-2);line-height:1.8;max-width:620px">Travel pages need atmosphere and route context. This section lets you show distinct destinations without collapsing everything into the same card grid used elsewhere.</p>
-      </div>
-      <div class="destination-stack" data-reveal-group="left">
-        <article class="travel-glass">
-          <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:10px"><h3 style="font-size:1.05rem">Seven-day coast itinerary</h3><span style="font-size:0.8rem;color:var(--color-text-3)">Sea, towns, islands</span></div>
-          <p style="margin:0;color:var(--color-text-2);line-height:1.75">Use this format for a guided route, resort collection, or region-led travel package with room for pacing and narrative.</p>
-        </article>
-        <article class="travel-glass">
-          <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:10px"><h3 style="font-size:1.05rem">Three-city culture pass</h3><span style="font-size:0.8rem;color:var(--color-text-3)">Museums, food, neighborhoods</span></div>
-          <p style="margin:0;color:var(--color-text-2);line-height:1.75">A stronger fit for tourism boards, boutique agencies, and experience-first travel brands.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="journey" class="chr-section-sm" style="background:var(--color-bg-2);border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border)" aria-labelledby="journey-heading">
+  <!-- § 2. DESTINATIONS IMAGE GRID -->
+  <section id="destinations" style="padding:120px 0;background:var(--color-bg-2)" aria-labelledby="destinations-heading">
     <div class="chr-container">
-      <div style="margin-bottom:28px" data-reveal="left">
-        <div class="chr-heading-sm">Sample itinerary</div>
-        <h2 id="journey-heading" class="chr-heading-xl">A route line with stops, not a generic process block.</h2>
-      </div>
-      <div class="route-grid" data-reveal-group="right">
-        <article class="route-card"><div style="display:flex;gap:14px;align-items:start"><div class="chr-step-number">01</div><div><h3 style="font-size:1rem;margin-bottom:8px">Arrive and settle</h3><p style="margin:0;color:var(--color-text-2);line-height:1.75;font-size:0.9rem">Airport pickup, boutique hotel check-in, and a first-evening orientation walk.</p></div></div></article>
-        <article class="route-card"><div style="display:flex;gap:14px;align-items:start"><div class="chr-step-number">02</div><div><h3 style="font-size:1rem;margin-bottom:8px">Explore the old quarter</h3><p style="margin:0;color:var(--color-text-2);line-height:1.75;font-size:0.9rem">Local guide route, market stop, museum pacing, and a slow dinner sequence.</p></div></div></article>
-        <article class="route-card"><div style="display:flex;gap:14px;align-items:start"><div class="chr-step-number">03</div><div><h3 style="font-size:1rem;margin-bottom:8px">Move to the coast</h3><p style="margin:0;color:var(--color-text-2);line-height:1.75;font-size:0.9rem">Scenic transfer, island ferry, and soft evening arrival at the second stay.</p></div></div></article>
-        <article class="route-card"><div style="display:flex;gap:14px;align-items:start"><div class="chr-step-number">04</div><div><h3 style="font-size:1rem;margin-bottom:8px">Return with follow-up</h3><p style="margin:0;color:var(--color-text-2);line-height:1.75;font-size:0.9rem">Departure support, traveler notes, and suggestions for the next route.</p></div></div></article>
-      </div>
-    </div>
-  </section>
-
-  <section id="stories" class="chr-section" aria-labelledby="stories-heading">
-    <div class="chr-container">
-      <div style="display:flex;justify-content:space-between;gap:20px;align-items:end;flex-wrap:wrap;margin-bottom:30px" data-reveal="right">
+      <div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:60px;flex-wrap:wrap;gap:20px" data-reveal="soft">
         <div>
-          <div class="chr-heading-sm">Travel stories</div>
-          <h2 id="stories-heading" class="chr-heading-xl">An editorial band for guides, journals, and campaign storytelling.</h2>
+          <div class="chr-heading-sm" style="color:var(--color-primary);font-weight:700;">Destinations</div>
+          <h2 id="destinations-heading" style="font-size:3rem;font-weight:800;line-height:1;margin-bottom:0;letter-spacing:-0.02em;">Curated Regions</h2>
         </div>
-        <p style="max-width:540px;color:var(--color-text-2);line-height:1.8">Travel sites often need guide content and story-led persuasion. This section gives that behavior without looking like another feature checklist.</p>
+        <a href="#" class="chr-btn-outline" style="border-radius:100px;padding:12px 26px;">View All Routes</a>
       </div>
-      <div class="stories-grid" data-reveal-group="left">
-        <article class="story-card"><div style="font-size:0.78rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Guide</div><h3 style="font-size:1.05rem;margin-bottom:10px">When to travel the coast</h3><p style="margin:0;color:var(--color-text-2);line-height:1.75;font-size:0.9rem">Seasonality, pacing, and route advice for first-time travelers.</p></article>
-        <article class="story-card"><div style="font-size:0.78rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Journal</div><h3 style="font-size:1.05rem;margin-bottom:10px">A three-day city map</h3><p style="margin:0;color:var(--color-text-2);line-height:1.75;font-size:0.9rem">A pattern for itinerary storytelling, neighborhood notes, and editorial travel content.</p></article>
-        <article class="story-card"><div style="font-size:0.78rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Retreat</div><h3 style="font-size:1.05rem;margin-bottom:10px">Slow travel in the hills</h3><p style="margin:0;color:var(--color-text-2);line-height:1.75;font-size:0.9rem">Use this for immersive stays, wellness routes, or retreat-based hospitality.</p></article>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:30px;grid-auto-rows:400px" data-reveal-group="zoom">
+        <a href="#" class="destination-tile" style="grid-column:1 / -1;background:var(--color-primary)">
+          <div class="dest-bg" style="background-image:url('https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+          <div class="dest-content">
+            <h3 style="font-size:2.8rem;font-weight:800;margin-bottom:10px;letter-spacing:-0.02em;">Japanese Alps</h3>
+            <p style="opacity:0.9;font-size:1.2rem;line-height:1.6;font-weight:300;">Winter retreats and hot springs.</p>
+          </div>
+        </a>
+        <a href="#" class="destination-tile" style="background:var(--color-secondary)">
+          <div class="dest-bg" style="background-image:url('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+          <div class="dest-content">
+            <h3 style="font-size:2rem;font-weight:800;margin-bottom:8px;letter-spacing:-0.01em;">Venice</h3>
+            <p style="opacity:0.9;font-size:1.1rem;font-weight:300;">Canals and culture.</p>
+          </div>
+        </a>
+        <a href="#" class="destination-tile" style="background:var(--color-accent)">
+          <div class="dest-bg" style="background-image:url('https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+          <div class="dest-content">
+            <h3 style="font-size:2rem;font-weight:800;margin-bottom:8px;letter-spacing:-0.01em;">Dubai</h3>
+            <p style="opacity:0.9;font-size:1.1rem;font-weight:300;">Desert luxury.</p>
+          </div>
+        </a>
       </div>
     </div>
   </section>
 
-  <section id="plan" class="chr-section-sm" style="background:var(--color-bg-2);border-top:1px solid var(--color-border)" aria-labelledby="plan-heading">
-    <div class="chr-container travel-shell">
-      <div>
-        <div class="chr-heading-sm">Planning desk</div>
-        <h2 id="plan-heading" class="chr-heading-xl" style="margin-bottom:14px">A source-safe inquiry form for route planning and travel requests.</h2>
-        <p style="color:var(--color-text-2);line-height:1.8;max-width:620px">This remains demo-safe, but the fields are aligned with booking and itinerary planning rather than a generic contact form.</p>
+  <!-- § 3. ITINERARY SPLIT TIMELINE -->
+  <section id="journey" style="padding:120px 0" aria-labelledby="journey-heading">
+    <div class="chr-container" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:80px;align-items:start">
+      <div style="position:sticky;top:120px" data-reveal="left">
+        <div class="chr-heading-sm" style="color:var(--color-primary);font-weight:700;">Interactive Itinerary</div>
+        <h2 id="journey-heading" style="font-size:3rem;font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:20px">The Highland Passage</h2>
+        <p style="color:var(--color-text-2);line-height:1.8;margin-bottom:40px;font-size:1.1rem;">A 4-day sample route through guided mountain paths, luxury cabins, and immersive local dining. Use this pattern to present detailed day-by-day plans without overwhelming the user.</p>
+        <div class="travel-glass" style="display:flex;gap:30px;flex-wrap:wrap">
+          <div>
+            <div style="font-size:0.85rem;text-transform:uppercase;color:var(--color-text-3);margin-bottom:8px;font-weight:700;letter-spacing:0.05em;">Duration</div>
+            <div style="font-weight:800;font-size:1.2rem;">4 Days, 3 Nights</div>
+          </div>
+          <div style="width:1px;background:color-mix(in srgb, var(--color-border) 60%, transparent)"></div>
+          <div>
+            <div style="font-size:0.85rem;text-transform:uppercase;color:var(--color-text-3);margin-bottom:8px;font-weight:700;letter-spacing:0.05em;">Difficulty</div>
+            <div style="font-weight:800;font-size:1.2rem;">Moderate</div>
+          </div>
+        </div>
       </div>
-      <div class="plan-card" data-reveal="right">
-        <form class="plan-form" aria-label="Travel planning form" data-demo-message="Travel planning request submitted. Connect this form to your own booking flow.">
-          <input type="text" placeholder="Your name" autocomplete="name">
-          <input type="email" placeholder="Email" autocomplete="email">
-          <input type="text" placeholder="Preferred destination">
-          <select aria-label="Travel style"><option>Adventure</option><option>Leisure</option><option>Culture</option></select>
-          <textarea placeholder="Trip length, season, or special requests"></textarea>
-          <button type="submit" class="chr-btn-primary">Request trip plan</button>
-        </form>
+      <div style="position:relative;padding-left:50px;border-left:2px dashed color-mix(in srgb, var(--color-border) 60%, transparent);display:grid;gap:60px;margin-left:20px" data-reveal-group="right">
+        <div class="route-card" style="position:relative">
+          <div style="position:absolute;left:-84px;top:0;width:24px;height:24px;background:var(--color-bg);border:4px solid var(--color-primary);border-radius:50%; box-shadow:0 0 0 8px var(--color-bg);"></div>
+          <h3 style="font-size:1.6rem;font-weight:800;margin-bottom:14px;letter-spacing:-0.01em;">Day 01: Arrival & Acclimation</h3>
+          <p style="color:var(--color-text-2);line-height:1.8;margin-bottom:20px;font-size:1.05rem;">Private transfer from the airport to the lodge. Evening orientation walk and a locally sourced welcome dinner.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap"><span style="padding:6px 14px;background:color-mix(in srgb, var(--color-primary) 10%, transparent);color:var(--color-primary);border-radius:100px;font-size:0.85rem;font-weight:700;">Transfer</span><span style="padding:6px 14px;background:var(--color-bg-2);border-radius:100px;font-size:0.85rem;border:1px solid color-mix(in srgb, var(--color-border) 50%, transparent);font-weight:600;">Dinner included</span></div>
+        </div>
+        <div class="route-card" style="position:relative">
+          <div style="position:absolute;left:-84px;top:0;width:24px;height:24px;background:var(--color-bg);border:4px solid var(--color-primary);border-radius:50%; box-shadow:0 0 0 8px var(--color-bg);"></div>
+          <h3 style="font-size:1.6rem;font-weight:800;margin-bottom:14px;letter-spacing:-0.01em;">Day 02: The Ridge Walk</h3>
+          <p style="color:var(--color-text-2);line-height:1.8;margin-bottom:20px;font-size:1.05rem;">A 6-hour guided hike along the eastern ridge. Incredible panoramic views and a packed gourmet lunch.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap"><span style="padding:6px 14px;background:color-mix(in srgb, var(--color-primary) 10%, transparent);color:var(--color-primary);border-radius:100px;font-size:0.85rem;font-weight:700;">Guided Hike</span><span style="padding:6px 14px;background:var(--color-bg-2);border-radius:100px;font-size:0.85rem;border:1px solid color-mix(in srgb, var(--color-border) 50%, transparent);font-weight:600;">Lunch included</span></div>
+        </div>
+        <div class="route-card" style="position:relative">
+          <div style="position:absolute;left:-84px;top:0;width:24px;height:24px;background:var(--color-bg);border:4px solid var(--color-primary);border-radius:50%; box-shadow:0 0 0 8px var(--color-bg);"></div>
+          <h3 style="font-size:1.6rem;font-weight:800;margin-bottom:14px;letter-spacing:-0.01em;">Day 03: Valley Descent</h3>
+          <p style="color:var(--color-text-2);line-height:1.8;margin-bottom:20px;font-size:1.05rem;">Explore the lower valley trails, visiting an artisan village and experiencing a traditional tea ceremony.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap"><span style="padding:6px 14px;background:color-mix(in srgb, var(--color-primary) 10%, transparent);color:var(--color-primary);border-radius:100px;font-size:0.85rem;font-weight:700;">Culture</span></div>
+        </div>
+        <div class="route-card" style="position:relative">
+          <div style="position:absolute;left:-84px;top:0;width:24px;height:24px;background:var(--color-primary);border:4px solid var(--color-primary);border-radius:50%; box-shadow:0 0 0 8px var(--color-bg);"></div>
+          <h3 style="font-size:1.6rem;font-weight:800;margin-bottom:14px;letter-spacing:-0.01em;">Day 04: Departure</h3>
+          <p style="color:var(--color-text-2);line-height:1.8;font-size:1.05rem;margin:0;">Morning at leisure before private transfer back to the airport.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- § 4. EDITORIAL STORIES -->
+  <section id="stories" style="padding:120px 0;background:var(--color-bg-2);border-top:1px solid color-mix(in srgb, var(--color-border) 40%, transparent)" aria-labelledby="stories-heading">
+    <div class="chr-container">
+      <div style="text-align:center;margin-bottom:70px" data-reveal="soft">
+        <h2 id="stories-heading" style="font-size:3rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:14px;">Travel Dispatches</h2>
+        <p style="color:var(--color-text-2);font-size:1.1rem;">Editorial guides, journals, and deep dives.</p>
+      </div>
+      <div class="stories-grid" data-reveal-group="zoom">
+        <article class="story-card travel-glass">
+          <div class="story-img-wrap"><div class="story-img" style="background-image:url('https://images.unsplash.com/photo-1542382257-80da9fb9f5abc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div></div>
+          <div class="story-content">
+            <div style="font-size:0.85rem;color:var(--color-primary);text-transform:uppercase;font-weight:700;letter-spacing:0.05em">Guide</div>
+            <h3 style="font-size:1.5rem;font-weight:800;line-height:1.3;letter-spacing:-0.01em;">When to travel the coast</h3>
+            <p style="margin:0;color:var(--color-text-2);line-height:1.7;font-size:1.05rem;">Seasonality, pacing, and route advice for first-timers.</p>
+            <a href="#" style="margin-top:auto;color:var(--color-text);font-weight:700;text-decoration:none;border-bottom:2px solid var(--color-text);display:inline-block;width:max-content;padding-bottom:2px;">Read dispatch</a>
+          </div>
+        </article>
+        <article class="story-card travel-glass">
+          <div class="story-img-wrap"><div class="story-img" style="background-image:url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div></div>
+          <div class="story-content">
+            <div style="font-size:0.85rem;color:var(--color-accent);text-transform:uppercase;font-weight:700;letter-spacing:0.05em">Journal</div>
+            <h3 style="font-size:1.5rem;font-weight:800;line-height:1.3;letter-spacing:-0.01em;">A three-day city map</h3>
+            <p style="margin:0;color:var(--color-text-2);line-height:1.7;font-size:1.05rem;">A pattern for itinerary storytelling and neighborhood notes.</p>
+            <a href="#" style="margin-top:auto;color:var(--color-text);font-weight:700;text-decoration:none;border-bottom:2px solid var(--color-text);display:inline-block;width:max-content;padding-bottom:2px;">Read dispatch</a>
+          </div>
+        </article>
+        <article class="story-card travel-glass">
+          <div class="story-img-wrap"><div class="story-img" style="background-image:url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div></div>
+          <div class="story-content">
+            <div style="font-size:0.85rem;color:var(--color-secondary);text-transform:uppercase;font-weight:700;letter-spacing:0.05em">Retreat</div>
+            <h3 style="font-size:1.5rem;font-weight:800;line-height:1.3;letter-spacing:-0.01em;">Slow travel in the hills</h3>
+            <p style="margin:0;color:var(--color-text-2);line-height:1.7;font-size:1.05rem;">Immersive stays, wellness routes, and hospitality.</p>
+            <a href="#" style="margin-top:auto;color:var(--color-text);font-weight:700;text-decoration:none;border-bottom:2px solid var(--color-text);display:inline-block;width:max-content;padding-bottom:2px;">Read dispatch</a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -160,13 +216,33 @@
 <footer class="chr-footer">
   <div class="chr-container chr-footer-grid">
     <div>
-      <div class="chr-logo" style="margin-bottom:14px">CHRONOS TRAVEL</div>
-      <p style="color:var(--color-text-2);line-height:1.7;max-width:420px">Layout 14 now behaves like a travel site with destination mosaic, itinerary cards, story band, and travel planning desk.</p>
+      <div class="chr-logo" style="margin-bottom:14px;letter-spacing:-0.02em;">CHRONOS TRAVEL</div>
+      <p style="color:var(--color-text-2);line-height:1.7;max-width:420px;font-size:0.95rem;">Layout 14 now features profound parallax depth and smooth Ken Burns hover effects for an immersive booking interface.</p>
     </div>
     <div><h3 class="chr-footer-heading">Related</h3><ul class="chr-footer-list"><li><a href="layout-13.html">Education layout</a></li><li><a href="layout-15.html">Social layout</a></li></ul></div>
     <div><h3 class="chr-footer-heading">Browse</h3><ul class="chr-footer-list"><li><a href="index.html">All layouts</a></li><li><a href="layout-08.html">Minimal journal</a></li></ul></div>
   </div>
 </footer>
+
+<script>
+  // Hero Parallax tracking
+  const heroStage = document.getElementById('hero-stage');
+  if (heroStage) {
+    heroStage.addEventListener('mousemove', (e) => {
+      const rect = heroStage.getBoundingClientRect();
+      const xObj = (e.clientX - rect.left) / rect.width - 0.5;
+      const yObj = (e.clientY - rect.top) / rect.height - 0.5;
+      
+      // Drive CSS Custom properties (-2px to +2px range roughly)
+      heroStage.style.setProperty('--px', (xObj * -3).toFixed(2));
+      heroStage.style.setProperty('--py', (yObj * -3).toFixed(2));
+    });
+    heroStage.addEventListener('mouseleave', () => {
+      heroStage.style.setProperty('--px', 0);
+      heroStage.style.setProperty('--py', 0);
+    });
+  }
+</script>
 <div id="chr-customizer-mount"></div>
 </body>
 </html>

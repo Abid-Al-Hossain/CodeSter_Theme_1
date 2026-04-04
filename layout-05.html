@@ -55,10 +55,10 @@
   <a href="#transactions" class="db-nav-item">Transactions</a>
   <a href="#users" class="db-nav-item">Users</a>
   <div class="db-nav-label">Reports</div>
-  <a href="#" class="db-nav-item" data-demo-message="Sales report preview">Sales Data</a>
-  <a href="#" class="db-nav-item" data-demo-message="Audience report preview">Audience</a>
-  <a href="#" class="db-nav-item" data-demo-message="Campaign report preview">Campaigns</a>
-  <a href="#" class="db-nav-item" data-demo-message="Performance report preview">Performance</a>
+  <a href="#sales" class="db-nav-item">Sales Data</a>
+  <a href="#audience" class="db-nav-item">Audience</a>
+  <a href="#campaigns" class="db-nav-item">Campaigns</a>
+  <a href="#performance" class="db-nav-item">Performance</a>
   <div class="db-nav-label">Account</div>
   <a href="#" class="db-nav-item" data-demo-message="Settings are demo-only">Settings</a>
   <a href="#" class="db-nav-item" data-demo-message="Support shortcut is demo-only">Support</a>
@@ -240,6 +240,83 @@
         </div>
       </div>
     </section>
+
+    <section id="sales" aria-labelledby="sales-h" style="margin-top:32px" data-reveal="right">
+      <div class="panel">
+        <div class="panel-header">
+          <span id="sales-h" style="font-weight:700;font-size:0.9rem">Sales Data</span>
+          <span style="font-size:0.76rem;color:var(--color-text-3)">YTD Performance</span>
+        </div>
+        <div style="padding:24px">
+          <div class="stat-grid" style="grid-template-columns:1fr 1fr;margin-bottom:0">
+            <div style="padding:16px;background:var(--color-bg-2);border-radius:var(--radius-md)">
+              <div class="stat-label">Enterprise Seats</div>
+              <div class="stat-val" style="font-size:1.6rem">1,204</div>
+            </div>
+            <div style="padding:16px;background:var(--color-bg-2);border-radius:var(--radius-md)">
+              <div class="stat-label">Pro Upgrades</div>
+              <div class="stat-val" style="font-size:1.6rem">8,450</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="audience" aria-labelledby="aud-h" style="margin-top:32px" data-reveal="right">
+      <div class="panel">
+        <div class="panel-header">
+          <span id="aud-h" style="font-weight:700;font-size:0.9rem">Audience Geographics</span>
+        </div>
+        <div style="padding:24px">
+          <table style="max-width:600px">
+            <thead><tr><th>Region</th><th>Active Users</th><th>Trend</th></tr></thead>
+            <tbody>
+              <tr><td>North America</td><td style="font-weight:600">45%</td><td class="up">+2.4%</td></tr>
+              <tr><td>Europe</td><td style="font-weight:600">32%</td><td class="up">+1.1%</td></tr>
+              <tr><td>Asia Pacific</td><td style="font-weight:600">18%</td><td class="down">-0.5%</td></tr>
+              <tr><td>Rest of World</td><td style="font-weight:600">5%</td><td style="color:var(--color-text-3)">-</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="campaigns" aria-labelledby="camp-h" style="margin-top:32px" data-reveal="right">
+      <div class="panel">
+        <div class="panel-header">
+          <span id="camp-h" style="font-weight:700;font-size:0.9rem">Active Campaigns</span>
+        </div>
+        <div style="padding:24px;display:grid;gap:16px">
+          <div style="padding:16px;border:var(--border-w) solid var(--color-border);border-radius:var(--radius-sm);display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-weight:600;margin-bottom:4px">Q4 Product Launch</div><div style="font-size:0.75rem;color:var(--color-text-3)">Email & Paid Social</div></div>
+            <span class="badge badge-green">Running</span>
+          </div>
+          <div style="padding:16px;border:var(--border-w) solid var(--color-border);border-radius:var(--radius-sm);display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-weight:600;margin-bottom:4px">Re-engagement Sequence</div><div style="font-size:0.75rem;color:var(--color-text-3)">Drip Automation</div></div>
+            <span class="badge badge-blue">Paused</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="performance" aria-labelledby="perf-h" style="margin-top:32px" data-reveal="right">
+      <div class="panel">
+        <div class="panel-header">
+          <span id="perf-h" style="font-weight:700;font-size:0.9rem">System Performance</span>
+        </div>
+        <div style="padding:24px;display:flex;gap:20px;flex-wrap:wrap">
+          <div style="flex:1;min-width:180px;text-align:center;padding:24px;background:var(--color-bg-2);border-radius:var(--radius-md);border-bottom:3px solid #10b981">
+            <div style="font-family:var(--font-heading);font-size:2.2rem;font-weight:800;color:var(--color-text);margin-bottom:8px">99.9%</div>
+            <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3)">Uptime</div>
+          </div>
+          <div style="flex:1;min-width:180px;text-align:center;padding:24px;background:var(--color-bg-2);border-radius:var(--radius-md);border-bottom:3px solid var(--color-primary)">
+            <div style="font-family:var(--font-heading);font-size:2.2rem;font-weight:800;color:var(--color-text);margin-bottom:8px">120ms</div>
+            <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-3)">Latency</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 </div>
 
