@@ -81,6 +81,73 @@ const CUSTOM_COLOR_VARS = [
   'color-border-2',
 ]
 
+const PREFS_KEY = 'chronos-prefs'
+const CUSTOMIZER_ENABLED = true
+const DEFAULT_FONTS = {
+  heading: 'Plus Jakarta Sans',
+  body: 'Inter',
+  mono: 'JetBrains Mono',
+  accent: 'Space Grotesk',
+}
+
+// EXPORT_DEFAULT_THEME_START
+const DEFAULT_THEME = {
+  era: 'modern',
+  fonts: { ...DEFAULT_FONTS },
+  colors: { ...DEFAULT_COLORS },
+  hasCustomFonts: false,
+  hasCustomColors: false,
+  activePalette: '',
+}
+// EXPORT_DEFAULT_THEME_END
+
+// DOWNLOAD_FEATURE_START
+const DOWNLOAD_LAYOUT_OPTIONS = [
+  { file: 'layout-01.html', short: 'L01', label: 'SaaS Landing Page' },
+  { file: 'layout-02.html', short: 'L02', label: 'Creative Portfolio' },
+  { file: 'layout-03.html', short: 'L03', label: 'Editorial Feed' },
+  { file: 'layout-04.html', short: 'L04', label: 'Text Manuscript' },
+  { file: 'layout-05.html', short: 'L05', label: 'Web App Dashboard' },
+  { file: 'layout-06.html', short: 'L06', label: 'Artistic Showcase' },
+  { file: 'layout-07.html', short: 'L07', label: 'Launch Page' },
+  { file: 'layout-08.html', short: 'L08', label: 'Minimal Journal' },
+  { file: 'layout-09.html', short: 'L09', label: 'Digital Agency' },
+  { file: 'layout-10.html', short: 'L10', label: 'Institutional Archive' },
+  { file: 'layout-11.html', short: 'L11', label: 'Enterprise Business' },
+  { file: 'layout-12.html', short: 'L12', label: 'Medical Care' },
+  { file: 'layout-13.html', short: 'L13', label: 'Education Campus' },
+  { file: 'layout-14.html', short: 'L14', label: 'Travel Explorer' },
+  { file: 'layout-15.html', short: 'L15', label: 'Social Community' },
+]
+
+function sanitizePackageName(value) {
+  return String(value || '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/-{2,}/g, '-')
+    .replace(/^-|-$/g, '')
+    || 'chronos-custom-site'
+}
+
+function sanitizeArchiveName(value) {
+  return String(value || '')
+    .trim()
+    .replace(/[\\/:*?"<>|]+/g, ' ')
+    .replace(/\s{2,}/g, ' ')
+    || 'chronos-custom-site'
+}
+
+function getCurrentLayoutFile() {
+  const current = window.location.pathname.split('/').pop()?.toLowerCase() || ''
+  return DOWNLOAD_LAYOUT_OPTIONS.some((option) => option.file === current) ? current : ''
+}
+
+function getLayoutMeta(layoutFile) {
+  return DOWNLOAD_LAYOUT_OPTIONS.find((option) => option.file === layoutFile) || null
+}
+// DOWNLOAD_FEATURE_END
+
 function setVar(name, value) {
   document.documentElement.style.setProperty(`--${name}`, value)
 }
@@ -180,14 +247,16 @@ function buildDerivedColorTokens(colors) {
 }
 
 function savePrefs(prefs) {
+  if (!CUSTOMIZER_ENABLED) return
   try {
-    localStorage.setItem('chronos-prefs', JSON.stringify(prefs))
+    localStorage.setItem(PREFS_KEY, JSON.stringify(prefs))
   } catch {}
 }
 
 function loadPrefs() {
+  if (!CUSTOMIZER_ENABLED) return null
   try {
-    const raw = localStorage.getItem('chronos-prefs')
+    const raw = localStorage.getItem(PREFS_KEY)
     return raw ? JSON.parse(raw) : null
   } catch {
     return null
@@ -221,42 +290,82 @@ function clearCustomColorVars() {
   })
 }
 
+function cloneThemePreset(preset = DEFAULT_THEME) {
+  return {
+    era: preset.era,
+    fonts: { ...preset.fonts },
+    colors: { ...DEFAULT_COLORS, ...preset.colors },
+    hasCustomFonts: Boolean(preset.hasCustomFonts),
+    hasCustomColors: Boolean(preset.hasCustomColors),
+    activePalette: preset.activePalette || '',
+  }
+}
+
+// DOWNLOAD_FEATURE_START
+function getDefaultPackageName(layoutFile) {
+  const layout = getLayoutMeta(layoutFile)
+  return sanitizePackageName(layout?.label || 'chronos-custom-site')
+}
+
+function getThemePresetFromStore(store) {
+  return {
+    era: store.era,
+    fonts: { ...store.fonts },
+    colors: { ...store.colors },
+    hasCustomFonts: store.hasCustomFonts,
+    hasCustomColors: store.hasCustomColors,
+    activePalette: store.activePalette,
+  }
+}
+// DOWNLOAD_FEATURE_END
+
 Alpine.store('chr', {
   open: false,
   activeTab: 'era',
-  era: 'modern',
-  fonts: { heading: 'Plus Jakarta Sans', body: 'Inter', mono: 'JetBrains Mono', accent: 'Space Grotesk' },
-  colors: { ...DEFAULT_COLORS },
-  hasCustomFonts: false,
-  hasCustomColors: false,
-  activePalette: '',
+  era: DEFAULT_THEME.era,
+  fonts: { ...DEFAULT_THEME.fonts },
+  colors: { ...DEFAULT_THEME.colors },
+  hasCustomFonts: DEFAULT_THEME.hasCustomFonts,
+  hasCustomColors: DEFAULT_THEME.hasCustomColors,
+  activePalette: DEFAULT_THEME.activePalette,
   paletteOptions: PALETTE_OPTIONS,
+  // DOWNLOAD_FEATURE_START
+  currentLayout: getCurrentLayoutFile(),
+  downloadAvailable: Boolean(getCurrentLayoutFile()),
+  currentLayoutLabel: '',
+  downloadPackageName: '',
+  downloadMode: 'without-customizer',
+  downloadBusy: false,
+  downloadError: '',
+  // DOWNLOAD_FEATURE_END
 
   async init() {
-    const saved = loadPrefs()
-    if (saved) {
-      if (saved.era) {
-        this.era = saved.era
-        await applyEra(saved.era)
-      }
+    const preset = cloneThemePreset(loadPrefs() || DEFAULT_THEME)
+    const eraDefaults = ERA_DEFAULT_FONTS[preset.era] || DEFAULT_THEME.fonts
 
-      if (saved.fonts && saved.hasCustomFonts) {
-        this.hasCustomFonts = true
-        for (const [role, font] of Object.entries(saved.fonts)) {
-          this.fonts[role] = font
-          await applyFont(role, font)
-        }
-      }
+    this.era = preset.era
+    this.fonts = { ...eraDefaults, ...preset.fonts }
+    this.colors = { ...DEFAULT_COLORS, ...preset.colors, surface: preset.colors.surface || preset.colors.bg2 || DEFAULT_COLORS.surface }
+    this.hasCustomFonts = preset.hasCustomFonts
+    this.hasCustomColors = preset.hasCustomColors
+    this.activePalette = preset.activePalette
 
-      if (saved.colors && saved.hasCustomColors) {
-        this.hasCustomColors = true
-        this.colors = { ...DEFAULT_COLORS, ...saved.colors, surface: saved.colors.surface || saved.colors.bg2 || DEFAULT_COLORS.surface }
-        this.applyColorTheme()
-      }
+    // DOWNLOAD_FEATURE_START
+    const currentLayoutMeta = getLayoutMeta(this.currentLayout)
+    this.currentLayoutLabel = currentLayoutMeta?.label || ''
+    this.downloadPackageName = getDefaultPackageName(this.currentLayout)
+    // DOWNLOAD_FEATURE_END
 
-      if (saved.activePalette) {
-        this.activePalette = saved.activePalette
+    await applyEra(this.era)
+
+    if (this.hasCustomFonts) {
+      for (const [role, font] of Object.entries(this.fonts)) {
+        await applyFont(role, font)
       }
+    }
+
+    if (this.hasCustomColors) {
+      this.applyColorTheme()
     }
 
     this.syncColorInputsFromComputed()
@@ -264,6 +373,7 @@ Alpine.store('chr', {
   },
 
   setActiveTab(tab) {
+    if (tab === 'download' && !this.downloadAvailable) return
     this.activeTab = tab
   },
 
@@ -350,6 +460,34 @@ Alpine.store('chr', {
     syncCustomizerToggle(this.open)
   },
 
+  // DOWNLOAD_FEATURE_START
+  getDownloadFileName() {
+    return `${sanitizeArchiveName(this.downloadPackageName) || 'chronos-custom-site'}.zip`
+  },
+
+  async downloadPackage() {
+    this.downloadBusy = true
+    this.downloadError = ''
+
+    try {
+      if (!this.downloadAvailable || !this.currentLayout) {
+        throw new Error('Open a layout page before downloading a package.')
+      }
+      const { downloadCustomizedPackage } = await import('./package-export.js')
+      await downloadCustomizedPackage({
+        packageName: this.downloadPackageName,
+        layoutFile: this.currentLayout,
+        keepCustomizer: this.downloadMode === 'with-customizer',
+        theme: getThemePresetFromStore(this),
+      })
+    } catch (error) {
+      this.downloadError = error instanceof Error ? error.message : 'Unable to build the package.'
+    } finally {
+      this.downloadBusy = false
+    }
+  },
+  // DOWNLOAD_FEATURE_END
+
   save() {
     savePrefs({
       era: this.era,
@@ -362,19 +500,34 @@ Alpine.store('chr', {
   },
 
   async reset() {
-    this.era = 'modern'
+    const preset = cloneThemePreset(DEFAULT_THEME)
+
+    this.era = preset.era
     this.activeTab = 'era'
-    this.hasCustomFonts = false
-    this.hasCustomColors = false
-    this.activePalette = ''
-    this.colors = { ...DEFAULT_COLORS }
-    this.fonts = { heading: 'Plus Jakarta Sans', body: 'Inter', mono: 'JetBrains Mono', accent: 'Space Grotesk' }
+    this.hasCustomFonts = preset.hasCustomFonts
+    this.hasCustomColors = preset.hasCustomColors
+    this.activePalette = preset.activePalette
+    this.colors = { ...preset.colors }
+    this.fonts = { ...preset.fonts }
 
     document.documentElement.removeAttribute('style')
-    document.documentElement.setAttribute('data-era', 'modern')
-    await applyEra('modern')
+    document.documentElement.setAttribute('data-era', this.era)
+    await applyEra(this.era)
+
+    if (this.hasCustomFonts) {
+      for (const [role, font] of Object.entries(this.fonts)) {
+        await applyFont(role, font)
+      }
+    }
+
+    if (this.hasCustomColors) {
+      this.applyColorTheme()
+    }
+
     this.syncColorInputsFromComputed()
-    localStorage.removeItem('chronos-prefs')
+    if (CUSTOMIZER_ENABLED) {
+      localStorage.removeItem(PREFS_KEY)
+    }
   },
 })
 
@@ -410,12 +563,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const mount = document.getElementById('chr-customizer-mount')
-  if (mount) {
+  if (CUSTOMIZER_ENABLED && mount) {
     mount.innerHTML = CUSTOMIZER_HTML
   }
 
   Alpine.start()
-  syncCustomizerToggle(false)
+  if (CUSTOMIZER_ENABLED) {
+    syncCustomizerToggle(false)
+  }
   initScrollReveal()
   revealAboveFold()
   initCounters()

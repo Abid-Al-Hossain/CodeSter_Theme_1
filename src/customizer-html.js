@@ -18,7 +18,7 @@ export const CUSTOMIZER_HTML = /* html */ `
   <div class="cust-header">
     <div>
       <div style="font-family:var(--font-accent);font-weight:800;font-size:1.1rem;color:var(--color-primary)">CHRONOS</div>
-      <div class="cust-subtitle">Preview styles before editing the source project.</div>
+      <div class="cust-subtitle">Preview styles here. Download the current layout as a ready-to-run package from any layout page.</div>
     </div>
     <button
       @click="$store.chr.close()"
@@ -31,10 +31,16 @@ export const CUSTOMIZER_HTML = /* html */ `
     <button class="cust-tab" :class="$store.chr.activeTab==='era'?'active':''" @click="$store.chr.setActiveTab('era')" role="tab" id="chr-tab-era" :aria-selected="$store.chr.activeTab==='era' ? 'true' : 'false'" aria-controls="chr-panel-era">Eras</button>
     <button class="cust-tab" :class="$store.chr.activeTab==='colors'?'active':''" @click="$store.chr.setActiveTab('colors')" role="tab" id="chr-tab-colors" :aria-selected="$store.chr.activeTab==='colors' ? 'true' : 'false'" aria-controls="chr-panel-colors">Colors</button>
     <button class="cust-tab" :class="$store.chr.activeTab==='fonts'?'active':''" @click="$store.chr.setActiveTab('fonts')" role="tab" id="chr-tab-fonts" :aria-selected="$store.chr.activeTab==='fonts' ? 'true' : 'false'" aria-controls="chr-panel-fonts">Fonts</button>
+    <!-- DOWNLOAD_TAB_START -->
+    <button x-show="$store.chr.downloadAvailable" class="cust-tab" :class="$store.chr.activeTab==='download'?'active':''" @click="$store.chr.setActiveTab('download')" role="tab" id="chr-tab-download" :aria-selected="$store.chr.activeTab==='download' ? 'true' : 'false'" aria-controls="chr-panel-download">Download</button>
+    <!-- DOWNLOAD_TAB_END -->
+    <!-- LAYOUTS_TAB_START -->
     <button class="cust-tab" :class="$store.chr.activeTab==='layouts'?'active':''" @click="$store.chr.setActiveTab('layouts')" role="tab" id="chr-tab-layouts" :aria-selected="$store.chr.activeTab==='layouts' ? 'true' : 'false'" aria-controls="chr-panel-layouts">Layouts</button>
+    <!-- LAYOUTS_TAB_END -->
   </div>
 
   <div class="cust-body">
+    <!-- LAYOUTS_PANEL_START -->
     <div x-show="$store.chr.activeTab==='layouts'" x-cloak role="tabpanel" id="chr-panel-layouts" aria-labelledby="chr-tab-layouts">
       <span class="cust-label" style="display:flex;justify-content:space-between;align-items:center">
         Theme Layouts
@@ -149,10 +155,11 @@ export const CUSTOMIZER_HTML = /* html */ `
       </div>
       <div style="margin-top:20px;padding:12px;background:var(--color-bg-2);border-radius:var(--radius-md);border:1px solid var(--color-border)">
         <p style="font-size:0.75rem;color:var(--color-text-2);margin:0;line-height:1.5">
-          <strong>Tip:</strong> Use this panel to preview combinations, then apply lasting changes in the downloaded source files.
+          <strong>Tip:</strong> Era, font, and palette choices stay with you while moving between layouts.
         </p>
       </div>
     </div>
+    <!-- LAYOUTS_PANEL_END -->
 
     <div x-show="$store.chr.activeTab==='era'" x-cloak role="tabpanel" id="chr-panel-era" aria-labelledby="chr-tab-era">
       <span class="cust-label">Select Era</span>
@@ -272,6 +279,43 @@ export const CUSTOMIZER_HTML = /* html */ `
         65+ fonts available. Loaded on demand to keep performance fast.
       </div>
     </div>
+
+    <!-- DOWNLOAD_PANEL_START -->
+    <div x-show="$store.chr.downloadAvailable && $store.chr.activeTab==='download'" x-cloak role="tabpanel" id="chr-panel-download" aria-labelledby="chr-tab-download">
+      <span class="cust-label">Layout Package</span>
+      <p style="font-size:0.78rem;color:var(--color-text-2);margin-bottom:14px;line-height:1.6">
+        Build a zip from the current layout page with your current era, colors, and fonts already baked in.
+      </p>
+
+      <label class="cust-label" for="chr-package-name">Package name</label>
+      <input id="chr-package-name" type="text" x-model="$store.chr.downloadPackageName" placeholder="my-brand-site" style="width:100%;padding:11px 12px;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-sm);color:var(--color-text);font-size:0.85rem;outline:none">
+
+      <label class="cust-label">Current layout</label>
+      <div style="padding:11px 12px;background:var(--color-bg-2);border:1px solid var(--color-border);border-radius:var(--radius-sm);color:var(--color-text);font-size:0.84rem;line-height:1.5">
+        <strong x-text="$store.chr.currentLayoutLabel || 'Layout page'"></strong>
+        <div style="margin-top:4px;color:var(--color-text-2)">This page will be exported as <code style="font-family:var(--font-mono)">index.html</code>.</div>
+      </div>
+
+      <label class="cust-label">Customizer in download</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <button type="button" class="era-card" :class="$store.chr.downloadMode==='without-customizer' ? 'active' : ''" :aria-pressed="$store.chr.downloadMode==='without-customizer' ? 'true' : 'false'" @click="$store.chr.downloadMode='without-customizer'">Without</button>
+        <button type="button" class="era-card" :class="$store.chr.downloadMode==='with-customizer' ? 'active' : ''" :aria-pressed="$store.chr.downloadMode==='with-customizer' ? 'true' : 'false'" @click="$store.chr.downloadMode='with-customizer'">With</button>
+      </div>
+
+      <div style="margin-top:16px;padding:12px;background:var(--color-bg-2);border:1px solid var(--color-border);border-radius:var(--radius-md);display:grid;gap:6px">
+        <div style="font-size:0.74rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:0.08em">Package preview</div>
+        <div style="font-size:0.84rem;color:var(--color-text)"><strong>Zip:</strong> <span x-text="$store.chr.getDownloadFileName()"></span></div>
+        <div style="font-size:0.84rem;color:var(--color-text-2)"><strong>Starts with:</strong> current page as <code style="font-family:var(--font-mono)">index.html</code></div>
+        <div style="font-size:0.84rem;color:var(--color-text-2)"><strong>Run:</strong> <code style="font-family:var(--font-mono)">npm install</code> then <code style="font-family:var(--font-mono)">npm run dev</code></div>
+      </div>
+
+      <p x-show="$store.chr.downloadError" x-text="$store.chr.downloadError" style="margin:12px 0 0;color:#dc2626;font-size:0.78rem;line-height:1.5"></p>
+
+      <button class="chr-btn-primary" style="width:100%;justify-content:center;font-size:0.84rem;padding:12px 16px;margin-top:16px" :disabled="$store.chr.downloadBusy" @click="$store.chr.downloadPackage()">
+        <span x-text="$store.chr.downloadBusy ? 'Building package...' : 'Download Package'"></span>
+      </button>
+    </div>
+    <!-- DOWNLOAD_PANEL_END -->
   </div>
 
   <div class="cust-footer" style="padding:16px;border-top:1px solid var(--color-border);background:var(--color-bg);flex-shrink:0;display:flex;flex-direction:column;gap:8px;">

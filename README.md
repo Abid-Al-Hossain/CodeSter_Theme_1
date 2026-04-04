@@ -10,7 +10,7 @@ This phase is the product-finalization phase. The project is being refined in so
 - 12 eras: Modern, Gothic, Futuristic, Retro, Cyberpunk, Brutalist, Minimalist, Eco, Corporate, Artistic, Apocalyptic, Liquid
 - 16 preset palettes plus custom color controls
 - 65+ Google Fonts with separate heading, body, accent, and mono roles
-- Shared customizer with persistence and reset
+- Shared customizer with persistence, reset, and current-layout package download
 - Vite 8 development and build workflow
 
 ## Tech stack
@@ -63,6 +63,7 @@ Because the source project uses Vite module entrypoints, use it through the deve
 ## Notes
 
 - Codester is the full-package delivery channel for buyers. The in-browser customizer is for previewing combinations before editing the downloaded source project.
+- On any layout page, the customizer can generate a one-layout Vite package zip from that current page with the active era, colors, and fonts baked in, with or without the live customizer panel.
 - The source project keeps demo content intentionally neutral where licensing, support, or marketplace-specific language would be premature.
 - Release packaging, buyer-facing file structure, and deployment portability are separate concerns for the shipping phase.
 
