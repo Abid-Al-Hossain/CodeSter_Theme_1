@@ -5,6 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Tektur:wght@400;500;600;700;800;900&family=Audiowide&family=Iceland&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&family=Source+Code+Pro:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500;600;700&family=Inconsolata:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Dancing+Script:wght@400;600;700&family=Sacramento&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap');
 @import "tailwindcss";
 
 /* ============================================================
@@ -365,6 +366,156 @@
 /* ============================================================
    GLOBAL BASE STYLES
    ============================================================ */
+
+/* ── JURASSIC ERA (Primal / Museum) ─────────────────────── */
+[data-era="jurassic"] {
+  --color-bg:        #181510;
+  --color-bg-2:      #201c15;
+  --color-bg-3:      #2c251a;
+  --color-surface:   rgba(24,21,16,0.9);
+  --color-primary:   #c19a6b;
+  --color-primary-2: #8c7355;
+  --color-secondary: #5a6438;
+  --color-accent:    #ab906e;
+  --color-text:      #e6dfd1;
+  --color-text-2:    #aa9e8b;
+  --color-text-3:    #756b5a;
+  --color-border:    #3b3324;
+  --color-border-2:  #4a412f;
+  --font-heading:    'Creepster', cursive;
+  --font-body:       'Lora', serif;
+  --font-mono:       'Space Mono', monospace;
+  --font-accent:     'Bebas Neue', sans-serif;
+  --radius-sm:       0px;
+  --radius-md:       0px;
+  --radius-lg:       0px;
+  --radius-xl:       0px;
+  --border-w:        0px;
+  --shadow-glow:     0 0 80px rgba(193,154,107,0.15);
+}
+
+/* ── PIXELATED ERA (8-Bit / Retro Gaming) ───────────────── */
+[data-era="pixelated"] {
+  --color-bg:        #000000;
+  --color-bg-2:      #0d0d0d;
+  --color-bg-3:      #1a1a1a;
+  --color-surface:   rgba(0,0,0,1);
+  --color-primary:   #39ff14;
+  --color-primary-2: #0fd600;
+  --color-secondary: #ff00ff;
+  --color-accent:    #00ffff;
+  --color-text:      #e0e0e0;
+  --color-text-2:    #999999;
+  --color-text-3:    #555555;
+  --color-border:    #39ff14;
+  --color-border-2:  #39ff14;
+  --font-heading:    'Press Start 2P', cursive;
+  --font-body:       'VT323', monospace;
+  --font-mono:       'VT323', monospace;
+  --font-accent:     'Silkscreen', cursive;
+  --radius-sm:       0px;
+  --radius-md:       0px;
+  --radius-lg:       0px;
+  --radius-xl:       0px;
+  --border-w:        4px;
+  --shadow-sm:       4px 4px 0 rgba(57, 255, 20, 0.4);
+  --shadow-md:       8px 8px 0 rgba(57, 255, 20, 0.4);
+  --shadow-lg:       12px 12px 0 rgba(57, 255, 20, 0.4);
+  --shadow-glow:     0 0 10px rgba(57, 255, 20, 0.5);
+  --blur-glass:      0px;
+}
+
+/* ── ICE AGE ERA ────────────────────────────────────────── */
+[data-era="iceage"] {
+  --color-bg:        #e0f7fa;
+  --color-bg-2:      #b2ebf2;
+  --color-bg-3:      #80deea;
+  --color-surface:   rgba(255, 255, 255, 0.4);
+  --color-primary:   #006064;
+  --color-primary-2: #00838f;
+  --color-secondary: #00acc1;
+  --color-accent:    #4dd0e1;
+  --color-text:      #00363a;
+  --color-text-2:    #37474f;
+  --color-text-3:    #546e7a;
+  --color-border:    rgba(255, 255, 255, 0.6);
+  --color-border-2:  rgba(255, 255, 255, 0.4);
+  --font-heading:    'Changa', sans-serif;
+  --font-body:       'Exo 2', sans-serif;
+  --font-mono:       'JetBrains Mono', monospace;
+  --font-accent:     'Cinzel', serif;
+  --radius-sm:       0px;
+  --radius-md:       0px;
+  --radius-lg:       0px;
+  --radius-xl:       0px;
+  --border-w:        1px;
+  --blur-glass:      30px;
+  --shadow-sm:       0 2px 6px rgba(0, 96, 100, 0.05);
+  --shadow-md:       0 8px 24px rgba(0, 96, 100, 0.1);
+  --shadow-lg:       0 16px 48px rgba(0, 96, 100, 0.15);
+  --shadow-glow:     0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+/* ── VOLCANIC ERA ───────────────────────────────────────── */
+[data-era="volcanic"] {
+  --color-bg:        #050505;
+  --color-bg-2:      #0d0800;
+  --color-bg-3:      #1a0f00;
+  --color-surface:   rgba(10,5,0,0.85);
+  --color-primary:   #ff3d00;
+  --color-primary-2: #dd2c00;
+  --color-secondary: #ff9100;
+  --color-accent:    #ffc400;
+  --color-text:      #ffe0b2;
+  --color-text-2:    #ffb74d;
+  --color-text-3:    #8d6e63;
+  --color-border:    #3e2723;
+  --color-border-2:  #4e342e;
+  --font-heading:    'Archivo Black', sans-serif;
+  --font-body:       'Syne', sans-serif;
+  --font-mono:       'Source Code Pro', monospace;
+  --font-accent:     'Barlow Condensed', sans-serif;
+  --radius-sm:       2px;
+  --radius-md:       4px;
+  --radius-lg:       6px;
+  --radius-xl:       8px;
+  --border-w:        2px;
+  --shadow-sm:       0 4px 10px rgba(255, 61, 0, 0.2);
+  --shadow-md:       0 12px 30px rgba(255, 61, 0, 0.4);
+  --shadow-lg:       0 20px 50px rgba(255, 61, 0, 0.6);
+  --shadow-glow:     0 0 30px rgba(255, 61, 0, 0.6), 0 0 100px rgba(255, 145, 0, 0.3);
+}
+
+/* ── MAGIC ERA ──────────────────────────────────────────── */
+[data-era="magic"] {
+  --color-bg:        #0b0c10;
+  --color-bg-2:      #111522;
+  --color-bg-3:      #181a38;
+  --color-surface:   rgba(17, 21, 34, 0.6);
+  --color-primary:   #d4af37;
+  --color-primary-2: #e8c678;
+  --color-secondary: #673ab7;
+  --color-accent:    #00bcd4;
+  --color-text:      #e4dfca;
+  --color-text-2:    #b6a98d;
+  --color-text-3:    #7b7561;
+  --color-border:    rgba(212, 175, 55, 0.2);
+  --color-border-2:  rgba(212, 175, 55, 0.4);
+  --font-heading:    'Playfair Display', serif;
+  --font-body:       'EB Garamond', serif;
+  --font-mono:       'Courier Prime', monospace;
+  --font-accent:     'Dancing Script', cursive;
+  --radius-sm:       12px;
+  --radius-md:       24px;
+  --radius-lg:       48px;
+  --radius-xl:       100px;
+  --border-w:        1px;
+  --blur-glass:      20px;
+  --shadow-sm:       0 4px 10px rgba(0,0,0,0.5);
+  --shadow-md:       0 10px 30px rgba(0,0,0,0.8);
+  --shadow-lg:       0 20px 60px rgba(0,0,0,0.9);
+  --shadow-glow:     0 0 40px rgba(212, 175, 55, 0.2), inset 0 0 20px rgba(103, 58, 183, 0.3);
+}
 
 /* FOUC prevention: hide body until era class applied */
 [data-era-loading] body { opacity: 0; }

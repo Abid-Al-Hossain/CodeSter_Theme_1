@@ -24,6 +24,11 @@ export default defineConfig({
         layout13: 'layout-13.html',
         layout14: 'layout-14.html',
         layout15: 'layout-15.html',
+        layout16: 'layout-16.html',
+        layout17: 'layout-17.html',
+        layout18: 'layout-18.html',
+        layout19: 'layout-19.html',
+        layout20: 'layout-20.html',
       }
     }
   }

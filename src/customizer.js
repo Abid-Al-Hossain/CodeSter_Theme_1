@@ -81,7 +81,7 @@ const CUSTOM_COLOR_VARS = [
   'color-border-2',
 ]
 
-const PREFS_NAMESPACE = document.documentElement.getAttribute('data-prefs-key') || 'chronos-prefs'
+const PREFS_NAMESPACE = document.documentElement.getAttribute('data-prefs-key') || 'chronos-prefs-v2'
 const CUSTOMIZER_ENABLED = true
 const DEFAULT_FONTS = {
   heading: 'Plus Jakarta Sans',
@@ -121,6 +121,11 @@ const DOWNLOAD_LAYOUT_OPTIONS = [
   { file: 'layout-13.html', short: 'L13', label: 'Education Campus' },
   { file: 'layout-14.html', short: 'L14', label: 'Travel Explorer' },
   { file: 'layout-15.html', short: 'L15', label: 'Social Community' },
+  { file: 'layout-16.html', short: 'L16', label: 'Jurassic Museum' },
+  { file: 'layout-17.html', short: 'L17', label: 'Pixelated Desktop' },
+  { file: 'layout-18.html', short: 'L18', label: 'Glacier Expeditions' },
+  { file: 'layout-19.html', short: 'L19', label: 'Geothermic Console' },
+  { file: 'layout-20.html', short: 'L20', label: 'The Grand Library' },
 ]
 
 function sanitizePackageName(value) {

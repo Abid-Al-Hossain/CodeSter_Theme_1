@@ -1,15 +1,15 @@
 ﻿# Chronos v2
 
-Chronos v2 is a multi-era HTML theme source project built around one shared customization system instead of a single fixed visual style. The current source workspace contains 15 layouts, 12 design eras, 16 preset palettes, and 65+ Google Fonts that can be mixed live through the shared customizer.
+Chronos v2 is a multi-era HTML theme source project built around one shared customization system instead of a single fixed visual style. The current source workspace contains 20 layouts, 17 design eras, 16 preset palettes, and 70+ Google Fonts that can be mixed live through the shared customizer.
 
 This phase is the product-finalization phase. The project is being refined in source first, and release packaging is intentionally deferred to a later shipping pass.
 
 ## Product scope
 
-- 15 source layouts
-- 12 eras: Modern, Gothic, Futuristic, Retro, Cyberpunk, Brutalist, Minimalist, Eco, Corporate, Artistic, Apocalyptic, Liquid
+- 20 source layouts
+- 17 eras: Modern, Gothic, Futuristic, Retro, Cyberpunk, Brutalist, Minimalist, Eco, Corporate, Artistic, Apocalyptic, Liquid, Jurassic, Pixelated, Ice Age, Volcanic, Magic
 - 16 preset palettes plus custom color controls
-- 65+ Google Fonts with separate heading, body, accent, and mono roles
+- 70+ Google Fonts with separate heading, body, accent, and mono roles
 - Shared customizer with per-layout persistence, reset, and current-layout package download
 - Vite 8 development and build workflow
 
@@ -45,7 +45,7 @@ Because the source project uses Vite module entrypoints, use it through the deve
 ## Project structure
 
 - `index.html` - layout directory hub
-- `layout-01.html` through `layout-15.html` - the 15 source layouts
+- `layout-01.html` through `layout-20.html` - the 20 source layouts
 - `src/style.css` - global design tokens, eras, utilities, and component styles
 - `src/main.js` - shared page runtime for demo actions, date handling, and countdowns
 - `src/customizer.js` - Alpine store and customization logic

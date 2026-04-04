@@ -152,6 +152,41 @@ export const CUSTOMIZER_HTML = /* html */ `
             <div class="layout-link-meta">Layout 15</div>
           </div>
         </a>
+        <a href="layout-16.html" class="layout-list-link">
+          <div class="layout-thumb-frame layout-mini-thumb"><svg viewBox="0 0 160 100" preserveAspectRatio="none" class="layout-thumb-svg"><rect width="160" height="100" fill="#181510"/><rect x="0" y="34" width="160" height="34" fill="#2c251a"/><path d="M0 70 22 58 40 78 62 52 82 74 104 48 122 78 142 56 160 68V100H0Z" fill="#1f1a14"/><rect x="18" y="16" width="70" height="8" rx="4" fill="#c19a6b"/><rect x="18" y="28" width="56" height="4" rx="2" fill="#7f6742"/><rect x="96" y="18" width="42" height="42" rx="8" fill="#2f281d" stroke="#6b5a3e"/><path d="M104 52c8-20 10-20 18 0M118 52c6-14 8-14 14 0" stroke="#d4b483" stroke-width="3" fill="none"/><rect x="22" y="76" width="116" height="8" rx="4" fill="#3a301f"/></svg></div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div class="layout-link-title">Jurassic Museum</div>
+            <div class="layout-link-meta">Layout 16</div>
+          </div>
+        </a>
+        <a href="layout-17.html" class="layout-list-link">
+          <div class="layout-thumb-frame layout-mini-thumb"><svg viewBox="0 0 160 100" preserveAspectRatio="none" class="layout-thumb-svg"><rect width="160" height="100" fill="#000"/><rect x="10" y="10" width="58" height="38" fill="#000" stroke="#39ff14" stroke-width="2"/><rect x="10" y="10" width="58" height="8" fill="#39ff14"/><rect x="82" y="18" width="68" height="50" fill="#000" stroke="#39ff14" stroke-width="2"/><rect x="82" y="18" width="68" height="8" fill="#39ff14"/><rect x="18" y="60" width="42" height="24" fill="#000" stroke="#ff00ff" stroke-width="2"/><rect x="18" y="60" width="42" height="8" fill="#ff00ff"/><rect x="92" y="74" width="48" height="6" rx="3" fill="#39ff14"/></svg></div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div class="layout-link-title">Pixelated Desktop</div>
+            <div class="layout-link-meta">Layout 17</div>
+          </div>
+        </a>
+        <a href="layout-18.html" class="layout-list-link">
+          <div class="layout-thumb-frame layout-mini-thumb"><svg viewBox="0 0 160 100" preserveAspectRatio="none" class="layout-thumb-svg"><rect width="160" height="100" fill="#def5fa"/><rect x="12" y="12" width="96" height="36" rx="10" fill="#ffffff" fill-opacity=".46" stroke="#ffffff" stroke-opacity=".65"/><rect x="52" y="30" width="96" height="52" rx="12" fill="#ffffff" fill-opacity=".58" stroke="#ffffff" stroke-opacity=".8"/><rect x="20" y="20" width="38" height="4" rx="2" fill="#006064" opacity=".75"/><rect x="20" y="30" width="52" height="4" rx="2" fill="#6aaab2"/><circle cx="30" cy="78" r="14" fill="#006064" opacity=".15"/><rect x="98" y="42" width="28" height="4" rx="2" fill="#006064" opacity=".65"/></svg></div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div class="layout-link-title">Glacier Expeditions</div>
+            <div class="layout-link-meta">Layout 18</div>
+          </div>
+        </a>
+        <a href="layout-19.html" class="layout-list-link">
+          <div class="layout-thumb-frame layout-mini-thumb"><svg viewBox="0 0 160 100" preserveAspectRatio="none" class="layout-thumb-svg"><rect width="160" height="100" fill="#050505"/><rect x="10" y="18" width="46" height="64" fill="#0d0800" stroke="#ff3d00" stroke-width="2"/><rect x="10" y="18" width="46" height="8" fill="#ff3d00"/><rect x="68" y="18" width="82" height="18" fill="#120900" stroke="#ff3d00" stroke-width="2"/><rect x="68" y="42" width="82" height="20" fill="#120900" stroke="#ff3d00" stroke-width="2"/><rect x="68" y="68" width="82" height="14" fill="#120900" stroke="#ff3d00" stroke-width="2"/><rect x="18" y="34" width="30" height="4" rx="2" fill="#ffc400"/><rect x="18" y="46" width="30" height="4" rx="2" fill="#ff6a00"/><rect x="76" y="48" width="46" height="4" rx="2" fill="#ffc400"/><rect x="124" y="48" width="16" height="4" rx="2" fill="#ff3d00"/></svg></div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div class="layout-link-title">Geothermic Console</div>
+            <div class="layout-link-meta">Layout 19</div>
+          </div>
+        </a>
+        <a href="layout-20.html" class="layout-list-link">
+          <div class="layout-thumb-frame layout-mini-thumb"><svg viewBox="0 0 160 100" preserveAspectRatio="none" class="layout-thumb-svg"><rect width="160" height="100" fill="#0b0c10"/><rect x="18" y="12" width="124" height="76" rx="14" fill="#16182c" stroke="#d4af37"/><rect x="28" y="22" width="104" height="56" rx="10" fill="#11131f" stroke="#6c5c2b"/><rect x="38" y="30" width="84" height="4" rx="2" fill="#d4af37" opacity=".8"/><rect x="38" y="40" width="66" height="3" rx="1.5" fill="#8f7d45"/><rect x="38" y="48" width="72" height="3" rx="1.5" fill="#8f7d45"/><rect x="38" y="56" width="54" height="3" rx="1.5" fill="#8f7d45"/><circle cx="112" cy="58" r="12" fill="#181a38" stroke="#d4af37"/><path d="M112 48l3.5 7 7.5 1-5.5 5.2 1.4 7.8-6.9-3.8-6.9 3.8 1.4-7.8-5.5-5.2 7.5-1z" fill="#d4af37"/></svg></div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div class="layout-link-title">The Grand Library</div>
+            <div class="layout-link-meta">Layout 20</div>
+          </div>
+        </a>
       </div>
       <div style="margin-top:20px;padding:12px;background:var(--color-bg-2);border-radius:var(--radius-md);border:1px solid var(--color-border)">
         <p style="font-size:0.75rem;color:var(--color-text-2);margin:0;line-height:1.5">
@@ -176,6 +211,11 @@ export const CUSTOMIZER_HTML = /* html */ `
         <button class="era-card" :class="$store.chr.era==='artistic'?'active':''" @click="$store.chr.setEra('artistic')">Artistic</button>
         <button class="era-card" :class="$store.chr.era==='apocalyptic'?'active':''" @click="$store.chr.setEra('apocalyptic')">Apocalyptic</button>
         <button class="era-card" :class="$store.chr.era==='liquid'?'active':''" @click="$store.chr.setEra('liquid')">Liquid</button>
+        <button class="era-card" :class="$store.chr.era==='jurassic'?'active':''" @click="$store.chr.setEra('jurassic')">Jurassic</button>
+        <button class="era-card" :class="$store.chr.era==='pixelated'?'active':''" @click="$store.chr.setEra('pixelated')">Pixelated</button>
+        <button class="era-card" :class="$store.chr.era==='iceage'?'active':''" @click="$store.chr.setEra('iceage')">Ice Age</button>
+        <button class="era-card" :class="$store.chr.era==='volcanic'?'active':''" @click="$store.chr.setEra('volcanic')">Volcanic</button>
+        <button class="era-card" :class="$store.chr.era==='magic'?'active':''" @click="$store.chr.setEra('magic')">Magic</button>
       </div>
 
       <span class="cust-label" style="margin-top:20px">Era Status</span>
@@ -276,7 +316,7 @@ export const CUSTOMIZER_HTML = /* html */ `
       </template>
 
       <div class="font-picker-note" style="margin-top:16px;font-size:0.75rem">
-        65+ fonts available. Loaded on demand to keep performance fast.
+        70+ fonts available. Loaded on demand to keep performance fast.
       </div>
     </div>
 

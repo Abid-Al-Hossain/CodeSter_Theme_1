@@ -27,6 +27,11 @@ import layout12Raw from '../layout-12.html?raw'
 import layout13Raw from '../layout-13.html?raw'
 import layout14Raw from '../layout-14.html?raw'
 import layout15Raw from '../layout-15.html?raw'
+import layout16Raw from '../layout-16.html?raw'
+import layout17Raw from '../layout-17.html?raw'
+import layout18Raw from '../layout-18.html?raw'
+import layout19Raw from '../layout-19.html?raw'
+import layout20Raw from '../layout-20.html?raw'
 
 export const LAYOUT_PACKAGE_OPTIONS = [
   { file: 'layout-01.html', short: 'L01', label: 'Modern SaaS Landing' },
@@ -44,6 +49,11 @@ export const LAYOUT_PACKAGE_OPTIONS = [
   { file: 'layout-13.html', short: 'L13', label: 'Education Campus' },
   { file: 'layout-14.html', short: 'L14', label: 'Travel Explorer' },
   { file: 'layout-15.html', short: 'L15', label: 'Social Community' },
+  { file: 'layout-16.html', short: 'L16', label: 'Jurassic Museum' },
+  { file: 'layout-17.html', short: 'L17', label: 'Pixelated Desktop' },
+  { file: 'layout-18.html', short: 'L18', label: 'Glacier Expeditions' },
+  { file: 'layout-19.html', short: 'L19', label: 'Geothermic Console' },
+  { file: 'layout-20.html', short: 'L20', label: 'The Grand Library' },
 ]
 
 const LAYOUT_HTML = {
@@ -62,6 +72,11 @@ const LAYOUT_HTML = {
   'layout-13.html': layout13Raw,
   'layout-14.html': layout14Raw,
   'layout-15.html': layout15Raw,
+  'layout-16.html': layout16Raw,
+  'layout-17.html': layout17Raw,
+  'layout-18.html': layout18Raw,
+  'layout-19.html': layout19Raw,
+  'layout-20.html': layout20Raw,
 }
 
 const DEFAULT_FALLBACK_PACKAGE = 'chronos-custom-site'

@@ -1,4 +1,4 @@
-// fonts.js — 65+ Curated Google Fonts manifest
+// fonts.js - 70+ curated Google Fonts manifest
 
 export const FONTS = {
   'Sans-Serif': [
@@ -13,7 +13,7 @@ export const FONTS = {
   ],
   'Display': [
     'Anton', 'Archivo Black', 'Barlow Condensed', 'Bebas Neue', 'Big Shoulders Display',
-    'Changa', 'Exo', 'Oswald', 'Readex Pro', 'Syne', 'Teko', 'Unbounded'
+    'Changa', 'Creepster', 'Exo', 'Oswald', 'Press Start 2P', 'Readex Pro', 'Silkscreen', 'Syne', 'Teko', 'Unbounded'
   ],
   'Gothic / Historic': [
     'Almendra', 'Cinzel', 'MedievalSharp', 'Uncial Antiqua', 'UnifrakturMaguntia'
@@ -23,19 +23,15 @@ export const FONTS = {
   ],
   'Monospace': [
     'Courier Prime', 'DM Mono', 'Fira Code', 'IBM Plex Mono', 'Inconsolata',
-    'JetBrains Mono', 'Roboto Mono', 'Source Code Pro', 'Space Mono'
+    'JetBrains Mono', 'Roboto Mono', 'Source Code Pro', 'Space Mono', 'VT323'
   ],
   'Handwriting': [
     'Caveat', 'Dancing Script', 'Pacifico', 'Sacramento'
   ]
 }
 
-// Track which fonts are already loaded
 const loadedFonts = new Set()
 
-/**
- * Dynamically loads a Google Font if not already loaded.
- */
 export function loadGoogleFont(name) {
   if (loadedFonts.has(name)) return Promise.resolve()
 
@@ -47,14 +43,11 @@ export function loadGoogleFont(name) {
     link.rel = 'stylesheet'
     link.href = href
     link.onload = () => { loadedFonts.add(name); resolve() }
-    link.onerror = () => resolve() // Fail silently
+    link.onerror = () => resolve()
     document.head.appendChild(link)
   })
 }
 
-/**
- * Preload fonts for the active era
- */
 export const ERA_DEFAULT_FONTS = {
   modern:     { heading: 'Plus Jakarta Sans', body: 'Inter', mono: 'JetBrains Mono', accent: 'Space Grotesk' },
   gothic:     { heading: 'Cinzel', body: 'Crimson Pro', mono: 'UnifrakturMaguntia', accent: 'UnifrakturMaguntia' },
@@ -67,5 +60,10 @@ export const ERA_DEFAULT_FONTS = {
   corporate:  { heading: 'Manrope', body: 'Inter', mono: 'IBM Plex Mono', accent: 'Work Sans' },
   artistic:   { heading: 'Unbounded', body: 'Syne', mono: 'Fira Code', accent: 'Anton' },
   apocalyptic:{ heading: 'UnifrakturMaguntia', body: 'Fira Code', mono: 'Space Mono', accent: 'Almendra' },
-  liquid:     { heading: 'Lexend', body: 'DM Sans', mono: 'DM Mono', accent: 'Readex Pro' }
+  liquid:     { heading: 'Lexend', body: 'DM Sans', mono: 'DM Mono', accent: 'Readex Pro' },
+  jurassic:   { heading: 'Creepster', body: 'Lora', mono: 'Space Mono', accent: 'Bebas Neue' },
+  pixelated:  { heading: 'Press Start 2P', body: 'VT323', mono: 'VT323', accent: 'Silkscreen' },
+  iceage:     { heading: 'Changa', body: 'Exo 2', mono: 'JetBrains Mono', accent: 'Cinzel' },
+  volcanic:   { heading: 'Archivo Black', body: 'Syne', mono: 'Source Code Pro', accent: 'Barlow Condensed' },
+  magic:      { heading: 'Playfair Display', body: 'EB Garamond', mono: 'Courier Prime', accent: 'Dancing Script' }
 }

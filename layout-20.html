@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" data-era="magic">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 20 - The Grand Library magic layout with a tome-like reading flow and spell cards.">
+  <title>Chronos | The Grand Library</title>
+  <script src="./theme-boot.js"></script>
+  <script type="module" src="/src/main.js"></script>
+  <style>
+    [x-cloak]{display:none!important}
+    body{
+      background: var(--color-bg);
+      color: var(--color-text);
+      background-image: radial-gradient(circle at 50% 50%, var(--color-bg-2) 0%, var(--color-bg) 80%);
+      min-height: 100vh;
+    }
+    .tome-container {
+      max-width: 900px;
+      margin: 80px auto;
+      background: var(--color-surface);
+      border: var(--border-w) solid var(--color-border);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      padding: 80px;
+      position: relative;
+    }
+    .tome-container::before {
+      content: '';
+      position: absolute;
+      top: 20px; left: 20px; right: 20px; bottom: 20px;
+      border: 1px solid var(--color-border-2);
+      border-radius: calc(var(--radius-sm) - 10px);
+      pointer-events: none;
+    }
+    .drop-cap {
+      float: left;
+      font-family: var(--font-heading);
+      font-size: 5rem;
+      line-height: 0.8;
+      color: var(--color-primary);
+      margin-right: 16px;
+      margin-bottom: 8px;
+    }
+    .magic-title {
+      font-family: var(--font-accent);
+      font-size: 4rem;
+      color: var(--color-primary-2);
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: var(--shadow-glow);
+    }
+    .magic-divider {
+      text-align: center;
+      margin: 40px 0;
+      color: var(--color-primary);
+      font-size: 1.5rem;
+    }
+    .magic-columns {
+      column-count: 2;
+      column-gap: 60px;
+      font-family: var(--font-body);
+      font-size: 1.15rem;
+      line-height: 2;
+      color: var(--color-text-2);
+      text-align: justify;
+    }
+    @media(max-width: 800px) {
+      .magic-columns { column-count: 1; }
+      .tome-container { padding: 40px 24px; }
+    }
+    @media(max-width: 900px) {
+      .magic-split {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+    }
+    .spell-card {
+      background: var(--color-bg-3);
+      border: var(--border-w) solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      text-align: center;
+      margin-top: 40px;
+      transition: box-shadow 0.3s;
+    }
+    .spell-card:hover {
+      box-shadow: var(--shadow-glow);
+    }
+  </style>
+</head>
+<body>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+
+<header class="chr-nav" role="banner" style="background:transparent; border:none; padding-top:20px;">
+  <div class="chr-container chr-nav-inner" style="justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <a href="index.html" class="chr-logo" style="color:var(--color-primary); font-family:var(--font-heading); font-size:1.5rem; letter-spacing:0.2em;">Chronos Archive</a>
+    <nav class="chr-nav-links" aria-label="Magic navigation">
+      <a href="#prologue" style="font-family:var(--font-body); color:var(--color-text);">Prologue</a>
+      <a href="#constructs" style="font-family:var(--font-body); color:var(--color-text);">Constructs</a>
+      <a href="#potions" style="font-family:var(--font-body); color:var(--color-text);">Potions</a>
+      <a href="#spells" style="font-family:var(--font-body); color:var(--color-text);">Spells</a>
+    </nav>
+    <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main-content" style="padding: 0 24px;">
+  <article class="tome-container" data-reveal="scale" id="prologue">
+    <h1 class="magic-title">The Grand Library</h1>
+    <div style="font-family:var(--font-heading); text-align:center; color:var(--color-text); letter-spacing:0.3em; text-transform:uppercase; margin-bottom: 60px; font-size:0.9rem;">
+      Tome of CSS Variables — Chapter 20
+    </div>
+
+    <div class="magic-columns">
+      <span class="drop-cap">T</span>
+      he Magic era captures the essence of enchanted folklore. It relies heavily on extreme rounded borders, very generous padding, and deep, lush color palettes. Notice the highly decorative serif topography and the elegant calligraphy used for primary titles. Unlike the brutal industrial layouts, the Magic aesthetic attempts to coddle the content in a velvet glove.
+      <br><br>
+      When exploring the depths of this tome, you will see the box shadows are incredibly soft and expansive. The glowing effects are achieved via thick inner and outer inset shadows layered gracefully over dark, starry backgrounds. This layout acts as a living grimoire. It is perfectly suited for long-form storytelling, fantasy-themed portfolio presentations, or literary archives. The two-column text flow further reinforces the aesthetic of a physical, ancient book.
+    </div>
+
+    <div class="magic-divider">✧ • ✦ • ✧</div>
+
+    <h2 id="constructs" style="font-family:var(--font-accent); font-size: 3rem; color:var(--color-primary); text-align:center; margin-bottom: 30px;">Chapter II: Arcane Constructs</h2>
+    <div class="magic-columns">
+      <p>
+        The physical boundaries of our boxes are constrained by the <code>--radius-xl</code> charm. When invoked, it forces sharp rectangular containers to yield, bending their edges until they perfectly resemble the soft curvature of an ancient scroll. However, manipulating the DOM is an imprecise art; too much padding and the layout tears; too little, and the magic feels suffocated within the viewport bounds.
+      </p>
+      <p>
+        We also employ a series of enchanted typography incantations. Titles are bound to <code>Playfair Display</code>, drawing the eye with sharp serifs that glitter against the <code>var(--color-text)</code> background. The body text relies on <code>EB Garamond</code> to ensure legibility when reading deeply nested lore, mimicking ink pressed heavily onto thick parchment paper.
+      </p>
+    </div>
+
+    <div style="margin: 60px 0; padding: 40px; border: 2px dashed var(--color-border-2); background: var(--color-bg-2); border-radius: var(--radius-lg);">
+      <h3 style="font-family:var(--font-heading); color:var(--color-primary-2); text-align:center; font-size:1.8rem; margin-bottom: 20px;">The Alchemist's Palette</h3>
+      <table style="width:100%; border-collapse: collapse; font-family:var(--font-body); color:var(--color-text-2);">
+        <tr style="border-bottom: 1px solid var(--color-border); color:var(--color-text);">
+          <th style="padding:16px; text-align:left;">Reagent</th>
+          <th style="padding:16px; text-align:left;">Property</th>
+          <th style="padding:16px; text-align:left;">Result</th>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--color-border);">
+          <td style="padding:16px;">Stardust Extract</td>
+          <td style="padding:16px;">--color-primary</td>
+          <td style="padding:16px;">#d4af37 (Enchanted Gold)</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--color-border);">
+          <td style="padding:16px;">Nightshade Root</td>
+          <td style="padding:16px;">--color-secondary</td>
+          <td style="padding:16px;">#673ab7 (Velvet Purple)</td>
+        </tr>
+        <tr>
+          <td style="padding:16px;">Void Water</td>
+          <td style="padding:16px;">--color-bg</td>
+          <td style="padding:16px;">#0b0c10 (Abyssal Navy)</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="magic-divider">✧ • ✦ • ✧</div>
+
+    <!-- New Content Section: Potion Recipes -->
+    <h2 id="potions" style="font-family:var(--font-accent); font-size: 3rem; color:var(--color-primary); text-align:center; margin-bottom: 30px;">Chapter III: Potion Recipes</h2>
+    <div class="magic-split" style="display:grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom:60px;">
+      <div class="magic-columns" style="column-count: 1;">
+        <h4 style="font-family:var(--font-heading); color:var(--color-secondary); font-size:1.5rem; margin-bottom:10px;">ELIXIR OF RADIANCE</h4>
+        <p>Combine two parts <code>--color-primary</code> with a pinch of <code>--shadow-glow</code>. Stir under the light of a full CSS bleed. The result is a shimmering liquid that illuminates even the darkest <code>z-index</code>.</p>
+      </div>
+      <div class="magic-columns" style="column-count: 1;">
+        <h4 style="font-family:var(--font-heading); color:var(--color-accent); font-size:1.5rem; margin-bottom:10px;">DRAUGHT OF RIGIDITY</h4>
+        <p>Boil three instances of <code>--radius-sm</code> until the vapor turns into <code>solid</code> borders. Useful for anchoring elements that attempt to <code>float</code> away from the main document flow.</p>
+      </div>
+    </div>
+
+    <!-- New Content Section: Scroll Archive -->
+    <div style="background:var(--color-bg-3); padding:40px; border-radius:var(--radius-xl); border:1px solid var(--color-border-2); margin-bottom:60px;">
+      <h3 style="font-family:var(--font-heading); color:var(--color-text); text-align:center; margin-bottom:30px;">SCROLL ARCHIVE</h3>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--color-border); padding-bottom:8px;">
+          <span style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-primary);">[SCR-092]</span>
+          <span style="font-family:var(--font-body); color:var(--color-text-2);">THE LOST ALIGNMENT OF DIVS</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--color-border); padding-bottom:8px;">
+          <span style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-primary);">[SCR-114]</span>
+          <span style="font-family:var(--font-body); color:var(--color-text-2);">THE SECRET HISTORY OF !IMPORTANT</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--color-border); padding-bottom:8px;">
+          <span style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-primary);">[SCR-205]</span>
+          <span style="font-family:var(--font-body); color:var(--color-text-2);">TRANSMUTATION OF MARGIN INTO PADDING</span>
+        </div>
+      </div>
+    </div>
+
+    <h2 id="spells" style="font-family:var(--font-accent); font-size: 3rem; color:var(--color-primary); text-align:center; margin-bottom: 30px;">Noteworthy Spells</h2>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px; justify-content:center;">
+      <div class="spell-card" data-reveal="bottom">
+        <div style="font-size:3rem; margin-bottom:16px;">✨</div>
+        <h3 style="font-family:var(--font-heading); color:var(--color-text); margin-bottom:10px; font-size:1.4rem;">Lumos Token</h3>
+        <p style="font-family:var(--font-body); color:var(--color-text-3);">Ignites the glowing inset shadows inside container frames.</p>
+      </div>
+      <div class="spell-card" data-reveal="bottom" style="transition-delay:0.1s;">
+         <div style="font-size:3rem; margin-bottom:16px;">🌙</div>
+        <h3 style="font-family:var(--font-heading); color:var(--color-text); margin-bottom:10px; font-size:1.4rem;">Radius Charm</h3>
+        <p style="font-family:var(--font-body); color:var(--color-text-3);">Molds brutally sharp structural lines into soft, flowing curves.</p>
+      </div>
+      <div class="spell-card" data-reveal="bottom" style="transition-delay:0.2s;">
+         <div style="font-size:3rem; margin-bottom:16px;">🔮</div>
+        <h3 style="font-family:var(--font-heading); color:var(--color-text); margin-bottom:10px; font-size:1.4rem;">Font Mending</h3>
+        <p style="font-family:var(--font-body); color:var(--color-text-3);">Replaces default system topographies with hand-scribed calligraphy.</p>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer style="padding:60px 0; text-align:center; background:transparent;">
+  <div class="chr-container">
+    <div style="font-family:var(--font-accent); font-size:2rem; color:var(--color-primary);">Chronos Archive</div>
+    <div style="font-family:var(--font-body); color:var(--color-text-3); margin-top:10px;">Preserving the Arcane Arts of CSS</div>
+  </div>
+</footer>
+
+<div id="chr-customizer-mount"></div>
