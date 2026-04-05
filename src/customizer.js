@@ -1,14 +1,5 @@
 import Alpine from 'alpinejs'
 import { FONTS, loadGoogleFont, ERA_DEFAULT_FONTS } from './fonts.js'
-import {
-  initScrollReveal,
-  revealAboveFold,
-  initCounters,
-  initNavHighlight,
-  initSectionJumpTransitions,
-  initFAQ,
-  initMobileNav,
-} from './transitions.js'
 import { CUSTOMIZER_HTML } from './customizer-html.js'
 
 const PALETTES = {
@@ -634,11 +625,4 @@ document.addEventListener('DOMContentLoaded', () => {
   if (CUSTOMIZER_ENABLED) {
     syncCustomizerToggle(false)
   }
-  initScrollReveal()
-  revealAboveFold()
-  initCounters()
-  initNavHighlight()
-  initSectionJumpTransitions()
-  initFAQ()
-  initMobileNav()
 })

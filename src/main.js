@@ -1,5 +1,14 @@
 import './style.css'
 import './customizer.js'
+import {
+  initScrollReveal,
+  revealAboveFold,
+  initCounters,
+  initNavHighlight,
+  initSectionJumpTransitions,
+  initFAQ,
+  initMobileNav,
+} from './transitions.js'
 
 const DEFAULT_LAUNCH_DATE = '2026-12-01T00:00:00Z'
 
@@ -85,4 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initDemoActions()
   initCurrentDate()
   initCountdowns()
+  initScrollReveal()
+  revealAboveFold()
+  initCounters()
+  initNavHighlight()
+  initSectionJumpTransitions()
+  initFAQ()
+  initMobileNav()
 })

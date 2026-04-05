@@ -9,8 +9,8 @@ import customizerRaw from './customizer.js?raw'
 import customizerHtmlRaw from './customizer-html.js?raw'
 import fontsRaw from './fonts.js?raw'
 import transitionsRaw from './transitions.js?raw'
-import faviconRaw from '../public/favicon.svg?raw'
-import iconsRaw from '../public/icons.svg?raw'
+import faviconRaw from './export-assets/favicon.svg?raw'
+import iconsRaw from './export-assets/icons.svg?raw'
 import themeBootRaw from '../public/theme-boot.js?raw'
 import layout01Raw from '../layout-01.html?raw'
 import layout02Raw from '../layout-02.html?raw'
@@ -141,10 +141,10 @@ function rewriteCustomizerSource(theme, { keepCustomizer, storageKey }) {
 function rewriteCustomizerHtml() {
   let source = customizerHtmlRaw
 
-  source = stripMarkedBlocks(source, '<!-- DOWNLOAD_TAB_START -->', '<!-- DOWNLOAD_TAB_END -->')
-  source = stripMarkedBlocks(source, '<!-- DOWNLOAD_PANEL_START -->', '<!-- DOWNLOAD_PANEL_END -->')
-  source = stripMarkedBlocks(source, '<!-- LAYOUTS_TAB_START -->', '<!-- LAYOUTS_TAB_END -->')
-  source = stripMarkedBlocks(source, '<!-- LAYOUTS_PANEL_START -->', '<!-- LAYOUTS_PANEL_END -->')
+  source = source.replace(/\s*<!-- DOWNLOAD_TAB_START -->[\s\S]*?<!-- DOWNLOAD_TAB_END -->\s*/g, '\n')
+  source = source.replace(/\s*<!-- DOWNLOAD_PANEL_START -->[\s\S]*?<!-- DOWNLOAD_PANEL_END -->\s*/g, '\n')
+  source = source.replace(/\s*<!-- LAYOUTS_TAB_START -->[\s\S]*?<!-- LAYOUTS_TAB_END -->\s*/g, '\n')
+  source = source.replace(/\s*<!-- LAYOUTS_PANEL_START -->[\s\S]*?<!-- LAYOUTS_PANEL_END -->\s*/g, '\n')
   source = source.replace(
     'Preview styles here. Download the current layout as a ready-to-run package from any layout page.',
     'Live theme controls for this exported layout.'
