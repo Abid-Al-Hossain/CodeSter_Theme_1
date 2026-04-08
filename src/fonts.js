@@ -31,21 +31,33 @@ export const FONTS = {
 }
 
 const loadedFonts = new Set()
+const loadingFonts = new Map()
 
 export function loadGoogleFont(name) {
   if (loadedFonts.has(name)) return Promise.resolve()
+  if (loadingFonts.has(name)) return loadingFonts.get(name)
 
   const encoded = name.replace(/ /g, '+')
   const href = `https://fonts.googleapis.com/css2?family=${encoded}:wght@300;400;500;600;700;800;900&display=swap`
 
-  return new Promise((resolve) => {
+  const request = new Promise((resolve) => {
     const link = document.createElement('link')
     link.rel = 'stylesheet'
     link.href = href
-    link.onload = () => { loadedFonts.add(name); resolve() }
-    link.onerror = () => resolve()
+    link.onload = () => {
+      loadedFonts.add(name)
+      loadingFonts.delete(name)
+      resolve()
+    }
+    link.onerror = () => {
+      loadingFonts.delete(name)
+      resolve()
+    }
     document.head.appendChild(link)
   })
+
+  loadingFonts.set(name, request)
+  return request
 }
 
 export const ERA_DEFAULT_FONTS = {

@@ -72,7 +72,7 @@ const CUSTOM_COLOR_VARS = [
   'color-border-2',
 ]
 
-const PREFS_NAMESPACE = document.documentElement.getAttribute('data-prefs-key') || 'chronos-prefs-v2'
+const PREFS_NAMESPACE = document.documentElement.getAttribute('data-prefs-key') || 'chronos-prefs-v3'
 const CUSTOMIZER_ENABLED = true
 const DEFAULT_FONTS = {
   heading: 'Plus Jakarta Sans',
@@ -177,6 +177,108 @@ function hexToRgb(value) {
 function rgbToHex({ r, g, b }) {
   const toHex = (channel) => clamp(Math.round(channel), 0, 255).toString(16).padStart(2, '0')
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`
+}
+
+function hslToHex(h, s, l) {
+  const hue = ((h % 360) + 360) % 360
+  const sat = clamp(s, 0, 100) / 100
+  const light = clamp(l, 0, 100) / 100
+  const c = (1 - Math.abs((2 * light) - 1)) * sat
+  const x = c * (1 - Math.abs(((hue / 60) % 2) - 1))
+  const m = light - (c / 2)
+
+  let r = 0
+  let g = 0
+  let b = 0
+
+  if (hue < 60) [r, g, b] = [c, x, 0]
+  else if (hue < 120) [r, g, b] = [x, c, 0]
+  else if (hue < 180) [r, g, b] = [0, c, x]
+  else if (hue < 240) [r, g, b] = [0, x, c]
+  else if (hue < 300) [r, g, b] = [x, 0, c]
+  else [r, g, b] = [c, 0, x]
+
+  return rgbToHex({
+    r: (r + m) * 255,
+    g: (g + m) * 255,
+    b: (b + m) * 255,
+  })
+}
+
+function relativeLuminance(color) {
+  const { r, g, b } = hexToRgb(color)
+  const normalize = (channel) => {
+    const value = channel / 255
+    return value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4
+  }
+
+  const rr = normalize(r)
+  const gg = normalize(g)
+  const bb = normalize(b)
+
+  return (0.2126 * rr) + (0.7152 * gg) + (0.0722 * bb)
+}
+
+function contrastRatio(colorA, colorB) {
+  const l1 = relativeLuminance(colorA)
+  const l2 = relativeLuminance(colorB)
+  const lighter = Math.max(l1, l2)
+  const darker = Math.min(l1, l2)
+  return (lighter + 0.05) / (darker + 0.05)
+}
+
+function randomInt(min, max) {
+  return Math.floor(Math.random() * ((max - min) + 1)) + min
+}
+
+function generateSurpriseColors() {
+  const darkTheme = Math.random() < 0.5
+  const baseHue = randomInt(0, 359)
+  const primaryHue = baseHue
+  const secondaryHue = (baseHue + randomInt(38, 112)) % 360
+  const accentHue = (baseHue + randomInt(165, 245)) % 360
+
+  const bg = darkTheme
+    ? hslToHex(baseHue, randomInt(18, 34), randomInt(7, 12))
+    : hslToHex(baseHue, randomInt(28, 58), randomInt(95, 98))
+  const bg2 = darkTheme
+    ? hslToHex(baseHue + randomInt(-12, 12), randomInt(18, 30), randomInt(12, 18))
+    : hslToHex(baseHue + randomInt(-12, 12), randomInt(24, 46), randomInt(88, 94))
+  const surface = darkTheme
+    ? hslToHex(baseHue + randomInt(-8, 8), randomInt(16, 28), randomInt(16, 22))
+    : hslToHex(baseHue + randomInt(-8, 8), randomInt(18, 40), randomInt(92, 97))
+
+  const primary = darkTheme
+    ? hslToHex(primaryHue, randomInt(72, 92), randomInt(58, 72))
+    : hslToHex(primaryHue, randomInt(66, 90), randomInt(42, 56))
+  const secondary = darkTheme
+    ? hslToHex(secondaryHue, randomInt(58, 84), randomInt(54, 68))
+    : hslToHex(secondaryHue, randomInt(52, 78), randomInt(36, 50))
+  const accent = darkTheme
+    ? hslToHex(accentHue, randomInt(72, 94), randomInt(72, 84))
+    : hslToHex(accentHue, randomInt(70, 94), randomInt(58, 72))
+
+  let text = darkTheme
+    ? hslToHex(baseHue + randomInt(-10, 10), randomInt(14, 26), randomInt(91, 96))
+    : hslToHex(baseHue + randomInt(-10, 10), randomInt(12, 24), randomInt(10, 18))
+
+  if (
+    contrastRatio(text, bg) < 5.5 ||
+    contrastRatio(text, bg2) < 5 ||
+    contrastRatio(text, surface) < 4.8
+  ) {
+    text = darkTheme ? '#f8f4ea' : '#101217'
+  }
+
+  return {
+    primary,
+    secondary,
+    accent,
+    bg,
+    bg2,
+    surface,
+    text,
+  }
 }
 
 function mixHex(base, target, weight) {
@@ -319,13 +421,13 @@ async function applyEra(era) {
   document.documentElement.setAttribute('data-era', era)
   const eraFonts = ERA_DEFAULT_FONTS[era]
   if (eraFonts) {
-    await Promise.all(Object.values(eraFonts).map(loadGoogleFont))
+    Promise.all(Object.values(eraFonts).map(loadGoogleFont)).catch(() => {})
   }
 }
 
 async function applyFont(role, fontName) {
-  await loadGoogleFont(fontName)
   setVar(`font-${role}`, `'${fontName}', sans-serif`)
+  loadGoogleFont(fontName).catch(() => {})
 }
 
 function syncCustomizerToggle(open) {
@@ -351,6 +453,12 @@ function cloneThemePreset(preset = DEFAULT_THEME) {
     hasCustomColors: Boolean(preset.hasCustomColors),
     activePalette: preset.activePalette || '',
   }
+}
+
+function pickRandom(list, exclude = '') {
+  const pool = list.filter((item) => item && item !== exclude)
+  if (!pool.length) return exclude || list[0]
+  return pool[Math.floor(Math.random() * pool.length)]
 }
 
 // DOWNLOAD_FEATURE_START
@@ -396,7 +504,7 @@ Alpine.store('chr', {
   downloadError: '',
   // DOWNLOAD_FEATURE_END
 
-  async init() {
+  init() {
     const preset = cloneThemePreset(loadPrefs() || DEFAULT_THEME)
     // Synchronize with the document era, since theme-boot.js enforces first-visit isolated logic
     preset.era = document.documentElement.getAttribute('data-era') || preset.era
@@ -415,12 +523,12 @@ Alpine.store('chr', {
     this.downloadPackageName = getDefaultPackageName(this.currentLayout)
     // DOWNLOAD_FEATURE_END
 
-    await applyEra(this.era)
+    applyEra(this.era)
 
     if (this.hasCustomFonts) {
-      for (const [role, font] of Object.entries(this.fonts)) {
-        await applyFont(role, font)
-      }
+      Object.entries(this.fonts).forEach(([role, font]) => {
+        applyFont(role, font)
+      })
     }
 
     if (this.hasCustomColors) {
@@ -436,9 +544,9 @@ Alpine.store('chr', {
     this.activeTab = tab
   },
 
-  async setEra(era) {
+  setEra(era) {
     this.era = era
-    await applyEra(era)
+    applyEra(era)
 
     clearCustomColorVars()
 
@@ -498,11 +606,40 @@ Alpine.store('chr', {
     this.save()
   },
 
-  async setFont(role, fontName) {
+  setFont(role, fontName) {
     this.hasCustomFonts = true
     this.fonts[role] = fontName
-    await applyFont(role, fontName)
+    applyFont(role, fontName)
     this.save()
+  },
+
+  surpriseMe() {
+    const nextHeading = pickRandom(ALL_FONTS_FLAT, this.fonts.heading)
+    const nextBody = pickRandom(ALL_FONTS_FLAT, nextHeading)
+    const nextAccent = pickRandom(ALL_FONTS_FLAT, nextBody)
+    const nextMono = pickRandom(ALL_FONTS_FLAT, this.fonts.mono)
+    const nextColors = generateSurpriseColors()
+
+    this.hasCustomFonts = true
+    this.hasCustomColors = true
+    this.activePalette = 'custom'
+    this.fonts = {
+      heading: nextHeading,
+      body: nextBody,
+      accent: nextAccent,
+      mono: nextMono,
+    }
+    this.colors = {
+      ...this.colors,
+      ...nextColors,
+    }
+
+    Object.entries(this.fonts).forEach(([role, font]) => {
+      applyFont(role, font)
+    })
+
+    this.applyColorTheme()
+    this.activeTab = 'fonts'
   },
 
   toggle() {
@@ -558,7 +695,7 @@ Alpine.store('chr', {
     })
   },
 
-  async reset() {
+  reset() {
     const preset = cloneThemePreset(DEFAULT_THEME)
 
     this.era = preset.era
@@ -571,12 +708,12 @@ Alpine.store('chr', {
 
     document.documentElement.removeAttribute('style')
     document.documentElement.setAttribute('data-era', this.era)
-    await applyEra(this.era)
+    applyEra(this.era)
 
     if (this.hasCustomFonts) {
-      for (const [role, font] of Object.entries(this.fonts)) {
-        await applyFont(role, font)
-      }
+      Object.entries(this.fonts).forEach(([role, font]) => {
+        applyFont(role, font)
+      })
     }
 
     if (this.hasCustomColors) {
@@ -590,7 +727,7 @@ Alpine.store('chr', {
   },
 })
 
-const ALL_FONTS_FLAT = Object.values(FONTS).flat().sort()
+const ALL_FONTS_FLAT = [...new Set(Object.values(FONTS).flat())].sort()
 
 Alpine.data('chrFontDropdown', (role) => ({
   open: false,

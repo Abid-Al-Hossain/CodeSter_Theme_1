@@ -58,7 +58,7 @@
   }
 
   function getPrefsKey() {
-    var namespace = document.documentElement.getAttribute('data-prefs-key') || 'chronos-prefs-v2'
+    var namespace = document.documentElement.getAttribute('data-prefs-key') || 'chronos-prefs-v3'
     return document.documentElement.hasAttribute('data-prefs-key')
       ? namespace
       : namespace + ':' + getCurrentPageKey()
