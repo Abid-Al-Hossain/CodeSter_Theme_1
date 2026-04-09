@@ -38,16 +38,22 @@
     .sc-form{display:grid;gap:12px}
     .sc-form input,.sc-form select,.sc-form textarea{width:100%;padding:13px 14px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2);color:var(--color-text);font:inherit;outline:none}
     .sc-form textarea{min-height:96px;resize:vertical}
+    .sc-left-top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .sc-left .sc-nav.chr-nav-links{display:grid}
+    .sc-left .chr-nav-toggle{display:none}
     @media(max-width:1180px){.sc-shell{grid-template-columns:220px minmax(0,1fr)}.sc-right{display:none}}
-    @media(max-width:860px){.sc-shell{grid-template-columns:1fr}.sc-left{position:static;height:auto;border-right:none;border-bottom:1px solid var(--color-border)}.sc-main{padding:20px}.sc-groups,.sc-triple{grid-template-columns:1fr}}
+    @media(max-width:860px){.sc-shell{grid-template-columns:1fr}.sc-left{position:static;height:auto;border-right:none;border-bottom:1px solid var(--color-border)}.sc-main{padding:20px}.sc-groups,.sc-triple{grid-template-columns:1fr}.sc-left .chr-nav-toggle{display:flex}.sc-left .sc-nav.chr-nav-links,.sc-left .sc-nav.chr-nav-links.open{position:static;background:transparent;border-bottom:none;padding:0;flex-direction:unset}.sc-left .sc-nav.chr-nav-links{display:none}.sc-left .sc-nav.chr-nav-links.open{display:grid}}
   </style>
 </head>
 <body>
 <a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 <div class="sc-shell">
   <aside class="sc-left" aria-label="Community navigation" data-reveal="left">
-    <a href="index.html" class="chr-logo">CHRONOS SOCIAL</a>
-    <div class="sc-nav">
+    <div class="sc-left-top">
+      <a href="index.html" class="chr-logo">CHRONOS SOCIAL</a>
+      <button class="chr-nav-toggle" aria-label="Toggle community navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+    <div class="sc-nav chr-nav-links">
       <a href="#feed" class="active"><span>Feed</span><span>01</span></a>
       <a href="#groups"><span>Groups</span><span>02</span></a>
       <a href="#creators"><span>Creators</span><span>03</span></a>

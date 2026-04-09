@@ -56,9 +56,11 @@ Because the source project uses Vite module entrypoints, use it through the deve
 
 - keep all visible product counts and version references truthful
 - remove stale or misleading marketplace copy from source pages
-- stabilize placeholder links and demo forms
+- stabilize placeholder links and demo forms with explicit demo-only feedback
 - keep the shared customizer behavior consistent across layouts
+- align skip-link and mobile-nav shell behavior across outlier layouts
 - reduce mobile layout regressions before the later shipping phase
+- keep the magical-academy layout original rather than franchise-adjacent
 
 ## Notes
 

@@ -11,7 +11,9 @@
     [x-cloak]{display:none!important}
     body{display:flex;min-height:100vh;flex-direction:row;--reveal-distance:34px;--group-reveal-distance:26px}
     .db-sidebar{width:256px;flex-shrink:0;background:var(--color-primary);color:#fff;display:flex;flex-direction:column;padding:24px 0;position:sticky;top:0;height:100vh;overflow-y:auto;transition:width var(--dur) var(--ease)}
+    .db-sidebar-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 24px 24px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:16px}
     .db-logo{padding:0 24px 24px;font-family:var(--font-accent);font-weight:800;font-size:1.2rem;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:16px}
+    .db-sidebar-top .db-logo{padding:0;border-bottom:none;margin-bottom:0}
     .db-nav-label{padding:16px 24px 8px;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.15em;opacity:0.5}
     .db-nav-item{display:flex;align-items:center;gap:12px;padding:10px 24px;font-size:0.88rem;font-weight:500;opacity:0.8;cursor:pointer;transition:background 0.2s,opacity 0.2s}
     .db-nav-item:hover,.db-nav-item.active{background:rgba(255,255,255,0.12);opacity:1}
@@ -42,31 +44,40 @@
     .badge-blue{background:rgba(59,130,246,0.1);color:#3b82f6}
     .badge-red{background:rgba(239,68,68,0.1);color:#ef4444}
     .badge-yellow{background:rgba(245,158,11,0.1);color:#d97706}
-    @media(max-width:768px){body{flex-direction:column}.db-sidebar{width:100%;height:auto;position:relative;padding:16px 0}.db-topbar{padding:16px 20px;height:auto;align-items:flex-start;gap:16px;flex-direction:column}.db-content{padding:20px}.stat-grid,.analytics-grid,.users-grid{grid-template-columns:1fr 1fr}table{display:block;overflow-x:auto;white-space:nowrap}}
+    .db-mobile-links.chr-nav-links{display:block}
+    .db-mobile-links a{color:inherit}
+    .db-sidebar .chr-nav-toggle span{background:#fff}
+    @media(max-width:768px){body{flex-direction:column}.db-sidebar{width:100%;height:auto;position:relative;padding:16px 0}.db-topbar{padding:16px 20px;height:auto;align-items:flex-start;gap:16px;flex-direction:column}.db-content{padding:20px}.stat-grid,.analytics-grid,.users-grid{grid-template-columns:1fr 1fr}table{display:block;overflow-x:auto;white-space:nowrap}.db-sidebar-top .chr-nav-toggle{display:flex}.db-mobile-links.chr-nav-links,.db-mobile-links.chr-nav-links.open{position:static;background:transparent;border-bottom:none;padding:0;flex-direction:unset}.db-mobile-links.chr-nav-links{display:none}.db-mobile-links.chr-nav-links.open{display:block}.db-nav-label{padding-top:8px}}
     @media(max-width:520px){.stat-grid,.analytics-grid,.users-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 <nav class="db-sidebar" role="navigation" aria-label="Dashboard navigation" data-reveal="left">
-  <div class="db-logo">CHRONOS</div>
-  <div class="db-nav-label">Main</div>
-  <a href="#overview" class="db-nav-item active">Overview</a>
-  <a href="#analytics" class="db-nav-item">Analytics</a>
-  <a href="#transactions" class="db-nav-item">Transactions</a>
-  <a href="#users" class="db-nav-item">Users</a>
-  <div class="db-nav-label">Reports</div>
-  <a href="#sales" class="db-nav-item">Sales Data</a>
-  <a href="#audience" class="db-nav-item">Audience</a>
-  <a href="#campaigns" class="db-nav-item">Campaigns</a>
-  <a href="#performance" class="db-nav-item">Performance</a>
-  <div class="db-nav-label">Account</div>
-  <a href="#" class="db-nav-item" data-demo-message="Settings are demo-only">Settings</a>
-  <a href="#" class="db-nav-item" data-demo-message="Support shortcut is demo-only">Support</a>
-  <div style="margin-top:auto;padding:24px">
-    <div style="background:rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:16px">
-      <div style="font-size:0.72rem;opacity:0.6;text-transform:uppercase;letter-spacing:0.1em">Workspace</div>
-      <div style="font-size:0.9rem;font-weight:700;margin:4px 0">Chronos Demo</div>
-      <a href="index.html" style="font-size:0.75rem;opacity:0.7">View Layouts</a>
+  <div class="db-sidebar-top">
+    <div class="db-logo">CHRONOS</div>
+    <button class="chr-nav-toggle" aria-label="Toggle dashboard navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <div class="db-mobile-links chr-nav-links">
+    <div class="db-nav-label">Main</div>
+    <a href="#overview" class="db-nav-item active">Overview</a>
+    <a href="#analytics" class="db-nav-item">Analytics</a>
+    <a href="#transactions" class="db-nav-item">Transactions</a>
+    <a href="#users" class="db-nav-item">Users</a>
+    <div class="db-nav-label">Reports</div>
+    <a href="#sales" class="db-nav-item">Sales Data</a>
+    <a href="#audience" class="db-nav-item">Audience</a>
+    <a href="#campaigns" class="db-nav-item">Campaigns</a>
+    <a href="#performance" class="db-nav-item">Performance</a>
+    <div class="db-nav-label">Account</div>
+    <a href="#" class="db-nav-item" data-demo-message="Settings are demo-only">Settings</a>
+    <a href="#" class="db-nav-item" data-demo-message="Support shortcut is demo-only">Support</a>
+    <div style="margin-top:auto;padding:24px">
+      <div style="background:rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:16px">
+        <div style="font-size:0.72rem;opacity:0.6;text-transform:uppercase;letter-spacing:0.1em">Workspace</div>
+        <div style="font-size:0.9rem;font-weight:700;margin:4px 0">Chronos Demo</div>
+        <a href="index.html" style="font-size:0.75rem;opacity:0.7">View Layouts</a>
+      </div>
     </div>
   </div>
 </nav>

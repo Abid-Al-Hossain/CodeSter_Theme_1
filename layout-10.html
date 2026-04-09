@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Chronos Layout 10 - Gothic archive presentation with a corrected 12-era catalog, responsive side navigation, and neutral demo messaging.">
+  <meta name="description" content="Chronos Layout 10 - Gothic archive presentation with a corrected 17-era catalog, responsive side navigation, and neutral demo messaging.">
   <title>Chronos | The Gothic Archive</title>
   <script src="./theme-boot.js"></script>
   <script type="module" src="/src/main.js"></script>
@@ -17,6 +17,8 @@
     .gothic-nav-item{display:block;padding:12px 0;font-family:var(--font-body);font-size:.9rem;color:var(--color-text-2);text-align:center;border-bottom:1px solid var(--color-border);letter-spacing:.05em;transition:color .2s}
     .gothic-nav-item:hover,.gothic-nav-item.active,.gothic-nav-item[aria-current="location"]{color:var(--color-primary)}
     .gothic-main{flex:1;overflow:hidden}
+    .gothic-links.chr-nav-links{display:block}
+    .gothic-toggle{display:none;margin:0 auto 16px}
     .ornate-box{position:relative;border:double 3px var(--color-primary);padding:60px;background:var(--color-bg);margin:0}
     .ornate-box::before{content:'';position:absolute;inset:12px;border:1px solid color-mix(in srgb,var(--color-primary) 30%,transparent);pointer-events:none}
     .ornate-corner{position:absolute;width:20px;height:20px;border-color:var(--color-primary);border-style:solid}
@@ -33,7 +35,7 @@
     .eras-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--color-border)}
     .scriptorium-grid,.relic-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
     @media(max-width:1100px){body{flex-direction:column}.gothic-sidebar{width:100%;height:auto;position:relative;padding:32px}.gothic-section{padding:48px 24px}.ornate-box{padding:36px 28px}}
-    @media(max-width:860px){.eras-grid,.scriptorium-grid,.relic-grid{grid-template-columns:1fr}.entry-row{grid-template-columns:1fr;gap:16px}.entry-year{text-align:left;padding-top:0}.entry-line{height:1px;width:100%;background:linear-gradient(to right,var(--color-primary),transparent)}}
+    @media(max-width:860px){.eras-grid,.scriptorium-grid,.relic-grid{grid-template-columns:1fr}.entry-row{grid-template-columns:1fr;gap:16px}.entry-year{text-align:left;padding-top:0}.entry-line{height:1px;width:100%;background:linear-gradient(to right,var(--color-primary),transparent)}.gothic-toggle{display:flex}.gothic-links.chr-nav-links,.gothic-links.chr-nav-links.open{position:static;background:transparent;border-bottom:none;padding:0;flex-direction:unset}.gothic-links.chr-nav-links{display:none}.gothic-links.chr-nav-links.open{display:block}}
     @media(max-width:620px){.gothic-section,#collection{padding:36px 18px!important}.ornate-box{padding:28px 20px}.gothic-sidebar{padding:24px 18px}}
   </style>
 </head>
@@ -44,8 +46,9 @@
   <div class="gothic-title">CHRONOS<br>ARCHIVE</div>
   <div class="gothic-subtitle">Established MMXXVI</div>
   <div class="gothic-divider">* * *</div>
+  <button class="chr-nav-toggle gothic-toggle" aria-label="Toggle archive navigation" aria-expanded="false"><span></span><span></span><span></span></button>
 
-  <div style="margin-bottom:24px">
+  <div style="margin-bottom:24px" class="gothic-links chr-nav-links">
     <a href="#collection" class="gothic-nav-item">The Collection</a>
     <a href="#chronicle" class="gothic-nav-item">Chronicle</a>
     <a href="#eras" class="gothic-nav-item">Hall of Eras</a>
