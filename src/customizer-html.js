@@ -359,12 +359,112 @@ export const CUSTOMIZER_HTML = /* html */ `
   </div>
 
   <div class="cust-footer" style="padding:16px;border-top:1px solid var(--color-border);background:var(--color-bg);flex-shrink:0;display:flex;flex-direction:column;gap:8px;">
-    <button class="chr-btn-primary" style="font-size:0.75rem;padding:10px 16px;width:100%;justify-content:center" @click="$store.chr.surpriseMe()">
-      Surprise Me
-    </button>
+    <div class="surprise-action-row">
+      <button class="chr-btn-primary" style="font-size:0.75rem;padding:10px 16px;justify-content:center;flex:1" @click="$store.chr.surpriseMe()">
+        Surprise Me
+      </button>
+      <button class="chr-btn-ghost" type="button" style="font-size:0.75rem;padding:10px 14px;justify-content:center;min-width:98px" @click="$store.chr.toggleSurpriseSettings()">
+        Settings
+      </button>
+    </div>
     <button class="chr-btn-ghost" style="font-size:0.75rem;padding:10px 16px;width:100%;justify-content:center" @click="$store.chr.reset()">
       Reset Theme
     </button>
+  </div>
+
+  <div
+    x-show="$store.chr.surpriseSettingsOpen"
+    x-cloak
+    class="surprise-modal-backdrop"
+    x-transition:enter="surprise-fade-enter"
+    x-transition:enter-start="surprise-fade-enter-start"
+    x-transition:enter-end="surprise-fade-enter-end"
+    x-transition:leave="surprise-fade-leave"
+    x-transition:leave-start="surprise-fade-leave-start"
+    x-transition:leave-end="surprise-fade-leave-end"
+    @click.self="$store.chr.toggleSurpriseSettings()"
+    @keydown.escape.window="$store.chr.surpriseSettingsOpen && $store.chr.toggleSurpriseSettings()"
+  >
+    <div
+      class="surprise-modal-card"
+      x-transition:enter="surprise-card-enter"
+      x-transition:enter-start="surprise-card-enter-start"
+      x-transition:enter-end="surprise-card-enter-end"
+      x-transition:leave="surprise-card-leave"
+      x-transition:leave-start="surprise-card-leave-start"
+      x-transition:leave-end="surprise-card-leave-end"
+    >
+      <div class="surprise-settings-head">
+        <div>
+          <div class="cust-label" style="margin:0 0 4px">Surprise Me Settings</div>
+          <div class="surprise-settings-note">Exclude exact fonts and swatches from future surprises.</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="surprise-settings-count" x-text="$store.chr.getSurpriseExclusionCount() + ' exclusions'"></div>
+          <button type="button" class="cust-close" @click="$store.chr.toggleSurpriseSettings()" aria-label="Close surprise settings">X</button>
+        </div>
+      </div>
+
+      <div class="surprise-modal-body">
+        <div class="surprise-settings-section">
+          <div class="cust-label" style="margin-top:0">Font Exclusions</div>
+          <template x-for="role in $store.chr.fontRoleOptions" :key="'surprise-font-' + role.id">
+            <div class="surprise-setting-block">
+              <div class="surprise-setting-title" x-text="role.label + ' Font'"></div>
+              <div class="surprise-setting-row">
+                <select
+                  class="surprise-select"
+                  :value="$store.chr.surpriseFontDrafts[role.id]"
+                  @change="$store.chr.surpriseFontDrafts[role.id] = $event.target.value"
+                >
+                  <template x-for="font in $store.chr.allFonts" :key="role.id + '-' + font">
+                    <option :value="font" x-text="font"></option>
+                  </template>
+                </select>
+                <button type="button" class="surprise-add-btn" @click="$store.chr.addSurpriseFontExclusion(role.id)">Exclude</button>
+              </div>
+              <div class="surprise-chip-list">
+                <template x-for="font in $store.chr.surpriseSettings.fonts[role.id]" :key="role.id + '-chip-' + font">
+                  <button type="button" class="surprise-chip" @click="$store.chr.removeSurpriseFontExclusion(role.id, font)">
+                    <span x-text="font"></span>
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </template>
+                <div x-show="$store.chr.surpriseSettings.fonts[role.id].length === 0" class="surprise-empty">Nothing excluded</div>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <div class="surprise-settings-section">
+          <div class="cust-label" style="margin-top:0">Color Exclusions</div>
+          <template x-for="slot in $store.chr.colorRoleOptions" :key="'surprise-color-' + slot.id">
+            <div class="surprise-setting-block">
+              <div class="surprise-setting-title" x-text="slot.label"></div>
+              <div class="surprise-setting-row">
+                <input
+                  class="surprise-color-input"
+                  type="color"
+                  :value="$store.chr.surpriseColorDrafts[slot.id]"
+                  @input="$store.chr.setSurpriseColorDraft(slot.id, $event.target.value)"
+                >
+                <button type="button" class="surprise-add-btn" @click="$store.chr.addSurpriseColorExclusion(slot.id)">Exclude</button>
+              </div>
+              <div class="surprise-chip-list">
+                <template x-for="color in $store.chr.surpriseSettings.colors[slot.id]" :key="slot.id + '-chip-' + color">
+                  <button type="button" class="surprise-chip surprise-color-chip" @click="$store.chr.removeSurpriseColorExclusion(slot.id, color)">
+                    <span class="surprise-color-swatch" :style="'background:' + color"></span>
+                    <span x-text="color.toUpperCase()"></span>
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </template>
+                <div x-show="$store.chr.surpriseSettings.colors[slot.id].length === 0" class="surprise-empty">Nothing excluded</div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
   </div>
 </aside>
 `

@@ -81,6 +81,23 @@ const DEFAULT_FONTS = {
   accent: 'Space Grotesk',
 }
 
+const FONT_ROLE_OPTIONS = [
+  { id: 'heading', label: 'Heading' },
+  { id: 'body', label: 'Body' },
+  { id: 'accent', label: 'Accent / Display' },
+  { id: 'mono', label: 'Monospace' },
+]
+
+const COLOR_ROLE_OPTIONS = [
+  { id: 'primary', label: 'Primary' },
+  { id: 'secondary', label: 'Secondary' },
+  { id: 'accent', label: 'Accent' },
+  { id: 'bg', label: 'Background' },
+  { id: 'bg2', label: 'Section' },
+  { id: 'surface', label: 'Surface' },
+  { id: 'text', label: 'Text' },
+]
+
 // EXPORT_DEFAULT_THEME_START
 // Wait for document to be parsed ideally, but since this module runs after HTML load, document elements exist
 const initialEra = document.documentElement.getAttribute('data-original-era') || document.documentElement.getAttribute('data-era') || 'modern'
@@ -455,10 +472,50 @@ function cloneThemePreset(preset = DEFAULT_THEME) {
   }
 }
 
-function pickRandom(list, exclude = '') {
-  const pool = list.filter((item) => item && item !== exclude)
-  if (!pool.length) return exclude || list[0]
+function createEmptySurpriseSettings() {
+  return {
+    fonts: Object.fromEntries(FONT_ROLE_OPTIONS.map((option) => [option.id, []])),
+    colors: Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => [option.id, []])),
+  }
+}
+
+function normalizeSurpriseSettings(settings) {
+  const fallback = createEmptySurpriseSettings()
+  const rawFonts = settings?.fonts || {}
+  const rawColors = settings?.colors || {}
+
+  return {
+    fonts: Object.fromEntries(FONT_ROLE_OPTIONS.map((option) => {
+      const values = Array.isArray(rawFonts[option.id]) ? rawFonts[option.id] : []
+      return [option.id, [...new Set(values.filter(Boolean))]]
+    })),
+    colors: Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => {
+      const values = Array.isArray(rawColors[option.id]) ? rawColors[option.id] : []
+      const normalized = values
+        .map((value) => normalizeHex(value, ''))
+        .filter(Boolean)
+      return [option.id, normalized.length ? [...new Set(normalized)] : fallback.colors[option.id]]
+    })),
+  }
+}
+
+function pickRandom(list, excluded = []) {
+  const blocked = new Set((Array.isArray(excluded) ? excluded : [excluded]).filter(Boolean))
+  const pool = list.filter((item) => item && !blocked.has(item))
+  if (!pool.length) return list[0]
   return pool[Math.floor(Math.random() * pool.length)]
+}
+
+function generateSurpriseColorsWithExclusions(exclusions) {
+  const normalized = normalizeSurpriseSettings({ colors: exclusions }).colors
+
+  for (let attempt = 0; attempt < 80; attempt += 1) {
+    const candidate = generateSurpriseColors()
+    const matchesExcluded = COLOR_ROLE_OPTIONS.some((option) => normalized[option.id].includes(normalizeHex(candidate[option.id], '')))
+    if (!matchesExcluded) return candidate
+  }
+
+  return generateSurpriseColors()
 }
 
 // DOWNLOAD_FEATURE_START
@@ -475,6 +532,7 @@ function getThemePresetFromStore(store) {
     hasCustomFonts: store.hasCustomFonts,
     hasCustomColors: store.hasCustomColors,
     activePalette: store.activePalette,
+    surpriseSettings: normalizeSurpriseSettings(store.surpriseSettings),
   }
 }
 // DOWNLOAD_FEATURE_END
@@ -483,6 +541,8 @@ const INITIAL_PREFS = loadPrefs()
 if (INITIAL_PREFS) {
   applyBootTheme(INITIAL_PREFS)
 }
+
+const ALL_FONTS_FLAT = [...new Set(Object.values(FONTS).flat())].sort()
 
 Alpine.store('chr', {
   open: false,
@@ -494,6 +554,13 @@ Alpine.store('chr', {
   hasCustomColors: DEFAULT_THEME.hasCustomColors,
   activePalette: DEFAULT_THEME.activePalette,
   paletteOptions: PALETTE_OPTIONS,
+  allFonts: ALL_FONTS_FLAT,
+  fontRoleOptions: FONT_ROLE_OPTIONS,
+  colorRoleOptions: COLOR_ROLE_OPTIONS,
+  surpriseSettings: createEmptySurpriseSettings(),
+  surpriseSettingsOpen: false,
+  surpriseFontDrafts: { ...DEFAULT_FONTS },
+  surpriseColorDrafts: { ...DEFAULT_COLORS },
   // DOWNLOAD_FEATURE_START
   currentLayout: getCurrentLayoutFile(),
   downloadAvailable: Boolean(getCurrentLayoutFile()),
@@ -505,7 +572,8 @@ Alpine.store('chr', {
   // DOWNLOAD_FEATURE_END
 
   init() {
-    const preset = cloneThemePreset(loadPrefs() || DEFAULT_THEME)
+    const storedPrefs = loadPrefs()
+    const preset = cloneThemePreset(storedPrefs || DEFAULT_THEME)
     // Synchronize with the document era, since theme-boot.js enforces first-visit isolated logic
     preset.era = document.documentElement.getAttribute('data-era') || preset.era
     const eraDefaults = ERA_DEFAULT_FONTS[preset.era] || DEFAULT_THEME.fonts
@@ -516,6 +584,17 @@ Alpine.store('chr', {
     this.hasCustomFonts = preset.hasCustomFonts
     this.hasCustomColors = preset.hasCustomColors
     this.activePalette = preset.activePalette
+    this.surpriseSettings = normalizeSurpriseSettings(storedPrefs?.surpriseSettings)
+    this.surpriseFontDrafts = { ...this.fonts }
+    this.surpriseColorDrafts = {
+      primary: this.colors.primary,
+      secondary: this.colors.secondary,
+      accent: this.colors.accent,
+      bg: this.colors.bg,
+      bg2: this.colors.bg2,
+      surface: this.colors.surface,
+      text: this.colors.text,
+    }
 
     // DOWNLOAD_FEATURE_START
     const currentLayoutMeta = getLayoutMeta(this.currentLayout)
@@ -556,6 +635,7 @@ Alpine.store('chr', {
 
     const defaults = ERA_DEFAULT_FONTS[era]
     if (defaults) this.fonts = { ...defaults }
+    this.surpriseFontDrafts = { ...this.fonts }
 
     this.hasCustomFonts = false
     this.hasCustomColors = false
@@ -578,6 +658,15 @@ Alpine.store('chr', {
       surface: colorValueToHex(style.getPropertyValue('--color-surface'), this.colors.surface || this.colors.bg2),
       text: colorValueToHex(style.getPropertyValue('--color-text'), this.colors.text),
     }
+    this.surpriseColorDrafts = {
+      primary: this.colors.primary,
+      secondary: this.colors.secondary,
+      accent: this.colors.accent,
+      bg: this.colors.bg,
+      bg2: this.colors.bg2,
+      surface: this.colors.surface,
+      text: this.colors.text,
+    }
   },
 
   applyColorTheme() {
@@ -591,6 +680,7 @@ Alpine.store('chr', {
     this.hasCustomColors = true
     this.activePalette = 'custom'
     this.colors[token] = value
+    this.surpriseColorDrafts[token] = value
     this.applyColorTheme()
     this.save()
   },
@@ -602,6 +692,16 @@ Alpine.store('chr', {
     this.hasCustomColors = true
     this.activePalette = name
     this.colors = { ...this.colors, ...palette, surface: palette.bg2 }
+    this.surpriseColorDrafts = {
+      ...this.surpriseColorDrafts,
+      primary: this.colors.primary,
+      secondary: this.colors.secondary,
+      accent: this.colors.accent,
+      bg: this.colors.bg,
+      bg2: this.colors.bg2,
+      surface: this.colors.surface,
+      text: this.colors.text,
+    }
     this.applyColorTheme()
     this.save()
   },
@@ -609,16 +709,17 @@ Alpine.store('chr', {
   setFont(role, fontName) {
     this.hasCustomFonts = true
     this.fonts[role] = fontName
+    this.surpriseFontDrafts[role] = fontName
     applyFont(role, fontName)
     this.save()
   },
 
   surpriseMe() {
-    const nextHeading = pickRandom(ALL_FONTS_FLAT, this.fonts.heading)
-    const nextBody = pickRandom(ALL_FONTS_FLAT, nextHeading)
-    const nextAccent = pickRandom(ALL_FONTS_FLAT, nextBody)
-    const nextMono = pickRandom(ALL_FONTS_FLAT, this.fonts.mono)
-    const nextColors = generateSurpriseColors()
+    const nextHeading = pickRandom(ALL_FONTS_FLAT, this.surpriseSettings.fonts.heading)
+    const nextBody = pickRandom(ALL_FONTS_FLAT, [...this.surpriseSettings.fonts.body, nextHeading])
+    const nextAccent = pickRandom(ALL_FONTS_FLAT, [...this.surpriseSettings.fonts.accent, nextHeading, nextBody])
+    const nextMono = pickRandom(ALL_FONTS_FLAT, this.surpriseSettings.fonts.mono)
+    const nextColors = generateSurpriseColorsWithExclusions(this.surpriseSettings.colors)
 
     this.hasCustomFonts = true
     this.hasCustomColors = true
@@ -632,6 +733,16 @@ Alpine.store('chr', {
     this.colors = {
       ...this.colors,
       ...nextColors,
+    }
+    this.surpriseFontDrafts = { ...this.fonts }
+    this.surpriseColorDrafts = {
+      primary: this.colors.primary,
+      secondary: this.colors.secondary,
+      accent: this.colors.accent,
+      bg: this.colors.bg,
+      bg2: this.colors.bg2,
+      surface: this.colors.surface,
+      text: this.colors.text,
     }
 
     Object.entries(this.fonts).forEach(([role, font]) => {
@@ -650,6 +761,49 @@ Alpine.store('chr', {
   close() {
     this.open = false
     this.syncToggle()
+  },
+
+  toggleSurpriseSettings() {
+    this.surpriseSettingsOpen = !this.surpriseSettingsOpen
+  },
+
+  addSurpriseFontExclusion(role) {
+    const font = this.surpriseFontDrafts[role]
+    if (!font) return
+    if (!this.surpriseSettings.fonts[role].includes(font)) {
+      this.surpriseSettings.fonts[role] = [...this.surpriseSettings.fonts[role], font]
+      this.save()
+    }
+  },
+
+  removeSurpriseFontExclusion(role, font) {
+    this.surpriseSettings.fonts[role] = this.surpriseSettings.fonts[role].filter((item) => item !== font)
+    this.save()
+  },
+
+  addSurpriseColorExclusion(token) {
+    const value = normalizeHex(this.surpriseColorDrafts[token], this.colors[token])
+    if (!value) return
+    if (!this.surpriseSettings.colors[token].includes(value)) {
+      this.surpriseSettings.colors[token] = [...this.surpriseSettings.colors[token], value]
+      this.save()
+    }
+  },
+
+  removeSurpriseColorExclusion(token, value) {
+    const normalized = normalizeHex(value, '')
+    this.surpriseSettings.colors[token] = this.surpriseSettings.colors[token].filter((item) => item !== normalized)
+    this.save()
+  },
+
+  setSurpriseColorDraft(token, value) {
+    this.surpriseColorDrafts[token] = value
+  },
+
+  getSurpriseExclusionCount() {
+    const fontCount = Object.values(this.surpriseSettings.fonts).reduce((total, list) => total + list.length, 0)
+    const colorCount = Object.values(this.surpriseSettings.colors).reduce((total, list) => total + list.length, 0)
+    return fontCount + colorCount
   },
 
   syncToggle() {
@@ -692,6 +846,7 @@ Alpine.store('chr', {
       hasCustomFonts: this.hasCustomFonts,
       hasCustomColors: this.hasCustomColors,
       activePalette: this.activePalette,
+      surpriseSettings: normalizeSurpriseSettings(this.surpriseSettings),
     })
   },
 
@@ -705,6 +860,16 @@ Alpine.store('chr', {
     this.activePalette = preset.activePalette
     this.colors = { ...preset.colors }
     this.fonts = { ...preset.fonts }
+    this.surpriseFontDrafts = { ...preset.fonts }
+    this.surpriseColorDrafts = {
+      primary: preset.colors.primary,
+      secondary: preset.colors.secondary,
+      accent: preset.colors.accent,
+      bg: preset.colors.bg,
+      bg2: preset.colors.bg2,
+      surface: preset.colors.surface,
+      text: preset.colors.text,
+    }
 
     document.documentElement.removeAttribute('style')
     document.documentElement.setAttribute('data-era', this.era)
@@ -721,13 +886,9 @@ Alpine.store('chr', {
     }
 
     this.syncColorInputsFromComputed()
-    if (CUSTOMIZER_ENABLED) {
-      localStorage.removeItem(getPrefsKey())
-    }
+    this.save()
   },
 })
-
-const ALL_FONTS_FLAT = [...new Set(Object.values(FONTS).flat())].sort()
 
 Alpine.data('chrFontDropdown', (role) => ({
   open: false,
