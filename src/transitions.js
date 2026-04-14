@@ -320,30 +320,63 @@ export function initFAQ() {
  * Mobile nav toggle
  */
 export function initMobileNav() {
-  const toggle = document.querySelector('.chr-nav-toggle')
-  const links = document.querySelector('.chr-nav-links')
-  if (!toggle || !links) return
+  const toggles = Array.from(document.querySelectorAll('.chr-nav-toggle'))
+  if (!toggles.length) return
 
-  toggle.addEventListener('click', () => {
-    const isOpen = links.classList.toggle('open')
+  function setToggleVisualState(toggle, isOpen) {
     toggle.setAttribute('aria-expanded', isOpen.toString())
-    toggle.querySelectorAll('span').forEach((s, i) => {
+    toggle.querySelectorAll('span').forEach((span, index) => {
       if (isOpen) {
-        if (i === 0) s.style.transform = 'rotate(45deg) translate(5px, 5px)'
-        if (i === 1) s.style.opacity = '0'
-        if (i === 2) s.style.transform = 'rotate(-45deg) translate(5px, -5px)'
+        if (index === 0) span.style.transform = 'rotate(45deg) translate(5px, 5px)'
+        if (index === 1) span.style.opacity = '0'
+        if (index === 2) span.style.transform = 'rotate(-45deg) translate(5px, -5px)'
       } else {
-        s.style.transform = ''
-        s.style.opacity = ''
+        span.style.transform = ''
+        span.style.opacity = ''
       }
     })
-  })
+  }
 
-  // Close nav when a link is clicked
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      links.classList.remove('open')
-      toggle.setAttribute('aria-expanded', 'false')
+  function domDistance(a, b) {
+    let distance = 0
+    let current = a
+    while (current && !current.contains(b)) {
+      current = current.parentElement
+      distance += 1
+    }
+    return distance
+  }
+
+  function findClosestNavLinks(toggle) {
+    let scope = toggle.parentElement
+
+    while (scope && scope !== document.body) {
+      const matches = Array.from(scope.querySelectorAll('.chr-nav-links')).filter((candidate) => !candidate.contains(toggle))
+      if (matches.length === 1) return matches[0]
+      if (matches.length > 1) {
+        return matches
+          .sort((a, b) => domDistance(toggle, a) - domDistance(toggle, b))[0]
+      }
+      scope = scope.parentElement
+    }
+
+    return null
+  }
+
+  toggles.forEach((toggle) => {
+    const links = findClosestNavLinks(toggle)
+    if (!links) return
+
+    toggle.addEventListener('click', () => {
+      const isOpen = links.classList.toggle('open')
+      setToggleVisualState(toggle, isOpen)
+    })
+
+    links.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        links.classList.remove('open')
+        setToggleVisualState(toggle, false)
+      })
     })
   })
 }

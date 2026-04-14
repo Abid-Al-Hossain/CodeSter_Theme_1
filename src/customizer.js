@@ -1,6 +1,7 @@
 import Alpine from 'alpinejs'
 import { FONTS, loadGoogleFont, ERA_DEFAULT_FONTS } from './fonts.js'
 import { CUSTOMIZER_HTML } from './customizer-html.js'
+import { sanitizePackageName, sanitizeArchiveName } from './package-name-utils.js'
 
 const PALETTES = {
   electric:  { primary: '#2563ff', secondary: '#0ea5e9', accent: '#7dd3fc', bg: '#f4f8ff', bg2: '#e8f0ff', text: '#0b1735' },
@@ -73,7 +74,9 @@ const CUSTOM_COLOR_VARS = [
 ]
 
 const PREFS_NAMESPACE = document.documentElement.getAttribute('data-prefs-key') || 'chronos-prefs-v3'
+// CUSTOMIZER_ENABLED_START
 const CUSTOMIZER_ENABLED = true
+// CUSTOMIZER_ENABLED_END
 const DEFAULT_FONTS = {
   heading: 'Plus Jakarta Sans',
   body: 'Inter',
@@ -135,24 +138,6 @@ const DOWNLOAD_LAYOUT_OPTIONS = [
   { file: 'layout-19.html', short: 'L19', label: 'Geothermic Console' },
   { file: 'layout-20.html', short: 'L20', label: 'The Grand Library' },
 ]
-
-function sanitizePackageName(value) {
-  return String(value || '')
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/-{2,}/g, '-')
-    .replace(/^-|-$/g, '')
-    || 'chronos-custom-site'
-}
-
-function sanitizeArchiveName(value) {
-  return String(value || '')
-    .trim()
-    .replace(/[\\/:*?"<>|]+/g, ' ')
-    .replace(/\s{2,}/g, ' ')
-    || 'chronos-custom-site'
-}
 
 function getCurrentLayoutFile() {
   const current = window.location.pathname.split('/').pop()?.toLowerCase() || ''

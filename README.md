@@ -59,6 +59,7 @@ Because the source project uses Vite module entrypoints, use it through the deve
 - stabilize placeholder links and demo forms with explicit demo-only feedback
 - keep the shared customizer behavior consistent across layouts
 - align skip-link and mobile-nav shell behavior across outlier layouts
+- keep exported packages and current-layout downloads aligned with the baked theme defaults
 - reduce mobile layout regressions before the later shipping phase
 - keep the magical-academy layout original rather than franchise-adjacent
 
@@ -68,6 +69,8 @@ Because the source project uses Vite module entrypoints, use it through the deve
 - On any layout page, the customizer can generate a one-layout Vite package zip from that current page with the active era, colors, and fonts baked in, with or without the live customizer panel.
 - The source project keeps demo content intentionally neutral where licensing, support, or marketplace-specific language would be premature.
 - Surprise Me can randomize fonts and colors for the current layout, and its settings panel can exclude specific font choices or exact color swatches from future surprises.
+- Shared mobile-nav behavior now supports the layout-specific nav shells used by the dashboard, archive, and social layouts.
+- Countdown blocks use a fixed launch date and fall back to a neutral completed state once that launch window has passed.
 - Release packaging, buyer-facing file structure, and deployment portability are separate concerns for the shipping phase.
 
 

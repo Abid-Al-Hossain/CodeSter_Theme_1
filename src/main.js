@@ -11,6 +11,7 @@ import {
 } from './transitions.js'
 
 const DEFAULT_LAUNCH_DATE = '2026-12-01T00:00:00Z'
+const DEFAULT_COUNTDOWN_COMPLETE_MESSAGE = 'Launch window completed'
 
 function showDemoToast(message) {
   let toast = document.getElementById('chr-demo-toast')
@@ -74,6 +75,7 @@ function initCountdowns() {
 
     const tick = () => {
       const diff = Math.max(0, targetTime - Date.now())
+      const isExpired = diff === 0
       const days = Math.floor(diff / 86400000)
       const hours = Math.floor((diff % 86400000) / 3600000)
       const mins = Math.floor((diff % 3600000) / 60000)
@@ -83,6 +85,13 @@ function initCountdowns() {
       if (hoursNode) hoursNode.textContent = String(hours).padStart(2, '0')
       if (minsNode) minsNode.textContent = String(mins).padStart(2, '0')
       if (secsNode) secsNode.textContent = String(secs).padStart(2, '0')
+
+      if (isExpired) {
+        countdown.setAttribute('data-countdown-complete', 'true')
+        countdown.setAttribute('aria-label', countdown.dataset.completeLabel || DEFAULT_COUNTDOWN_COMPLETE_MESSAGE)
+      } else {
+        countdown.removeAttribute('data-countdown-complete')
+      }
     }
 
     tick()

@@ -12,6 +12,7 @@ import transitionsRaw from './transitions.js?raw'
 import faviconRaw from './export-assets/favicon.svg?raw'
 import iconsRaw from './export-assets/icons.svg?raw'
 import themeBootRaw from '../public/theme-boot.js?raw'
+import { sanitizePackageName, sanitizeArchiveName } from './package-name-utils.js'
 import layout01Raw from '../layout-01.html?raw'
 import layout02Raw from '../layout-02.html?raw'
 import layout03Raw from '../layout-03.html?raw'
@@ -79,26 +80,6 @@ const LAYOUT_HTML = {
   'layout-20.html': layout20Raw,
 }
 
-const DEFAULT_FALLBACK_PACKAGE = 'chronos-custom-site'
-
-export function sanitizePackageName(value) {
-  return String(value || '')
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/-{2,}/g, '-')
-    .replace(/^-|-$/g, '')
-    || DEFAULT_FALLBACK_PACKAGE
-}
-
-export function sanitizeArchiveName(value) {
-  return String(value || '')
-    .trim()
-    .replace(/[\\/:*?"<>|]+/g, ' ')
-    .replace(/\s{2,}/g, ' ')
-    || DEFAULT_FALLBACK_PACKAGE
-}
-
 export function getCurrentLayoutFile() {
   const current = window.location.pathname.split('/').pop()?.toLowerCase() || ''
   return LAYOUT_HTML[current] ? current : ''
@@ -129,7 +110,10 @@ function rewriteCustomizerSource(theme, { keepCustomizer, storageKey }) {
   let source = customizerRaw
 
   source = stripMarkedBlocks(source, '// DOWNLOAD_FEATURE_START', '// DOWNLOAD_FEATURE_END')
-  source = source.replace(/const CUSTOMIZER_ENABLED = true/, `const CUSTOMIZER_ENABLED = ${keepCustomizer ? 'true' : 'false'}`)
+  source = source.replace(
+    /\/\/ CUSTOMIZER_ENABLED_START[\s\S]*?\/\/ CUSTOMIZER_ENABLED_END/,
+    `// CUSTOMIZER_ENABLED_START\nconst CUSTOMIZER_ENABLED = ${keepCustomizer ? 'true' : 'false'}\n// CUSTOMIZER_ENABLED_END`
+  )
   source = source.replace(
     /\/\/ EXPORT_DEFAULT_THEME_START[\s\S]*?\/\/ EXPORT_DEFAULT_THEME_END/,
     `// EXPORT_DEFAULT_THEME_START\n${buildThemeLiteral(theme)}\n// EXPORT_DEFAULT_THEME_END`
@@ -174,9 +158,15 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
   doc.documentElement.setAttribute('data-prefs-key', storageKey)
 
   const bootScript = Array.from(doc.head.querySelectorAll('script'))
-    .find((script) => script.src?.includes('theme-boot.js') || script.textContent?.includes("localStorage.getItem('chronos-prefs')"))
+    .find((script) => {
+      const src = script.getAttribute('src') || ''
+      return src.includes('theme-boot.js') || script.textContent?.includes("localStorage.getItem('chronos-prefs')")
+    })
   if (bootScript) {
-    bootScript.outerHTML = buildThemeBootScript({ storageKey, theme, useStorage: keepCustomizer })
+    const replacement = parser.parseFromString(buildThemeBootScript({ storageKey, theme, useStorage: keepCustomizer }), 'text/html').head.firstElementChild
+    if (replacement) {
+      bootScript.replaceWith(replacement)
+    }
   }
 
   doc.querySelectorAll('a[href]').forEach((link) => {

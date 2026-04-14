@@ -19,7 +19,7 @@ export const FONTS = {
     'Almendra', 'Cinzel', 'MedievalSharp', 'Uncial Antiqua', 'UnifrakturMaguntia'
   ],
   'Futuristic / Tech': [
-    'Audiowide', 'Electrolize', 'Iceland', 'Orbitron', 'Rajdhani', 'Space Mono', 'Tektur'
+    'Audiowide', 'Electrolize', 'Iceland', 'Orbitron', 'Rajdhani', 'Tektur'
   ],
   'Monospace': [
     'Courier Prime', 'DM Mono', 'Fira Code', 'IBM Plex Mono', 'Inconsolata',
