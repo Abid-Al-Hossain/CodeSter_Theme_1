@@ -652,6 +652,41 @@ Alpine.store('chr', {
     this.activeTab = tab
   },
 
+  getAvailableTabs() {
+    return [
+      'era',
+      'colors',
+      'fonts',
+      ...(this.downloadAvailable ? ['download'] : []),
+      'layouts',
+    ]
+  },
+
+  focusTab(tab) {
+    this.setActiveTab(tab)
+    window.requestAnimationFrame(() => {
+      document.getElementById(`chr-tab-${tab}`)?.focus()
+    })
+  },
+
+  moveTab(currentTab, direction) {
+    const tabs = this.getAvailableTabs()
+    const currentIndex = tabs.indexOf(currentTab)
+    if (currentIndex === -1) return
+    const nextIndex = (currentIndex + direction + tabs.length) % tabs.length
+    this.focusTab(tabs[nextIndex])
+  },
+
+  focusFirstTab() {
+    const tabs = this.getAvailableTabs()
+    if (tabs.length) this.focusTab(tabs[0])
+  },
+
+  focusLastTab() {
+    const tabs = this.getAvailableTabs()
+    if (tabs.length) this.focusTab(tabs[tabs.length - 1])
+  },
+
   setEra(era) {
     this.era = era
     applyEra(era)
