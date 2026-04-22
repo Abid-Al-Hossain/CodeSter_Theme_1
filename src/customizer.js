@@ -815,6 +815,7 @@ Alpine.store('chr', {
 
     this.applyColorTheme()
     this.activeTab = 'fonts'
+    this.save()
   },
 
   toggle() {
