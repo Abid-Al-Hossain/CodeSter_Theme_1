@@ -71,6 +71,7 @@ const CUSTOM_COLOR_VARS = [
   'color-text-3',
   'color-border',
   'color-border-2',
+  'shadow-glow',
 ]
 
 const PREFS_NAMESPACE = document.documentElement.getAttribute('data-prefs-key') || 'chronos-prefs-v3'
@@ -355,6 +356,7 @@ function buildDerivedColorTokens(colors) {
     'color-text-3': mixHex(text, bg, tertiaryTextMix),
     'color-border': mixHex(bg2, text, darkTheme ? 0.22 : 0.14),
     'color-border-2': mixHex(bg2, primary, 0.28),
+    'shadow-glow': `0 0 52px ${withAlpha(primary, darkTheme ? 0.32 : 0.2)}`,
   }
 }
 
@@ -385,6 +387,8 @@ function getPrefsScopeKey() {
   return parts.slice(0, -1).join('/').toLowerCase()
 }
 
+// NOTE: This key scheme is intentionally mirrored in public/theme-boot.js.
+// Update both files if the localStorage scope changes.
 function getPrefsKey() {
   return document.documentElement.hasAttribute('data-prefs-key')
     ? PREFS_NAMESPACE
@@ -1057,6 +1061,7 @@ window.Alpine = Alpine
 document.addEventListener('DOMContentLoaded', () => {
   const mount = document.getElementById('chr-customizer-mount')
   if (CUSTOMIZER_ENABLED && mount) {
+    // CUSTOMIZER_HTML is a static build-time constant, not user data.
     mount.innerHTML = CUSTOMIZER_HTML
   }
 
