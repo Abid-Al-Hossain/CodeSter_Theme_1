@@ -126,7 +126,7 @@ var wrapHue=function(hue){return((hue%360)+360)%360};
 var hueDistance=function(a,b){var distance=Math.abs(wrapHue(a)-wrapHue(b));return Math.min(distance,360-distance)};
 var hslToHex=function(h,s,l){var hue=wrapHue(h);var sat=clamp(s,0,100)/100;var light=clamp(l,0,100)/100;var c=(1-Math.abs((2*light)-1))*sat;var x=c*(1-Math.abs(((hue/60)%2)-1));var m=light-(c/2);var r=0;var g=0;var b=0;if(hue<60){r=c;g=x;b=0}else if(hue<120){r=x;g=c;b=0}else if(hue<180){r=0;g=c;b=x}else if(hue<240){r=0;g=x;b=c}else if(hue<300){r=x;g=0;b=c}else{r=c;g=0;b=x}return'#'+[r,g,b].map(function(channel){return clamp(Math.round((channel+m)*255),0,255).toString(16).padStart(2,'0')}).join('')};
 var hexToHsl=function(color){var rgb=hexToRgb(color,color);var rr=rgb.r/255;var gg=rgb.g/255;var bb=rgb.b/255;var max=Math.max(rr,gg,bb);var min=Math.min(rr,gg,bb);var delta=max-min;var h=0;if(delta!==0){if(max===rr)h=60*(((gg-bb)/delta)%6);else if(max===gg)h=60*(((bb-rr)/delta)+2);else h=60*(((rr-gg)/delta)+4)}var light=(max+min)/2;var saturation=delta===0?0:delta/(1-Math.abs((2*light)-1));return{h:wrapHue(h),s:saturation*100,l:light*100}};
-var tuneBackgroundTone=function(color,primary,darkTheme,limits){var tone=hexToHsl(color);var primaryTone=hexToHsl(primary);var hue=tone.s<18||hueDistance(tone.h,primaryTone.h)<18?wrapHue(primaryTone.h+(darkTheme?-34:34)):tone.h;var saturation=clamp(tone.s*0.72,darkTheme?22:18,darkTheme?42:36);var lightness=darkTheme?clamp(tone.l,limits.darkMin,limits.darkMax):clamp(tone.l,limits.lightMin,limits.lightMax);return hslToHex(hue,saturation,lightness)};
+var tuneBackgroundTone=function(color,primary,darkTheme,limits){var tone=hexToHsl(color);var primaryTone=hexToHsl(primary);var neutralRest=tone.s<14;var hue=!neutralRest&&hueDistance(tone.h,primaryTone.h)<24?wrapHue(primaryTone.h+(darkTheme?-56:56)):tone.h;var saturation=neutralRest?clamp(tone.s*0.5,darkTheme?5:4,darkTheme?12:10):clamp(tone.s*0.42,darkTheme?7:5,darkTheme?22:18);var lightness=darkTheme?clamp(tone.l,limits.darkMin,limits.darkMax):clamp(tone.l,limits.lightMin,limits.lightMax);return hslToHex(hue,saturation,lightness)};
 var relativeLuminance=function(color){var rgb=hexToRgb(color,color);var normalize=function(channel){var value=channel/255;return value<=0.03928?value/12.92:Math.pow((value+0.055)/1.055,2.4)};return(0.2126*normalize(rgb.r))+(0.7152*normalize(rgb.g))+(0.0722*normalize(rgb.b))};
 var contrastRatio=function(colorA,colorB){var l1=relativeLuminance(colorA);var l2=relativeLuminance(colorB);var lighter=Math.max(l1,l2);var darker=Math.min(l1,l2);return(lighter+0.05)/(darker+0.05)};
 var getReadableOnColor=function(background){return contrastRatio(background,'#ffffff')>=contrastRatio(background,'#0b0b0b')?'#ffffff':'#0b0b0b'};
@@ -185,7 +185,7 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
   const parser = new DOMParser()
   const doc = parser.parseFromString(html, 'text/html')
   const currentLayoutMessage = 'This export includes only the current layout.'
-  const currentLayoutTarget = doc.getElementById('main-content') ? '#main-content' : '#'
+  const currentLayoutTarget = doc.getElementById('page-top') ? '#page-top' : doc.getElementById('main-content') ? '#main-content' : '#'
   const singleLayoutTexts = new Map([
     ['home', 'Back to top'],
     ['view all layouts', 'Current layout'],
