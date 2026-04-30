@@ -126,18 +126,21 @@ var wrapHue=function(hue){return((hue%360)+360)%360};
 var hueDistance=function(a,b){var distance=Math.abs(wrapHue(a)-wrapHue(b));return Math.min(distance,360-distance)};
 var hslToHex=function(h,s,l){var hue=wrapHue(h);var sat=clamp(s,0,100)/100;var light=clamp(l,0,100)/100;var c=(1-Math.abs((2*light)-1))*sat;var x=c*(1-Math.abs(((hue/60)%2)-1));var m=light-(c/2);var r=0;var g=0;var b=0;if(hue<60){r=c;g=x;b=0}else if(hue<120){r=x;g=c;b=0}else if(hue<180){r=0;g=c;b=x}else if(hue<240){r=0;g=x;b=c}else if(hue<300){r=x;g=0;b=c}else{r=c;g=0;b=x}return'#'+[r,g,b].map(function(channel){return clamp(Math.round((channel+m)*255),0,255).toString(16).padStart(2,'0')}).join('')};
 var hexToHsl=function(color){var rgb=hexToRgb(color,color);var rr=rgb.r/255;var gg=rgb.g/255;var bb=rgb.b/255;var max=Math.max(rr,gg,bb);var min=Math.min(rr,gg,bb);var delta=max-min;var h=0;if(delta!==0){if(max===rr)h=60*(((gg-bb)/delta)%6);else if(max===gg)h=60*(((bb-rr)/delta)+2);else h=60*(((rr-gg)/delta)+4)}var light=(max+min)/2;var saturation=delta===0?0:delta/(1-Math.abs((2*light)-1));return{h:wrapHue(h),s:saturation*100,l:light*100}};
-var tuneBackgroundTone=function(color,primary,darkTheme,limits){var tone=hexToHsl(color);var primaryTone=hexToHsl(primary);var neutralRest=tone.s<14;var hue=!neutralRest&&hueDistance(tone.h,primaryTone.h)<24?wrapHue(primaryTone.h+(darkTheme?-56:56)):tone.h;var saturation=neutralRest?clamp(tone.s*0.5,darkTheme?5:4,darkTheme?12:10):clamp(tone.s*0.42,darkTheme?7:5,darkTheme?22:18);var lightness=darkTheme?clamp(tone.l,limits.darkMin,limits.darkMax):clamp(tone.l,limits.lightMin,limits.lightMax);return hslToHex(hue,saturation,lightness)};
+var tuneBackgroundTone=function(color,primary,darkTheme,limits){var tone=hexToHsl(color);var primaryTone=hexToHsl(primary);var neutralRest=tone.s<14;var hue=!neutralRest&&hueDistance(tone.h,primaryTone.h)<24?wrapHue(primaryTone.h+(darkTheme?-56:56)):tone.h;var saturation=neutralRest?clamp(tone.s*0.5,darkTheme?5:2,darkTheme?12:8):clamp(tone.s*0.42,darkTheme?7:3,darkTheme?22:12);var lightness=darkTheme?clamp(tone.l,limits.darkMin,limits.darkMax):clamp(tone.l,limits.lightMin,limits.lightMax);return hslToHex(hue,saturation,lightness)};
 var relativeLuminance=function(color){var rgb=hexToRgb(color,color);var normalize=function(channel){var value=channel/255;return value<=0.03928?value/12.92:Math.pow((value+0.055)/1.055,2.4)};return(0.2126*normalize(rgb.r))+(0.7152*normalize(rgb.g))+(0.0722*normalize(rgb.b))};
 var contrastRatio=function(colorA,colorB){var l1=relativeLuminance(colorA);var l2=relativeLuminance(colorB);var lighter=Math.max(l1,l2);var darker=Math.min(l1,l2);return(lighter+0.05)/(darker+0.05)};
 var getReadableOnColor=function(background){return contrastRatio(background,'#ffffff')>=contrastRatio(background,'#0b0b0b')?'#ffffff':'#0b0b0b'};
 var improveContrast=function(color,background,minRatio){if(contrastRatio(color,background)>=minRatio)return color;var target=isDarkColor(background)?'#ffffff':'#000000';var candidate=color;for(var step=1;step<=10;step+=1){candidate=mixHex(color,target,step*0.1);if(contrastRatio(candidate,background)>=minRatio)return candidate}return target};
 var improveContrastAcross=function(color,backgrounds,minRatio){var candidate=color;for(var attempt=0;attempt<4;attempt+=1){candidate=backgrounds.reduce(function(next,background){return improveContrast(next,background,minRatio)},candidate);if(backgrounds.every(function(background){return contrastRatio(candidate,background)>=minRatio}))return candidate}return backgrounds.some(function(background){return isDarkColor(background)})?'#ffffff':'#0b0b0b'};
+var softenExtremeAccent=function(color,background,darkTheme){var tone=hexToHsl(color);if(darkTheme&&tone.l>86)return mixHex(color,background,0.18);if(!darkTheme&&tone.l<14)return mixHex(color,background,0.1);return color};
 var mixReadableText=function(text,background,weight,minRatio){for(var step=weight;step>=0;step-=0.06){var candidate=mixHex(text,background,step);if(contrastRatio(candidate,background)>=minRatio)return candidate}return improveContrast(text,background,minRatio)};
+var singleWeightFonts=['Anton','Archivo Black','Audiowide','Bebas Neue','Creepster','Electrolize','Iceland','MedievalSharp','Pacifico','Press Start 2P','Sacramento','Uncial Antiqua','UnifrakturMaguntia','VT323'];
+var getGoogleFontFamilyParam=function(font){var encoded=encodeURIComponent(font).replace(/%20/g,'+');return singleWeightFonts.indexOf(font)===-1?encoded+':wght@400;700':encoded};
 var state=base;
 if(useStorage){try{var saved=JSON.parse(localStorage.getItem(key));if(saved){state={...base,...saved,fonts:{...base.fonts,...saved.fonts},colors:{...base.colors,...saved.colors}}}}catch(error){}}
 if(state.era)document.documentElement.setAttribute('data-era',state.era);
-if(state.hasCustomFonts&&state.fonts){var families=[...new Set(Object.values(state.fonts).filter(Boolean))];if(families.length){var link=document.createElement('link');link.rel='stylesheet';link.dataset.chronosPreloadFonts='true';link.href='https://fonts.googleapis.com/css2?display=swap&family='+families.map(function(font){return encodeURIComponent(font).replace(/%20/g,'+')}).join('&family=');document.head.appendChild(link)}Object.entries(state.fonts).forEach(function(entry){setVar('--font-'+entry[0],"'"+entry[1]+"', sans-serif")})}
-if(state.hasCustomColors&&state.colors){var colors={...base.colors,...state.colors,surface:(state.colors&&state.colors.surface)||(state.colors&&state.colors.bg2)||base.colors.surface};var rawPrimary=normalizeHex(colors.primary,base.colors.primary);var rawBg=normalizeHex(colors.bg,base.colors.bg);var dark=isDarkColor(rawBg);var bg=tuneBackgroundTone(rawBg,rawPrimary,dark,{darkMin:30,darkMax:40,lightMin:78,lightMax:88});var bg2=tuneBackgroundTone(normalizeHex(colors.bg2,base.colors.bg2),rawPrimary,dark,{darkMin:38,darkMax:48,lightMin:70,lightMax:80});var surface=tuneBackgroundTone(normalizeHex(colors.surface,bg2),rawPrimary,dark,{darkMin:42,darkMax:54,lightMin:74,lightMax:86});var primary=improveContrastAcross(rawPrimary,[bg,bg2,surface],4.5);var secondary=improveContrastAcross(normalizeHex(colors.secondary,base.colors.secondary),[bg,bg2,surface],3.5);var accent=improveContrastAcross(normalizeHex(colors.accent,base.colors.accent),[bg,bg2,surface],3.5);var text=improveContrastAcross(normalizeHex(colors.text,base.colors.text),[bg,bg2,surface],7);var secondaryText=mixReadableText(text,bg,dark?0.16:0.22,5.2);var tertiaryText=mixReadableText(text,bg,dark?0.32:0.42,4.5);[['--color-bg',bg],['--color-bg-2',bg2],['--color-bg-3',mixHex(bg2,text,dark?0.08:0.06)],['--color-surface',withAlpha(surface,dark?0.82:0.78)],['--color-primary',primary],['--color-primary-2',mixHex(primary,dark?'#ffffff':'#000000',0.12)],['--color-on-primary',getReadableOnColor(primary)],['--color-secondary',secondary],['--color-accent',accent],['--color-text',text],['--color-text-2',secondaryText],['--color-text-3',tertiaryText],['--color-border',mixHex(bg2,text,dark?0.22:0.14)],['--color-border-2',mixHex(bg2,primary,0.28)],['--shadow-glow','0 0 52px '+withAlpha(primary,dark?0.32:0.2)]].forEach(function(pair){setVar(pair[0],pair[1])})}
+if(state.hasCustomFonts&&state.fonts){var families=[...new Set(Object.values(state.fonts).filter(Boolean))];if(families.length){var link=document.createElement('link');link.rel='stylesheet';link.dataset.chronosPreloadFonts='true';link.href='https://fonts.googleapis.com/css2?display=swap&family='+families.map(getGoogleFontFamilyParam).join('&family=');document.head.appendChild(link)}Object.entries(state.fonts).forEach(function(entry){setVar('--font-'+entry[0],"'"+entry[1]+"', sans-serif")})}
+if(state.hasCustomColors&&state.colors){var colors={...base.colors,...state.colors,surface:(state.colors&&state.colors.surface)||(state.colors&&state.colors.bg2)||base.colors.surface};var rawPrimary=normalizeHex(colors.primary,base.colors.primary);var rawBg=normalizeHex(colors.bg,base.colors.bg);var dark=isDarkColor(rawBg);var bg=tuneBackgroundTone(rawBg,rawPrimary,dark,{darkMin:30,darkMax:40,lightMin:94,lightMax:98});var bg2=tuneBackgroundTone(normalizeHex(colors.bg2,base.colors.bg2),rawPrimary,dark,{darkMin:38,darkMax:48,lightMin:90,lightMax:96});var surface=tuneBackgroundTone(normalizeHex(colors.surface,bg2),rawPrimary,dark,{darkMin:42,darkMax:54,lightMin:92,lightMax:98});var primary=softenExtremeAccent(improveContrastAcross(rawPrimary,[bg,bg2,surface],4.5),bg,dark);var secondary=softenExtremeAccent(improveContrastAcross(normalizeHex(colors.secondary,base.colors.secondary),[bg,bg2,surface],3.5),bg,dark);var accent=softenExtremeAccent(improveContrastAcross(normalizeHex(colors.accent,base.colors.accent),[bg,bg2,surface],3.5),bg,dark);var text=improveContrastAcross(normalizeHex(colors.text,base.colors.text),[bg,bg2,surface],7);var secondaryText=mixReadableText(text,bg,dark?0.16:0.22,5.2);var tertiaryText=mixReadableText(text,bg,dark?0.32:0.42,4.5);[['--color-bg',bg],['--color-bg-2',bg2],['--color-bg-3',mixHex(bg2,text,dark?0.08:0.06)],['--color-surface',withAlpha(surface,dark?0.82:0.78)],['--color-primary',primary],['--color-primary-2',mixHex(primary,dark?'#ffffff':'#000000',0.12)],['--color-on-primary',getReadableOnColor(primary)],['--color-secondary',secondary],['--color-accent',accent],['--color-text',text],['--color-text-2',secondaryText],['--color-text-3',tertiaryText],['--color-border',mixHex(bg2,text,dark?0.22:0.14)],['--color-border-2',mixHex(bg2,primary,0.28)],['--shadow-glow','0 0 52px '+withAlpha(primary,dark?0.32:0.2)]].forEach(function(pair){setVar(pair[0],pair[1])})}
 })()</script>`
 }
 
@@ -181,7 +184,41 @@ function rewriteMainSource(keepCustomizer) {
   return mainRaw.replace(/^\s*import\s+['"]\.\/customizer\.js['"];?\r?\n/m, '')
 }
 
-function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
+function setMetaContent(doc, selector, createAttrs, content) {
+  let meta = doc.head.querySelector(selector)
+  if (!meta) {
+    meta = doc.createElement('meta')
+    Object.entries(createAttrs).forEach(([name, value]) => meta.setAttribute(name, value))
+    doc.head.appendChild(meta)
+  }
+  meta.setAttribute('content', content)
+}
+
+function updateSocialPreviewMeta(doc, previewImagePath) {
+  if (!previewImagePath) {
+    doc.head.querySelectorAll('meta[property="og:image"], meta[name="twitter:image"]').forEach((meta) => meta.remove())
+    return
+  }
+  setMetaContent(doc, 'meta[property="og:image"]', { property: 'og:image' }, previewImagePath)
+  setMetaContent(doc, 'meta[name="twitter:image"]', { name: 'twitter:image' }, previewImagePath)
+}
+
+function getLayoutPreviewFile(layoutFile) {
+  return layoutFile.replace(/\.html$/i, '.jpg')
+}
+
+async function addPreviewImage(zip, previewFile) {
+  try {
+    const response = await fetch(new URL(`./previews/${previewFile}`, window.location.href))
+    if (!response.ok) return false
+    zip.file(`public/previews/${previewFile}`, await response.arrayBuffer())
+    return true
+  } catch {
+    return false
+  }
+}
+
+function rewriteRootHtml(html, { keepCustomizer, storageKey, theme, previewImagePath }) {
   const parser = new DOMParser()
   const doc = parser.parseFromString(html, 'text/html')
   const currentLayoutMessage = 'This export includes only the current layout.'
@@ -204,6 +241,7 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
 
   doc.documentElement.setAttribute('data-era', theme.era)
   doc.documentElement.setAttribute('data-prefs-key', storageKey)
+  updateSocialPreviewMeta(doc, previewImagePath)
 
   const bootScript = Array.from(doc.head.querySelectorAll('script'))
     .find((script) => {
@@ -236,6 +274,10 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
         link.textContent = singleLayoutTexts.get(label)
       }
     }
+  })
+
+  doc.querySelectorAll('[data-demo-message]').forEach((element) => {
+    element.removeAttribute('data-demo-message')
   })
 
   if (keepCustomizer) {
@@ -341,8 +383,11 @@ export async function downloadCustomizedPackage({ packageName, layoutFile, keepC
 
   const storageKey = buildStorageKey(slug)
   const zip = new JSZip()
+  const previewFile = getLayoutPreviewFile(selectedLayout.file)
+  const hasPreviewImage = await addPreviewImage(zip, previewFile)
+  const previewImagePath = hasPreviewImage ? `./previews/${previewFile}` : ''
 
-  zip.file('index.html', rewriteRootHtml(html, { keepCustomizer, storageKey, theme }))
+  zip.file('index.html', rewriteRootHtml(html, { keepCustomizer, storageKey, theme, previewImagePath }))
   zip.file('package.json', rewritePackageJson(slug, { keepCustomizer }))
   zip.file('vite.config.js', buildViteConfig())
   zip.file('.gitignore', EXPORT_GITIGNORE)
