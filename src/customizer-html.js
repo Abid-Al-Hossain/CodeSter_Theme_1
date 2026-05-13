@@ -34,6 +34,7 @@ export const CUSTOMIZER_HTML = /* html */ `
         <span x-text="$store.chr.getModifiedMessage()"></span>
       </div>
     </div>
+    <button type="button" class="cust-close-btn" @click="$store.chr.close()" aria-label="Close theme customizer">X</button>
   </div>
 
   <div class="cust-tabs" role="tablist">
@@ -409,6 +410,7 @@ export const CUSTOMIZER_HTML = /* html */ `
       role="dialog"
       aria-modal="true"
       aria-labelledby="chr-surprise-title"
+      tabindex="-1"
       x-transition:enter="surprise-card-enter"
       x-transition:enter-start="surprise-card-enter-start"
       x-transition:enter-end="surprise-card-enter-end"
